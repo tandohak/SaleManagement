@@ -1,0 +1,40 @@
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+//apply plugin: 'application'
+
+sourceCompatibility=1.8
+
+tasks.withType(JavaCompile){
+    options.encoding = 'UTF-8'
+}
+
+
+repositories {
+    jcenter()
+}
+
+javadoc{
+    options.encoding = 'UTF-8'    
+    
+}
+
+dependencies {
+ 	 // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.44'
+	
+	// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.9.1'
+	
+	// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.9.1'
+	
+	// https://mvnrepository.com/artifact/org.mybatis/mybatis
+	compile group: 'org.mybatis', name: 'mybatis', version: '3.4.5'
+	
+	// https://mvnrepository.com/artifact/com.jfoenix/jfoenix
+	compile group: 'com.jfoenix', name: 'jfoenix', version: '1.9.1'
+	
+	 testImplementation 'junit:junit:4.12'
+}
+
