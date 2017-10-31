@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -9,15 +10,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane blendMode="SCREEN" prefHeight="400.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="500.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="400.0" fitWidth="500.0" layoutX="58.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../../../../../../../../img/loginBg_.jpg" />
+            <Image url="file:/D:/workspace/workspace_mybatis/SaleManagement/src/main/resources/img/loginBg_2.jpg" />
          </image>
       </ImageView>
-      <TextField layoutX="162.0" layoutY="246.0" opacity="0.62" prefHeight="35.0" prefWidth="200.0" promptText="아이디" style="-fx-border-radius: 10px;">
+     
+            <TextField layoutX="150.0" layoutY="225.0" opacity="0.62" prefHeight="35.0" prefWidth="200.0" promptText="아이디" style="-fx-border-radius: 10px;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -25,12 +26,15 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </TextField>
-      <PasswordField layoutX="162.0" layoutY="287.0" opacity="0.62" prefHeight="35.0" prefWidth="200.0" promptText="비밀번호">
+      <PasswordField layoutX="150.0" layoutY="266.0" opacity="0.62" prefHeight="35.0" prefWidth="200.0" promptText="비밀번호">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
+         <font>
+            <Font name="Gulim" size="12.0" />
+         </font>
       </PasswordField>
-      <JFXButton buttonType="RAISED" layoutX="162.0" layoutY="335.0" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: #49CB85;" text="로그인" textFill="WHITE">
+      <JFXButton layoutX="150.0" layoutY="306.0" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #49CB85;" text="로그인" textFill="WHITE">
          <font>
             <Font name="NanumGothic" size="12.0" />
          </font>
@@ -38,13 +42,6 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </JFXButton>
-      <JFXButton layoutX="265.0" layoutY="335.0" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: #49CB85;" text="로그인" textFill="WHITE">
-         <font>
-            <Font name="NanumGothic" size="12.0" />
-         </font>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </JFXButton>
+      <Label layoutX="235.0" layoutY="349.0" text="아이디/비밀번호찾기" textFill="#ff5757" />
    </children>
 </AnchorPane>
