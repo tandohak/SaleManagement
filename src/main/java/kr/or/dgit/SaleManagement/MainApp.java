@@ -6,19 +6,21 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import kr.or.dgit.SaleManagement.view.RootLayoutController;
 
 public class MainApp extends Application {
 	private Stage primaryStage;
 	private Parent rootLayout;
+	private RootLayoutController controller;
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("영업관리 프로그램");
+		
+		controller = new RootLayoutController();
+		controller.setMainApp(this);
 		
 //		fontLoad();
 		
@@ -31,8 +33,8 @@ public class MainApp extends Application {
 
 	private void initRootLayout() throws IOException  {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/loginView.fxml"));
-		rootLayout = (AnchorPane) loader.load();
+		loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+		rootLayout = loader.load();
 		
 		Scene scene = new Scene(rootLayout);
 		primaryStage.setScene(scene);
