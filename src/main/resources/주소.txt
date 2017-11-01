@@ -1,0 +1,21 @@
+create table if not exists post(
+   zipcode char(5) null,
+   sido varchar(20) null,
+   sigungu varchar(20) null,
+   doro varchar(80) null,
+   building1 int(5) null,
+   building2 int(5) null
+);
+
+
+load data local infile 'D:/workspace_bigdata/post_search/DataFiles/√Ê√ª∫œµµ.txt'
+into table post
+character set 'euckr'
+fields terminated by '|'
+ignore 1 lines
+(@zipcode, @sido, @d, @sigungu , @d, @d, @d, @d, @doro, @d, @d, @building1, @building2, @d, @d, @d, @d, @d, @d, @d, @d, @d, @d, @d, @d, @d)
+set zipcode = @zipcode, sido = @sido, sigungu = @sigungu,doro = @doro, building1 = @building1, building2= @building2;
+
+create INDEX idx_post_sido On post(sido);
+create INDEX idx_post_doro ON post(doro);
+create index idx_post_sigungu on post(sigungu);
