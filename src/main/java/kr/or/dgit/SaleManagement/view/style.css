@@ -1,4 +1,8 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+BorderPane{
+	-fx-background-color:#f0f1f3;
+}
+
 .button{
 	-fx-text-fill:#7c8991;
 	-fx-background-color: #DDDDDD;
@@ -42,7 +46,7 @@
 }
 
 .tab-pane:top .tab-label{
-	-fx-text-fill:#7c8991;	
+	-fx-text-fill:#f7f7f7;	
 }
 
 .tab-pane:top .tab-label{
@@ -51,7 +55,7 @@
 }
 
 .table-view{
-	-fx-border-radius:none;
+	-fx-background-color:none;
 }
 
 .table-view .table-column{
@@ -59,5 +63,9 @@
 }
 
 .table-view .placeholder{
-	-fx-background-color:#dddddd;
+	-fx-background-color:f7f7f7;
+}
+
+.check-box{
+	-fx-background-color:#fff;
 }
