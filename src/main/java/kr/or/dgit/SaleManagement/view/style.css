@@ -3,6 +3,9 @@ BorderPane{
 	-fx-background-color:#f0f1f3;
 }
 
+/*
+ * 모든 버튼
+ */
 .button{
 	-fx-text-fill:#7c8991;
 	-fx-background-color: #DDDDDD;
@@ -31,6 +34,9 @@ BorderPane{
 	-fx-padding: 4 7 4 10;
 }
 
+/*
+ * 탭관련 css
+ */
 .tab-pane:top > .tab-header-area > .tab-header-background{
 	-fx-background-color:none;	
 }
@@ -68,4 +74,29 @@ BorderPane{
 
 .check-box{
 	-fx-background-color:#fff;
+}
+
+HBox{
+	-fx-alignment:CENTER_LEFT;
+	-fx-spacing:15;	
+}
+HBox > .label{
+	-fx-min-width:65px;
+}
+.searchBoxBtn{
+	-fx-pref-width:25px;
+	-fx-pref-height:18px;
+	-fx-border-radius: 0 3 3 0;
+	-fx-background-radius: 0 3 3 0;
+}
+
+.searchBoxTf{
+	-fx-border-radius: 3 0 0 3;
+	-fx-background-radius: 3 0 0 3;
+	-fx-pref-width:115px;
+}
+.slideDown{
+	-fx-pref-width:25px;
+	-fx-pref-height:25px;
+	-fx-background-color:none;
 }

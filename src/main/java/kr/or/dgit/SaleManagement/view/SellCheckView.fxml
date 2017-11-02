@@ -43,9 +43,9 @@
                           <columns>
                             <TableColumn prefWidth="75.0" text="판매 번호" />
                             <TableColumn prefWidth="75.0" text="거래처" />
+                              <TableColumn prefWidth="75.0" text="거래일자" />
                               <TableColumn prefWidth="75.0" text="품목" />
                               <TableColumn prefWidth="75.0" text="금액" />
-                              <TableColumn prefWidth="75.0" text="거래일자" />
                               <TableColumn prefWidth="75.0" text="발송여부" />
                               <TableColumn prefWidth="75.0" text="수령여부" />
                               <TableColumn prefWidth="75.0" text="담당직원" />
