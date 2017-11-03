@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Circle?>
@@ -13,7 +14,6 @@
    <left>
       <AnchorPane prefHeight="625.0" prefWidth="180.0" style="-fx-background-color: #252525;" BorderPane.alignment="CENTER">
          <children>
-            <Accordion layoutX="-1.0" layoutY="269.0" />
             <AnchorPane layoutY="633.0" prefHeight="42.0" prefWidth="180.0" style="-fx-background-color: #363636;">
                <children>
                   <JFXButton layoutX="62.0" layoutY="10.0" text="Logout" textFill="#666666" />
@@ -35,8 +35,23 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
             </Label>
-            <JFXButton layoutX="56.0" layoutY="219.0" onAction="#hadleShowSalesManager" text="사원 관리" />
-            <JFXButton layoutX="56.0" layoutY="242.0" text="제품 관리" />
+            <JFXButton layoutX="56.0" layoutY="242.0" text="제품 관리" textFill="WHITE" />
+            <JFXButton layoutX="50.0" layoutY="269.0" text="거래처 관리" textFill="WHITE" />
+            <Accordion layoutX="1.0" layoutY="303.0" prefHeight="69.0" prefWidth="179.0">
+              <panes>
+                <TitledPane animated="false" prefHeight="103.0" prefWidth="179.0" text="판매 관리">
+                  <content>
+                    <AnchorPane>
+                           <children>
+                              <JFXButton layoutX="55.0" layoutY="10.0" text="판매 조회" />
+                              <JFXButton layoutX="55.0" layoutY="56.0" text="판매 현황" />
+                              <JFXButton layoutX="55.0" layoutY="33.0" text="판매 등록" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </TitledPane>
+              </panes>
+            </Accordion>
          </children>
       </AnchorPane>
    </left>
