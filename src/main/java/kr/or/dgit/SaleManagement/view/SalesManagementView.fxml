@@ -11,18 +11,18 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="675.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane minWidth="900.0" prefHeight="675.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <AnchorPane prefHeight="100.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="100.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
             <TextField layoutX="14.0" layoutY="14.0" promptText="사원검색" styleClass="searchTF" stylesheets="@style.css" />
             <JFXButton layoutX="152.0" layoutY="14.0" styleClass="searchBtn" stylesheets="@style.css" text="검색" />
-            <Separator layoutY="57.0" prefHeight="0.0" prefWidth="1000.0" />
+            <Separator layoutY="57.0" prefHeight="0.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
    </top>
    <bottom>
-      <AnchorPane prefHeight="200.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
             <ButtonBar layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0">
                <buttons>
@@ -35,14 +35,14 @@
                   <JFXButton style="-fx-background-color: #DDDDDD;" text="수정" textFill="#7c8991" />
                </buttons>
             </ButtonBar>
-            <JFXButton layoutX="900.0" layoutY="23.0" prefHeight="23.0" prefWidth="75.0" style="-fx-background-color: #DDDDDD;" text="인쇄" textFill="#7c8991" AnchorPane.leftAnchor="900.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="23.0" />
+            <JFXButton layoutX="798.0" layoutY="23.0" text="인쇄" />
          </children>
       </AnchorPane>
    </bottom>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView layoutX="33.0" prefHeight="452.0" prefWidth="938.0">
+            <TableView layoutX="33.0" prefHeight="375.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
                   <TableColumn prefWidth="75.0">
                      <graphic>

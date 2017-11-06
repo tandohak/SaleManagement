@@ -11,21 +11,77 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import kr.or.dgit.SaleManagement.view.RootLayoutController;
+import kr.or.dgit.SaleManagement.controller.RootLayoutController;
 
 public class MainApp extends Application {
 	private Stage primaryStage;
 	private Parent rootLayout;
 	private RootLayoutController controller;
-	
+	private Boolean resizebottom = false;
+	private double dx;
+	private double dy;
+
 	final Delta dragDelta = new Delta();
 	   
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
+
 	@Override
 	public void start( Stage primaryStage) throws IOException {
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("영업관리 프로그램");
 		initRootLayout();
+		
+		setWindowMove(primaryStage);
+		
+//		windowResize(primaryStage);
+
+		
+		controller = new RootLayoutController();
+		controller.setMainApp(this);
+		
+//		fontLoad();
+		
+		
+	}
+
+	private void windowResize(Stage primaryStage) {
+		rootLayout.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				if(event.getX() > primaryStage.getX() -10 
+				&& event.getX() < primaryStage.getWidth() + 10
+		        && event.getY() > primaryStage.getHeight() - 10
+		        && event.getY() < primaryStage.getHeight() + 10) {
+		                resizebottom = true;
+		                dx = primaryStage.getWidth() - event.getX();
+		                dy = primaryStage.getHeight() - event.getY();
+		         } else {
+		                resizebottom = false;
+		                dragDelta.x = event.getSceneX();
+		                dragDelta.y = event.getSceneY();
+		         }
+			}
+			
+		});
+		
+		rootLayout.setOnMouseDragged(new EventHandler<MouseEvent>() {
+		        public void handle(MouseEvent event) {
+		            if (resizebottom == false) {
+		            	primaryStage.setX(event.getScreenX() - dragDelta.x);
+		            	primaryStage.setY(event.getScreenY() - dragDelta.y);
+		            } else {
+		            	primaryStage.setWidth(event.getX() + dx);
+		            	primaryStage.setHeight(event.getY() + dy);
+		            }
+		        }
+		    });
+	}
+
+	private void setWindowMove(Stage primaryStage) {
 		rootLayout.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -43,14 +99,7 @@ public class MainApp extends Application {
 				}
 			}
 		});
-		
-		controller = new RootLayoutController();
-		controller.setMainApp(this);
-		
-//		fontLoad();
-		
-		
-	}
+	}	
 
 	private void fontLoad() {
 //		Font.loadFont(getClass().getResourceAsStream("view/font/NotoSansCJKkr-Black.otf"),14);		
@@ -71,4 +120,5 @@ public class MainApp extends Application {
 	}
 	
 	class Delta { double x, y; } 
+	
 }

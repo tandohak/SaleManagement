@@ -100,3 +100,11 @@ HBox > .label{
 	-fx-pref-height:25px;
 	-fx-background-color:none;
 }
+
+/*아코디언 pane 버튼 */
+.accor_Btn{
+	-fx-pref-width:170px;
+	-fx-border-radius:none;
+	-fx-background-radius:none;
+	-fx-margin:0;
+}

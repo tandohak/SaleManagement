@@ -1,0 +1,392 @@
+-- 거래처영업관리
+DROP SCHEMA IF EXISTS SalesManagement;
+
+-- 거래처영업관리
+CREATE SCHEMA SalesManagement;
+
+-- 사원
+CREATE TABLE SalesManagement.Sales (
+	saleCode  int(4)       NOT NULL, -- 사원코드
+	saleName  VARCHAR(20)  NOT NULL, -- 사원이름
+	saleTel   VARCHAR(20)  NULL,     -- 연락처
+	saleLevel VARCHAR(1)   NULL,     -- 사원등급
+	saleAddr  VARCHAR(120) NULL      -- 사원주소
+);
+
+-- 사원
+ALTER TABLE SalesManagement.Sales
+	ADD CONSTRAINT PK_Sales -- 사원 기본키
+		PRIMARY KEY (
+			saleCode -- 사원코드
+		);
+
+-- 거래처
+CREATE TABLE SalesManagement.Account (
+	accCode  int(4)       NOT NULL, -- 거래처코드
+	accName  VARCHAR(20)  NOT NULL, -- 거래처명
+	accTel   VARCHAR(20)  NULL,     -- 연락처
+	accLevel VARCHAR(1)   NOT NULL, -- 거래처등급
+	accAddr  VARCHAR(120) NULL      -- 거래처주소
+);
+
+-- 거래처
+ALTER TABLE SalesManagement.Account
+	ADD CONSTRAINT PK_Account -- 거래처 기본키
+		PRIMARY KEY (
+			accCode -- 거래처코드
+		);
+
+ALTER TABLE SalesManagement.Account
+	MODIFY COLUMN accCode int(4) NOT NULL AUTO_INCREMENT;
+
+-- 제품
+CREATE TABLE SalesManagement.Product (
+	pdtCode  INT(4)      NOT NULL, -- 제품코드
+	pdtClass INT(2)      NULL,     -- 제품분류
+	pdtName  VARCHAR(20) NOT NULL, -- 제품이름
+	pdtCost  INT(10)     NOT NULL, -- 제품원가
+	pdtPrice INT(10)     NOT NULL, -- 제품정가
+	accCode  int(4)      NULL,     -- 거래처코드
+	pdtAdmit BOOLEAN     NOT NULL DEFAULT false -- 제품허가
+);
+
+-- 제품
+ALTER TABLE SalesManagement.Product
+	ADD CONSTRAINT PK_Product -- 제품 기본키
+		PRIMARY KEY (
+			pdtCode -- 제품코드
+		);
+
+ALTER TABLE SalesManagement.Product
+	MODIFY COLUMN pdtCode INT(4) NOT NULL AUTO_INCREMENT;
+
+-- 거래내역
+CREATE TABLE SalesManagement.Record (
+	recNo       INT(20) NOT NULL, -- 거래번호
+	saleCode    int(4)  NOT NULL, -- 사원코드
+	pdtCode     INT(4)  NOT NULL, -- 제품코드
+	pdtCost     INT(10) NULL,     -- 제품원가
+	pdtPrice    INT(10) NULL,     -- 제품정가
+	recDate     DATE    NOT NULL, -- 거래일자
+	recDisprice INT(10) NULL,     -- 할인금액
+	recDisrate  INT(3)  NULL,     -- 할인율
+	recCount    INT(10) NOT NULL, -- 판매수량
+	recAdmit    BOOLEAN NOT NULL DEFAULT false -- 거래허가
+);
+
+-- 거래내역
+ALTER TABLE SalesManagement.Record
+	ADD CONSTRAINT PK_Record -- 거래내역 기본키
+		PRIMARY KEY (
+			recNo -- 거래번호
+		);
+
+ALTER TABLE SalesManagement.Record
+	MODIFY COLUMN recNo INT(20) NOT NULL AUTO_INCREMENT;
+
+-- 사원등급
+CREATE TABLE SalesManagement.SalesLevel (
+	saleLevel   VARCHAR(1) NOT NULL, -- 등급
+	saleDisrate INT(3)     NOT NULL  -- 할인율
+);
+
+-- 사원등급
+ALTER TABLE SalesManagement.SalesLevel
+	ADD CONSTRAINT PK_SalesLevel -- 사원등급 기본키
+		PRIMARY KEY (
+			saleLevel -- 등급
+		);
+
+-- 거래처등급
+CREATE TABLE SalesManagement.AccountLevel (
+	accLevel   VARCHAR(1) NOT NULL, -- 등급
+	accDisrate INT(3)     NOT NULL  -- 할인율
+);
+
+-- 거래처등급
+ALTER TABLE SalesManagement.AccountLevel
+	ADD CONSTRAINT PK_AccountLevel -- 거래처등급 기본키
+		PRIMARY KEY (
+			accLevel -- 등급
+		);
+
+-- 대분류
+CREATE TABLE SalesManagement.bigClass (
+	bigClass INT(2)      NOT NULL, -- 대분류
+	bigName  VARCHAR(10) NULL      -- 이름
+);
+
+-- 대분류
+ALTER TABLE SalesManagement.bigClass
+	ADD CONSTRAINT PK_bigClass -- 대분류 기본키
+		PRIMARY KEY (
+			bigClass -- 대분류
+		);
+
+-- 중분류
+CREATE TABLE SalesManagement.midClass (
+	midClass INT(2)      NOT NULL, -- 중분류
+	midName  VARCHAR(10) NULL,     -- 이름
+	bigClass INT(2)      NULL      -- 대분류
+);
+
+-- 중분류
+ALTER TABLE SalesManagement.midClass
+	ADD CONSTRAINT PK_midClass -- 중분류 기본키
+		PRIMARY KEY (
+			midClass -- 중분류
+		);
+
+-- 제조사
+CREATE TABLE SalesManagement.maker (
+	makerNo   INT(2)      NOT NULL, -- 제조사
+	makerName VARCHAR(10) NULL      -- 이름
+);
+
+-- 제조사
+ALTER TABLE SalesManagement.maker
+	ADD CONSTRAINT PK_maker -- 제조사 기본키
+		PRIMARY KEY (
+			makerNo -- 제조사
+		);
+
+-- 주소
+CREATE TABLE SalesManagement.Addr (
+	zipCode   CHAR(5)     NULL, -- 우편번호
+	sido      VARCHAR(20) NULL, -- 시도
+	sigungu   VARCHAR(20) NULL, -- 시군구
+	doro      VARCHAR(20) NULL, -- 도로
+	building1 INT(5)      NULL, -- 건물번호1
+	building2 INT(5)      NULL  -- 건물번호2
+);
+
+-- 거래처아이디
+CREATE TABLE SalesManagement.accId (
+	accId    VARCHAR(10) NOT NULL, -- 아이디
+	accPw    VARCHAR(16) NOT NULL, -- 비밀번호
+	accAdmit BOOLEAN     NOT NULL, -- 허가여부
+	accCode  int(4)      NULL      -- 거래처코드
+);
+
+-- 거래처아이디
+ALTER TABLE SalesManagement.accId
+	ADD CONSTRAINT PK_accId -- 거래처아이디 기본키
+		PRIMARY KEY (
+			accId -- 아이디
+		);
+
+-- 사원아이디
+CREATE TABLE SalesManagement.saleId (
+	saleId    VARCHAR(10) NOT NULL, -- 사원아이디
+	salePw    VARCHAR(16) NOT NULL, -- 비밀번호
+	saleCode  int(4)      NOT NULL, -- 사원코드
+	saleAdmit BOOLEAN     NOT NULL  -- 허가여부
+);
+
+-- 사원아이디
+ALTER TABLE SalesManagement.saleId
+	ADD CONSTRAINT PK_saleId -- 사원아이디 기본키
+		PRIMARY KEY (
+			saleId -- 사원아이디
+		);
+
+-- 사원
+ALTER TABLE SalesManagement.Sales
+	ADD CONSTRAINT FK_SalesLevel_TO_Sales -- 사원등급 -> 사원
+		FOREIGN KEY (
+			saleLevel -- 사원등급
+		)
+		REFERENCES SalesManagement.SalesLevel ( -- 사원등급
+			saleLevel -- 등급
+		);
+
+-- 거래처
+ALTER TABLE SalesManagement.Account
+	ADD CONSTRAINT FK_AccountLevel_TO_Account -- 거래처등급 -> 거래처
+		FOREIGN KEY (
+			accLevel -- 거래처등급
+		)
+		REFERENCES SalesManagement.AccountLevel ( -- 거래처등급
+			accLevel -- 등급
+		);
+
+-- 제품
+ALTER TABLE SalesManagement.Product
+	ADD CONSTRAINT FK_midClass_TO_Product -- 중분류 -> 제품
+		FOREIGN KEY (
+			pdtClass -- 제품분류
+		)
+		REFERENCES SalesManagement.midClass ( -- 중분류
+			midClass -- 중분류
+		);
+
+-- 제품
+ALTER TABLE SalesManagement.Product
+	ADD CONSTRAINT FK_Account_TO_Product -- 거래처 -> 제품
+		FOREIGN KEY (
+			accCode -- 거래처코드
+		)
+		REFERENCES SalesManagement.Account ( -- 거래처
+			accCode -- 거래처코드
+		);
+
+-- 거래내역
+ALTER TABLE SalesManagement.Record
+	ADD CONSTRAINT FK_Sales_TO_Record -- 사원 -> 거래내역
+		FOREIGN KEY (
+			saleCode -- 사원코드
+		)
+		REFERENCES SalesManagement.Sales ( -- 사원
+			saleCode -- 사원코드
+		);
+
+-- 거래내역
+ALTER TABLE SalesManagement.Record
+	ADD CONSTRAINT FK_Product_TO_Record -- 제품 -> 거래내역
+		FOREIGN KEY (
+			pdtCode -- 제품코드
+		)
+		REFERENCES SalesManagement.Product ( -- 제품
+			pdtCode -- 제품코드
+		);
+
+-- 중분류
+ALTER TABLE SalesManagement.midClass
+	ADD CONSTRAINT FK_bigClass_TO_midClass -- 대분류 -> 중분류
+		FOREIGN KEY (
+			bigClass -- 대분류
+		)
+		REFERENCES SalesManagement.bigClass ( -- 대분류
+			bigClass -- 대분류
+		);
+
+-- 거래처아이디
+ALTER TABLE SalesManagement.accId
+	ADD CONSTRAINT FK_Account_TO_accId -- 거래처 -> 거래처아이디
+		FOREIGN KEY (
+			accCode -- 거래처코드
+		)
+		REFERENCES SalesManagement.Account ( -- 거래처
+			accCode -- 거래처코드
+		);
+
+-- 사원아이디
+ALTER TABLE SalesManagement.saleId
+	ADD CONSTRAINT FK_Sales_TO_saleId -- 사원 -> 사원아이디
+		FOREIGN KEY (
+			saleCode -- 사원코드
+		)
+		REFERENCES SalesManagement.Sales ( -- 사원
+			saleCode -- 사원코드
+		);
+
+
+
+
+
+--사원등급
+insert into saleslevel values
+('A', 3),
+('B', 2),
+('C', 1);
+
+--거래처등급
+insert into accountlevel values
+('L', 4),
+('M', 3),
+('S', 2);
+
+--사원
+insert into sales values
+(1001,'서대구','010-7412-5896','C',null),
+(1002,'김개똥','010-1111-1111','A',null),
+(1003,'강호동','010-3333-3333','A',null),
+(1004,'성시경','010-4444-4444','A',null),
+(1005,'가나다','010-5555-5555','A',null),
+(1006,'마바사','010-6666-6666','C',null),
+(1007,'아자차','010-7777-7777','B',null),
+(1008,'대구시','010-8888-8888','B',null),
+(1009,'이효리','010-9999-9999','C',null),
+(1010,'김건','010-1234-1234','C',null),
+(1101,'가가가가가','010-7898-7989','B',null),
+(1102,'이승기','010-1234-8583','A',null),
+(1103,'도레미','010-9999-9876','B',null),
+(1110,'남대구','010-7895-1353','C',null),
+(1111,'서현진','010-2222-2222','A',null);
+
+--거래처
+insert into account(accCode,accName,accAddr,accTel,accLevel) values
+(1001,'한진운수','대구시 남구 대명1동 123-12','053-666-6666','L'),
+(1003,'한빛소프트','대구시 남구 대명2동 234-23','053-123-2345','M'),
+(1002,'교보문고','대구시 남구 대명3동 234-35','053-555-5555','M'),
+(2001,'넥슨','대구시 남구 대명4동 167-49','053-444-4444','S'),
+(2005,'동네슈퍼','대구시 남구 대명5동 898-88','053-333-3333','L'),
+(2004,'다나와','대구시 남구 대명6동 12-45','053-222-2222','S'),
+(2002,'DGIT','대구시 남구 대명7동 55-84','053-111-1111','M'),
+(3002,'오뚜기컴퓨터','대구시 남구 대명8동 99-99','053-777-7777','L'),
+(3001,'대명세탁소','대구시 남구 대명 9동 15-15','053-888-8888','L'),
+(3003,'IMAX','대구시 남구 대명 10동 333-3','053-999-9999','S'),
+(3005,'가나다휴대폰','대구시 달서구 상인동 12-12','053-777-7777','S');
+
+--거래처아이디
+insert into accId values
+('abc', '12345', true, null),
+('abc1', '12345', true, null),
+('abc2', '12345', true, null),
+('abc3', '12345', true, null),
+('cbd4', '12345', false, null),
+('cbd5', '12345', false, null),
+('cbd6', '12345', false, null),
+('cbd7', '12345', false, null),
+('cbd8', '12345', false, null),
+('cbd9', '12345', false, null),
+('cbd100', '12345', false, null);
+
+--사원아이디
+insert into saleId values
+('sales1','1234', 1001 ,true),
+('sales2','1234', 1002 ,true),
+('sales3','1234', 1003 ,true),
+('sales4','1234', 1004 ,true),
+('sales5','1234', 1005 ,true),
+('sales6','1234', 1006 ,true),
+('sales7','1234', 1007 ,true),
+('sales8','1234', 1008 ,true),
+('sales9','1234', 1009 ,true),
+('sales10','1234',1010  ,true),
+('sales11','1234',1101  ,true),
+('sales12','1234',1102  ,true),
+('sales13','1234',1103  ,true),
+('sales14','1234',1110 ,true),
+('sales15','1234',1111  ,true);
+
+--대분류
+insert into bigClass values
+(50,"컴퓨터/주변기기"),
+(10,"TV/음향기기"),
+(20,"카메라"),
+(30,"냉장고/세탁기"),
+(40,"주방가전"),
+(99,"기타");
+
+--중분류
+insert into midClass values
+(51, "노트북",50),(52, "태플릿", 50),(53, "데스크탑",50),(54, "일체형",50),(55, "모니터",50),
+(11, "TV",10),(12, "스피커",10),(13, "이어폰",10),(14, "MP3",10),(15, "사운드바",10),
+(21, "DSLR",20),(22, "미러리스",20),(23, "캠코더",20),(24, "액션캠",20),(25, "CCTV",20),
+(31, "냉장고",30),(32, "세탁기",30),
+(41, "전기밥솥",40),(42, "전자레인지",40),(43, "믹서",40),(44, "커피머신",40),(45, "오븐",40)
+,(99,"기타",99);
+
+--제품
+insert into product values
+(1000, 21, "삼성노트북" , 730000, 450000, null, true),
+(1001, 21, "LG노트북" , 730000, 450000, null, true),
+(1002, 21, "애플노트북" , 730000, 450000, null, true),
+(1003, 21, "소니노트북" , 730000, 450000, null, true),
+(1004, 21, "브리츠노트북" , 730000, 450000, null, true),
+(1005, 52, "삼성테블릿" , 730000, 450000, null, true),
+(1006, 52, "LG테블릿" , 730000, 450000, null, true),
+(1007, 52, "애플테블릿" , 730000, 450000, null, true),
+(1009, 52, "고프로테블릿" , 730000, 450000, null, true),
+(1008, 52, "한일테블릿" , 730000, 450000, null, true);
