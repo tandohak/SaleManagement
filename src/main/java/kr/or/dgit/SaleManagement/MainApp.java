@@ -107,7 +107,7 @@ public class MainApp extends Application {
 
 	private void initRootLayout() throws IOException  {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+		loader.setLocation(MainApp.class.getResource("view/loginView.fxml"));
 		rootLayout = loader.load();
 		
 		Scene scene = new Scene(rootLayout);

@@ -30,16 +30,12 @@ public class RootLayoutController {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
-	public void setRootLayout() {
-		
-	}
 	
 	@FXML
 	private void hadleShowSalesManager() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SalesManagementView.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
-			rootPane = new BorderPane();
 			rootPane.setCenter(pane);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -101,15 +97,6 @@ public class RootLayoutController {
 		}
 	}
 	
-	@FXML
-	private void handleLoginBtn() {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/RootLayout.fxml"));
-			Parent pane = (BorderPane)loader.load();
-			((Stage)changeViewBtn.getScene().getWindow()).setScene(new Scene(pane, 1080, 675));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 }
