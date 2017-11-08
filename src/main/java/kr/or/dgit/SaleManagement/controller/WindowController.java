@@ -5,21 +5,24 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
-public class RootLayoutController {
+public class WindowController {
 	@FXML
 	private Parent rootPane;
-	
+	private EventHandler<MouseEvent> mousePress;
+	private EventHandler<MouseEvent> mouseDragged;
 	private double dx;
 	private double dy;
-	final Delta dragDelta = new Delta();
+	
 	class Delta { double x, y; } 
 	
-	@FXML
-	private void initialize() {
+	
+	public WindowController(Parent rootPane) {
+		this.rootPane = rootPane;
 		setWindowMove();
 	}
-	
+
 	private void setWindowMove() {
 		rootPane.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
@@ -39,4 +42,7 @@ public class RootLayoutController {
 			}
 		});
 	}	
+	
+
+	final Delta dragDelta = new Delta();
 }

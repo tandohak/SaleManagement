@@ -11,12 +11,12 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import kr.or.dgit.SaleManagement.controller.RootLayoutController;
+import kr.or.dgit.SaleManagement.controller.MainViewController;
 
 public class MainApp extends Application {
 	private Stage primaryStage;
 	private Parent rootLayout;
-	private RootLayoutController controller;
+	private MainViewController controller;
 	private Boolean resizebottom = false;
 	private double dx;
 	private double dy;
@@ -39,7 +39,7 @@ public class MainApp extends Application {
 //		windowResize(primaryStage);
 
 		
-		controller = new RootLayoutController();
+		controller = new MainViewController();
 		controller.setMainApp(this);
 		
 //		fontLoad();
@@ -78,7 +78,7 @@ public class MainApp extends Application {
 		            	primaryStage.setHeight(event.getY() + dy);
 		            }
 		        }
-		    });
+		});
 	}
 
 	private void setWindowMove(Stage primaryStage) {

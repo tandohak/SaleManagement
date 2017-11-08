@@ -1,0 +1,110 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+BorderPane{
+	-fx-background-color:#f0f1f3;
+}
+
+/*
+ * 모든 버튼
+ */
+.button{
+	-fx-text-fill:#7c8991;
+	-fx-background-color: #DDDDDD;
+	-fx-pref-width: 75;
+    -fx-pref-height: 23;
+}
+
+.greenBtn{
+	-fx-text-fill:#fff;
+	-fx-background-color: #49CB85;
+	-fx-pref-width: 75;
+    -fx-pref-height: 23;
+}
+
+.searchBtn{
+	-fx-text-fill:#fff;
+	-fx-background-color: #49CB85;
+	-fx-pref-width: 25;
+    -fx-pref-height: 23;
+	-fx-background-radius: 0 11.5 11.5 0;
+	-fx-text-fill: transparent;
+}
+
+.searchTF{
+	-fx-background-radius: 11.5 0 0 11.5;
+	-fx-padding: 4 7 4 10;
+}
+
+/*
+ * 탭관련 css
+ */
+.tab-pane:top > .tab-header-area > .tab-header-background{
+	-fx-background-color:none;	
+}
+
+.tab-pane:top > .tab-header-area > .headers-region > .tab:top{
+	-fx-background-color:#dddddd;
+	-fx-padding:1 10 1 10;
+}
+
+.tab-pane:top > .tab-header-area > .headers-region > .tab:selected{
+	-fx-background-color:#49CB85;
+	
+}
+
+.tab-pane:top .tab-label{
+	-fx-text-fill:#f7f7f7;	
+}
+
+.tab-pane:top .tab-label{
+	-fx-text-fill:#ffffff;
+	
+}
+
+.table-view{
+	-fx-background-color:none;
+}
+
+.table-view .table-column{
+	-fx-background-color:#ffffff;
+}
+
+.table-view .placeholder{
+	-fx-background-color:f7f7f7;
+}
+
+.check-box{
+	-fx-background-color:#fff;
+}
+
+HBox{
+	-fx-alignment:CENTER_LEFT;
+	-fx-spacing:15;	
+}
+HBox > .label{
+	-fx-min-width:65px;
+}
+.searchBoxBtn{
+	-fx-pref-width:25px;
+	-fx-pref-height:18px;
+	-fx-border-radius: 0 3 3 0;
+	-fx-background-radius: 0 3 3 0;
+}
+
+.searchBoxTf{
+	-fx-border-radius: 3 0 0 3;
+	-fx-background-radius: 3 0 0 3;
+	-fx-pref-width:115px;
+}
+.slideDown{
+	-fx-pref-width:25px;
+	-fx-pref-height:25px;
+	-fx-background-color:none;
+}
+
+/*아코디언 pane 버튼 */
+.accor_Btn{
+	-fx-pref-width:170px;
+	-fx-border-radius:none;
+	-fx-background-radius:none;
+	-fx-margin:0;
+}

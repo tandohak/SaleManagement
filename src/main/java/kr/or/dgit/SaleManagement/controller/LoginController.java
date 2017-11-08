@@ -67,7 +67,7 @@ public class LoginController {
 	@FXML
 	private void changeViewSale() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/RootLayout.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdimMainView.fxml"));
 			Parent pane = (BorderPane)loader.load();
 			((Stage)changViewSale.getScene().getWindow()).setScene(new Scene(pane, 1080, 675));
 		} catch (IOException e) {
@@ -83,7 +83,7 @@ public class LoginController {
 	@FXML
 	private void changeViewAcc() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/RootLayout.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdimMainView.fxml"));
 			Parent pane = (BorderPane)loader.load();
 			((Stage)changeViewAcc.getScene().getWindow()).setScene(new Scene(pane, 1080, 675));
 		} catch (IOException e) {
@@ -94,7 +94,7 @@ public class LoginController {
 	@FXML
 	private void showJoinDialog() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/JoinUserAcc.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dialog/JoinUserAccDialog.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			
 			Stage dialogStage = new Stage();
@@ -107,4 +107,6 @@ public class LoginController {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
