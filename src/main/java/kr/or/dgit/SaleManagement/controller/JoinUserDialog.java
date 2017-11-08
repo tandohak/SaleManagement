@@ -1,6 +1,9 @@
 package kr.or.dgit.SaleManagement.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import javax.imageio.stream.ImageInputStream;
 
@@ -35,11 +38,15 @@ public class JoinUserDialog {
 	        fileChooser.getExtensionFilters().add(extFilter);
 	        
 	        File file = fileChooser.showOpenDialog(pane.getScene().getWindow());
-	       
+	        
 	        if (file != null) {
-	        	System.out.println(file.getPath());
-	        	userImg.setImage(new Image(file.getAbsolutePath()));
-	        	imgNameTf.setText(file.getName());
+	        	try {
+					InputStream is = new FileInputStream(file);
+					userImg.setImage(new Image(is));
+		        	imgNameTf.setText(file.getName());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
 	        }
 	    }
 }
