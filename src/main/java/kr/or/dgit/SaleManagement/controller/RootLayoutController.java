@@ -1,14 +1,19 @@
 package kr.or.dgit.SaleManagement.controller;
 
+import java.io.IOException;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import kr.or.dgit.SaleManagement.MainApp;
 
 public class RootLayoutController {
 	@FXML
-	private Parent rootPane;
+	private BorderPane rootPane;
 	
 	private double dx;
 	private double dy;
@@ -16,8 +21,14 @@ public class RootLayoutController {
 	class Delta { double x, y; } 
 	
 	@FXML
-	private void initialize() {
+	private void initialize() throws IOException {
 		setWindowMove();
+		
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/loginView.fxml"));
+		AnchorPane pane = loader.load();
+		
+		rootPane.setCenter(pane);
 	}
 	
 	private void setWindowMove() {

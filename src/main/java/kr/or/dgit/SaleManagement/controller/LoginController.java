@@ -11,15 +11,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import kr.or.dgit.SaleManagement.MainApp;
 
 public class LoginController {
 	@FXML
-	private BorderPane rootPane;
+	private BorderPane Node;
 	
 	@FXML
 	private Button changViewSale;
@@ -68,8 +68,12 @@ public class LoginController {
 	private void changeViewSale() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdimMainView.fxml"));
-			Parent pane = (BorderPane)loader.load();
-			((Stage)changViewSale.getScene().getWindow()).setScene(new Scene(pane, 1080, 675));
+			BorderPane pane = (BorderPane)loader.load();
+//			((Stage)changViewSale.getScene().getWindow()).setScene(new Scene(pane, 1080, 675));
+
+			changViewSale.getScene().getWindow().setWidth(1080);
+			changViewSale.getScene().getWindow().setHeight(675);
+			((BorderPane)changViewSale.getScene().getRoot()).setCenter(pane);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -84,8 +88,12 @@ public class LoginController {
 	private void changeViewAcc() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdimMainView.fxml"));
-			Parent pane = (BorderPane)loader.load();
-			((Stage)changeViewAcc.getScene().getWindow()).setScene(new Scene(pane, 1080, 675));
+			BorderPane pane = (BorderPane)loader.load();
+//			((Stage)changeViewAcc.getScene().getWindow()).setScene(new Scene(pane, 1080, 675));
+//			((BorderPane)changeViewAcc.getScene().getRoot()).setCenter(pane);
+			changeViewAcc.getScene().getWindow().setWidth(1080);
+			changeViewAcc.getScene().getWindow().setHeight(675);
+			((BorderPane)changeViewAcc.getScene().getRoot()).setCenter(pane);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
