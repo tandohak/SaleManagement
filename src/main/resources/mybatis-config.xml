@@ -3,8 +3,8 @@
 <configuration>
 	<properties resource = "application.properties"/>
 	<typeAliases>
-		<typeAlias type="kr.or.dgit.SaleManagement.dto.Sales" alias="Sales"/>
-		<typeAlias type="kr.or.dgit.SaleManagement.dto.SalesLevel" alias="SalesLevel"/>
+		<!-- <typeAlias type="kr.or.dgit.SaleManagement.dto.Sales" alias="Sales"/> -->
+		<!-- <typeAlias type="kr.or.dgit.SaleManagement.dto.SalesLevel" alias="SalesLevel"/> -->
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
