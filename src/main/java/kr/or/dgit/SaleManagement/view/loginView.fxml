@@ -33,7 +33,7 @@
                         </PasswordField>
                         <JFXButton layoutX="119.0" layoutY="101.0" onAction="#handleCloseBtn" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: #dddddd;" text="취소" textFill="#7c8991" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="95.0" />
                         <Label layoutX="27.0" layoutY="147.0" text="ID/PW 찾기" textFill="#da6c6c" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="150.0" />
-                        <Label layoutX="106.0" layoutY="147.0" onMouseClicked="#showJoinDialog" text="회원가입하기" textFill="WHITE" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="150.0" />
+                        <Label layoutX="106.0" layoutY="147.0" onMouseClicked="#showJoinDialogSales" text="회원가입하기" textFill="WHITE" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="150.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -50,7 +50,7 @@
                         </PasswordField>
                         <JFXButton layoutX="117.0" layoutY="101.0" onAction="#handleCloseBtn" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: #dddddd;" text="취소" textFill="#7c8991" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="95.0" />
                         <Label text="ID/PW 찾기" textFill="#da6c6c" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="150.0" />
-                        <Label text="회원가입하기" textFill="WHITE" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="150.0" />
+                        <Label onMouseClicked="#showJoinDialogAcc" text="회원가입하기" textFill="WHITE" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="150.0" />
                      </children>
                   </AnchorPane>
               </content>

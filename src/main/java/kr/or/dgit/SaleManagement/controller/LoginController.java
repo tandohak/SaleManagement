@@ -100,7 +100,7 @@ public class LoginController {
 	}
 	
 	@FXML
-	private void showJoinDialog() {
+	private void showJoinDialogAcc() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dialog/JoinUserAccDialog.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
@@ -116,5 +116,21 @@ public class LoginController {
 		}
 	}
 	
+	@FXML
+	private void showJoinDialogSales() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dialog/JoinUserSalesDialog.fxml"));
+			BorderPane pane = (BorderPane)loader.load();
+			
+			Stage dialogStage = new Stage();
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			Scene scene = new Scene(pane);
+			dialogStage.setScene(scene);
+			
+			dialogStage.showAndWait();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }
