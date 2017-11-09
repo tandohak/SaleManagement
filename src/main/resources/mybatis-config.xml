@@ -2,10 +2,16 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<properties resource = "application.properties"/>
+	
+		
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
 	<typeAliases>
-		<!-- <typeAlias type="kr.or.dgit.SaleManagement.dto.Sales" alias="Sales"/> -->
-		<!-- <typeAlias type="kr.or.dgit.SaleManagement.dto.SalesLevel" alias="SalesLevel"/> -->
+		<package name="kr.or.dgit.SaleManagement.dto"/> 
 	</typeAliases>
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -18,6 +24,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<!-- <mapper resource="kr/or/dgit/SaleManagement/mappers/SalesLevelMappers.xml" /> -->
+		<mapper resource="kr/or/dgit/SaleManagement/Mappers/LoginMapper.xml" />
 	</mappers>
 </configuration>
