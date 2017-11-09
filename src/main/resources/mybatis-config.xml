@@ -18,6 +18,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="kr/or/dgit/SaleManagement/mappers/SalesLevelMappers.xml" />
+		<!-- <mapper resource="kr/or/dgit/SaleManagement/mappers/SalesLevelMappers.xml" /> -->
 	</mappers>
 </configuration>
