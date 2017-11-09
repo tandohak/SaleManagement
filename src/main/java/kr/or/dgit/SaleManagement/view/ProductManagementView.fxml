@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="675.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="675.0" prefWidth="900.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <TableView prefHeight="423.0" prefWidth="900.0" BorderPane.alignment="CENTER">
         <columns>
@@ -34,11 +34,11 @@
    <top>
       <AnchorPane prefHeight="100.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="14.0" layoutY="14.0" promptText="제품검색" styleClass="searchTF" stylesheets="@style.css">
+            <TextField layoutX="14.0" layoutY="14.0" promptText="제품검색" styleClass="searchTF" stylesheets="@css/style.css">
                <padding>
                   <Insets bottom="4.0" left="7.0" right="7.0" top="4.0" />
                </padding></TextField>
-            <JFXButton layoutX="152.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@style.css" text="검색" textOverrun="CLIP" />
+            <JFXButton layoutX="152.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@css/style.css" text="검색" textOverrun="CLIP" />
             <Separator layoutY="57.0" prefHeight="0.0" prefWidth="900.0" />
          </children>
       </AnchorPane>
@@ -57,7 +57,7 @@
                   <JFXButton style="-fx-background-color: #DDDDDD;" text="수정" textFill="#7c8991" />
                </buttons>
             </ButtonBar>
-            <JFXButton layoutX="897.0" layoutY="23.0" stylesheets="@style.css" text="인쇄" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="23.0" />
+            <JFXButton layoutX="897.0" layoutY="23.0" stylesheets="@css/style.css" text="인쇄" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="23.0" />
          </children>
       </AnchorPane>
    </bottom>

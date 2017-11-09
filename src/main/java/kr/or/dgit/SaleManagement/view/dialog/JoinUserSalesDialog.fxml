@@ -27,8 +27,8 @@
          <children>
             <ButtonBar layoutX="87.0" layoutY="3.0" prefHeight="23.0" prefWidth="145.0">
               <buttons>
-                  <JFXButton styleClass="greenBtn" text="가입" />
-                  <JFXButton text="취소" />
+                  <JFXButton fx:id="joinSalesBtn" styleClass="greenBtn" text="가입" />
+                  <JFXButton fx:id="closeDialog" text="취소" />
               </buttons>
             </ButtonBar>
          </children>
@@ -66,15 +66,15 @@
                         <Insets />
                      </GridPane.margin>
                   </Label>
-                  <TextField maxWidth="150.0" GridPane.columnIndex="1" />
-                  <TextField maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="거래처코드" GridPane.rowIndex="5" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="idTf" maxWidth="150.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="nameTf" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="phoneTf" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="사원코드" GridPane.rowIndex="5" />
+                  <TextField fx:id="codeTf" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text="비밀번호" GridPane.rowIndex="1" />
                   <Label text="비밀번호확인" GridPane.rowIndex="2" />
-                  <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="psTf" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="psTfComf" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />

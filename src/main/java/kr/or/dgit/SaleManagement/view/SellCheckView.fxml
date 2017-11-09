@@ -15,11 +15,11 @@
    <top>
       <AnchorPane prefHeight="100.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="14.0" layoutY="14.0" promptText="내역조회" styleClass="searchTF" stylesheets="@style.css">
+            <TextField layoutX="14.0" layoutY="14.0" promptText="내역조회" styleClass="searchTF" stylesheets="@css/style.css">
                <padding>
                   <Insets bottom="4.0" left="7.0" right="7.0" top="4.0" />
                </padding></TextField>
-            <JFXButton layoutX="152.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@style.css" text="검색" textOverrun="CLIP" />
+            <JFXButton layoutX="152.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@css/style.css" text="검색" textOverrun="CLIP" />
             <Separator layoutY="57.0" prefHeight="0.0" prefWidth="1000.0" />
          </children>
       </AnchorPane>
@@ -27,19 +27,19 @@
    <bottom>
       <AnchorPane prefHeight="123.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton layoutX="901.0" layoutY="45.0" stylesheets="@style.css" text="인쇄" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="45.0" />
-            <JFXButton layoutX="819.0" layoutY="45.0" styleClass="greenBtn" stylesheets="@style.css" text="수정" textFill="#7c8991" />
+            <JFXButton layoutX="901.0" layoutY="45.0" stylesheets="@css/style.css" text="인쇄" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="45.0" />
+            <JFXButton layoutX="819.0" layoutY="45.0" styleClass="greenBtn" stylesheets="@css/style.css" text="수정" textFill="#7c8991" />
          </children>
       </AnchorPane>
    </bottom>
    <center>
-      <TabPane prefHeight="388.0" prefWidth="1000.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane prefHeight="388.0" prefWidth="1000.0" stylesheets="@css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab text="전체">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="-309.0" layoutY="-118.0" prefHeight="383.0" prefWidth="1000.0" stylesheets="@style.css" AnchorPane.bottomAnchor="-37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView layoutX="-309.0" layoutY="-118.0" prefHeight="383.0" prefWidth="1000.0" stylesheets="@css/style.css" AnchorPane.bottomAnchor="-37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="판매 번호" />
                             <TableColumn prefWidth="75.0" text="거래처" />

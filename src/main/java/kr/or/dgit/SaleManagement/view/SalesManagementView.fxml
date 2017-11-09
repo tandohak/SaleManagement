@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minWidth="900.0" prefHeight="675.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane minWidth="900.0" prefHeight="675.0" prefWidth="900.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <AnchorPane prefHeight="100.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="14.0" layoutY="14.0" promptText="사원검색" styleClass="searchTF" stylesheets="@style.css" />
-            <JFXButton layoutX="152.0" layoutY="14.0" styleClass="searchBtn" stylesheets="@style.css" text="검색" />
+            <TextField layoutX="14.0" layoutY="14.0" promptText="사원검색" styleClass="searchTF" stylesheets="@css/style.css" />
+            <JFXButton layoutX="152.0" layoutY="14.0" styleClass="searchBtn" stylesheets="@css/style.css" text="검색" />
             <Separator layoutY="57.0" prefHeight="0.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>

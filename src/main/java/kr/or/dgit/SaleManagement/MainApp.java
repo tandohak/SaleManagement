@@ -78,25 +78,7 @@ public class MainApp extends Application {
 		});
 	}
 
-	private void setWindowMove(Stage primaryStage) {
-		rootLayout.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				dragDelta.x = primaryStage.getX() - event.getScreenX() ;
-				dragDelta.y = primaryStage.getY() - event.getScreenY() ;
-			}
-		});
-		
-		rootLayout.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {	
-				if(event.getButton() == MouseButton.PRIMARY) {
-				primaryStage.setX(event.getScreenX() + dragDelta.x);
-				primaryStage.setY(event.getScreenY() + dragDelta.y);
-				}
-			}
-		});
-	}	*/
+	*/
 
 	private void fontLoad() {
 //		Font.loadFont(getClass().getResourceAsStream("view/font/NotoSansCJKkr-Black.otf"),14);		

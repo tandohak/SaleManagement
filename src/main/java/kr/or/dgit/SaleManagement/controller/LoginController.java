@@ -89,8 +89,6 @@ public class LoginController {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdimMainView.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
-//			((Stage)changeViewAcc.getScene().getWindow()).setScene(new Scene(pane, 1080, 675));
-//			((BorderPane)changeViewAcc.getScene().getRoot()).setCenter(pane);
 			changeViewAcc.getScene().getWindow().setWidth(1080);
 			changeViewAcc.getScene().getWindow().setHeight(675);
 			((BorderPane)changeViewAcc.getScene().getRoot()).setCenter(pane);
@@ -109,8 +107,11 @@ public class LoginController {
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			Scene scene = new Scene(pane);
 			dialogStage.setScene(scene);
-			
+
+			JoinUserDialog joinUserDialog = new JoinUserDialog();
+			joinUserDialog.setDialogStage(dialogStage);
 			dialogStage.showAndWait();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

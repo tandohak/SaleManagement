@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <TableView prefHeight="423.0" prefWidth="900.0" BorderPane.alignment="CENTER">
         <columns>
@@ -35,8 +35,8 @@
    <top>
       <AnchorPane prefHeight="100.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="14.0" layoutY="14.0" promptText="거래처 검색" styleClass="searchTF" stylesheets="@style.css" />
-            <JFXButton layoutX="152.0" layoutY="14.0" styleClass="searchBtn" stylesheets="@style.css" text="검색" />
+            <TextField layoutX="14.0" layoutY="14.0" promptText="거래처 검색" styleClass="searchTF" stylesheets="@../css/style.css" />
+            <JFXButton layoutX="152.0" layoutY="14.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" />
             <Separator layoutY="57.0" prefHeight="0.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
@@ -46,7 +46,7 @@
          <children>
             <ButtonBar layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0">
                <buttons>
-                  <JFXButton buttonType="RAISED" style="-fx-background-color: #49CB85;" styleClass="greenBtn" stylesheets="@style.css" text="신규" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" style="-fx-background-color: #49CB85;" styleClass="greenBtn" stylesheets="@../css/style.css" text="신규" textFill="WHITE">
                      <font>
                         <Font name="NanumBarunGothic Bold" size="12.0" />
                      </font>
@@ -55,7 +55,7 @@
                   <JFXButton style="-fx-background-color: #DDDDDD;" text="수정" textFill="#7c8991" />
                </buttons>
             </ButtonBar>
-            <JFXButton layoutX="902.0" layoutY="23.0" stylesheets="@style.css" text="인쇄" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="23.0" />
+            <JFXButton layoutX="902.0" layoutY="23.0" stylesheets="@../css/style.css" text="인쇄" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="23.0" />
          </children>
       </AnchorPane>
    </bottom>

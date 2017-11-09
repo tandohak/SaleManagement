@@ -18,15 +18,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="675.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="675.0" prefWidth="900.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <AnchorPane prefHeight="100.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="32.0" layoutY="14.0" styleClass="searchTF" stylesheets="@style.css" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="14.0">
+            <TextField layoutX="32.0" layoutY="14.0" styleClass="searchTF" stylesheets="@css/style.css" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="14.0">
                <padding>
                   <Insets bottom="4.0" left="7.0" right="7.0" top="4.0" />
                </padding></TextField>
-            <JFXButton layoutX="170.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@style.css" text="검색" textOverrun="CLIP" />
+            <JFXButton layoutX="170.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@css/style.css" text="검색" textOverrun="CLIP" />
             <Separator layoutY="57.0" prefHeight="3.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.5" />
          </children>
       </AnchorPane>
@@ -36,9 +36,9 @@
          <children>
             <ButtonBar layoutX="601.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0">
                <buttons>
-                  <JFXButton styleClass="greenBtn" stylesheets="@style.css" text="저장" textFill="#7c8991" />
+                  <JFXButton styleClass="greenBtn" stylesheets="@css/style.css" text="저장" textFill="#7c8991" />
                   <JFXButton text="다시작성" />
-                  <JFXButton stylesheets="@style.css" text="인쇄" />
+                  <JFXButton stylesheets="@css/style.css" text="인쇄" />
                </buttons>
             </ButtonBar>
          </children>

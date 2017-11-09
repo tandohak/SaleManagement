@@ -18,7 +18,7 @@
             <Image url="file:/D:/workspace/workspace_mybatis/SaleManagement/DataFile/loginBg_2.jpg" />
          </image>
       </ImageView>
-      <JFXTabPane layoutX="150.0" layoutY="97.0" stylesheets="@loginStyle.css" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="97.0">
+      <JFXTabPane layoutX="150.0" layoutY="97.0" stylesheets="@css/loginStyle.css" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="97.0">
          <tabs>
             <Tab text="사원">
               <content>
