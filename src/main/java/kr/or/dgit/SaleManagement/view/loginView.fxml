@@ -1,47 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.RootLayoutController">
+<AnchorPane fx:id="node" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.LoginController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="500.0" layoutX="58.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="400.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/D:/workspace/workspace_mybatis/SaleManagement/src/main/resources/img/loginBg_2.jpg" />
+            <Image url="file:/D:/workspace/workspace_mybatis/SaleManagement/DataFile/loginBg_2.jpg" />
          </image>
       </ImageView>
-     
-            <TextField layoutX="150.0" layoutY="225.0" opacity="0.62" prefHeight="35.0" prefWidth="200.0" promptText="아이디" style="-fx-border-radius: 10px;">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </TextField>
-      <PasswordField layoutX="150.0" layoutY="266.0" opacity="0.62" prefHeight="35.0" prefWidth="200.0" promptText="비밀번호">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <font>
-            <Font name="Gulim" size="12.0" />
-         </font>
-      </PasswordField>
-      <JFXButton fx:id="changeViewBtn" layoutX="150.0" layoutY="306.0" onAction="#handleLoginBtn" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #49CB85;" text="로그인" textFill="WHITE">
-         <font>
-            <Font name="NanumGothic" size="12.0" />
-         </font>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </JFXButton>
-      <Label layoutX="235.0" layoutY="349.0" text="아이디/비밀번호찾기" textFill="#ff5757" />
+      <JFXTabPane layoutX="150.0" layoutY="97.0" stylesheets="@css/loginStyle.css" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="97.0">
+         <tabs>
+            <Tab text="사원">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="saleIdTf" layoutY="14.0" onKeyTyped="#SaleTfTypeHandle" opacity="0.62" prefHeight="35.0" prefWidth="200.0" promptText="아이디" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="14.0" />
+                        <JFXButton fx:id="changViewSale" disable="true" layoutX="73.0" layoutY="100.0" onAction="#changeViewSale" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: #49CB85;" text="로그인" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="95.0" />
+                        <PasswordField fx:id="salePwTf" layoutX="31.0" layoutY="59.0" onKeyTyped="#SaleTfTypeHandle" opacity="0.62" prefHeight="35.0" prefWidth="200.0" promptText="비밀번호" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="55.0">
+                           <font>
+                              <Font name="Modern No. 20" size="12.0" />
+                           </font>
+                        </PasswordField>
+                        <JFXButton layoutX="119.0" layoutY="101.0" onAction="#handleCloseBtn" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: #dddddd;" text="취소" textFill="#7c8991" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="95.0" />
+                        <Label layoutX="27.0" layoutY="147.0" text="ID/PW 찾기" textFill="#da6c6c" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="150.0" />
+                        <Label layoutX="106.0" layoutY="147.0" onMouseClicked="#showJoinDialogSales" text="회원가입하기" textFill="WHITE" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="150.0" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="거래처">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton fx:id="changeViewAcc" disable="true" layoutX="66.0" layoutY="107.0" onAction="#changeViewAcc" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: #49CB85;" text="로그인" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="95.0" />
+                        <TextField fx:id="accIdTf" layoutX="25.0" layoutY="24.0" onKeyTyped="#AccTfTypeHandle" opacity="0.62" prefHeight="35.0" prefWidth="200.0" promptText="아이디" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="15.0" />
+                        <PasswordField fx:id="accPwTf" layoutX="25.0" layoutY="65.0" onKeyTyped="#AccTfTypeHandle" opacity="0.62" prefHeight="35.0" prefWidth="200.0" promptText="비밀번호" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="55.0">
+                           <font>
+                              <Font name="Modern No. 20" size="12.0" />
+                           </font>
+                        </PasswordField>
+                        <JFXButton layoutX="117.0" layoutY="101.0" onAction="#handleCloseBtn" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: #dddddd;" text="취소" textFill="#7c8991" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="95.0" />
+                        <Label text="ID/PW 찾기" textFill="#da6c6c" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="150.0" />
+                        <Label onMouseClicked="#showJoinDialogAcc" text="회원가입하기" textFill="WHITE" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="150.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
    </children>
 </AnchorPane>

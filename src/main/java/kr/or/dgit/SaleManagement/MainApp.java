@@ -3,20 +3,17 @@ package kr.or.dgit.SaleManagement;
 import java.io.IOException;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import kr.or.dgit.SaleManagement.controller.RootLayoutController;
+import kr.or.dgit.SaleManagement.controller.MainViewController;
 
 public class MainApp extends Application {
 	private Stage primaryStage;
 	private Parent rootLayout;
-	private RootLayoutController controller;
+	private MainViewController controller;
 	private Boolean resizebottom = false;
 	private double dx;
 	private double dy;
@@ -34,12 +31,12 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("영업관리 프로그램");
 		initRootLayout();
 		
-		setWindowMove(primaryStage);
+//		setWindowMove(primaryStage);
 		
 //		windowResize(primaryStage);
 
 		
-		controller = new RootLayoutController();
+		controller = new MainViewController();
 		controller.setMainApp(this);
 		
 //		fontLoad();
@@ -47,7 +44,7 @@ public class MainApp extends Application {
 		
 	}
 
-	private void windowResize(Stage primaryStage) {
+	/*private void windowResize(Stage primaryStage) {
 		rootLayout.setOnMousePressed(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -78,28 +75,10 @@ public class MainApp extends Application {
 		            	primaryStage.setHeight(event.getY() + dy);
 		            }
 		        }
-		    });
+		});
 	}
 
-	private void setWindowMove(Stage primaryStage) {
-		rootLayout.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				dragDelta.x = primaryStage.getX() - event.getScreenX() ;
-				dragDelta.y = primaryStage.getY() - event.getScreenY() ;
-			}
-		});
-		
-		rootLayout.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {	
-				if(event.getButton() == MouseButton.PRIMARY) {
-				primaryStage.setX(event.getScreenX() + dragDelta.x);
-				primaryStage.setY(event.getScreenY() + dragDelta.y);
-				}
-			}
-		});
-	}	
+	*/
 
 	private void fontLoad() {
 //		Font.loadFont(getClass().getResourceAsStream("view/font/NotoSansCJKkr-Black.otf"),14);		
