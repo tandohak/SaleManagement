@@ -38,12 +38,13 @@ dependencies {
 	 testImplementation 'junit:junit:4.12'
 }
 
+
 jar {
 	//  archiveName'StudentManagement.jar' archiveName속성을지정하면baseName속성이나appendix속성은무시.
 	version = 1.0
 	//  application으로 개발 할 경우(apply plugin: 'application') main()메서드가 있는 클래스를 반드시 지정
-	mainClassName= 'kr.or.dgit.SaleManagement.jdbc_setting.jdbcSetting'
-	baseName= 'jdbcSetting'
+	mainClassName= 'kr.or.dgit.SaleManagement.jdbc_setting.TestMain'
+	baseName= 'TestMain'
 	appendix = 'bin'
 	manifest{
 		attributes 'Title': baseName, 'Version': version, 'Main-Class': mainClassName
