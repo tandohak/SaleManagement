@@ -108,7 +108,7 @@ public class LoginController {
 			Scene scene = new Scene(pane);
 			dialogStage.setScene(scene);
 
-			JoinUserDialog joinUserDialog = new JoinUserDialog();
+			JoinUserDialog joinUserDialog = loader.getController();
 			joinUserDialog.setDialogStage(dialogStage);
 			dialogStage.showAndWait();
 			
