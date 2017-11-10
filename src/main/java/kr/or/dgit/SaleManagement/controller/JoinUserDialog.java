@@ -7,14 +7,18 @@ import java.io.InputStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
-public class JoinUserDialog {
+public class JoinUserDialog extends TextFieldUtil{
 	@FXML
 	private Parent pane;
 
@@ -31,10 +35,10 @@ public class JoinUserDialog {
 	private TextField idTf;
 
 	@FXML
-	private TextField pwTf;
+	private PasswordField pwTf;
 
 	@FXML
-	private TextField psTfComf;
+	private PasswordField pwTfComf;
 
 	@FXML
 	private TextField nameTf;
@@ -44,7 +48,6 @@ public class JoinUserDialog {
 
 	@FXML
 	private TextField codeTf;
-	
 	
 	private Stage dialogStage;
 	
@@ -72,6 +75,37 @@ public class JoinUserDialog {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	@FXML
+	private void submitClickAction() {
+		if(tfComfrimField()) {
+			idTf.getText();
+			nameTf.getText();
+			phoneTf.getText();
+			codeTf.getText();
+			pwTf.getText();
+		};
+		
+	}
+
+	private boolean tfComfrimField() {		
+		try {
+			tfComfrim(idTf);
+			tfComfrim(nameTf);
+			tfComfrim(phoneTf);
+			tfComfrim(codeTf);
+			tfComfrim(pwTf);
+			tfComfrim(pwTfComf);
+			return true;
+		} catch (Exception e) {
+			Alert alert =new Alert(AlertType.WARNING);
+			alert.setTitle("공백존재");			
+			alert.setContentText("공백이 존재합니다.");
+			alert.show();
+			e.printStackTrace();
+			return false;
+		}		
 	}
 	
 	@FXML
