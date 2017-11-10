@@ -56,48 +56,6 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="사원별">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView prefHeight="423.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="거래 번호" />
-                              <TableColumn prefWidth="75.0" text="거래처" />
-                              <TableColumn prefWidth="75.0" text="품목" />
-                              <TableColumn prefWidth="75.0" text="금액" />
-                              <TableColumn prefWidth="75.0" text="거래일자" />
-                              <TableColumn prefWidth="75.0" text="담당직원" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="거래처별">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView prefHeight="423.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="거래 번호" />
-                              <TableColumn prefWidth="75.0" text="거래처" />
-                              <TableColumn prefWidth="75.0" text="품목" />
-                              <TableColumn prefWidth="75.0" text="금액" />
-                              <TableColumn prefWidth="75.0" text="거래일자" />
-                              <TableColumn prefWidth="75.0" text="담당직원" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
         </tabs>
       </TabPane>
    </center>
