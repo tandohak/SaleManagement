@@ -6,6 +6,9 @@ BorderPane{
 /*
  * 모든 버튼
  */
+.text-field{
+	-fx-background-radius: 11.5 11.5 11.5 11.5;
+}
 .button{
 	-fx-text-fill:#7c8991;
 	-fx-background-color: #DDDDDD;
@@ -21,6 +24,22 @@ BorderPane{
 }
 
 .searchBtn{
+	-fx-background-image:url("ic_search_white_48dp_1x.png");
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 16 16;	
+    -fx-background-position: center center;
+	-fx-text-fill:#fff;
+	-fx-background-color: #49CB85;
+	-fx-pref-width: 25;
+    -fx-pref-height: 23;
+	-fx-background-radius: 0 11.5 11.5 0;
+	-fx-text-fill: transparent;
+}
+.uploadBtn{
+	-fx-background-image:url("ic_file_upload_white_48dp_1x.png");
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 16 16;	
+    -fx-background-position: center center;
 	-fx-text-fill:#fff;
 	-fx-background-color: #49CB85;
 	-fx-pref-width: 25;
@@ -33,7 +52,13 @@ BorderPane{
 	-fx-background-radius: 11.5 0 0 11.5;
 	-fx-padding: 4 7 4 10;
 }
+.combo-box{
+	-fx-background-radius: 11.5 11.5 11.5 11.5;
+}
 
+.date-picker .text-field{
+	-fx-background-radius: none;
+}
 /*
  * 탭관련 css
  */
