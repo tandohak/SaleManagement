@@ -1,22 +1,30 @@
 package kr.or.dgit.SaleManagement.dto;
 
-public class UserAddress {
-	private int addrNo;
+public class Addr {
 	private String zipCode;
 	private String sido;
 	private String sigungu;
 	private String doro;
 	private int building1;
 	private int building2;
-	public UserAddress() {
+	public Addr(String zipCode, String sido, String sigungu, String doro, int building1,
+			int building2) {
+		super();
+		this.zipCode = zipCode;
+		this.sido = sido;
+		this.sigungu = sigungu;
+		this.doro = doro;
+		this.building1 = building1;
+		this.building2 = building2;
+	}
+	public Addr() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public int getAddrNo() {
-		return addrNo;
-	}
-	public void setAddrNo(int addrNo) {
-		this.addrNo = addrNo;
+	@Override
+	public String toString() {
+		return String.format(
+				"UserAddr [zipCode=%s, sido=%s, sigungu=%s, doro=%s, building1=%s, building2=%s]", zipCode, sido, sigungu, doro, building1, building2);
 	}
 	public String getZipCode() {
 		return zipCode;
@@ -53,10 +61,6 @@ public class UserAddress {
 	}
 	public void setBuilding2(int building2) {
 		this.building2 = building2;
-	}
-	@Override
-	public String toString() {
-		return String.format("Address [No=%s, %s, %s, %s, %s, %s, %s]", addrNo, zipCode, sido, sigungu, doro, building1, building2);
 	}
 	
 	

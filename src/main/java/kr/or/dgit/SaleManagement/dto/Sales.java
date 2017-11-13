@@ -4,7 +4,7 @@ public class Sales {
 	private int saleCode;
 	private String saleName;
 	private String saleTel;
-	private UserAddress saleAddr;
+	private UserAddr saleAddr;
 	private boolean saleLeave;
 	private User saleId;
 	private SalesLevel saleLevel;
@@ -33,11 +33,11 @@ public class Sales {
 		this.saleTel = saleTel;
 	}
 
-	public UserAddress getSaleAddr() {
+	public UserAddr getSaleAddr() {
 		return saleAddr;
 	}
 
-	public void setSaleAddr(UserAddress saleAddr) {
+	public void setSaleAddr(UserAddr saleAddr) {
 		this.saleAddr = saleAddr;
 	}
 

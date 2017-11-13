@@ -4,7 +4,7 @@ public class Account {
 	private int accCode;
 	private String accName;
 	private String accTel;
-	private UserAddress accAddr;
+	private UserAddr accAddr;
 	private boolean accAdmit;
 	private User accId;
 	private AccountLevel accLevel;
@@ -45,11 +45,11 @@ public class Account {
 		this.accAdmit = accAdmit;
 	}
 
-	public UserAddress getAccAddr() {
+	public UserAddr getAccAddr() {
 		return accAddr;
 	}
 
-	public void setAccAddr(UserAddress accAddr) {
+	public void setAccAddr(UserAddr accAddr) {
 		this.accAddr = accAddr;
 	}
 

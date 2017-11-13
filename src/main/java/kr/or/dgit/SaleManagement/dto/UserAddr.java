@@ -8,26 +8,9 @@ public class UserAddr {
 	private String doro;
 	private int building1;
 	private int building2;
-	public UserAddr(int addrNo, String zipCode, String sido, String sigungu, String doro, int building1,
-			int building2) {
-		super();
-		this.addrNo = addrNo;
-		this.zipCode = zipCode;
-		this.sido = sido;
-		this.sigungu = sigungu;
-		this.doro = doro;
-		this.building1 = building1;
-		this.building2 = building2;
-	}
 	public UserAddr() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	@Override
-	public String toString() {
-		return String.format(
-				"UserAddr [addrNo=%s, zipCode=%s, sido=%s, sigungu=%s, doro=%s, building1=%s, building2=%s]", addrNo,
-				zipCode, sido, sigungu, doro, building1, building2);
 	}
 	public int getAddrNo() {
 		return addrNo;
@@ -70,6 +53,10 @@ public class UserAddr {
 	}
 	public void setBuilding2(int building2) {
 		this.building2 = building2;
+	}
+	@Override
+	public String toString() {
+		return String.format("Address [No=%s, %s, %s, %s, %s, %s, %s]", addrNo, zipCode, sido, sigungu, doro, building1, building2);
 	}
 	
 	
