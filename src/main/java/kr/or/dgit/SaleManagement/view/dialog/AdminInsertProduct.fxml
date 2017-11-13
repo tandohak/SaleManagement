@@ -75,10 +75,10 @@
                </children>
             </HBox>
             <Label text="거래처명" GridPane.rowIndex="2" />
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 0;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Label text="검색하세요" textFill="#c5bcbc" />
-                  <Button mnemonicParsing="false" text="검색" />
+                  <TextField editable="false" prefHeight="23.0" prefWidth="110.0" promptText="검색하세요" styleClass="searchTF" />
+                  <Button mnemonicParsing="false" styleClass="searchBtn" text="검색" />
                </children>
             </HBox>
             <TextField maxWidth="138.0" prefHeight="23.0" prefWidth="118.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
