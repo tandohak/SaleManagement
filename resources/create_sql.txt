@@ -9,7 +9,7 @@ CREATE TABLE SalesManagement.Sales (
 	saleAddr   INT(8)      NOT NULL,
 	saleLeave  BOOLEAN     NOT NULL DEFAULT true,
 	saleId     VARCHAR(20) NOT NULL,
-	salesLevel VARCHAR(2)  NOT NULL
+	salelevel VARCHAR(2)  NOT NULL
 );
 
 ALTER TABLE SalesManagement.Sales
@@ -168,15 +168,15 @@ ALTER TABLE SalesManagement.UserCategory
 			categoryNo
 		);
 
-CREATE TABLE SalesManagement.SalesLevel (
-	salesLevel   VARCHAR(2) NOT NULL,
+CREATE TABLE SalesManagement.salelevel (
+	salelevel   VARCHAR(2) NOT NULL,
 	salesDisrate INT(3)     NOT NULL
 );
 
-ALTER TABLE SalesManagement.SalesLevel
-	ADD CONSTRAINT PK_SalesLevel
+ALTER TABLE SalesManagement.salelevel
+	ADD CONSTRAINT PK_salelevel
 		PRIMARY KEY (
-			salesLevel
+			salelevel
 		);
 
 CREATE TABLE SalesManagement.UserAddr (
@@ -215,12 +215,12 @@ ALTER TABLE SalesManagement.Sales
 		);
 
 ALTER TABLE SalesManagement.Sales
-	ADD CONSTRAINT FK_SalesLevel_TO_Sales
+	ADD CONSTRAINT FK_salelevel_TO_Sales
 		FOREIGN KEY (
-			salesLevel
+			salelevel
 		)
-		REFERENCES SalesManagement.SalesLevel (
-			salesLevel
+		REFERENCES SalesManagement.salelevel (
+			salelevel
 		);
 
 ALTER TABLE SalesManagement.Sales
