@@ -1,6 +1,6 @@
 package kr.or.dgit.SaleManagement.dto;
 
-public class Address {
+public class UserAddress {
 	private int addrNo;
 	private String zipCode;
 	private String sido;
@@ -8,7 +8,7 @@ public class Address {
 	private String doro;
 	private int building1;
 	private int building2;
-	public Address() {
+	public UserAddress() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
