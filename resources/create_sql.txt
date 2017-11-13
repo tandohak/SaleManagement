@@ -1,8 +1,8 @@
-DROP SCHEMA IF EXISTS SalesManagement;
+DROP SCHEMA IF EXISTS SaleManagement;
 
-CREATE SCHEMA SalesManagement;
+CREATE SCHEMA SaleManagement;
 
-CREATE TABLE SalesManagement.Sales (
+CREATE TABLE SaleManagement.Sales (
 	saleCode   INT(8)      NOT NULL,
 	saleName   VARCHAR(20) NOT NULL,
 	saleTel    VARCHAR(20) NULL,
@@ -12,13 +12,13 @@ CREATE TABLE SalesManagement.Sales (
 	salelevel VARCHAR(2)  NOT NULL
 );
 
-ALTER TABLE SalesManagement.Sales
+ALTER TABLE SaleManagement.Sales
 	ADD CONSTRAINT PK_Sales
 		PRIMARY KEY (
 			saleCode
 		);
 
-CREATE TABLE SalesManagement.Account (
+CREATE TABLE SaleManagement.Account (
 	accCode  INT(8)      NOT NULL,
 	accName  VARCHAR(20) NOT NULL,
 	accTel   VARCHAR(20) NULL,
@@ -28,13 +28,13 @@ CREATE TABLE SalesManagement.Account (
 	accLevel VARCHAR(1)  NULL
 );
 
-ALTER TABLE SalesManagement.Account
+ALTER TABLE SaleManagement.Account
 	ADD CONSTRAINT PK_Account
 		PRIMARY KEY (
 			accCode
 		);
 
-CREATE TABLE SalesManagement.Product (
+CREATE TABLE SaleManagement.Product (
 	pdtCode  INT(4)      NOT NULL,
 	pdtClass INT(2)      NOT NULL,
 	pdtName  VARCHAR(20) NOT NULL,
@@ -44,13 +44,13 @@ CREATE TABLE SalesManagement.Product (
 	accCode  INT(8)      NOT NULL
 );
 
-ALTER TABLE SalesManagement.Product
+ALTER TABLE SaleManagement.Product
 	ADD CONSTRAINT PK_Product
 		PRIMARY KEY (
 			pdtCode
 		);
 
-CREATE TABLE SalesManagement.Record (
+CREATE TABLE SaleManagement.Record (
 	recNo       INT(20) NOT NULL,
 	pdtCode     INT(4)  NOT NULL,
 	saleCode    INT(8)  NOT NULL,
@@ -62,70 +62,59 @@ CREATE TABLE SalesManagement.Record (
 	recCount    INT(10) NOT NULL
 );
 
-ALTER TABLE SalesManagement.Record
+ALTER TABLE SaleManagement.Record
 	ADD CONSTRAINT PK_Record
 		PRIMARY KEY (
 			recNo
 		);
 
-CREATE TABLE SalesManagement.User (
+CREATE TABLE SaleManagement.User (
 	userId     VARCHAR(20) NOT NULL,
 	userPw     VARCHAR(20) NOT NULL,
 	categoryNo INT(2)      NOT NULL
 );
 
-ALTER TABLE SalesManagement.User
+ALTER TABLE SaleManagement.User
 	ADD CONSTRAINT PK_User
 		PRIMARY KEY (
 			userId
 		);
 
-CREATE TABLE SalesManagement.AccountLevel (
+CREATE TABLE SaleManagement.AccountLevel (
 	accLevel   VARCHAR(1) NOT NULL,
 	accDisrate INT(3)     NOT NULL
 );
 
-ALTER TABLE SalesManagement.AccountLevel
+ALTER TABLE SaleManagement.AccountLevel
 	ADD CONSTRAINT PK_AccountLevel
 		PRIMARY KEY (
 			accLevel
 		);
 
-CREATE TABLE SalesManagement.bigClass (
+CREATE TABLE SaleManagement.bigClass (
 	bigClass INT(2)      NOT NULL,
 	bigName  VARCHAR(10) NOT NULL
 );
 
-ALTER TABLE SalesManagement.bigClass
+ALTER TABLE SaleManagement.bigClass
 	ADD CONSTRAINT PK_bigClass
 		PRIMARY KEY (
 			bigClass
 		);
 
-CREATE TABLE SalesManagement.rowClass (
+CREATE TABLE SaleManagement.rowClass (
 	rowClass INT(2)      NOT NULL,
 	rowName  VARCHAR(10) NOT NULL,
 	bigClass INT(2)      NOT NULL
 );
 
-ALTER TABLE SalesManagement.rowClass
+ALTER TABLE SaleManagement.rowClass
 	ADD CONSTRAINT PK_rowClass
 		PRIMARY KEY (
 			rowClass
 		);
 
-CREATE TABLE SalesManagement.maker (
-	makerNo   INT(2)      NOT NULL,
-	makerName VARCHAR(10) NULL
-);
-
-ALTER TABLE SalesManagement.maker
-	ADD CONSTRAINT PK_maker
-		PRIMARY KEY (
-			makerNo
-		);
-
-CREATE TABLE SalesManagement.Addr (
+CREATE TABLE SaleManagement.Addr (
 	zipCode   CHAR(5)     NULL,
 	sido      VARCHAR(20) NULL,
 	sigungu   VARCHAR(20) NULL,
@@ -134,52 +123,29 @@ CREATE TABLE SalesManagement.Addr (
 	building2 INT(5)      NULL
 );
 
-CREATE TABLE SalesManagement.accId (
-	accId VARCHAR(10) NOT NULL,
-	accPw VARCHAR(16) NOT NULL
-);
-
-ALTER TABLE SalesManagement.accId
-	ADD CONSTRAINT PK_accId
-		PRIMARY KEY (
-			accId
-		);
-
-CREATE TABLE SalesManagement.saleId (
-	saleId    VARCHAR(10) NOT NULL,
-	salePw    VARCHAR(16) NOT NULL,
-	saleAdmit BOOLEAN     NOT NULL
-);
-
-ALTER TABLE SalesManagement.saleId
-	ADD CONSTRAINT PK_saleId
-		PRIMARY KEY (
-			saleId
-		);
-
-CREATE TABLE SalesManagement.UserCategory (
+CREATE TABLE SaleManagement.UserCategory (
 	categoryNo   INT(2)      NOT NULL,
 	categoryName VARCHAR(20) NOT NULL
 );
 
-ALTER TABLE SalesManagement.UserCategory
+ALTER TABLE SaleManagement.UserCategory
 	ADD CONSTRAINT PK_UserCategory
 		PRIMARY KEY (
 			categoryNo
 		);
 
-CREATE TABLE SalesManagement.salelevel (
+CREATE TABLE SaleManagement.saleslevel (
 	salelevel   VARCHAR(2) NOT NULL,
-	salesDisrate INT(3)     NOT NULL
+	saleDisrate INT(3)     NOT NULL
 );
 
-ALTER TABLE SalesManagement.salelevel
-	ADD CONSTRAINT PK_salelevel
+ALTER TABLE SaleManagement.saleslevel
+	ADD CONSTRAINT PK_saleslevel
 		PRIMARY KEY (
 			salelevel
 		);
 
-CREATE TABLE SalesManagement.UserAddr (
+CREATE TABLE SaleManagement.UserAddr (
 	addrNo    INT(8)      NOT NULL,
 	zipCode   CHAR(5)     NULL,
 	sido      VARCHAR(20) NULL,
@@ -189,144 +155,144 @@ CREATE TABLE SalesManagement.UserAddr (
 	building2 INT(5)      NULL
 );
 
-ALTER TABLE SalesManagement.UserAddr
+ALTER TABLE SaleManagement.UserAddr
 	ADD CONSTRAINT PK_UserAddr
 		PRIMARY KEY (
 			addrNo
 		);
 
-CREATE TABLE SalesManagement.SalesImg (
+CREATE TABLE SaleManagement.SalesImg (
 	saleCode INT(8)   NULL,
-	salesImg LONGBLOB NULL
+	saleImg LONGBLOB NULL
 );
 
-CREATE TABLE SalesManagement.ProductImg (
+CREATE TABLE SaleManagement.ProductImg (
 	pdtCode INT(4)   NULL,
 	pdtImg  LONGBLOB NULL
 );
 
-ALTER TABLE SalesManagement.Sales
+ALTER TABLE SaleManagement.Sales
 	ADD CONSTRAINT FK_User_TO_Sales
 		FOREIGN KEY (
 			saleId
 		)
-		REFERENCES SalesManagement.User (
+		REFERENCES SaleManagement.User (
 			userId
 		);
 
-ALTER TABLE SalesManagement.Sales
+ALTER TABLE SaleManagement.Sales
 	ADD CONSTRAINT FK_salelevel_TO_Sales
 		FOREIGN KEY (
 			salelevel
 		)
-		REFERENCES SalesManagement.salelevel (
+		REFERENCES SaleManagement.saleslevel (
 			salelevel
 		);
 
-ALTER TABLE SalesManagement.Sales
+ALTER TABLE SaleManagement.Sales
 	ADD CONSTRAINT FK_UserAddr_TO_Sales
 		FOREIGN KEY (
 			saleAddr
 		)
-		REFERENCES SalesManagement.UserAddr (
+		REFERENCES SaleManagement.UserAddr (
 			addrNo
 		);
 
-ALTER TABLE SalesManagement.Account
+ALTER TABLE SaleManagement.Account
 	ADD CONSTRAINT FK_User_TO_Account
 		FOREIGN KEY (
 			accId
 		)
-		REFERENCES SalesManagement.User (
+		REFERENCES SaleManagement.User (
 			userId
 		);
 
-ALTER TABLE SalesManagement.Account
+ALTER TABLE SaleManagement.Account
 	ADD CONSTRAINT FK_AccountLevel_TO_Account
 		FOREIGN KEY (
 			accLevel
 		)
-		REFERENCES SalesManagement.AccountLevel (
+		REFERENCES SaleManagement.AccountLevel (
 			accLevel
 		);
 
-ALTER TABLE SalesManagement.Account
+ALTER TABLE SaleManagement.Account
 	ADD CONSTRAINT FK_UserAddr_TO_Account
 		FOREIGN KEY (
 			accAddr
 		)
-		REFERENCES SalesManagement.UserAddr (
+		REFERENCES SaleManagement.UserAddr (
 			addrNo
 		);
 
-ALTER TABLE SalesManagement.Product
+ALTER TABLE SaleManagement.Product
 	ADD CONSTRAINT FK_rowClass_TO_Product
 		FOREIGN KEY (
 			pdtClass
 		)
-		REFERENCES SalesManagement.rowClass (
+		REFERENCES SaleManagement.rowClass (
 			rowClass
 		);
 
-ALTER TABLE SalesManagement.Product
+ALTER TABLE SaleManagement.Product
 	ADD CONSTRAINT FK_Account_TO_Product
 		FOREIGN KEY (
 			accCode
 		)
-		REFERENCES SalesManagement.Account (
+		REFERENCES SaleManagement.Account (
 			accCode
 		);
 
-ALTER TABLE SalesManagement.Record
+ALTER TABLE SaleManagement.Record
 	ADD CONSTRAINT FK_Product_TO_Record
 		FOREIGN KEY (
 			pdtCode
 		)
-		REFERENCES SalesManagement.Product (
+		REFERENCES SaleManagement.Product (
 			pdtCode
 		);
 
-ALTER TABLE SalesManagement.Record
+ALTER TABLE SaleManagement.Record
 	ADD CONSTRAINT FK_Sales_TO_Record
 		FOREIGN KEY (
 			saleCode
 		)
-		REFERENCES SalesManagement.Sales (
+		REFERENCES SaleManagement.Sales (
 			saleCode
 		);
 
-ALTER TABLE SalesManagement.User
+ALTER TABLE SaleManagement.User
 	ADD CONSTRAINT FK_UserCategory_TO_User
 		FOREIGN KEY (
 			categoryNo
 		)
-		REFERENCES SalesManagement.UserCategory (
+		REFERENCES SaleManagement.UserCategory (
 			categoryNo
 		);
 
-ALTER TABLE SalesManagement.rowClass
+ALTER TABLE SaleManagement.rowClass
 	ADD CONSTRAINT FK_bigClass_TO_rowClass
 		FOREIGN KEY (
 			bigClass
 		)
-		REFERENCES SalesManagement.bigClass (
+		REFERENCES SaleManagement.bigClass (
 			bigClass
 		);
 
-ALTER TABLE SalesManagement.SalesImg
+ALTER TABLE SaleManagement.SalesImg
 	ADD CONSTRAINT FK_Sales_TO_SalesImg
 		FOREIGN KEY (
 			saleCode
 		)
-		REFERENCES SalesManagement.Sales (
+		REFERENCES SaleManagement.Sales (
 			saleCode
 		);
 
-ALTER TABLE SalesManagement.ProductImg
+ALTER TABLE SaleManagement.ProductImg
 	ADD CONSTRAINT FK_Product_TO_ProductImg
 		FOREIGN KEY (
 			pdtCode
 		)
-		REFERENCES SalesManagement.Product (
+		REFERENCES SaleManagement.Product (
 			pdtCode
 		);

@@ -18,6 +18,7 @@ public class TestMain {
 		
 		DbService service = InitService.getInstance();
 		service.service();
+		System.out.println("초기화 끝");
 		service = ImportService.getInstance();
 		service.service();
 		service = ExportService.getInstance();
