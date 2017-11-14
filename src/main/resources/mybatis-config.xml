@@ -27,6 +27,7 @@
 		<!-- <mapper resource="kr/or/dgit/SaleManagement/Mappers/LoginMapper.xml" /> -->
 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/BigClassMapper.xml" />
 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/RowClassMapper.xml" />
+
 	</mappers>
 
 </configuration>

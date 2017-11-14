@@ -68,14 +68,14 @@ ALTER TABLE SaleManagement.Record
 			recNo
 		);
 
-CREATE TABLE SaleManagement.User (
+CREATE TABLE SaleManagement.Usertb (
 	userId     VARCHAR(20) NOT NULL,
 	userPw     VARCHAR(20) NOT NULL,
 	categoryNo INT(2)      NOT NULL
 );
 
-ALTER TABLE SaleManagement.User
-	ADD CONSTRAINT PK_User
+ALTER TABLE SaleManagement.Usertb
+	ADD CONSTRAINT PK_Usertb
 		PRIMARY KEY (
 			userId
 		);
@@ -172,11 +172,11 @@ CREATE TABLE SaleManagement.ProductImg (
 );
 
 ALTER TABLE SaleManagement.Sales
-	ADD CONSTRAINT FK_User_TO_Sales
+	ADD CONSTRAINT FK_Usertb_TO_Sales
 		FOREIGN KEY (
 			saleId
 		)
-		REFERENCES SaleManagement.User (
+		REFERENCES SaleManagement.Usertb (
 			userId
 		);
 
@@ -199,11 +199,11 @@ ALTER TABLE SaleManagement.Sales
 		);
 
 ALTER TABLE SaleManagement.Account
-	ADD CONSTRAINT FK_User_TO_Account
+	ADD CONSTRAINT FK_Usertb_TO_Account
 		FOREIGN KEY (
 			accId
 		)
-		REFERENCES SaleManagement.User (
+		REFERENCES SaleManagement.Usertb (
 			userId
 		);
 
@@ -261,8 +261,8 @@ ALTER TABLE SaleManagement.Record
 			saleCode
 		);
 
-ALTER TABLE SaleManagement.User
-	ADD CONSTRAINT FK_UserCategory_TO_User
+ALTER TABLE SaleManagement.Usertb
+	ADD CONSTRAINT FK_UserCategory_TO_Usertb
 		FOREIGN KEY (
 			categoryNo
 		)

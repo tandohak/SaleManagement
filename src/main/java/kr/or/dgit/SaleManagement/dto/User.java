@@ -9,6 +9,13 @@ public class User {
 
 	}
 
+	public User(String userId, String userPw, UserCategory categoryNo) {
+		super();
+		this.userId = userId;
+		this.userPw = userPw;
+		this.categoryNo = categoryNo;
+	}
+
 	public String getUserId() {
 		return userId;
 	}

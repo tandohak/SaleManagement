@@ -23,8 +23,8 @@ public class TestLogin {
 	public static void tearDownAfterClass() throws Exception {
 		loginService = null;
 	}
-/*
-	@Test
+
+	/*@Test
 	public void test1() {
 		Login login = new Login();
 		login.setCode(1010);

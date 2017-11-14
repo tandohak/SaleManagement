@@ -3,7 +3,7 @@ package kr.or.dgit.SaleManagement.jdbc_setting;
 public class Config {
 	public static final String DB_NAME = "salemanagement";
 
-	public static final String[] TABLE_NAME = { "saleslevel", "UserCategory", "AccountLevel", "bigclass", "rowclass", "Sales", "Account", "UserAddr", "product", "Record"};
+	public static final String[] TABLE_NAME = { "saleslevel", "UserCategory", "AccountLevel", "bigclass", "rowclass", "Sales", "Account", "UserAddr", "product", "Record", "usertb"};
 
 	private static final String USER_DIR = System.getProperty("user.dir") + "\\";
 
