@@ -14,7 +14,7 @@
 	</sql>
 	
 	<select id="selectSalesId" parameterType="Login" resultType="Login">
-		<include refid="selectSql"/>
+		<include refid="selectSql"/> 
 		where salecode = #{code}
 	</select>
 	

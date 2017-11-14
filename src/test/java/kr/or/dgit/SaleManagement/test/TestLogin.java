@@ -24,7 +24,7 @@ public class TestLogin {
 		loginService = null;
 	}
 
-	@Test
+	/*@Test
 	public void test1() {
 		Login login = new Login();
 		login.setCode(1010);
@@ -38,6 +38,6 @@ public class TestLogin {
 		List<Login> lists= loginService.findAll();
 		Assert.assertNotNull(lists);
 		
-	}
+	}*/
 	
 }
