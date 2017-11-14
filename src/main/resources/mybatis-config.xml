@@ -12,6 +12,11 @@
 		<package name="kr.or.dgit.SaleManagement.dto"/> 
 	</typeAliases>
 	
+	<typeHandlers>
+		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserCategoryTypeHandler"/>
+		<package name="kr.or.dgit.SaleManagement.dto"/>
+	</typeHandlers>
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -24,7 +29,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="kr/or/dgit/SaleManagement/Mappers/LoginMapper.xml" />
-		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" />
+		<mapper resource="kr/or/dgit/SaleManagement/Mappers/UserMapper.xml" />
 	</mappers>
 </configuration>

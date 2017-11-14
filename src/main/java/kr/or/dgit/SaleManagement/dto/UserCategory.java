@@ -7,6 +7,10 @@ public class UserCategory {
 	public UserCategory() {
 		super();
 	}
+		
+	public UserCategory(int categoryNo) {
+		this.categoryNo = categoryNo;
+	}
 
 	public int getCategoryNo() {
 		return categoryNo;
