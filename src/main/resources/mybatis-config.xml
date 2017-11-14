@@ -24,6 +24,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="kr/or/dgit/SaleManagement/Mappers/LoginMapper.xml" />
+		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" />
 	</mappers>
 </configuration>
