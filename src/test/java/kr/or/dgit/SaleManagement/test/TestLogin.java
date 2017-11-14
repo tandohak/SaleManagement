@@ -23,7 +23,7 @@ public class TestLogin {
 	public static void tearDownAfterClass() throws Exception {
 		loginService = null;
 	}
-
+/*
 	@Test
 	public void test1() {
 		Login login = new Login();
@@ -38,6 +38,6 @@ public class TestLogin {
 		List<Login> lists= loginService.findAll();
 		Assert.assertNotNull(lists);
 		
-	}
+	}*/
 	
 }
