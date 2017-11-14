@@ -24,13 +24,13 @@ public class TestBigClass {
 		bigClassService =null;
 	}
 
-	/*@Test
+/*	@Test
 	public void test() {
 		List<BigClass> lists = bigClassService.findAll();
 		Assert.assertNotNull(lists);
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	public void test1() {
 		BigClass big = new BigClass();
 		big.setBigClass(10);
@@ -55,21 +55,21 @@ public class TestBigClass {
 		
 		int res = bigClassService.insertbigClass(big);
 		Assert.assertEquals(1, res);
-	}*/
+	}
 	
 	
-/*	@Test
+	@Test
 	public void test4update() {
 		BigClass bigClass = new BigClass(1, "바뀜");
 		int res = bigClassService.updatebigClass(bigClass);
 		Assert.assertEquals(1, res);
 	}*/
 	
-	@Test
+	/*@Test
 	public void test5delete() {
 		BigClass bigClass = new BigClass(1);
 		int res = bigClassService.deletebigClass(1);
 		Assert.assertEquals(1, res);
-	}
+	}*/
 
 }

@@ -5,6 +5,17 @@ public class RowClass {
 	private String rowName;
 	private BigClass bigClass;
 
+	
+	
+
+
+	public RowClass(int rowClass, String rowName, BigClass bigClass) {
+		super();
+		this.rowClass = rowClass;
+		this.rowName = rowName;
+		this.bigClass = bigClass;
+	}
+
 	public RowClass() {
 		super();
 		// TODO Auto-generated constructor stub
