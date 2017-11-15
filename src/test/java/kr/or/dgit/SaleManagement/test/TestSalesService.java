@@ -1,14 +1,8 @@
 package kr.or.dgit.SaleManagement.test;
 
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
-import kr.or.dgit.SaleManagement.dto.Sales;
-import kr.or.dgit.SaleManagement.dto.SalesLevel;
-import kr.or.dgit.SaleManagement.dto.User;
-import kr.or.dgit.SaleManagement.dto.UserAddr;
 import kr.or.dgit.SaleManagement.service.SalesService;
 
 public class TestSalesService {

@@ -4,10 +4,16 @@ public class Sales {
 	private int saleCode;
 	private String saleName;
 	private String saleTel;
-	private UserAddr saleAddr;
-	private boolean saleLeave;
-	private User saleId;
+	private String saleAddr;
+	private String saleLeave;
+	private String saleId;
+	private String salePw;
 	private SalesLevel saleLevel;
+
+	public Sales() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public int getSaleCode() {
 		return saleCode;
@@ -33,28 +39,36 @@ public class Sales {
 		this.saleTel = saleTel;
 	}
 
-	public UserAddr getSaleAddr() {
+	public String getSaleAddr() {
 		return saleAddr;
 	}
 
-	public void setSaleAddr(UserAddr saleAddr) {
+	public void setSaleAddr(String saleAddr) {
 		this.saleAddr = saleAddr;
 	}
 
-	public boolean isSaleLeave() {
+	public String getSaleLeave() {
 		return saleLeave;
 	}
 
-	public void setSaleLeave(boolean saleLeave) {
+	public void setSaleLeave(String saleLeave) {
 		this.saleLeave = saleLeave;
 	}
 
-	public User getSaleId() {
+	public String getSaleId() {
 		return saleId;
 	}
 
-	public void setSaleId(User saleId) {
+	public void setSaleId(String saleId) {
 		this.saleId = saleId;
+	}
+
+	public String getSalePw() {
+		return salePw;
+	}
+
+	public void setSalePw(String salePw) {
+		this.salePw = salePw;
 	}
 
 	public SalesLevel getSaleLevel() {
@@ -67,8 +81,9 @@ public class Sales {
 
 	@Override
 	public String toString() {
-		return String.format("Sales [Code=%s, Name=%s, Tel=%s, Addr=%s, Leave=%s, Id=%s, Level=%s]", saleCode, saleName,
-				saleTel, saleAddr, saleLeave, saleId, saleLevel);
+		return String.format(
+				"Sales [saleCode=%s, saleName=%s, saleTel=%s, saleAddr=%s, saleLeave=%s, saleId=%s, salePw=%s, saleLevel=%s]",
+				saleCode, saleName, saleTel, saleAddr, saleLeave, saleId, salePw, saleLevel);
 	}
 
 }

@@ -2,7 +2,7 @@ package kr.or.dgit.SaleManagement.dto;
 
 public class Product {
 	private int pdtCode;
-	private RowClass pdtClass;
+	private SmallClass pdtClass;
 	private String pdtName;
 	private int pdtCost;
 	private int pdtPrice;
@@ -22,11 +22,11 @@ public class Product {
 		this.pdtCode = pdtCode;
 	}
 
-	public RowClass getPdtClass() {
+	public SmallClass getPdtClass() {
 		return pdtClass;
 	}
 
-	public void setPdtClass(RowClass pdtClass) {
+	public void setPdtClass(SmallClass pdtClass) {
 		this.pdtClass = pdtClass;
 	}
 

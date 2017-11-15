@@ -9,7 +9,7 @@ import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
 import kr.or.dgit.SaleManagement.dto.BigClass;
-import kr.or.dgit.SaleManagement.dto.RowClass;
+import kr.or.dgit.SaleManagement.dto.SmallClass;
 
 public class BigClassTypehandlers extends BaseTypeHandler<BigClass> {
 

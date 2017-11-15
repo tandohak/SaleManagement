@@ -4,13 +4,15 @@ public class Account {
 	private int accCode;
 	private String accName;
 	private String accTel;
-	private UserAddr accAddr;
-	private boolean accAdmit;
-	private User accId;
-	private AccountLevel accLevel;
+	private String accAddr;
+	private String accAdmit;
+	private String accLevel;
+	private String accId;
+	private String accPw;
 
 	public Account() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getAccCode() {
@@ -37,42 +39,51 @@ public class Account {
 		this.accTel = accTel;
 	}
 
-	public boolean isAccAdmit() {
-		return accAdmit;
-	}
-
-	public void setAccAdmit(boolean accAdmit) {
-		this.accAdmit = accAdmit;
-	}
-
-	public UserAddr getAccAddr() {
+	public String getAccAddr() {
 		return accAddr;
 	}
 
-	public void setAccAddr(UserAddr accAddr) {
+	public void setAccAddr(String accAddr) {
 		this.accAddr = accAddr;
 	}
 
-	public User getAccId() {
-		return accId;
+	public String getAccAdmit() {
+		return accAdmit;
 	}
 
-	public void setAccId(User accId) {
-		this.accId = accId;
+	public void setAccAdmit(String accAdmit) {
+		this.accAdmit = accAdmit;
 	}
 
-	public AccountLevel getAccLevel() {
+	public String getAccLevel() {
 		return accLevel;
 	}
 
-	public void setAccLevel(AccountLevel accLevel) {
+	public void setAccLevel(String accLevel) {
 		this.accLevel = accLevel;
+	}
+
+	public String getAccId() {
+		return accId;
+	}
+
+	public void setAccId(String accId) {
+		this.accId = accId;
+	}
+
+	public String getAccPw() {
+		return accPw;
+	}
+
+	public void setAccPw(String accPw) {
+		this.accPw = accPw;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Account [Code=%s, Name=%s, Tel=%s, Addr=%s, Admit=%s, Id=%s, Level=%s]", accCode, accName,
-				accTel, accAddr, accAdmit, accId, accLevel);
+		return String.format(
+				"Account [accCode=%s, accName=%s, accTel=%s, accAddr=%s, accAdmit=%s, accLevel=%s, accId=%s, accPw=%s]",
+				accCode, accName, accTel, accAddr, accAdmit, accLevel, accId, accPw);
 	}
 
 }

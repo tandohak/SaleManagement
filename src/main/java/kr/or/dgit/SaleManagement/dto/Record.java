@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Record {
 	private int recNo;
-	private Product pdtCode;
-	private Sales salecode;
+	private Product rProductCode;
+	private Sales rSalecode;
 	private Date recDate;
 	private int recDisprice;
 	private int recDisrate;
@@ -24,20 +24,20 @@ public class Record {
 		this.recNo = recNo;
 	}
 
-	public Product getPdtCode() {
-		return pdtCode;
+	public Product getrProductCode() {
+		return rProductCode;
 	}
 
-	public void setPdtCode(Product pdtCode) {
-		this.pdtCode = pdtCode;
+	public void setrProductCode(Product rProductCode) {
+		this.rProductCode = rProductCode;
 	}
 
-	public Sales getSalecode() {
-		return salecode;
+	public Sales getrSalecode() {
+		return rSalecode;
 	}
 
-	public void setSalecode(Sales salecode) {
-		this.salecode = salecode;
+	public void setrSalecode(Sales rSalecode) {
+		this.rSalecode = rSalecode;
 	}
 
 	public Date getRecDate() {
@@ -75,8 +75,8 @@ public class Record {
 	@Override
 	public String toString() {
 		return String.format(
-				"Record [recNo=%s, pdtCode=%s, salecode=%s, recDate=%s, recDisprice=%s, recDisrate=%s, recCount=%s]",
-				recNo, pdtCode, salecode, recDate, recDisprice, recDisrate, recCount);
+				"Record [recNo=%s, rProductCode=%s, rSalecode=%s, recDate=%s, recDisprice=%s, recDisrate=%s, recCount=%s]",
+				recNo, rProductCode, rSalecode, recDate, recDisprice, recDisrate, recCount);
 	}
 
 }

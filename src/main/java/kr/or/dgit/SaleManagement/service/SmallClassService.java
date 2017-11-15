@@ -4,53 +4,50 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.dgit.SaleManagement.dao.RowClassDao;
-import kr.or.dgit.SaleManagement.dao.RowClassDaoImpl;
-import kr.or.dgit.SaleManagement.dao.RowClassDao;
-import kr.or.dgit.SaleManagement.dao.RowClassDaoImpl;
-import kr.or.dgit.SaleManagement.dto.RowClass;
-import kr.or.dgit.SaleManagement.dto.RowClass;
+import kr.or.dgit.SaleManagement.dao.SmallClassDao;
+import kr.or.dgit.SaleManagement.dao.SmallClassDaoImpl;
+import kr.or.dgit.SaleManagement.dto.SmallClass;
 import kr.or.dgit.SaleManagement.util.MyBatisSqlSessionFactory;
 
-public class RowClassService {
+public class SmallClassService {
 	
-	public List<RowClass> findAll() {
+	public List<SmallClass> findAll() {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
-			RowClassDao dao = new RowClassDaoImpl(sqlSession);
+			SmallClassDao dao = new SmallClassDaoImpl(sqlSession);
 			return dao.selectAll();
 		}
 	}
 	
-	public RowClass findByRowClass(RowClass rowclass) {
+	public SmallClass findBySmallClass(SmallClass Smallclass) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
-			RowClassDao dao = new RowClassDaoImpl(sqlSession);
-			return dao.selectByRowClass(rowclass);
+			SmallClassDao dao = new SmallClassDaoImpl(sqlSession);
+			return dao.selectBySmallClass(Smallclass);
 		}
 	}
 	
-	public RowClass findByRowName(RowClass rowclass) {
+	public SmallClass findBySmallName(SmallClass Smallclass) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
-			RowClassDao dao = new RowClassDaoImpl(sqlSession);
-			return dao.selectByRowName(rowclass);
+			SmallClassDao dao = new SmallClassDaoImpl(sqlSession);
+			return dao.selectBySmallName(Smallclass);
 		}
 	}
 	
 	
-	public int insertRowClass(RowClass rowClass) {
+	public int insertSmallClass(SmallClass SmallClass) {
 		int res=-1;
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
-			RowClassDao dao = new RowClassDaoImpl(sqlSession);
-			res = dao.insertRowClass(rowClass);
+			SmallClassDao dao = new SmallClassDaoImpl(sqlSession);
+			res = dao.insertSmallClass(SmallClass);
 			sqlSession.commit();
 		}
 		return res;		
 	}
 	
-	public int updateRowClass(RowClass rowClass) {
+	public int updateSmallClass(SmallClass SmallClass) {
 		SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();
 		try {
-			RowClassDao dao = new RowClassDaoImpl(sqlSession);
-			int res = dao.updateRowClass(rowClass);
+			SmallClassDao dao = new SmallClassDaoImpl(sqlSession);
+			int res = dao.updateSmallClass(SmallClass);
 			sqlSession.commit();
 			return res;					
 		}catch(Exception e) {
@@ -62,11 +59,11 @@ public class RowClassService {
 		return 1;
 	}
 	
-	public int	deleteRowClass(int rowClass) {
+	public int	deleteSmallClass(int SmallClass) {
 		SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();
 		try {
-			RowClassDao dao = new RowClassDaoImpl(sqlSession);
-			int res = dao.deleteRowClass(rowClass);
+			SmallClassDao dao = new SmallClassDaoImpl(sqlSession);
+			int res = dao.deleteSmallClass(SmallClass);
 			sqlSession.commit();
 			return res;					
 		}catch(Exception e) {

@@ -1,24 +1,15 @@
 package kr.or.dgit.SaleManagement.test;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
-import org.junit.Assert;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
-import kr.or.dgit.SaleManagement.dto.BigClass;
-import kr.or.dgit.SaleManagement.dto.RowClass;
-import kr.or.dgit.SaleManagement.dto.RowClass;
-import kr.or.dgit.SaleManagement.service.RowClassService;
+import kr.or.dgit.SaleManagement.service.SmallClassService;
 
 public class TestRowClass {
-	private static RowClassService rowClassService;
+	private static SmallClassService rowClassService;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		rowClassService = new RowClassService();
+		rowClassService = new SmallClassService();
 	}
 
 	@AfterClass
@@ -60,13 +51,13 @@ public class TestRowClass {
 	}*/
 	
 	
-	@Test
-	public void test4update() {
-		BigClass bigClass = new BigClass(99);
-		RowClass RowClass = new RowClass(2, "바뀜22");
-		int res = rowClassService.updateRowClass(RowClass);
-		Assert.assertEquals(1, res);
-	}
+//	@Test
+//	public void test4update() {
+//		BigClass bigClass = new BigClass(99);
+//		SmallClass RowClass = new SmallClass(2, "바뀜22");
+//		int res = rowClassService.updateRowClass(RowClass);
+//		Assert.assertEquals(1, res);
+//	}
 	
 /*	@Test
 	public void test5delete() {

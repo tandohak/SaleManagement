@@ -2,9 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<properties resource = "application.properties"/>
-	
-	
-		
+
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
@@ -13,16 +11,15 @@
 		<package name="kr.or.dgit.SaleManagement.dto"/> 
 	</typeAliases>
 	
-	<typeHandlers>
-
-		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserCategoryTypeHandler"/>
-		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserTypeHandler"/>
-		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.SalesLevelTypeHandler"/>
-		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.AccountLevelTypeHandler"/>
-		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserAddrTypeHandler"/>
-		<package name="kr.or.dgit.SaleManagement.dto"/>
-		<package name="kr.or.dgit.SaleManagement.typehandlers"/>
-	</typeHandlers>
+<!-- 	<typeHandlers> -->
+<!-- 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserCategoryTypeHandler"/> -->
+<!-- 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserTypeHandler"/> -->
+<!-- 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.SalesLevelTypeHandler"/> -->
+<!-- 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.AccountLevelTypeHandler"/> -->
+<!-- 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserAddrTypeHandler"/> -->
+<!-- 		<package name="kr.or.dgit.SaleManagement.dto"/> -->
+<!-- 		<package name="kr.or.dgit.SaleManagement.typehandlers"/> -->
+<!-- 	</typeHandlers> -->
 	
 	<environments default="development">
 		<environment id="development">
@@ -37,14 +34,10 @@
 	</environments>
 
 	<mappers>
-		<mapper resource="kr/or/dgit/SaleManagement/Mappers/UserMapper.xml" />
-		<mapper resource="kr/or/dgit/SaleManagement/Mappers/SalesMapper.xml" />
-		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" />
-		<mapper resource="kr/or/dgit/SaleManagement/Mappers/BigClassMapper.xml" />
-		<mapper resource="kr/or/dgit/SaleManagement/Mappers/RowClassMapper.xml" />
-
+<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/UserMapper.xml" /> -->
+<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/SalesMapper.xml" /> -->
+<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" /> -->
+<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/BigClassMapper.xml" /> -->
+<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/RowClassMapper.xml" /> -->
 	</mappers>
-	
-	
-	
 </configuration>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.SaleManagement.dao.SmallClassDao">
+	
+<!-- 	<resultMap id="SmallClassResult" type="SmallClass" >
+		<id property="SmallClass" column="SmallClass"/>
+		<result property="SmallName" column="SmallName"/>
+	</resultMap>
+
+	<resultMap id="SmallClassWithBigClassResult" type="SmallClass" extends="SmallClassResult">
+		<result property="bigClass.bigClass" column="bigClass"/>
+		<result property="bigClass.bigName" column="bigName"/>
+	</resultMap>
+
+ -->
+	<sql id="selectSql">
+		select SmallClass, SmallName, bigClass
+		from SmallClass
+	</sql>
+	
+	<sql id="whereSql">
+		<where>
+			<if test="SmallClass!=null">
+				SmallClass=#{SmallClass}
+			</if>
+		</where>
+	</sql>
+	<sql id="whereSmallName">
+		<where>
+			<if test="SmallName!=null">
+				SmallName=#{SmallName}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectAll" resultType="SmallClass">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	
+	
+	<select id="selectBySmallClass" parameterType="SmallClass" resultType="SmallClass">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	
+		<select id="selectBySmallName" parameterType="SmallClass" resultType="SmallClass">
+		<include refid="selectSql"/>
+		<include refid="whereSmallName"/>
+	</select>
+	
+	
+	
+	<sql id="insertSql">
+		insert into Smallclass (SmallClass, SmallName, bigClass) 
+		VALUES (#{SmallClass}, #{SmallName}, #{bigClass})
+	</sql>
+	
+	<insert id="insertSmallClass" parameterType="SmallClass">
+		<include refid="insertSql"/>
+	</insert>
+	
+	<update id="updateSmallClass" parameterType="SmallClass">
+		update SmallClass set SmallName = #{SmallName} where SmallClass= #{SmallClass}
+	</update>
+	
+	<update id="deleteSmallClass" parameterType="SmallClass">
+		delete from SmallClass where SmallClass=#{SmallClass}
+	</update>
+
+</mapper>

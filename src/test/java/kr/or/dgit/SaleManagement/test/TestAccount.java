@@ -1,18 +1,10 @@
 package kr.or.dgit.SaleManagement.test;
 
-import java.util.List;
-
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import kr.or.dgit.SaleManagement.dto.Account;
-import kr.or.dgit.SaleManagement.dto.AccountLevel;
-import kr.or.dgit.SaleManagement.dto.User;
-import kr.or.dgit.SaleManagement.dto.UserAddr;
 import kr.or.dgit.SaleManagement.service.AccountService;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
