@@ -18,7 +18,7 @@
 		<include refid="whereSql"/>
 	</select>
 	
-	<insert id="insertUser">
+	<insert id="insertUser" parameterType="User">
 		insert into usertb(userId, userPw, categoryNo)
 		values (#{userId}, #{userPw}, #{categoryNo})
 	</insert>

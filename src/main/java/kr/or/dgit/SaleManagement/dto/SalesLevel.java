@@ -8,6 +8,10 @@ public class SalesLevel {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public SalesLevel(String salesLevel) {
+		this.salesLevel = salesLevel;
+	}
 
 	public String getSalesLevel() {
 		return salesLevel;

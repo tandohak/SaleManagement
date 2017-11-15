@@ -15,7 +15,6 @@ public class UserAddr {
 	}
 
 	public UserAddr(int addrNo) {
-		super();
 		this.addrNo = addrNo;
 	}
 

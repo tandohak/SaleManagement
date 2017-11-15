@@ -34,7 +34,7 @@ public class TestUserService {
 	@Test
 	public void test2InsertUser() {
 		User user = new User();
-		user.setUserId("asdfasdf");
+		user.setUserId("testtest");
 		user.setCategoryNo(new UserCategory(10));
 		user.setUserPw("12341234");
 		int res = userService.insertUser(user);

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.SaleManagement.dao.SalesDao">
+	<sql id="selectSql"> 
+		SELECT saleCode, saleName, saleTel, saleAddr, saleLeave, saleId, saleLevel
+		FROM sales
+	</sql>
+	<sql id="insertSql">
+		insert into sales(saleCode,saleName,saleTel,saleAddr,saleLeave,saleId,saleLevel)
+		values(#{saleCode},#{saleName},#{saleTel},#{saleAddr},#{saleLeave},#{saleId},#{saleLevel}) 		
+	</sql>
+	<sql id="whereSql">
+		<where>
+			<if test="saleCode != null">
+				AND saleCode = #{saleCode}
+			</if>
+			<if test="saleName != null">
+				AND saleTel = #{saleName}
+			</if>
+			<if test="saleTel != null">
+				AND saleTel = #{saleTel}
+			</if>
+			<if test="saleAddr != null"> 
+				AND saleAddr = #{saleAddr}
+			</if>
+			<if test="saleLeave != null">
+				AND saleLeave = #{saleLeave}
+			</if>
+			<if test="saleId != null">
+				AND saleId = #{saleId}
+			</if>
+			<if test="saleLevel != null">
+				AND saleLevel = #{saleLevel}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectSalesByCode" parameterType="Sales" resultType="Sales">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	
+	<select id="selectSalseByAll" parameterType="Sales">
+		<include refid="selectSql"/>
+	</select>
+	
+	<insert id="insertSales" parameterType="Sales">
+		<include refid="insertSql"/>
+	</insert>
+</mapper>
