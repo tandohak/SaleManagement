@@ -16,6 +16,7 @@
 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserCategoryTypeHandler"/>
 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserTypeHandler"/>
 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.SalesLevelTypeHandler"/>
+		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.AccountLevelTypeHandler"/>
 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserAddrTypeHandler"/>
 		<package name="kr.or.dgit.SaleManagement.dto"/>
 	</typeHandlers>
@@ -34,5 +35,6 @@
 	<mappers>
 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/UserMapper.xml" />
 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/SalesMapper.xml" />
+		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" />
 	</mappers>
 </configuration>

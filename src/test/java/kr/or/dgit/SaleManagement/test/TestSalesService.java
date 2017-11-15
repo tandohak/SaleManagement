@@ -25,7 +25,7 @@ public class TestSalesService {
 		salesService = null;
 	}
 
-	@Test
+/*	@Test
 	public void test1InsertSlaes() {
 		Sales sales = new Sales();
 		sales.setSaleCode(99999992);
@@ -38,6 +38,6 @@ public class TestSalesService {
 		
 		int res = salesService.insertSales(sales);
 		Assert.assertSame(1, res);
-	}
+	}*/
 
 }

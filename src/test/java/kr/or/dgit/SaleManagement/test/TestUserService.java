@@ -22,7 +22,7 @@ public class TestUserService {
 		userService = null;
 	}
 
-	@Test
+/*	@Test
 	public void test1FindUserById() {
 		User user = new User();
 		user.setUserId("10111001");
@@ -39,6 +39,6 @@ public class TestUserService {
 		user.setUserPw("12341234");
 		int res = userService.insertUser(user);
 		Assert.assertSame(1, res);
-	}
+	}*/
 
 }

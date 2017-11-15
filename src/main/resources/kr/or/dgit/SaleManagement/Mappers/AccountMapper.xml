@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.SaleManagement.dao.AccountDao">
+	
+	<sql id = "selectAccount">
+		SELECT accCode, accName, accTel, accAddr, accAdmit, accId, accLevel
+		FROM account
+	</sql>
+	
+ 	<sql id = "insertAccount">
+ 		INSERT INTO Account(accCode, accName, accTel, accAddr, accAdmit, accId, accLevel)
+		VALUES(#{accCode},#{accName},#{accTel},#{accAddr},#{accAdmit},#{accId},#{accLevel})
+ 	</sql>
+	
+	<select id="selectAccountByCode" parameterType="Account" resultType="Account">
+		<include refid="selectAccount"/>
+		WHERE accCode = #{accCode}
+	</select>
+	
+	<select id="selectAllAccount" resultType="Account">
+		<include refid="selectAccount"/>
+	</select>
+	
+	<insert id="insertAccount" parameterType="Account">
+		INSERT INTO Account(accCode, accName, accTel, accAddr, accAdmit, accId, accLevel)
+		VALUES(#{accCode},#{accName},#{accTel},#{accAddr},#{accAdmit},#{accId},#{accLevel})
+	</insert>
+
+</mapper>

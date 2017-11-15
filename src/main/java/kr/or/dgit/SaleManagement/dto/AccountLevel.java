@@ -7,6 +7,10 @@ public class AccountLevel {
 	public AccountLevel() {
 		super();
 	}
+	
+	public AccountLevel(String accLevel) {
+		this.accLevel = accLevel;
+	}
 
 	public String getAccLevel() {
 		return accLevel;
