@@ -28,8 +28,8 @@ public class TestSalesService {
 	@Test
 	public void test1InsertSlaes() {
 		Sales sales = new Sales();
-		sales.setSaleCode(99999999);
-		sales.setSaleName("테스트");
+		sales.setSaleCode(99999992);
+		sales.setSaleName("테스트2");
 		sales.setSaleTel("010-1234-1234");
 		sales.setSaleAddr(new UserAddr(90000001));
 		sales.setSaleLeave(true);
