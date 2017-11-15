@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.SaleManagement.dao.RowClassDao">
+	
+<!-- 	<resultMap id="RowClassResult" type="RowClass" >
+		<id property="rowClass" column="rowClass"/>
+		<result property="rowName" column="rowName"/>
+	</resultMap>
+
+	<resultMap id="RowClassWithBigClassResult" type="RowClass" extends="RowClassResult">
+		<result property="bigClass.bigClass" column="bigClass"/>
+		<result property="bigClass.bigName" column="bigName"/>
+	</resultMap>
+
+ -->
+	<sql id="selectSql">
+		select rowClass, rowName, bigClass
+		from rowClass
+	</sql>
+	
+	<sql id="whereSql">
+		<where>
+			<if test="rowClass!=null">
+				rowClass=#{rowClass}
+			</if>
+		</where>
+	</sql>
+	<sql id="whereRowName">
+		<where>
+			<if test="rowName!=null">
+				rowName=#{rowName}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectAll" resultType="RowClass">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	
+	
+	<select id="selectByRowClass" parameterType="RowClass" resultType="RowClass">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	
+		<select id="selectByRowName" parameterType="RowClass" resultType="RowClass">
+		<include refid="selectSql"/>
+		<include refid="whereRowName"/>
+	</select>
+	
+	
+	
+	<sql id="insertSql">
+		insert into rowclass (rowClass, rowName, bigClass) 
+		VALUES (#{rowClass}, #{rowName}, #{bigClass})
+	</sql>
+	
+	<insert id="insertRowClass" parameterType="RowClass">
+		<include refid="insertSql"/>
+	</insert>
+	
+	<update id="updateRowClass" parameterType="RowClass">
+		update rowClass set rowName = #{rowName} where rowClass= #{rowClass}
+	</update>
+	
+	<update id="deleteRowClass" parameterType="RowClass">
+		delete from rowClass where rowClass=#{rowClass}
+	</update>
+
+</mapper>

@@ -5,6 +5,28 @@ public class RowClass {
 	private String rowName;
 	private BigClass bigClass;
 
+	
+	
+
+
+	public RowClass(int rowClass, String rowName) {
+		super();
+		this.rowClass = rowClass;
+		this.rowName = rowName;
+	}
+
+	public RowClass(int rowClass) {
+		super();
+		this.rowClass = rowClass;
+	}
+
+	public RowClass(int rowClass, String rowName, BigClass bigClass) {
+		super();
+		this.rowClass = rowClass;
+		this.rowName = rowName;
+		this.bigClass = bigClass;
+	}
+
 	public RowClass() {
 		super();
 		// TODO Auto-generated constructor stub
