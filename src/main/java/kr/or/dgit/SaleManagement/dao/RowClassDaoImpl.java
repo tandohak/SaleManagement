@@ -19,12 +19,26 @@ public class RowClassDaoImpl implements RowClassDao {
 		this.sqlSession = sqlSession;
 	}
 
+	private String namespace = "kr.or.dgit.SaleManagement.dao.RowClassDao";
 
 	@Override
 	public List<RowClass> selectAll() {
 		log.debug("selectAll()");
 		return sqlSession.getMapper(RowClassDao.class).selectAll();
 	}
+	
+	@Override
+	public RowClass selectByRowClass(RowClass rowclass) {
+		log.debug("selectByRowClass()");
+		return sqlSession.getMapper(RowClassDao.class).selectByRowClass(rowclass);
+	}
+	
+	@Override
+	public RowClass selectByRowName(RowClass rowclass) {
+		log.debug("selectByRowName()");
+		return sqlSession.getMapper(RowClassDao.class).selectByRowName(rowclass);
+	}
+
 
 
 	@Override
@@ -32,5 +46,22 @@ public class RowClassDaoImpl implements RowClassDao {
 		log.debug("insertRowClass()");
 		return sqlSession.getMapper(RowClassDao.class).insertRowClass(rowclass);
 	}
+
+	@Override
+	public int updateRowClass(RowClass rowclass) {
+		log.debug("updateRowClass()");
+		return sqlSession.getMapper(RowClassDao.class).updateRowClass(rowclass);
+	}
+
+	@Override
+	public int deleteRowClass(int rowclass) {
+		log.debug("deleteRowClass()");
+		return sqlSession.getMapper(RowClassDao.class).deleteRowClass(rowclass);
+	}
+
+	
+
+
+	
 
 }

@@ -6,6 +6,12 @@ import kr.or.dgit.SaleManagement.dto.RowClass;
 
 public interface RowClassDao {
 	public List<RowClass> selectAll();
+	public RowClass selectByRowClass(RowClass rowclass);
+	public RowClass selectByRowName(RowClass rowclass);
 	
-	int insertRowClass(RowClass rowclass);
+	
+	public int insertRowClass(RowClass rowclass);
+	
+	int updateRowClass(RowClass rowclass);
+	int deleteRowClass(int rowClass);
 }	

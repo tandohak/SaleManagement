@@ -9,6 +9,17 @@ public class RowClass {
 	
 
 
+	public RowClass(int rowClass, String rowName) {
+		super();
+		this.rowClass = rowClass;
+		this.rowName = rowName;
+	}
+
+	public RowClass(int rowClass) {
+		super();
+		this.rowClass = rowClass;
+	}
+
 	public RowClass(int rowClass, String rowName, BigClass bigClass) {
 		super();
 		this.rowClass = rowClass;

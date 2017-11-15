@@ -2,28 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.SaleManagement.dao.RowClassDao">
 	
-	<!-- <resultMap type="RowClass" id="RowClassResult">
+<!-- 	<resultMap id="RowClassResult" type="RowClass" >
 		<id property="rowClass" column="rowClass"/>
-		<result property="rowname" column="rowname"/>
+		<result property="rowName" column="rowName"/>
 	</resultMap>
 
-	<resultMap type="RowClass" id="RowClassWithBigClassResult" extends="RowClassResult">
+	<resultMap id="RowClassWithBigClassResult" type="RowClass" extends="RowClassResult">
 		<result property="bigClass.bigClass" column="bigClass"/>
 		<result property="bigClass.bigName" column="bigName"/>
 	</resultMap>
 
-	<sql id="selectJoinRowClass">
-		select b.bigClass, bigName, rowClass, rowName from bigclass b join rowclass r on b.bigClass = r.bigClass
-	</sql> -->
-
+ -->
 	<sql id="selectSql">
 		select rowClass, rowName, bigClass
 		from rowClass
 	</sql>
 	
+	<sql id="whereSql">
+		<where>
+			<if test="rowClass!=null">
+				rowClass=#{rowClass}
+			</if>
+		</where>
+	</sql>
+	<sql id="whereRowName">
+		<where>
+			<if test="rowName!=null">
+				rowName=#{rowName}
+			</if>
+		</where>
+	</sql>
+	
 	<select id="selectAll" resultType="RowClass">
 		<include refid="selectSql"/>
+		<include refid="whereSql"/>
 	</select>
+	
+	
+	<select id="selectByRowClass" parameterType="RowClass" resultType="RowClass">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	
+		<select id="selectByRowName" parameterType="RowClass" resultType="RowClass">
+		<include refid="selectSql"/>
+		<include refid="whereRowName"/>
+	</select>
+	
+	
 	
 	<sql id="insertSql">
 		insert into rowclass (rowClass, rowName, bigClass) 
@@ -33,5 +59,13 @@
 	<insert id="insertRowClass" parameterType="RowClass">
 		<include refid="insertSql"/>
 	</insert>
+	
+	<update id="updateRowClass" parameterType="RowClass">
+		update rowClass set rowName = #{rowName} where rowClass= #{rowClass}
+	</update>
+	
+	<update id="deleteRowClass" parameterType="RowClass">
+		delete from rowClass where rowClass=#{rowClass}
+	</update>
 
 </mapper>
