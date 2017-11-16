@@ -19,58 +19,38 @@ public class LoginController {
 	private BorderPane Node;
 	
 	@FXML
-	private Button changViewSale;
+	private Button changView;
 	
 	@FXML
-	private Button changeViewAcc;
+	private TextField idTf;
 	
 	@FXML
-	private TextField saleIdTf;
-	
-	@FXML
-	private PasswordField salePwTf;
-	
-	@FXML
-	private TextField accIdTf;
-	
-	@FXML
-	private PasswordField accPwTf;
+	private PasswordField pwTf;
 	
 	private MainApp mainApp;
 	
 	@FXML
-	private void initialize() {
-	}
-	
+	private void initialize() {}
 	
 	@FXML
 	public void SaleTfTypeHandle(KeyEvent event) {
-		if(saleIdTf.getText().equals("") || salePwTf.getText().equals("")) {
-			changViewSale.setDisable(true);
+		if(idTf.getText().equals("") || pwTf.getText().equals("")) {
+			changView.setDisable(true);
 		}else {
-			changViewSale.setDisable(false);
+			changView.setDisable(false);
 		}				
 	}
 	
-	@FXML
-	public void AccTfTypeHandle(KeyEvent event) {
-		if(accIdTf.getText().equals("") || accPwTf.getText().equals("")) {
-			changeViewAcc.setDisable(true);
-		}else {
-			changeViewAcc.setDisable(false);
-		}				
-	}
 	
 	@FXML
-	private void changeViewSale() {
+	private void changeView() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdimMainView.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
-//			((Stage)changViewSale.getScene().getWindow()).setScene(new Scene(pane, 1080, 675));
 
-			changViewSale.getScene().getWindow().setWidth(1080);
-			changViewSale.getScene().getWindow().setHeight(675);
-			((BorderPane)changViewSale.getScene().getRoot()).setCenter(pane);
+			changView.getScene().getWindow().setWidth(1080);
+			changView.getScene().getWindow().setHeight(675);
+			((BorderPane)changView.getScene().getRoot()).setCenter(pane);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -79,19 +59,6 @@ public class LoginController {
 	@FXML
 	private void handleCloseBtn() {
 		System.exit(0);
-	}
-	
-	@FXML
-	private void changeViewAcc() {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdimMainView.fxml"));
-			BorderPane pane = (BorderPane)loader.load();
-			changeViewAcc.getScene().getWindow().setWidth(1080);
-			changeViewAcc.getScene().getWindow().setHeight(675);
-			((BorderPane)changeViewAcc.getScene().getRoot()).setCenter(pane);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	@FXML

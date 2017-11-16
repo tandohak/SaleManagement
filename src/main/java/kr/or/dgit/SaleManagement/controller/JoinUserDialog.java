@@ -59,8 +59,7 @@ public class JoinUserDialog extends TextFieldUtil{
 	private void openDialogFileChooser() {
 		FileChooser fileChooser = new FileChooser();
 
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("jpg,png,gif files ", "*.jpg", "*.png",
-				"*.gif");
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("jpg,png,gif files ", "*.jpg", "*.png",	"*.gif");
 
 		fileChooser.getExtensionFilters().add(extFilter);
 
