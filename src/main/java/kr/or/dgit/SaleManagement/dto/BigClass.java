@@ -1,14 +1,29 @@
 package kr.or.dgit.SaleManagement.dto;
 
-public class BigClass {
-	private int bigClass;
-	private String bigName;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-	public BigClass() {
-		super();
-		// TODO Auto-generated constructor stub
+public class BigClass {
+	private IntegerProperty bigClass  = new SimpleIntegerProperty();;
+	private StringProperty bigName = new SimpleStringProperty();
+
+	public BigClass() {}
+
+	public BigClass(int bigClass, String bigName) {
+		this.bigClass.set(bigClass);
+		this.bigName.set(bigName);
+	}
+	
+	public BigClass(int bigClass) {
+		this.bigClass.set(bigClass);
 	}
 
+	public BigClass(String bigName) {
+		this.bigName.set(bigName);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -35,35 +50,27 @@ public class BigClass {
 	}
 
 	public int getBigClass() {
+		return bigClass.get();
+	}
+	
+	public IntegerProperty getBigClassProperty() {
 		return bigClass;
-	}
-
-	public BigClass(int bigClass, String bigName) {
-		super();
-		this.bigClass = bigClass;
-		this.bigName = bigName;
-	}
-
-	public BigClass(int bigClass) {
-		super();
-		this.bigClass = bigClass;
-	}
-
-	public BigClass(String bigName) {
-		super();
-		this.bigName = bigName;
-	}
+	}	
 
 	public void setBigClass(int bigClass) {
-		this.bigClass = bigClass;
+		this.bigClass.set(bigClass);
 	}
 
 	public String getBigName() {
+		return bigName.get();
+	}
+	
+	public StringProperty getBigNameProperty() {
 		return bigName;
 	}
 
 	public void setBigName(String bigName) {
-		this.bigName = bigName;
+		this.bigName.set(bigName);
 	}
 
 	@Override

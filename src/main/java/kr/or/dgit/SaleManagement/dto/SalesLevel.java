@@ -1,32 +1,44 @@
 package kr.or.dgit.SaleManagement.dto;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class SalesLevel {
-	private String salesLevel;
-	private int salesDisrate;
+	private StringProperty salesLevel = new SimpleStringProperty();
+	private IntegerProperty salesDisrate = new SimpleIntegerProperty();
 
 	public SalesLevel() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public SalesLevel(String salesLevel) {
-		this.salesLevel = salesLevel;
+		this.salesLevel.set(salesLevel);
 	}
 
 	public String getSalesLevel() {
+		return salesLevel.get();
+	}
+	
+	public StringProperty getSalesLevelProperty() {
 		return salesLevel;
 	}
 
 	public void setSalesLevel(String salesLevel) {
-		this.salesLevel = salesLevel;
+		this.salesLevel.set(salesLevel);
 	}
 
 	public int getSalesDisrate() {
+		return salesDisrate.get();
+	}
+	
+	public IntegerProperty getSalesDisrateProperty() {
 		return salesDisrate;
 	}
 
 	public void setSalesDisrate(int salesDisrate) {
-		this.salesDisrate = salesDisrate;
+		this.salesDisrate.set(salesDisrate);
 	}
 
 	@Override

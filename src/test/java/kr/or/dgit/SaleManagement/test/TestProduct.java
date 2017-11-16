@@ -32,8 +32,8 @@ public class TestProduct {
 		List<Product> lists = pdt.findAll();
 		Assert.assertNotNull(lists);	
 	}
-	/*@Test
-	public void test() {
+	@Test
+	public void test1234() {
 		List<Product> lists = pdt.findAll();
 		Assert.assertNotNull(lists);	
 	}
@@ -43,7 +43,7 @@ public class TestProduct {
 		Product product = new Product();
 		product.setPdtCode(1000);
 		pdt.findBypdtProduct(product);
-	}*/
+	}
 	
 	/*@Test
 	public void test2ByClass() {
@@ -93,11 +93,11 @@ public class TestProduct {
 		Assert.assertEquals(1, res);
 	}
 	
-	/*@Test
+	@Test
 	public void test5delete() {
 		Product product = new Product();
 		product.setPdtName("테스트111");
 		int res = pdt.deleteProduct(product);
 		Assert.assertEquals(1, res);
-	}*/
+	}
 }

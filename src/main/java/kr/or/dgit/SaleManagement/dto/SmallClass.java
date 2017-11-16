@@ -1,58 +1,70 @@
 package kr.or.dgit.SaleManagement.dto;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class SmallClass {
-	private int smallClass;
-	private String smallName;
-	private int sBigClass;
+	private IntegerProperty smallClass = new SimpleIntegerProperty();
+	private StringProperty smallName = new SimpleStringProperty();
+	private IntegerProperty sBigClass = new SimpleIntegerProperty();
 
 
 	
 	public SmallClass(int smallClass, String smallName, int sBigClass) {
-		super();
-		this.smallClass = smallClass;
-		this.smallName = smallName;
-		this.sBigClass = sBigClass;
+		this.smallClass.set(smallClass);
+		this.smallName.set(smallName);
+		this.sBigClass.set(sBigClass);
 	}
 
 	
 
-	public SmallClass() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public SmallClass() {}
 
 	
 	
 	public SmallClass(int smallClass, String smallName) {
-		super();
-		this.smallClass = smallClass;
-		this.smallName = smallName;
+		this.smallClass.set(smallClass);
+		this.smallName.set(smallName);
 	}
 
 
 
 	public int getSmallClass() {
-		return smallClass;
+		return smallClass.get();
 	}
 
+	public IntegerProperty getSmallClassProperty() {
+		return smallClass;
+	}
+	
 	public void setSmallClass(int smallClass) {
-		this.smallClass = smallClass;
+		this.smallClass.set(smallClass);
 	}
 
 	public String getSmallName() {
+		return smallName.get();
+	}
+	
+	public StringProperty getSmallNameProperty() {
 		return smallName;
 	}
 
 	public void setSmallName(String smallName) {
-		this.smallName = smallName;
+		this.smallName.set(smallName);
 	}
-
-	public int getsBigClass() {
+	
+	public Integer getsBigClass() {
+		return sBigClass.get();
+	}
+	
+	public IntegerProperty getsBigClassProperty() {
 		return sBigClass;
 	}
 
 	public void setsBigClass(int sBigClass) {
-		this.sBigClass = sBigClass;
+		this.sBigClass.set(sBigClass);
 	}
 
 	@Override
