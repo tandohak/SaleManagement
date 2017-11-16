@@ -1,4 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.dgit.SaleManagement.Mappers.ProductMapper">
+<mapper namespace="kr.or.dgit.SaleManagement.dao.ProductDao">
+	<sql id="selectSql">
+		select pdtCode, class, name, cost, price, admit, aCode from product
+	</sql>
+	
+	<sql id="wherepdtCode">
+		<where>
+			<if test="pdtCode!=null">
+				pdtCode = #{pdtCode}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="where">
+		<where>
+			<if test="pdtCode!=0">
+				and pdtCode=#{pdtCode}
+			</if>
+			<if test="pdtName!=null">
+				and name like #{pdtName}
+			</if>
+			<if test="pdtClass!=0">
+				and class=#{pdtClass}
+			</if>
+			<if test="pdtCost!=0">
+				and cost=#{pdtCost}
+			</if>
+			<if test="pdtPrice!=0">
+				and price=#{pdtPrice}
+			</if>
+			<if test="pdtAdmit!=null">
+				and admit=#{pdtAdmit}
+			</if>
+			<if test="accCode!=0">
+				and aCode=#{accCode}
+			</if>
+		</where>
+	</sql>
+	
+	
+	<select id="selectAll" resultType="Product">
+		<include refid="selectSql"/>
+	</select>
+	
+	<select id="selectBypdtCode" resultType="Product">
+		<include refid="selectSql"/>
+		<include refid="wherepdtCode"/>
+	</select>
+	
+	<select id="SearchAllItem" resultType="Product">
+		<include refid="selectSql"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insertPdt" parameterType="Product">
+		insert into product (pdtCode, class, name, cost, price, admit, aCode)
+		values(#{pdtCode}, #{pdtClass}, #{pdtName}, #{pdtCost}, #{pdtPrice}, #{pdtAdmit}, #{accCode})
+	</insert>
+	
+	<delete id="deletePdt" parameterType="Product">
+		delete from product
+		<include refid="where"/>
+	</delete>
+	
+	<update id="updatePdt" parameterType="Product">
+		update product set class=#{pdtClass}, name=#{pdtName}, cost= #{pdtCost}, price=#{pdtPrice}, 
+		admit=#{pdtAdmit}, aCode=#{accCode}
+		where pdtCode=#{pdtCode};
+		
+	</update>
+
 </mapper>

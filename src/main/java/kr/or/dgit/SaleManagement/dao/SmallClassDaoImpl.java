@@ -65,6 +65,14 @@ public class SmallClassDaoImpl implements SmallClassDao {
 		return sqlSession.getMapper(SmallClassDao.class).selectByBigClass(Smallclass);
 	}
 
+
+
+	@Override
+	public List<SmallClass> selectBySmallClasslike(SmallClass Smallclass) {
+		log.debug("whereSmallNameLike()");
+		return sqlSession.getMapper(SmallClassDao.class).selectBySmallClasslike(Smallclass);
+	}
+
 	
 
 

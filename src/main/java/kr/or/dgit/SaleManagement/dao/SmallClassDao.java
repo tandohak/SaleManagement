@@ -9,6 +9,7 @@ public interface SmallClassDao {
 	public SmallClass selectBySmallClass(SmallClass Smallclass);
 	public SmallClass selectBySmallName(SmallClass Smallclass);
 	public List<SmallClass> selectByBigClass(SmallClass Smallclass);
+	public List<SmallClass> selectBySmallClasslike(SmallClass Smallclass);
 	
 	public int insertSmallClass(SmallClass Smallclass);
 	

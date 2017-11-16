@@ -2,17 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.SaleManagement.dao.SmallClassDao">
 	
-<!-- 	<resultMap id="SmallClassResult" type="SmallClass" >
-		<id property="SmallClass" column="SmallClass"/>
-		<result property="SmallName" column="SmallName"/>
-	</resultMap>
 
-	<resultMap id="SmallClassWithBigClassResult" type="SmallClass" extends="SmallClassResult">
-		<result property="bigClass.bigClass" column="bigClass"/>
-		<result property="bigClass.bigName" column="bigName"/>
-	</resultMap>
-
- -->
 	<sql id="selectSql">
 		select Small, name, big
 		from SmallClass
@@ -34,6 +24,16 @@
 		</where>
 	</sql>
 	
+	
+	<sql id="whereSmallNameLike">
+		<where>
+			<if test="smallName!=null">
+				name like #{smallName}
+			</if>
+		</where>
+	</sql>
+	
+	
 	<sql id="whereBigClass">
 		<where>
 			<if test="sBigClass!=null">
@@ -46,6 +46,10 @@
 		<include refid="selectSql"/>
 	</select>
 	
+	<select id="selectBySmallClasslike" parameterType="SmallClass" resultType="SmallClass">
+		<include refid="selectSql"/>
+		<include refid="whereSmallNameLike"/>
+	</select>
 	
 	<select id="selectBySmallClass" parameterType="SmallClass" resultType="SmallClass">
 		<include refid="selectSql"/>
@@ -74,7 +78,7 @@
 	</insert>
 	
 	<update id="updateSmallClass" parameterType="SmallClass">
-		update SmallClass set Name = #{smallName} where Small= #{smallClass}
+		update SmallClass set Name = #{smallName}, big=#{sBigClass} where Small= #{smallClass}
 	</update>
 	
 	<update id="deleteSmallClass" parameterType="SmallClass">

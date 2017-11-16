@@ -25,6 +25,13 @@ public class SmallClassService {
 		}
 	}
 	
+	public List<SmallClass> findBySmallClassLisk(SmallClass Smallclass) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			SmallClassDao dao = new SmallClassDaoImpl(sqlSession);
+			return dao.selectBySmallClasslike(Smallclass);
+		}
+	}
+	
 	public SmallClass findBySmallName(SmallClass Smallclass) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
 			SmallClassDao dao = new SmallClassDaoImpl(sqlSession);

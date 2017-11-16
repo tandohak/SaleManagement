@@ -6,8 +6,22 @@ public class Product {
 	private String pdtName;
 	private int pdtCost;
 	private int pdtPrice;
-	private boolean pdtAdmit;
+	private String pdtAdmit;
 	private int accCode;
+	
+	
+	
+	public Product(int pdtCode, int pdtClass, String pdtName, int pdtCost, int pdtPrice, String pdtAdmit,
+			int accCode) {
+		super();
+		this.pdtCode = pdtCode;
+		this.pdtClass = pdtClass;
+		this.pdtName = pdtName;
+		this.pdtCost = pdtCost;
+		this.pdtPrice = pdtPrice;
+		this.pdtAdmit = pdtAdmit;
+		this.accCode = accCode;
+	}
 
 	public Product() {
 		super();
@@ -54,11 +68,11 @@ public class Product {
 		this.pdtPrice = pdtPrice;
 	}
 
-	public boolean isPdtAdmit() {
+	public String isPdtAdmit() {
 		return pdtAdmit;
 	}
 
-	public void setPdtAdmit(boolean pdtAdmit) {
+	public void setPdtAdmit(String pdtAdmit) {
 		this.pdtAdmit = pdtAdmit;
 	}
 

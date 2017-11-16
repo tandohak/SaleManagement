@@ -22,13 +22,20 @@ public class TestSmallClass {
 	public static void tearDownAfterClass() throws Exception {
 		SmallClassService = null;
 	}
-
-	@Test
+	
+/*	@Test
+	public void test4BySmallNameLike() {
+		SmallClass SmallClass = new SmallClass();
+		SmallClass.setSmallName("%TV%");
+		SmallClassService.findBySmallClassLisk(SmallClass);
+	}
+*/
+/*	@Test
 	public void test() {
 		List<SmallClass> lists = SmallClassService.findAll();
 		Assert.assertNotNull(lists);
 	}
-	
+	*/
 	
 	
 /*	@Test
