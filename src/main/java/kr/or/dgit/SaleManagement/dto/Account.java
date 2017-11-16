@@ -6,25 +6,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Account {
-	private IntegerProperty accCode;
-	private StringProperty accName;
-	private StringProperty accTel;
-	private StringProperty accAddr;
-	private StringProperty accAdmit;
-	private StringProperty accLevel;
-	private StringProperty accId;
-	private StringProperty accPw;
+	private IntegerProperty accCode = new SimpleIntegerProperty();
+	private StringProperty accName = new SimpleStringProperty();
+	private StringProperty accTel = new SimpleStringProperty();
+	private StringProperty accAddr = new SimpleStringProperty();
+	private StringProperty accAdmit = new SimpleStringProperty();
+	private StringProperty accLevel = new SimpleStringProperty();
+	private StringProperty accId = new SimpleStringProperty();
+	private StringProperty accPw = new SimpleStringProperty();
 
-	public Account() {
-		accCode = new SimpleIntegerProperty();
-		accName = new SimpleStringProperty();
-		accTel = new SimpleStringProperty();
-		accAddr = new SimpleStringProperty();
-		accAdmit = new SimpleStringProperty();
-		accLevel = new SimpleStringProperty();
-		accId = new SimpleStringProperty();
-		accPw = new SimpleStringProperty();
-	}
+	public Account() {}
 
 	
 

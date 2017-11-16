@@ -77,13 +77,7 @@ public class TestProduct {
 		pdt.findByAllItem(product);
 	}*/
 	
-	/*@Test
-	public void test5delete() {
-		Product product = new Product();
-		product.setPdtName("테스트");
-		int res = pdt.deleteProduct(product);
-		Assert.assertEquals(1, res);
-	}*/
+	
 	
 	@Test
 	public void test2insert() {		
@@ -98,4 +92,12 @@ public class TestProduct {
 		int res = pdt.updatePdt(product);
 		Assert.assertEquals(1, res);
 	}
+	
+	/*@Test
+	public void test5delete() {
+		Product product = new Product();
+		product.setPdtName("테스트111");
+		int res = pdt.deleteProduct(product);
+		Assert.assertEquals(1, res);
+	}*/
 }

@@ -6,25 +6,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Sales {
-	private IntegerProperty saleCode;
-	private StringProperty saleName;
-	private StringProperty saleTel;
-	private StringProperty saleAddr;
-	private StringProperty saleLeave;
-	private StringProperty saleId;
-	private StringProperty salePw;
-	private StringProperty saleLevel;
+	private IntegerProperty saleCode = new SimpleIntegerProperty();	
+	private StringProperty saleName = new SimpleStringProperty();
+	private StringProperty saleTel = new SimpleStringProperty();
+	private StringProperty saleAddr = new SimpleStringProperty();
+	private StringProperty saleLeave = new SimpleStringProperty();
+	private StringProperty saleId = new SimpleStringProperty();
+	private StringProperty salePw = new SimpleStringProperty();
+	private StringProperty saleLevel = new SimpleStringProperty();;
 
-	public Sales() {
-		saleCode = new SimpleIntegerProperty();	
-		saleName = new SimpleStringProperty();
-		saleTel = new SimpleStringProperty();
-		saleAddr = new SimpleStringProperty();
-		saleLeave = new SimpleStringProperty();
-		saleId = new SimpleStringProperty();
-		salePw = new SimpleStringProperty();
-		saleLevel = new SimpleStringProperty();
-	}
+	public Sales() {}
 
 	public int getSaleCode() {
 		return saleCode.get();	

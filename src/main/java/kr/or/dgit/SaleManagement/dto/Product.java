@@ -1,87 +1,116 @@
 package kr.or.dgit.SaleManagement.dto;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Product {
-	private int pdtCode;
-	private int pdtClass;
-	private String pdtName;
-	private int pdtCost;
-	private int pdtPrice;
-	private String pdtAdmit;
-	private int accCode;
+	private IntegerProperty pdtCode = new SimpleIntegerProperty();
+	private IntegerProperty pdtClass = new SimpleIntegerProperty();
+	private StringProperty pdtName = new SimpleStringProperty();
+	private IntegerProperty pdtCost = new SimpleIntegerProperty();
+	private IntegerProperty pdtPrice = new SimpleIntegerProperty();
+	private StringProperty pdtAdmit = new SimpleStringProperty();
+	private IntegerProperty accCode = new SimpleIntegerProperty();
 	
 	
 	
 	public Product(int pdtCode, int pdtClass, String pdtName, int pdtCost, int pdtPrice, String pdtAdmit,
 			int accCode) {
-		super();
-		this.pdtCode = pdtCode;
-		this.pdtClass = pdtClass;
-		this.pdtName = pdtName;
-		this.pdtCost = pdtCost;
-		this.pdtPrice = pdtPrice;
-		this.pdtAdmit = pdtAdmit;
-		this.accCode = accCode;
+		this.pdtCode.set(pdtCode);
+		this.pdtClass.set(pdtClass);
+		this.pdtName.set(pdtName);
+		this.pdtCost.set(pdtCost);
+		this.pdtPrice.set(pdtPrice);
+		this.pdtAdmit.set(pdtAdmit);
+		this.accCode.set(accCode);
 	}
 
-	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public Product() {}
 
 	public int getPdtCode() {
+		return pdtCode.get();
+	}
+	
+	public IntegerProperty getPdtCodeProperty() {
 		return pdtCode;
 	}
-
+	
 	public void setPdtCode(int pdtCode) {
-		this.pdtCode = pdtCode;
+		this.pdtCode.set(pdtCode);
 	}
 
 	public int getPdtClass() {
+		return pdtClass.get();
+	}
+	
+	public IntegerProperty getPdtClassProperty() {
 		return pdtClass;
 	}
-
+	
 	public void setPdtClass(int pdtClass) {
-		this.pdtClass = pdtClass;
+		this.pdtClass.set(pdtClass);
 	}
 
 	public String getPdtName() {
+		return pdtName.get();
+	}
+	
+	public StringProperty getPdtNameProperty() {
 		return pdtName;
 	}
-
+	
 	public void setPdtName(String pdtName) {
-		this.pdtName = pdtName;
+		this.pdtName.set(pdtName);
 	}
 
 	public int getPdtCost() {
+		return pdtCost.get();
+	}
+	
+	public IntegerProperty getPdtCostProperty() {
 		return pdtCost;
 	}
-
+	
 	public void setPdtCost(int pdtCost) {
-		this.pdtCost = pdtCost;
+		this.pdtCost.set(pdtCost);
 	}
 
 	public int getPdtPrice() {
+		return pdtPrice.get();
+	}
+	
+	public IntegerProperty getPdtPriceProperty() {
 		return pdtPrice;
 	}
-
+	
 	public void setPdtPrice(int pdtPrice) {
-		this.pdtPrice = pdtPrice;
+		this.pdtPrice.set(pdtPrice);
 	}
 
 	public String isPdtAdmit() {
+		return pdtAdmit.get();
+	}
+	
+	public StringProperty isPdtAdmitProperty() {
 		return pdtAdmit;
 	}
-
+	
 	public void setPdtAdmit(String pdtAdmit) {
-		this.pdtAdmit = pdtAdmit;
+		this.pdtAdmit.set(pdtAdmit);
 	}
 
 	public int getAccCode() {
+		return accCode.get();
+	}
+	
+	public IntegerProperty getAccCodeProperty() {
 		return accCode;
 	}
 
 	public void setAccCode(int accCode) {
-		this.accCode = accCode;
+		this.accCode.set(accCode);
 	}
 
 	@Override
