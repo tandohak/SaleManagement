@@ -35,8 +35,13 @@
 
 	<mappers>
 <!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/UserMapper.xml" /> -->
+<<<<<<< HEAD
 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/SalesMapper.xml" /> 
 <!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" /> -->
+=======
+<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/SalesMapper.xml" /> -->
+		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" /> 
+>>>>>>> refs/heads/fix_account_v1.0
 <!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/BigClassMapper.xml" /> -->
 <!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/RowClassMapper.xml" /> -->
 	</mappers>
