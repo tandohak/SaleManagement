@@ -1,79 +1,94 @@
 package kr.or.dgit.SaleManagement.dto;
 
-public class Sales {
-	private int saleCode;
-	private String saleName;
-	private String saleTel;
-	private String saleAddr;
-	private String saleLeave;
-	private String saleId;
-	private String salePw;
-	private SalesLevel saleLevel;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-	public Sales() {}
+public class Sales {
+	private IntegerProperty saleCode;
+	private StringProperty saleName;
+	private StringProperty saleTel;
+	private StringProperty saleAddr;
+	private StringProperty saleLeave;
+	private StringProperty saleId;
+	private StringProperty salePw;
+	private StringProperty saleLevel;
+
+	public Sales() {
+		saleCode = new SimpleIntegerProperty();	
+		saleName = new SimpleStringProperty();
+		saleTel = new SimpleStringProperty();
+		saleAddr = new SimpleStringProperty();
+		saleLeave = new SimpleStringProperty();
+		saleId = new SimpleStringProperty();
+		salePw = new SimpleStringProperty();
+		saleLevel = new SimpleStringProperty();
+	}
 
 	public int getSaleCode() {
-		return saleCode;
+		return saleCode.get();
+		
 	}
 
 	public void setSaleCode(int saleCode) {
-		this.saleCode = saleCode;
+		this.saleCode.set(saleCode);
 	}
 
 	public String getSaleName() {
-		return saleName;
+		return saleName.get();
 	}
 
 	public void setSaleName(String saleName) {
-		this.saleName = saleName;
+		this.saleName.set(saleName);
 	}
 
 	public String getSaleTel() {
-		return saleTel;
+		return saleTel.get();
 	}
 
 	public void setSaleTel(String saleTel) {
-		this.saleTel = saleTel;
+		this.saleTel.set(saleTel);
 	}
 
 	public String getSaleAddr() {
-		return saleAddr;
+		return saleAddr.get();
 	}
 
 	public void setSaleAddr(String saleAddr) {
-		this.saleAddr = saleAddr;
+		this.saleAddr.set(saleAddr);
 	}
 
 	public String getSaleLeave() {
-		return saleLeave;
+		return saleLeave.get();
 	}
 
 	public void setSaleLeave(String saleLeave) {
-		this.saleLeave = saleLeave;
+		this.saleLeave.set(saleLeave);
 	}
 
 	public String getSaleId() {
-		return saleId;
+		return saleId.get();
 	}
 
 	public void setSaleId(String saleId) {
-		this.saleId = saleId;
+		this.saleId.set(saleId);;
 	}
 
 	public String getSalePw() {
-		return salePw;
+		return salePw.get();
 	}
 
 	public void setSalePw(String salePw) {
-		this.salePw = salePw;
+		this.salePw.set(salePw);;
 	}
 
-	public SalesLevel getSaleLevel() {
-		return saleLevel;
+	public String getSaleLevel() {
+		return saleLevel.get();
 	}
 
-	public void setSaleLevel(SalesLevel saleLevel) {
-		this.saleLevel = saleLevel;
+	public void setSaleLevel(String saleLevel) {
+		this.saleLevel.set(saleLevel);;
 	}
 
 	@Override
@@ -82,5 +97,9 @@ public class Sales {
 				"Sales [saleCode=%s, saleName=%s, saleTel=%s, saleAddr=%s, saleLeave=%s, saleId=%s, salePw=%s, saleLevel=%s]",
 				saleCode, saleName, saleTel, saleAddr, saleLeave, saleId, salePw, saleLevel);
 	}
+	
+	
+	
+	
 
 }

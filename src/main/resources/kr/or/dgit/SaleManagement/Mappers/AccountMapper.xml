@@ -9,11 +9,21 @@
 	
 	<sql id = "whereAccount">
 		<where>
-			<if test="accCode != 0">AND accCode = #{accCode}</if>
-			<if test="accName != null">AND name = #{accName}</if>
-			<if test="accLevel != null">AND alevel = #{accLevel}</if>
-			<if test="accId != null">AND id = #{accId}</if>
-			<if test="accAdmit != Null">AND admit = #{accAdmit}</if>
+			<if test="accCode != 0">
+				accCode = #{accCode}
+			</if>
+			<if test="accName != null">
+				name = #{accName}
+			</if>
+			<if test="accLevel != null">
+				alevel = #{accLevel}
+			</if>
+			<if test="accId != null">
+				id = #{accId}
+			</if>
+			<if test="accAdmit != null">
+				admit = #{accAdmit}
+			</if>
 		</where>
 	</sql>
 	

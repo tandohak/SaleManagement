@@ -29,20 +29,20 @@ public class TestSalesService {
 		salesService = null;
 	}
 
-	/*@Test
+	@Test
 	public void test1InsertSlaes() {
 		Sales sales = new Sales();
 		sales.setSaleCode(99999992);
-		sales.setSaleName("테스트");
+		sales.setSaleName("테스트2");
 		sales.setSaleTel("010-1234-1234");
-		sales.setSaleAddr("테스트용 주소");
+		sales.setSaleAddr("테스트용 주소2");
 		sales.setSaleId("testId");
 		sales.setSalePw("asdfqwer");
-		sales.setSaleLevel(new SalesLevel("A"));
-		
+		sales.setSaleLevel("B");
+		sales.setSaleLeave("false");
 		int res = salesService.insertSales(sales);
 		Assert.assertSame(1, res);
-	}*/
+	}
 	
 	@Test
 	public void test2FindByAll() {
@@ -56,7 +56,7 @@ public class TestSalesService {
 	public void test3findSalesSearch() {
 		List<Sales> lists = new ArrayList<>();
 		Sales sales = new Sales();
-		sales.setSaleLevel(new SalesLevel("B"));
+		sales.setSaleLevel("B");
 		
 		lists = salesService.findSalesSearch(sales);
 		Assert.assertNotNull(lists);

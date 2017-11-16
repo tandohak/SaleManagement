@@ -45,7 +45,7 @@ public class TestAccount {
 	@Test
 	public void test2ByCode() {
 		Account account = new Account();
-		account.setAccCode(21999999);
+		account.setAccCode(20703003);
 
 		Account findAccount = accountService.findAccountByCode(account);
 		System.out.println(findAccount);

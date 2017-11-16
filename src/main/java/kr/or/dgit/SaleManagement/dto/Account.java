@@ -15,69 +15,103 @@ public class Account {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public int getAccCode() {
 		return accCode;
 	}
+
+
 
 	public void setAccCode(int accCode) {
 		this.accCode = accCode;
 	}
 
+
+
 	public String getAccName() {
 		return accName;
 	}
+
+
 
 	public void setAccName(String accName) {
 		this.accName = accName;
 	}
 
+
+
 	public String getAccTel() {
 		return accTel;
 	}
+
+
 
 	public void setAccTel(String accTel) {
 		this.accTel = accTel;
 	}
 
+
+
 	public String getAccAddr() {
 		return accAddr;
 	}
+
+
 
 	public void setAccAddr(String accAddr) {
 		this.accAddr = accAddr;
 	}
 
+
+
 	public String getAccAdmit() {
 		return accAdmit;
 	}
+
+
 
 	public void setAccAdmit(String accAdmit) {
 		this.accAdmit = accAdmit;
 	}
 
+
+
 	public String getAccLevel() {
 		return accLevel;
 	}
+
+
 
 	public void setAccLevel(String accLevel) {
 		this.accLevel = accLevel;
 	}
 
+
+
 	public String getAccId() {
 		return accId;
 	}
+
+
 
 	public void setAccId(String accId) {
 		this.accId = accId;
 	}
 
+
+
 	public String getAccPw() {
 		return accPw;
 	}
 
+
+
 	public void setAccPw(String accPw) {
 		this.accPw = accPw;
 	}
+
+
 
 	@Override
 	public String toString() {
