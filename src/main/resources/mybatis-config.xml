@@ -12,13 +12,8 @@
 	</typeAliases>
 	
 	<typeHandlers>
-<!-- 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserCategoryTypeHandler"/> -->
-<!-- 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserTypeHandler"/> -->
 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.SalesLevelTypeHandler"/>
-<!-- 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.AccountLevelTypeHandler"/> -->
-<!-- 		<typeHandler handler="kr.or.dgit.SaleManagement.typehandlers.UserAddrTypeHandler"/> -->
-	<package name="kr.or.dgit.SaleManagement.dto"/>
-<!-- 		<package name="kr.or.dgit.SaleManagement.typehandlers"/> -->
+		<package name="kr.or.dgit.SaleManagement.dto"/>
 	</typeHandlers>
 	
 	<environments default="development">
@@ -34,15 +29,7 @@
 	</environments>
 
 	<mappers>
-<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/UserMapper.xml" /> -->
-<<<<<<< HEAD
 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/SalesMapper.xml" /> 
-<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" /> -->
-=======
-<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/SalesMapper.xml" /> -->
 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" /> 
->>>>>>> refs/heads/fix_account_v1.0
-<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/BigClassMapper.xml" /> -->
-<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/RowClassMapper.xml" /> -->
 	</mappers>
 </configuration>
