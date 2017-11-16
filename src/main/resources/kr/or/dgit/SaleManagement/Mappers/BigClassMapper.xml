@@ -2,20 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.SaleManagement.dao.BigClassDao">
 	<sql id="selectSql">
-		select bigClass, bigName
+		select big, name
 		from bigClass
 	</sql>
+	
 	<sql id="wherebigClass">
 		<where>
 			<if test="bigClass!=null">
-				bigClass= #{bigClass}
+				big= #{bigClass}
 			</if>
 		</where>
 	</sql>
-	<sql id="wherebigName">
+	
+	<sql id="wherename">
 		<where>
 			<if test="bigName!=null">
-				bigName= #{bigName}
+				name= #{bigName}
 			</if>
 		</where>
 	</sql>
@@ -31,20 +33,20 @@
 	
 	<select id="selectbigName" parameterType="BigClass" resultType="BigClass">
 		<include refid="selectSql"/>		
-		<include refid="wherebigName"/>
+		<include refid="wherename"/>
 	</select>
 	
 	<insert id="insertbigClass" parameterType="BigClass">
-		insert into bigClass(bigClass, bigName)
+		insert into bigClass(big, name)
 		values(#{bigClass}, #{bigName})	
 	</insert>
 	
 	<update id="updatebigClass" parameterType="BigClass">
-		update bigClass set bigName = #{bigName} where bigClass= #{bigClass};
+		update bigClass set name = #{bigName} where big= #{bigClass};
 	</update>
 	
 	<update id="deletebigClass" parameterType="int">
-		DELETE FROM bigClass WHERE bigClass =#{bigClass}
+		DELETE FROM bigClass WHERE big =#{bigClass}
 	</update>
 	
 	

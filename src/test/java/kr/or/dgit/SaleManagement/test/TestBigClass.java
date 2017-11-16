@@ -28,23 +28,22 @@ public class TestBigClass {
 	public void test() {
 		List<BigClass> lists = bigClassService.findAll();
 		Assert.assertNotNull(lists);
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void test1() {
-		BigClass big = new BigClass();
-		big.setBigClass(10);
+		BigClass big1 = new BigClass();
+		big1.setBigClass(10);
 		
-		bigClassService.findBigClassByBigClass(big);
+		bigClassService.findBigClassByBigClass(big1);
 	}
 	
 	@Test
 	public void test2() {
 		BigClass big = new BigClass();
 		big.setBigName("기타");
-		
-		BigClass t = bigClassService.findBigClassByBigName(big);
-		Assert.assertNotNull(t);		
+		bigClassService.findBigClassByBigName(big);
+
 	}
 	
 	@Test
@@ -63,9 +62,9 @@ public class TestBigClass {
 		BigClass bigClass = new BigClass(1, "바뀜");
 		int res = bigClassService.updatebigClass(bigClass);
 		Assert.assertEquals(1, res);
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void test5delete() {
 		BigClass bigClass = new BigClass(1);
 		int res = bigClassService.deletebigClass(1);

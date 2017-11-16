@@ -2,12 +2,26 @@ package kr.or.dgit.SaleManagement.dto;
 
 public class Product {
 	private int pdtCode;
-	private SmallClass pdtClass;
+	private int pdtClass;
 	private String pdtName;
 	private int pdtCost;
 	private int pdtPrice;
-	private boolean pdtAdmit;
-	private Account accCode;
+	private String pdtAdmit;
+	private int accCode;
+	
+	
+	
+	public Product(int pdtCode, int pdtClass, String pdtName, int pdtCost, int pdtPrice, String pdtAdmit,
+			int accCode) {
+		super();
+		this.pdtCode = pdtCode;
+		this.pdtClass = pdtClass;
+		this.pdtName = pdtName;
+		this.pdtCost = pdtCost;
+		this.pdtPrice = pdtPrice;
+		this.pdtAdmit = pdtAdmit;
+		this.accCode = accCode;
+	}
 
 	public Product() {
 		super();
@@ -22,11 +36,11 @@ public class Product {
 		this.pdtCode = pdtCode;
 	}
 
-	public SmallClass getPdtClass() {
+	public int getPdtClass() {
 		return pdtClass;
 	}
 
-	public void setPdtClass(SmallClass pdtClass) {
+	public void setPdtClass(int pdtClass) {
 		this.pdtClass = pdtClass;
 	}
 
@@ -54,19 +68,19 @@ public class Product {
 		this.pdtPrice = pdtPrice;
 	}
 
-	public boolean isPdtAdmit() {
+	public String isPdtAdmit() {
 		return pdtAdmit;
 	}
 
-	public void setPdtAdmit(boolean pdtAdmit) {
+	public void setPdtAdmit(String pdtAdmit) {
 		this.pdtAdmit = pdtAdmit;
 	}
 
-	public Account getAccCode() {
+	public int getAccCode() {
 		return accCode;
 	}
 
-	public void setAccCode(Account accCode) {
+	public void setAccCode(int accCode) {
 		this.accCode = accCode;
 	}
 

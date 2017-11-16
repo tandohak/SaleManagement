@@ -31,5 +31,8 @@
 	<mappers>
 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/SalesMapper.xml" /> 
 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" /> 
+ 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/SmallClassMapper.xml" />
+ 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/BigClassMapper.xml" />
+ 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/ProductMapper.xml" />
 	</mappers>
 </configuration>
