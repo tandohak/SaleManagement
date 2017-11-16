@@ -10,7 +10,7 @@
 	<sql id = "whereAccount">
 		<where>
 			<if test="accCode != 0">
-				accCode = #{accCode}
+			accCode = #{accCode}
 			</if>
 			<if test="accName != null">
 				name = #{accName}

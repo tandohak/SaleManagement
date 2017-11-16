@@ -26,6 +26,12 @@ public class TestProduct {
 		pdt = null;
 	}
 
+	
+	@Test
+	public void test() {
+		List<Product> lists = pdt.findAll();
+		Assert.assertNotNull(lists);	
+	}
 	/*@Test
 	public void test() {
 		List<Product> lists = pdt.findAll();
@@ -79,12 +85,12 @@ public class TestProduct {
 		Assert.assertEquals(1, res);
 	}*/
 	
-	/*@Test
-	public void test3insert() {		
+	@Test
+	public void test2insert() {		
 		Product product = new Product(13, 21, "테스트", 700, 70, "true", 21722051);
 		int res = pdt.insertProduct(product);
 		Assert.assertEquals(1, res);
-	}*/
+	}
 	
 	@Test
 	public void test3insert() {		
