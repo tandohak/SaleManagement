@@ -36,7 +36,7 @@
 	<mappers>
 <!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/UserMapper.xml" /> -->
 <!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/SalesMapper.xml" /> -->
-<!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" /> -->
+		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AccountMapper.xml" /> 
 <!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/BigClassMapper.xml" /> -->
 <!-- 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/RowClassMapper.xml" /> -->
 	</mappers>

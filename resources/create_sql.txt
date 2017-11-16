@@ -25,7 +25,7 @@ CREATE TABLE SaleManagement.Account (
 	addr    VARCHAR(100) NULL,
 	admit   VARCHAR(10)  NULL,
 	alevel  VARCHAR(2)   NULL,
-	COL     VARCHAR(20)  NULL,
+	id     VARCHAR(20)  NULL,
 	pw      VARCHAR(20)  NULL
 );
 

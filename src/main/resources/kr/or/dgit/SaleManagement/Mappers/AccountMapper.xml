@@ -3,27 +3,69 @@
 <mapper namespace="kr.or.dgit.SaleManagement.dao.AccountDao">
 	
 	<sql id = "selectAccount">
-		SELECT accCode, accName, accTel, accAddr, accAdmit, accId, accLevel
+		SELECT accCode, name, tel, addr, admit, alevel, id, pw
 		FROM account
 	</sql>
 	
- 	<sql id = "insertAccount">
- 		INSERT INTO Account(accCode, accName, accTel, accAddr, accAdmit, accId, accLevel)
-		VALUES(#{accCode},#{accName},#{accTel},#{accAddr},#{accAdmit},#{accId},#{accLevel})
- 	</sql>
+	<sql id = "whereAccount">
+		<where>
+			<if test="accCode != 0">AND accCode = #{accCode}</if>
+			<if test="accName != null">AND name = #{accName}</if>
+			<if test="accLevel != null">AND alevel = #{accLevel}</if>
+			<if test="accId != null">AND id = #{accId}</if>
+			<if test="accAdmit != Null">AND admit = #{accAdmit}</if>
+		</where>
+	</sql>
 	
+ 	<resultMap type="Account" id="AccountResult">
+ 		<id property="accCode" column="accCode"/>
+ 		<result property="accName" column="name"/>
+ 		<result property="accTel" column="tel"/>
+ 		<result property="accAddr" column="addr"/>
+ 		<result property="accAdmit" column="admit"/>
+ 		<result property="accLevel" column="alevel"/>
+ 		<result property="accId" column="id"/>
+ 		<result property="accPw" column="pw"/>
+ 	</resultMap>
+ 	
 	<select id="selectAccountByCode" parameterType="Account" resultType="Account">
 		<include refid="selectAccount"/>
-		WHERE accCode = #{accCode}
+		<include refid="whereAccount"/>
 	</select>
 	
-	<select id="selectAllAccount" resultType="Account">
+	<select id="selectAccountByName" parameterType="Account" resultType="Account">
+		<include refid="selectAccount"/>
+		<include refid="whereAccount"/>
+	</select>
+	
+	<select id="selectAccountById" parameterType="Account" resultType="Account">
+		<include refid="selectAccount"/>
+		<include refid="whereAccount"/>
+	</select>
+	
+	<select id="selectAccountByLevel" parameterType="Account" resultMap="AccountResult">
+		<include refid="selectAccount"/>
+		<include refid="whereAccount"/>
+	</select>
+	
+	<select id="selectAccountByAllAdmit" resultType="Account">
+		<include refid="selectAccount"/>
+		<include refid="whereAccount"/>
+	</select>
+	
+	<select id="selectAccountByAll" resultType="Account">
 		<include refid="selectAccount"/>
 	</select>
 	
 	<insert id="insertAccount" parameterType="Account">
-		INSERT INTO Account(accCode, accName, accTel, accAddr, accAdmit, accId, accLevel)
-		VALUES(#{accCode},#{accName},#{accTel},#{accAddr},#{accAdmit},#{accId},#{accLevel})
+		INSERT INTO Account(accCode, Name, Tel, Addr, Admit, aLevel, Id, Pw)
+		VALUES(#{accCode},#{accName},#{accTel},#{accAddr},#{accAdmit},#{accLevel},#{accId},#{accPw})
 	</insert>
+	
+	<update id="updateAccount" parameterType="Account">
+		UPDATE account
+		SET name=#{accName}, tel=#{accTel}, addr=#{accAddr}, admit=#{accAdmit}, alevel=#{accLevel}, pw=#{accPw}
+		WHERE accCode=#{accCode}
+	</update>
 
 </mapper>

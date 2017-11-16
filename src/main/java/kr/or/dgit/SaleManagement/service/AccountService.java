@@ -10,26 +10,64 @@ import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.util.MyBatisSqlSessionFactory;
 
 public class AccountService {
-	
+
 	public Account findAccountByCode(Account account) {
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
 			AccountDao dao = new AccountDaoImpl(sqlSession);
 			return dao.selectAccountByCode(account);
 		}
 	}
-	
-	public List<Account> findAllAccount(){
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+
+	public Account findAccountByName(Account account) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
 			AccountDao dao = new AccountDaoImpl(sqlSession);
-			return dao.selectAllAccount();
+			return dao.selectAccountByName(account);
 		}
 	}
-	
+
+	public Account findAccountById(Account account) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			AccountDao dao = new AccountDaoImpl(sqlSession);
+			return dao.selectAccountById(account);
+		}
+	}
+
+	public List<Account> findAccountByLevel(Account account) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			AccountDao dao = new AccountDaoImpl(sqlSession);
+			return dao.selectAccountByLevel(account);
+		}
+	}
+
+	public List<Account> findAllAdmitAccount(Account account) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			AccountDao dao = new AccountDaoImpl(sqlSession);
+			return dao.selectAccountByAllAdmit(account);
+		}
+	}
+
+	public List<Account> findAllAccount() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			AccountDao dao = new AccountDaoImpl(sqlSession);
+			return dao.selectAccountByAll();
+		}
+	}
+
 	public int insertAccount(Account account) {
 		int res = -1;
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
 			AccountDao dao = new AccountDaoImpl(sqlSession);
 			res = dao.insertAccount(account);
+			sqlSession.commit();
+		}
+		return res;
+	}
+
+	public int updateAccount(Account account) {
+		int res = -1;
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			AccountDao dao = new AccountDaoImpl(sqlSession);
+			res = dao.updateAccount(account);
 			sqlSession.commit();
 		}
 		return res;
