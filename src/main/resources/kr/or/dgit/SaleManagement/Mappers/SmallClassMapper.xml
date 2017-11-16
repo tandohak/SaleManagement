@@ -14,28 +14,36 @@
 
  -->
 	<sql id="selectSql">
-		select SmallClass, SmallName, bigClass
+		select Small, name, big
 		from SmallClass
 	</sql>
 	
 	<sql id="whereSql">
 		<where>
-			<if test="SmallClass!=null">
-				SmallClass=#{SmallClass}
+			<if test="smallClass!=null">
+				Small=#{smallClass}
 			</if>
 		</where>
 	</sql>
+	
 	<sql id="whereSmallName">
 		<where>
-			<if test="SmallName!=null">
-				SmallName=#{SmallName}
+			<if test="smallName!=null">
+				name=#{smallName}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="whereBigClass">
+		<where>
+			<if test="sBigClass!=null">
+				big=#{sBigClass}
 			</if>
 		</where>
 	</sql>
 	
 	<select id="selectAll" resultType="SmallClass">
 		<include refid="selectSql"/>
-		<include refid="whereSql"/>
 	</select>
 	
 	
@@ -44,16 +52,21 @@
 		<include refid="whereSql"/>
 	</select>
 	
-		<select id="selectBySmallName" parameterType="SmallClass" resultType="SmallClass">
+	<select id="selectBySmallName" parameterType="SmallClass" resultType="SmallClass">
 		<include refid="selectSql"/>
 		<include refid="whereSmallName"/>
+	</select>
+	
+	<select id="selectByBigClass" parameterType="SmallClass" resultType="SmallClass">
+		<include refid="selectSql"/>
+		<include refid="whereBigClass"/>
 	</select>
 	
 	
 	
 	<sql id="insertSql">
-		insert into Smallclass (SmallClass, SmallName, bigClass) 
-		VALUES (#{SmallClass}, #{SmallName}, #{bigClass})
+		insert into SmallClass (Small, Name, big) 
+		VALUES (#{smallClass}, #{smallName}, #{sBigClass})
 	</sql>
 	
 	<insert id="insertSmallClass" parameterType="SmallClass">
@@ -61,11 +74,11 @@
 	</insert>
 	
 	<update id="updateSmallClass" parameterType="SmallClass">
-		update SmallClass set SmallName = #{SmallName} where SmallClass= #{SmallClass}
+		update SmallClass set Name = #{smallName} where Small= #{smallClass}
 	</update>
 	
 	<update id="deleteSmallClass" parameterType="SmallClass">
-		delete from SmallClass where SmallClass=#{SmallClass}
+		delete from SmallClass where Small=#{smallClass}
 	</update>
 
 </mapper>

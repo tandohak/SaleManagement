@@ -5,10 +5,31 @@ public class SmallClass {
 	private String smallName;
 	private int sBigClass;
 
+
+	
+	public SmallClass(int smallClass, String smallName, int sBigClass) {
+		super();
+		this.smallClass = smallClass;
+		this.smallName = smallName;
+		this.sBigClass = sBigClass;
+	}
+
+	
+
 	public SmallClass() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	
+	public SmallClass(int smallClass, String smallName) {
+		super();
+		this.smallClass = smallClass;
+		this.smallName = smallName;
+	}
+
+
 
 	public int getSmallClass() {
 		return smallClass;

@@ -2,12 +2,12 @@ package kr.or.dgit.SaleManagement.dto;
 
 public class Product {
 	private int pdtCode;
-	private SmallClass pdtClass;
+	private int pdtClass;
 	private String pdtName;
 	private int pdtCost;
 	private int pdtPrice;
 	private boolean pdtAdmit;
-	private Account accCode;
+	private int accCode;
 
 	public Product() {
 		super();
@@ -22,11 +22,11 @@ public class Product {
 		this.pdtCode = pdtCode;
 	}
 
-	public SmallClass getPdtClass() {
+	public int getPdtClass() {
 		return pdtClass;
 	}
 
-	public void setPdtClass(SmallClass pdtClass) {
+	public void setPdtClass(int pdtClass) {
 		this.pdtClass = pdtClass;
 	}
 
@@ -62,11 +62,11 @@ public class Product {
 		this.pdtAdmit = pdtAdmit;
 	}
 
-	public Account getAccCode() {
+	public int getAccCode() {
 		return accCode;
 	}
 
-	public void setAccCode(Account accCode) {
+	public void setAccCode(int accCode) {
 		this.accCode = accCode;
 	}
 

@@ -19,7 +19,7 @@ public class SmallClassDaoImpl implements SmallClassDao {
 		this.sqlSession = sqlSession;
 	}
 
-	private String namespace = "kr.or.dgit.SaleManagement.dao.SmallClassDao";
+	
 
 	@Override
 	public List<SmallClass> selectAll() {
@@ -57,6 +57,12 @@ public class SmallClassDaoImpl implements SmallClassDao {
 	public int deleteSmallClass(int Smallclass) {
 		log.debug("deleteSmallClass()");
 		return sqlSession.getMapper(SmallClassDao.class).deleteSmallClass(Smallclass);
+	}
+
+	@Override
+	public List<SmallClass> selectByBigClass(SmallClass Smallclass) {
+		log.debug("selectByBigClass()");
+		return sqlSession.getMapper(SmallClassDao.class).selectByBigClass(Smallclass);
 	}
 
 	
