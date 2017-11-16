@@ -35,4 +35,18 @@ public class SalesDaoImpl implements SalesDao {
 		return sqlSession.insert(namespace + "insertSales", sales);
 	}
 
+	@Override
+	public List<Sales> selectSalesSearch(Sales sales) {
+		log.debug("selectSalesSearch()");
+		return sqlSession.selectList(namespace + "selectSalesSearch",sales);
+	}
+
+	@Override
+	public int updateSales(Sales sales) {
+		log.debug("updateSales()");
+		return sqlSession.update(namespace + "updateSales", sales);
+	}
+	
+	
+
 }

@@ -9,7 +9,6 @@ public class Addr {
 	private int building2;
 
 	public Addr(String zipCode, String sido, String sigungu, String doro, int building1, int building2) {
-		super();
 		this.zipCode = zipCode;
 		this.sido = sido;
 		this.sigungu = sigungu;

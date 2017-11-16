@@ -10,10 +10,7 @@ public class Sales {
 	private String salePw;
 	private SalesLevel saleLevel;
 
-	public Sales() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public Sales() {}
 
 	public int getSaleCode() {
 		return saleCode;

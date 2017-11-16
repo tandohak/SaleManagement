@@ -2,49 +2,92 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.SaleManagement.dao.SalesDao">
 	<sql id="selectSql"> 
-		SELECT saleCode, saleName, saleTel, saleAddr, saleLeave, saleId, saleLevel
+		SELECT salecode, name, tel, addr, sleave, id, pw ,slevel
 		FROM sales
 	</sql>
+	
 	<sql id="insertSql">
-		insert into sales(saleCode,saleName,saleTel,saleAddr,saleLeave,saleId,saleLevel)
-		values(#{saleCode},#{saleName},#{saleTel},#{saleAddr},#{saleLeave},#{saleId},#{saleLevel}) 		
+		insert into sales(salecode, name, tel, addr, sleave, id, pw, slevel)
+		values(#{saleCode},#{saleName},#{saleTel},#{saleAddr},#{saleLeave},#{saleId},#{salePw},#{saleLevel}) 		
 	</sql>
+	
 	<sql id="whereSql">
 		<where>
-			<if test="saleCode != null">
+			<if test="saleCode != 0">
 				AND saleCode = #{saleCode}
 			</if>
 			<if test="saleName != null">
-				AND saleTel = #{saleName}
+				AND name = #{saleName}
 			</if>
 			<if test="saleTel != null">
-				AND saleTel = #{saleTel}
+				AND tel = #{saleTel}
 			</if>
 			<if test="saleAddr != null"> 
-				AND saleAddr = #{saleAddr}
+				AND addr = #{saleAddr}
 			</if>
 			<if test="saleLeave != null">
-				AND saleLeave = #{saleLeave}
+				AND sLeave = #{saleLeave}
 			</if>
 			<if test="saleId != null">
-				AND saleId = #{saleId}
+				AND id = #{saleId}
 			</if>
 			<if test="saleLevel != null">
-				AND saleLevel = #{saleLevel}
+				AND sLevel = #{saleLevel}
 			</if>
 		</where>
-	</sql>
+	</sql>	
+	
+	<resultMap type="Sales" id="SalesResult">
+		<id property="saleCode" column="salecode"/>
+		<result property="saleName" column="name"/>
+		<result property="saleTel" column="tel"/>
+		<result property="saleAddr" column="addr"/>
+		<result property="saleLeave" column="sLeave"/>
+		<result property="saleId" column="id"/>
+		<result property="salePw" column="pw"/>
+		<result property="saleLevel" column="sLevel"/>
+	</resultMap>
 	
 	<select id="selectSalesByCode" parameterType="Sales" resultType="Sales">
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
 	</select>
 	
-	<select id="selectSalseByAll" parameterType="Sales">
+	<select id="selectSalseByAll" resultMap="SalesResult">
 		<include refid="selectSql"/>
+	</select>
+	
+	<select id="selectSalesSearch" parameterType="Sales" resultMap="SalesResult">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
 	</select>
 	
 	<insert id="insertSales" parameterType="Sales">
 		<include refid="insertSql"/>
 	</insert>
+	
+	<update id="updateSales" parameterType="Sales">
+		update sales
+		<set>
+			<if test="saleName != null">
+				 name = #{saleName},
+			</if>
+			<if test="saleTel != null">
+				 tel = #{saleTel},
+			</if>
+			<if test="saleAddr != null"> 
+				 addr = #{saleAddr},
+			</if>
+			<if test="saleLeave != null">
+				 sLeave = #{saleLeave},
+			</if>
+			<if test="salePw != null">
+				 pw = #{saleId},
+			</if>
+			<if test="saleLevel != null">
+				 sLevel = #{saleLevel},
+			</if>
+		</set>
+		where saleCode = #{saleCode}
+	</update>
 </mapper>
