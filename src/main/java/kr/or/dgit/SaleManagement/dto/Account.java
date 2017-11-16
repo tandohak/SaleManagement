@@ -1,114 +1,138 @@
 package kr.or.dgit.SaleManagement.dto;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Account {
-	private int accCode;
-	private String accName;
-	private String accTel;
-	private String accAddr;
-	private String accAdmit;
-	private String accLevel;
-	private String accId;
-	private String accPw;
+	private IntegerProperty accCode;
+	private StringProperty accName;
+	private StringProperty accTel;
+	private StringProperty accAddr;
+	private StringProperty accAdmit;
+	private StringProperty accLevel;
+	private StringProperty accId;
+	private StringProperty accPw;
 
 	public Account() {
-		super();
-		// TODO Auto-generated constructor stub
+		accCode = new SimpleIntegerProperty();
+		accName = new SimpleStringProperty();
+		accTel = new SimpleStringProperty();
+		accAddr = new SimpleStringProperty();
+		accAdmit = new SimpleStringProperty();
+		accLevel = new SimpleStringProperty();
+		accId = new SimpleStringProperty();
+		accPw = new SimpleStringProperty();
 	}
 
 	
 
 	public int getAccCode() {
+		return accCode.get();
+	}
+
+	public IntegerProperty getAccCodeProperty() {
 		return accCode;
 	}
 
-
-
 	public void setAccCode(int accCode) {
-		this.accCode = accCode;
+		this.accCode.set(accCode);
 	}
 
-
-
 	public String getAccName() {
+		return accName.get();
+	}
+
+	public StringProperty getAccNameProperty() {
 		return accName;
 	}
 
-
-
 	public void setAccName(String accName) {
-		this.accName = accName;
+		this.accName.set(accName);;
 	}
 
-
-
 	public String getAccTel() {
+		return accTel.get();
+	}
+
+	public StringProperty getAccTelProperty() {
 		return accTel;
 	}
 
-
-
 	public void setAccTel(String accTel) {
-		this.accTel = accTel;
+		this.accTel.set(accTel);
 	}
 
 
 
 	public String getAccAddr() {
+		return accAddr.get();
+	}
+
+	public StringProperty getAccAddrProperty() {
 		return accAddr;
 	}
 
-
-
 	public void setAccAddr(String accAddr) {
-		this.accAddr = accAddr;
+		this.accAddr.set(accAddr);
 	}
 
 
 
 	public String getAccAdmit() {
+		return accAdmit.get();
+	}
+
+	public StringProperty getAccAdmitProperty() {
 		return accAdmit;
 	}
 
 
-
 	public void setAccAdmit(String accAdmit) {
-		this.accAdmit = accAdmit;
+		this.accAdmit.set(accAdmit);;
 	}
-
+	
 
 
 	public String getAccLevel() {
-		return accLevel;
+		return accLevel.get();
 	}
 
-
-
+	public StringProperty getAccLevelProperty() {
+		return accLevel;
+	}
+	
 	public void setAccLevel(String accLevel) {
-		this.accLevel = accLevel;
+		this.accLevel.set(accLevel);
 	}
 
 
 
 	public String getAccId() {
+		return accId.get();
+	}
+
+	public StringProperty getAccIdProperty() {
 		return accId;
 	}
 
-
-
 	public void setAccId(String accId) {
-		this.accId = accId;
+		this.accId.set(accId);
 	}
 
 
 
 	public String getAccPw() {
-		return accPw;
+		return accPw.get();
 	}
 
-
-
+	public StringProperty getAccPwProperty() {
+		return accPw;
+	}
+	
 	public void setAccPw(String accPw) {
-		this.accPw = accPw;
+		this.accPw.set(accPw);;
 	}
 
 

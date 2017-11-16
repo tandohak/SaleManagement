@@ -27,10 +27,13 @@ public class Sales {
 	}
 
 	public int getSaleCode() {
-		return saleCode.get();
-		
+		return saleCode.get();	
 	}
-
+	
+	public IntegerProperty getSaleCodeProperty() {
+		return saleCode;	
+	}
+	
 	public void setSaleCode(int saleCode) {
 		this.saleCode.set(saleCode);
 	}
@@ -38,7 +41,11 @@ public class Sales {
 	public String getSaleName() {
 		return saleName.get();
 	}
-
+	
+	public StringProperty getSaleNameProperty() {
+		return saleName;
+	}
+	
 	public void setSaleName(String saleName) {
 		this.saleName.set(saleName);
 	}
@@ -46,7 +53,11 @@ public class Sales {
 	public String getSaleTel() {
 		return saleTel.get();
 	}
-
+	
+	public StringProperty getSaleTelProperty() {
+		return saleTel;
+	}
+	
 	public void setSaleTel(String saleTel) {
 		this.saleTel.set(saleTel);
 	}
@@ -54,7 +65,9 @@ public class Sales {
 	public String getSaleAddr() {
 		return saleAddr.get();
 	}
-
+	public StringProperty getSaleAddrProperty() {
+		return saleAddr;
+	}
 	public void setSaleAddr(String saleAddr) {
 		this.saleAddr.set(saleAddr);
 	}
@@ -62,7 +75,11 @@ public class Sales {
 	public String getSaleLeave() {
 		return saleLeave.get();
 	}
-
+	
+	public StringProperty getSaleLeaveProperty() {
+		return saleLeave;
+	}
+	
 	public void setSaleLeave(String saleLeave) {
 		this.saleLeave.set(saleLeave);
 	}
@@ -70,7 +87,11 @@ public class Sales {
 	public String getSaleId() {
 		return saleId.get();
 	}
-
+	
+	public StringProperty getSaleIdProperty() {
+		return saleId;
+	}
+	
 	public void setSaleId(String saleId) {
 		this.saleId.set(saleId);;
 	}
@@ -78,7 +99,11 @@ public class Sales {
 	public String getSalePw() {
 		return salePw.get();
 	}
-
+	
+	public StringProperty getSalePwProperty() {
+		return salePw;
+	}
+	
 	public void setSalePw(String salePw) {
 		this.salePw.set(salePw);;
 	}
@@ -86,7 +111,11 @@ public class Sales {
 	public String getSaleLevel() {
 		return saleLevel.get();
 	}
-
+	
+	public StringProperty getSaleLevelProperty() {
+		return saleLevel;
+	}
+	
 	public void setSaleLevel(String saleLevel) {
 		this.saleLevel.set(saleLevel);;
 	}
