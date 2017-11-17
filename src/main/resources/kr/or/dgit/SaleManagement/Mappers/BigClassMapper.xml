@@ -6,6 +6,11 @@
 		from bigClass
 	</sql>
 	
+	<resultMap type="BigClass" id="resultMap">
+		<id property="bigClass" column="big"/>
+		<result property="bigName" column="name" />
+	</resultMap>
+	
 	<sql id="wherebigClass">
 		<where>
 			<if test="bigClass!=null">
@@ -22,7 +27,7 @@
 		</where>
 	</sql>
 	
-	<select id="selectAll" resultType="BigClass">
+	<select id="selectAll" resultType="BigClass" resultMap="resultMap">
 		<include refid="selectSql"/>		
 	</select>
 	
@@ -31,7 +36,7 @@
 		<include refid="wherebigClass"/>
 	</select>
 	
-	<select id="selectbigName" parameterType="BigClass" resultType="BigClass">
+	<select id="selectbigName" parameterType="BigClass">
 		<include refid="selectSql"/>		
 		<include refid="wherename"/>
 	</select>

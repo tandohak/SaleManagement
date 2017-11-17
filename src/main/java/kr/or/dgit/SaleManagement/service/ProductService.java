@@ -11,6 +11,12 @@ import kr.or.dgit.SaleManagement.util.MyBatisSqlSessionFactory;
 
 public class ProductService {
 
+	private final static ProductService instance = new ProductService();
+
+	public static ProductService getInstance() {
+		return instance;
+	}
+
 	public List<Product> findAll() {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
 			ProductDao dao = new ProductDaoImpl(sqlSession);
@@ -57,8 +63,7 @@ public class ProductService {
 		}
 		return 1;
 	}
-	
-	
+
 	public int updatePdt(Product product) {
 		SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();
 		try {

@@ -115,7 +115,6 @@ public class LoginController {
 			JoinUserController joinUserDialog = loader.getController();
 			joinUserDialog.setDialogStage(dialogStage);
 			dialogStage.showAndWait();
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

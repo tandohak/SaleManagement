@@ -1,0 +1,138 @@
+package kr.or.dgit.SaleManagement.controller;
+
+import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.PopupWindow.AnchorLocation;
+import kr.or.dgit.SaleManagement.ProductTestMain;
+import kr.or.dgit.SaleManagement.dto.BigClass;
+import kr.or.dgit.SaleManagement.dto.Product;
+import kr.or.dgit.SaleManagement.service.BigClassService;
+import kr.or.dgit.SaleManagement.service.ProductService;
+
+public class ProductController {
+	
+	@FXML
+	private AnchorPane Node;
+	
+	@FXML
+	private TextField searchTf;
+	
+	@FXML
+	private Button searchBtn;
+	
+	@FXML
+	private TextField nameTf;
+	
+	@FXML
+	private TextField codeTf;
+	
+	@FXML
+	private ComboBox admitCb;
+	
+	@FXML
+	private TextField costTf;
+	
+	@FXML
+	private TextField priceTf;
+	
+	@FXML
+	private ComboBox<String> bigCb;
+	
+	@FXML
+	private ComboBox smallCb;
+	
+	@FXML
+	private Button classAddBtn;
+	
+	@FXML
+	private Button deleteBtn;
+	
+	@FXML
+	private Button changeBtn;
+	
+	@FXML
+	private TableView<Product> pdtTable;
+	
+	@FXML
+	private CheckBox pdtCheck;
+	
+	@FXML
+	private TableColumn<Product, Integer> codeTc;
+	
+	@FXML
+	private TableColumn<Product, String> nameTc;
+	
+	@FXML
+	private TableColumn<Product, Integer> accTc;
+	
+	@FXML
+	private TableColumn<Product, Integer> costTc;
+	
+	@FXML
+	private TableColumn<Product, Integer> priceTc;
+	
+	@FXML
+	private TableColumn<Product, String> admitTc;
+	
+	private static ProductService pdtService;
+	private static BigClassService bigService;
+	
+	
+	private ObservableList<Product> myList = FXCollections.observableArrayList();
+	
+	private ObservableList<String> biglist = FXCollections.observableArrayList();
+
+	@FXML
+	private void initialize() {
+		pdtService = ProductService.getInstance();
+		List<Product> lists = pdtService.findAll();
+		for(Product pdt : lists) {	
+			myList.add(pdt);
+		}
+		
+		bigService = BigClassService.getInstance();
+		List<BigClass> blist = bigService.findAll();
+		
+		for(BigClass big : blist) {	
+			biglist.add(big.getBigName());
+		}
+		
+		
+		codeTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
+		nameTc.setCellValueFactory(cellData -> cellData.getValue().getPdtNameProperty());
+		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
+		costTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCostProperty().asObject());
+		priceTc.setCellValueFactory(cellData -> cellData.getValue().getPdtPriceProperty().asObject());
+		admitTc.setCellValueFactory(cellData -> cellData.getValue().getPdtAdmitProperty());
+		
+		pdtTable.setItems(myList);
+		bigCb.setItems(biglist);
+	}
+	
+	public ProductController() {}
+	
+	
+	private ProductTestMain mainApp;
+	
+	public void setMainApp(ProductTestMain mainApp) {
+	        this.mainApp = mainApp;
+	       
+	   }
+
+ 
+	
+	
+	
+	
+}

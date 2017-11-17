@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import kr.or.dgit.SaleManagement.dto.BigClass;
+import kr.or.dgit.SaleManagement.dto.Product;
 import kr.or.dgit.SaleManagement.dto.SmallClass;
 import kr.or.dgit.SaleManagement.service.SmallClassService;
 
@@ -30,12 +31,17 @@ public class TestSmallClass {
 		SmallClassService.findBySmallClassLisk(SmallClass);
 	}
 */
-/*	@Test
+	/*@Test
 	public void test() {
 		List<SmallClass> lists = SmallClassService.findAll();
 		Assert.assertNotNull(lists);
+		for(SmallClass pdt : lists) {
+			System.out.println(pdt);
+			
+		}
+		
 	}
-	*/
+*/	
 	
 	
 /*	@Test

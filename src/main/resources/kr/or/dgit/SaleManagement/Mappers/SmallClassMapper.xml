@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.SaleManagement.dao.SmallClassDao">
 	
+	<resultMap type="SmallClass" id="resultMap">
+		<id property="smallClass" column="small"/>
+		<result property="smallName" column="name" />
+		<result property="sBigClass" column="big" />
+	</resultMap>
 
 	<sql id="selectSql">
 		select Small, name, big
@@ -42,7 +47,7 @@
 		</where>
 	</sql>
 	
-	<select id="selectAll" resultType="SmallClass">
+	<select id="selectAll" resultType="SmallClass" resultMap="resultMap">
 		<include refid="selectSql"/>
 	</select>
 	
@@ -56,12 +61,12 @@
 		<include refid="whereSql"/>
 	</select>
 	
-	<select id="selectBySmallName" parameterType="SmallClass" resultType="SmallClass">
+	<select id="selectBySmallName" parameterType="SmallClass" resultType="SmallClass"  resultMap="resultMap">
 		<include refid="selectSql"/>
 		<include refid="whereSmallName"/>
 	</select>
 	
-	<select id="selectByBigClass" parameterType="SmallClass" resultType="SmallClass">
+	<select id="selectByBigClass" parameterType="SmallClass" resultType="SmallClass"  resultMap="resultMap">
 		<include refid="selectSql"/>
 		<include refid="whereBigClass"/>
 	</select>

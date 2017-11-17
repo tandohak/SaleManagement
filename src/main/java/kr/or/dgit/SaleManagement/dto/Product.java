@@ -89,11 +89,11 @@ public class Product {
 		this.pdtPrice.set(pdtPrice);
 	}
 
-	public String isPdtAdmit() {
+	public String getPdtAdmit() {
 		return pdtAdmit.get();
 	}
 	
-	public StringProperty isPdtAdmitProperty() {
+	public StringProperty getPdtAdmitProperty() {
 		return pdtAdmit;
 	}
 	
