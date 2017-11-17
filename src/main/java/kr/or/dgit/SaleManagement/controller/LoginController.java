@@ -38,6 +38,7 @@ public class LoginController {
 	private static AccountService accService;
 	private static SalesService salesService;
 	
+	@FXML
 	private void initialize() {
 		salesService = SalesService.getInstance();
 		accService = AccountService.getInstance();
@@ -55,7 +56,6 @@ public class LoginController {
 	
 	@FXML
 	private void changeView() {
-
 		Sales sales = new Sales();
 		sales.setSaleId(idTf.getText());
 		sales.setSalePw(pwTf.getText());
@@ -84,10 +84,10 @@ public class LoginController {
 			alert.showAndWait();
 			return;
 		}
-		try {
+		try {			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdimMainView.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
-
+ 
 			changView.getScene().getWindow().setWidth(1080);
 			changView.getScene().getWindow().setHeight(675);
 			((BorderPane)changView.getScene().getRoot()).setCenter(pane);
