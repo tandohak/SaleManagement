@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import org.apache.ibatis.javassist.URLClassPath;
+
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -14,23 +17,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
-public class JoinUserDialog extends TextFieldUtil{
+public class JoinUserController{
 	@FXML
 	private Parent pane;
-
-	@FXML
+	//이미지 관련 필드
+	
 	private TextField imgNameTf;
 
-	@FXML
+	
 	private Button userImgBtn;
 
-	@FXML
+	
 	private ImageView userImg;
-
+	
+	//텍스트 필드	
 	@FXML
 	private TextField idTf;
 
@@ -48,6 +53,9 @@ public class JoinUserDialog extends TextFieldUtil{
 
 	@FXML
 	private TextField codeTf;
+	
+	@FXML
+	private ImageView checkPwIcon;
 	
 	private Stage dialogStage;
 	
@@ -75,6 +83,14 @@ public class JoinUserDialog extends TextFieldUtil{
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	@FXML
+	private void pwTypeHandler(KeyEvent event) {
+		String path = System.getProperty("user.dir");
+		File file = new File(path + "/DataFile/ic_block_black_48dp_1x.png" );
+		Image image = new Image(file.toURI().toString());
+		checkPwIcon.setImage(image);
 	}
 	
 	@FXML
@@ -106,6 +122,12 @@ public class JoinUserDialog extends TextFieldUtil{
 			e.printStackTrace();
 			return false;
 		}		
+	}
+	
+	public void tfComfrim(TextField tf) throws Exception {
+		if(tf.getText().equals("")) {
+		  throw new Exception("공백 존재");
+		}
 	}
 	
 	@FXML
