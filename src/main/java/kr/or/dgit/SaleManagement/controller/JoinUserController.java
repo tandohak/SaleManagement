@@ -20,6 +20,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import kr.or.dgit.SaleManagement.service.AccountService;
+import kr.or.dgit.SaleManagement.service.SalesService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
 public class JoinUserController{
@@ -59,6 +61,14 @@ public class JoinUserController{
 	
 	private Stage dialogStage;
 	
+	private static AccountService accService;
+	
+	@FXML
+	private void initialize() {
+		accService = AccountService.getInstance();
+	}
+	
+	
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
@@ -88,9 +98,18 @@ public class JoinUserController{
 	@FXML
 	private void pwTypeHandler(KeyEvent event) {
 		String path = System.getProperty("user.dir");
-		File file = new File(path + "/DataFile/ic_block_black_48dp_1x.png" );
-		Image image = new Image(file.toURI().toString());
-		checkPwIcon.setImage(image);
+		
+		if(pwTf.getText().equals(pwTfComf.getText())) {
+			File file = new File(path + "/DataFile/ic_check_circle_black_48dp_1x.png" );
+			Image image = new Image(file.toURI().toString());
+			checkPwIcon.setImage(image);
+			checkPwIcon.setVisible(true);
+		}else {
+			File file = new File(path + "/DataFile/ic_block_black_48dp_1x.png" );
+			Image image = new Image(file.toURI().toString());
+			checkPwIcon.setImage(image);
+			checkPwIcon.setVisible(true);
+		}
 	}
 	
 	@FXML
