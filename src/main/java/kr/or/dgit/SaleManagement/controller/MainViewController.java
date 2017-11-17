@@ -1,8 +1,8 @@
 package kr.or.dgit.SaleManagement.controller;
-
-
+ 
+ 
 import java.io.IOException;
-
+ 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import kr.or.dgit.SaleManagement.MainApp;
-
+ 
 public class MainViewController {
 	@FXML
 	private BorderPane rootPane;
@@ -26,7 +26,7 @@ public class MainViewController {
 	@FXML
 	private void initialize() {
 	}
-
+ 
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
@@ -34,7 +34,7 @@ public class MainViewController {
 	@FXML
 	private void hadleShowSalesManager() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SalesManagementView.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/SalesManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			rootPane.setCenter(pane);
 		} catch (IOException e) {
@@ -45,7 +45,7 @@ public class MainViewController {
 	@FXML
 	private void hadleShowProductManager() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ProductManagementView.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/ProductManagementView.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			rootPane.setCenter(pane);
 		} catch (IOException e) {
@@ -56,7 +56,7 @@ public class MainViewController {
 	@FXML
 	private void hadleShowInsertSell() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/InsertSell.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ProductManager.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			rootPane.setCenter(pane);
 		} catch (IOException e) {
@@ -67,7 +67,7 @@ public class MainViewController {
 	@FXML
 	private void hadleShowAccountManager() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AccountManagementView.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/AccountManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			
 			rootPane.setCenter(pane);
