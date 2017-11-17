@@ -27,7 +27,7 @@ public class TestProduct {
 	}
 
 	
-	@Test
+	/*@Test
 	public void test() {
 		List<Product> lists = pdt.findAll();
 		Assert.assertNotNull(lists);	
@@ -43,7 +43,7 @@ public class TestProduct {
 		Product product = new Product();
 		product.setPdtCode(1000);
 		pdt.findBypdtProduct(product);
-	}
+	}*/
 	
 	/*@Test
 	public void test2ByClass() {
@@ -79,25 +79,25 @@ public class TestProduct {
 	
 	
 	
-	@Test
-	public void test2insert() {		
-		Product product = new Product(13, 21, "테스트", 700, 70, "true", 21722051);
-		int res = pdt.insertProduct(product);
-		Assert.assertEquals(1, res);
-	}
-	
-	@Test
-	public void test3insert() {		
-		Product product = new Product(13, 21, "테스트111", 700, 70, "true", 21722051);
-		int res = pdt.updatePdt(product);
-		Assert.assertEquals(1, res);
-	}
-	
-	@Test
-	public void test5delete() {
-		Product product = new Product();
-		product.setPdtName("테스트111");
-		int res = pdt.deleteProduct(product);
-		Assert.assertEquals(1, res);
-	}
+//	@Test
+//	public void test2insert() {		
+//		Product product = new Product(13, 21, "테스트", 700, 70, "true", 21722051);
+//		int res = pdt.insertProduct(product);
+//		Assert.assertEquals(1, res);
+//	}
+//	
+//	@Test
+//	public void test3insert() {		
+//		Product product = new Product(13, 21, "테스트111", 700, 70, "true", 21722051);
+//		int res = pdt.updatePdt(product);
+//		Assert.assertEquals(1, res);
+//	}
+//	
+//	@Test
+//	public void test5delete() {
+//		Product product = new Product();
+//		product.setPdtName("테스트111");
+//		int res = pdt.deleteProduct(product);
+//		Assert.assertEquals(1, res);
+//	}
 }

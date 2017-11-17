@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import kr.or.dgit.SaleManagement.dto.BigClass;
+import kr.or.dgit.SaleManagement.dto.Product;
 import kr.or.dgit.SaleManagement.service.BigClassService;
 
 public class TestBigClass {
@@ -24,13 +25,17 @@ public class TestBigClass {
 		bigClassService =null;
 	}
 
-/*	@Test
+	/*@Test
 	public void test() {
 		List<BigClass> lists = bigClassService.findAll();
 		Assert.assertNotNull(lists);
-	}
+		System.out.println(lists);
+		for(BigClass pdt : lists) {
+			System.out.println(pdt);
+		}
+	}*/
 	
-	@Test
+	/*	@Test
 	public void test1() {
 		BigClass big1 = new BigClass();
 		big1.setBigClass(10);

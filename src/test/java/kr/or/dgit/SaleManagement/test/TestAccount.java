@@ -26,7 +26,7 @@ public class TestAccount {
 		accountService = null;
 	}
 
-	@Test
+	/*@Test
 	public void test1InsertAccount() {
 		Account acc = new Account();
 		acc.setAccCode(21999999);
@@ -88,5 +88,5 @@ public class TestAccount {
 
 		int res = accountService.updateAccount(acc);
 		System.out.println("결과 : " + res);
-	}
+	}*/
 }

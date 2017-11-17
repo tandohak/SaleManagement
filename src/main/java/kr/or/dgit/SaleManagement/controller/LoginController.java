@@ -117,7 +117,6 @@ public class LoginController {
 			joinUserDialog.setAccService(accService);
 			joinUserDialog.setSalesService(salesService);
 			dialogStage.showAndWait();
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
