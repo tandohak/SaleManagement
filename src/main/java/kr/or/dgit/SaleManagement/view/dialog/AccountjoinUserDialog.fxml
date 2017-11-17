@@ -40,8 +40,8 @@
          <children>
             <GridPane hgap="10.0" layoutX="14.0" layoutY="14.0" prefHeight="217.0" prefWidth="318.0" vgap="10.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="104.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="164.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -66,13 +66,18 @@
                         <Insets />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="idTf" maxWidth="150.0" GridPane.columnIndex="1" />
-                  <TextField fx:id="nameTf" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="phoneTf" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="nameTf" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="phoneTf" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="비밀번호" GridPane.rowIndex="1" />
                   <Label text="비밀번호확인" GridPane.rowIndex="2" />
-                  <PasswordField fx:id="pwTf" onKeyTyped="#pwTypeHandler" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <PasswordField fx:id="pwTfComf" onKeyTyped="#pwTypeHandler" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="pwTf" onKeyReleased="#pwTypeHandler" prefHeight="23.0" prefWidth="116.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="pwTfComf" onKeyReleased="#pwTypeHandler" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <HBox style="-fx-spacing: 5px;" GridPane.columnIndex="1">
+                     <children>
+                        <TextField fx:id="idTf" maxWidth="150.0" prefHeight="23.0" prefWidth="116.0" />
+                        <JFXButton fx:id="idCheckBtn" onAction="#idTypeHandler" style="-fx-pref-width: 40px;" styleClass="greenBtn" text="확인" />
+                     </children>
+                  </HBox>
                </children>
                <padding>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
@@ -91,7 +96,7 @@
                      <children>
                         <Label text="주소" />
                         <Label text="우편번호" textFill="#553ad0" />
-                        <TextField prefHeight="23.0" prefWidth="134.0" style="-fx-pref-height: 23;" styleClass="searchTF" />
+                        <TextField fx:id="addrZipTf" prefHeight="23.0" prefWidth="134.0" style="-fx-pref-height: 23;" styleClass="searchTF" />
                         <Button mnemonicParsing="false" prefHeight="7.0" prefWidth="28.0" styleClass="searchBtn" text="검색" />
                      </children>
                      <opaqueInsets>
@@ -101,7 +106,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
                         <Label text="상세주소" />
-                        <TextField prefHeight="23.0" prefWidth="203.0" />
+                        <TextField fx:id="addrTf" prefHeight="23.0" prefWidth="203.0" />
                      </children>
                   </HBox>
                </children>
@@ -109,7 +114,8 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" />
                </padding>
             </GridPane>
-            <ImageView fx:id="checkPwIcon" fitHeight="22.0" fitWidth="18.0" layoutX="320.0" layoutY="118.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" visible="false" />
+            <ImageView fx:id="checkPwIcon" fitHeight="22.0" fitWidth="18.0" layoutX="320.0" layoutY="118.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="118.0" />
+            <ImageView fx:id="checkIdIcon" fitHeight="22.0" fitWidth="18.0" layoutX="330.0" layoutY="128.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="38.0" />
          </children>
       </AnchorPane>
    </center>

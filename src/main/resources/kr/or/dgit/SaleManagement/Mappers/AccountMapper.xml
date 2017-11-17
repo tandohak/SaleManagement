@@ -7,6 +7,8 @@
 		FROM account
 	</sql>
 	
+	
+	
 	<sql id = "whereAccount">
 		<where>
 			<if test="accCode != 0">
@@ -56,6 +58,10 @@
 	<select id="selectAccountByLevel" parameterType="Account" resultMap="AccountResult">
 		<include refid="selectAccount"/>
 		<include refid="whereAccount"/>
+	</select>
+	
+	<select id="selectMaxCode" resultType="int">
+		SELECT MAX(accCode) FROM account
 	</select>
 	
 	<select id="selectAccountByAllAdmit" resultType="Account">

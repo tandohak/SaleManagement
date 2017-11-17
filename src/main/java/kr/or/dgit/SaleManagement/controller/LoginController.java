@@ -114,31 +114,13 @@ public class LoginController {
  
 			JoinUserController joinUserDialog = loader.getController();
 			joinUserDialog.setDialogStage(dialogStage);
+			joinUserDialog.setAccService(accService);
+			joinUserDialog.setSalesService(salesService);
 			dialogStage.showAndWait();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	@FXML
-	private void showJoinDialogSales() {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dialog/JoinUserSalesDialog.fxml"));
-			BorderPane pane = (BorderPane)loader.load();
-			
-			Stage dialogStage = new Stage();
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			Scene scene = new Scene(pane);
-			dialogStage.setScene(scene);
-			
-			JoinUserController joinUserDialog = loader.getController();
-			joinUserDialog.setDialogStage(dialogStage);
-			
-			dialogStage.showAndWait();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
+
 }

@@ -40,8 +40,7 @@ public class MainApp extends Application {
 		controller.setMainApp(this);
 		
 //		fontLoad();
-		
-		
+
 	}
 
 	/*private void windowResize(Stage primaryStage) {

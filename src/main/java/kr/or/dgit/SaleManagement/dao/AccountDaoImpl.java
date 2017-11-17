@@ -66,4 +66,10 @@ public class AccountDaoImpl implements AccountDao {
 		return sqlSession.getMapper(AccountDao.class).selectAccountById(account);
 	}
 
+	@Override
+	public int selectMaxCode() {
+		log.debug("selectMaxCode()");
+		return sqlSession.getMapper(AccountDao.class).selectMaxCode();
+	}
+
 }

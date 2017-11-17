@@ -22,6 +22,11 @@ public class Account {
 	public int getAccCode() {
 		return accCode.get();
 	}
+	
+	
+	
+	
+
 
 	public IntegerProperty getAccCodeProperty() {
 		return accCode;

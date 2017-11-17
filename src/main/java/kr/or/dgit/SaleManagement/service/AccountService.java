@@ -77,5 +77,12 @@ public class AccountService {
 		}
 		return res;
 	}
+	
+	public int findMaxCode() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			AccountDao dao = new AccountDaoImpl(sqlSession);
+			return dao.selectMaxCode();
+		}
+	}
  
 }

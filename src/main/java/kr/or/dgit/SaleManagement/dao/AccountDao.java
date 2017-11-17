@@ -15,4 +15,6 @@ public interface AccountDao {
 	public int insertAccount(Account account);
 	
 	public int updateAccount(Account account);	
+	
+	public int selectMaxCode();
 }
