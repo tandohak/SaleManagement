@@ -2,6 +2,7 @@ package kr.or.dgit.SaleManagement.controller;
 
 import java.util.List;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -101,8 +102,7 @@ public class ProductController {
 	private void initialize() {
 		pdtService = ProductService.getInstance();
 		List<Product> lists = pdtService.findAll();
-		for(Product pdt : lists) {	
-			pdt.setCheckedBox(false);
+		for(Product pdt : lists) {
 			myList.add(pdt);
 		}
 		
@@ -113,12 +113,25 @@ public class ProductController {
 			biglist.add(big.getBigName().trim());
 			//공백 콤보박스에 공백 들어가서 크기가 커지니까 trim()으로 공백 없앤뒤 입력해야함
 		}
-			
+		
+		/* **********************
+		 * 테이블 cell안 체크박스 삽입 *
+		 * **********************/
 		chckTc.setCellFactory(new Callback<TableColumn<Product,Boolean>,TableCell<Product,Boolean>>(){
 	        @Override public
 	        TableCell<Product,Boolean> call( TableColumn<Product,Boolean> p ){
-	        	
-	           return new CheckBoxTableCell<Product,Boolean>(); 
+	           CheckBoxTableCell<Product, Boolean> checkBoxTbC = new CheckBoxTableCell<>(); 
+	           checkBoxTbC.setSelectedStateCallback(new Callback<Integer, ObservableValue<Boolean>>() {
+	        	   //checkbox에 callback 함수 달기 
+				@Override
+				public ObservableValue<Boolean> call(Integer index) {
+					 return pdtTable.getItems().get(index).selectedProperty();
+					 //필드의 변동을 확인하기 위해 table에서 item을 받아와 selectedProperty() 함수를 받아 리턴한다.
+					 // ObservableValue<T>를 리턴하여 ui에서 변동된 사항을 감지한다.
+				}
+			});
+	         
+	           return checkBoxTbC;
 	           
 	           }
 	        });
@@ -139,12 +152,12 @@ public class ProductController {
 	
 	@FXML
 	private void selectCheckEvent(ActionEvent event) {
+		
 		for(Product pdt : myList) {
 			pdt.setCheckedBox(true);
 		}
-		ObservableList<TableColumn<Product, ?>> lists = pdtTable.getColumns();
-		for(TableColumn<Product, ?> tbc : lists) {
-		}
+		
+		
 	}
 	
 	

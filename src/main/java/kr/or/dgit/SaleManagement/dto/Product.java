@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 
 public class Product {
 	private BooleanProperty checkedBox = new SimpleBooleanProperty(false);
@@ -29,6 +30,11 @@ public class Product {
 	public void setCheckedBox(Boolean checkedBox) {
 		this.checkedBox.set(checkedBox);
 	}
+	
+	public ObservableValue<Boolean> selectedProperty() {
+		return checkedBox;
+	}
+	
 	public Product(int pdtCode, int pdtClass, String pdtName, int pdtCost, int pdtPrice, String pdtAdmit,
 			int accCode) {
 		this.pdtCode.set(pdtCode);
@@ -131,5 +137,7 @@ public class Product {
 		return String.format("Product [Code=%s, Class=%s, Name=%s, Cost=%s, Price=%s, Admit=%s, Code=%s]", pdtCode,
 				pdtClass, pdtName, pdtCost, pdtPrice, pdtAdmit, accCode);
 	}
+
+
 
 }
