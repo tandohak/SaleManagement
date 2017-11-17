@@ -85,26 +85,12 @@ BorderPane{
 	
 }
 
-.table-view{
-	-fx-background-color:none;
-}
-
-.table-view .table-column{
-	-fx-background-color:#ffffff;
-}
-
-.table-view .placeholder{
-	-fx-background-color:f7f7f7;
-}
-
-.check-box{
-	-fx-background-color:#fff;
-}
 
 HBox{
 	-fx-alignment:CENTER_LEFT;
 	-fx-spacing:15;	
 }
+
 HBox > .label{
 	-fx-min-width:65px;
 }
@@ -124,12 +110,4 @@ HBox > .label{
 	-fx-pref-width:25px;
 	-fx-pref-height:25px;
 	-fx-background-color:none;
-}
-
-/*아코디언 pane 버튼 */
-.accor_Btn{
-	-fx-pref-width:170px;
-	-fx-border-radius:none;
-	-fx-background-radius:none;
-	-fx-margin:0;
 }
