@@ -92,7 +92,7 @@ public class TestProduct {
 //		int res = pdt.updatePdt(product);
 //		Assert.assertEquals(1, res);
 //	}
-//	
+	
 //	@Test
 //	public void test5delete() {
 //		Product product = new Product();

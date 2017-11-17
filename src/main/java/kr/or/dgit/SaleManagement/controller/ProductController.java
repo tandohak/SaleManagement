@@ -4,16 +4,18 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.PopupWindow.AnchorLocation;
+import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.ProductTestMain;
 import kr.or.dgit.SaleManagement.dto.BigClass;
 import kr.or.dgit.SaleManagement.dto.Product;
@@ -66,6 +68,8 @@ public class ProductController {
 	
 	@FXML
 	private CheckBox pdtCheck;
+	@FXML
+	private TableColumn<Product, Boolean> chckTc;
 	
 	@FXML
 	private TableColumn<Product, Integer> codeTc;
@@ -98,6 +102,7 @@ public class ProductController {
 		pdtService = ProductService.getInstance();
 		List<Product> lists = pdtService.findAll();
 		for(Product pdt : lists) {	
+			pdt.setCheckedBox(false);
 			myList.add(pdt);
 		}
 		
@@ -105,10 +110,20 @@ public class ProductController {
 		List<BigClass> blist = bigService.findAll();
 		
 		for(BigClass big : blist) {	
-			biglist.add(big.getBigName());
+			biglist.add(big.getBigName().trim());
+			//공백 콤보박스에 공백 들어가서 크기가 커지니까 trim()으로 공백 없앤뒤 입력해야함
 		}
+			
+		chckTc.setCellFactory(new Callback<TableColumn<Product,Boolean>,TableCell<Product,Boolean>>(){
+	        @Override public
+	        TableCell<Product,Boolean> call( TableColumn<Product,Boolean> p ){
+	        	
+	           return new CheckBoxTableCell<Product,Boolean>(); 
+	           
+	           }
+	        });
 		
-		
+		/*chckTc.setCellFactory(CheckBoxTableCell.forTableColumn(chckTc));*/
 		codeTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
 		nameTc.setCellValueFactory(cellData -> cellData.getValue().getPdtNameProperty());
 		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
@@ -122,12 +137,22 @@ public class ProductController {
 	
 	public ProductController() {}
 	
+	@FXML
+	private void selectCheckEvent(ActionEvent event) {
+		for(Product pdt : myList) {
+			pdt.setCheckedBox(true);
+		}
+		ObservableList<TableColumn<Product, ?>> lists = pdtTable.getColumns();
+		for(TableColumn<Product, ?> tbc : lists) {
+		}
+	}
+	
 	
 	private ProductTestMain mainApp;
 	
 	public void setMainApp(ProductTestMain mainApp) {
 	        this.mainApp = mainApp;
-	       
+	        
 	   }
 
  

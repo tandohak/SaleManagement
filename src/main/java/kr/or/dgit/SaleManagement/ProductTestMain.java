@@ -40,8 +40,6 @@ public class ProductTestMain extends Application {
 		Scene scene = new Scene(rootLayout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		
 	}
 
 }

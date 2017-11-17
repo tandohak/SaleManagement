@@ -98,7 +98,7 @@
                         <Font name="NanumBarunGothic Bold" size="12.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="deleteBtn" style="-fx-background-color: #DDDDDD;" text="선택삭제" textFill="#7c8991" />
+                  <JFXButton fx:id="deleteBtn" onAction="#selectCheckEvent" style="-fx-background-color: #DDDDDD;" text="선택삭제" textFill="#7c8991" />
                   <JFXButton fx:id="changeBtn" style="-fx-background-color: #DDDDDD;" text="수정" textFill="#7c8991" />
                </buttons>
             </ButtonBar>
@@ -107,11 +107,11 @@
       </AnchorPane>
    </bottom>
    <center>
-      <TableView fx:id="pdtTable" prefHeight="349.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="pdtTable" editable="true" prefHeight="349.0" prefWidth="900.0" BorderPane.alignment="CENTER">
         <columns>
-            <TableColumn prefWidth="51.0" resizable="false">
+            <TableColumn fx:id="chckTc" prefWidth="51.0" resizable="false">
                <graphic>
-                  <CheckBox fx:id="pdtCheck" mnemonicParsing="false" />
+                  <CheckBox fx:id="pdtCheck" mnemonicParsing="false" onAction="#selectCheckEvent" />
                </graphic>
             </TableColumn>
           <TableColumn fx:id="codeTc" prefWidth="117.0" resizable="false" text="코드" />
