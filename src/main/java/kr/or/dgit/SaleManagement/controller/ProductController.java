@@ -1,10 +1,17 @@
 package kr.or.dgit.SaleManagement.controller;
 
+import java.awt.Event;
 import java.util.List;
+import java.util.Observer;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -114,9 +121,9 @@ public class ProductController {
 			//공백 콤보박스에 공백 들어가서 크기가 커지니까 trim()으로 공백 없앤뒤 입력해야함
 		}
 		
-		/* **********************
-		 * 테이블 cell안 체크박스 삽입 *
-		 * **********************/
+		/* ********************* *
+		 * 테이블 cell안 체크박스 삽입   *
+		 * ********************* */
 		chckTc.setCellFactory(new Callback<TableColumn<Product,Boolean>,TableCell<Product,Boolean>>(){
 	        @Override public
 	        TableCell<Product,Boolean> call( TableColumn<Product,Boolean> p ){
@@ -125,18 +132,38 @@ public class ProductController {
 	        	   //checkbox에 callback 함수 달기 
 				@Override
 				public ObservableValue<Boolean> call(Integer index) {
-					 return pdtTable.getItems().get(index).selectedProperty();
+					
+					return pdtTable.getItems().get(index).selectedProperty();
 					 //필드의 변동을 확인하기 위해 table에서 item을 받아와 selectedProperty() 함수를 받아 리턴한다.
 					 // ObservableValue<T>를 리턴하여 ui에서 변동된 사항을 감지한다.
 				}
 			});
-	         
-	           return checkBoxTbC;
 	           
+	           return checkBoxTbC;
+	      
 	           }
-	        });
+	        });		
 		
-		/*chckTc.setCellFactory(CheckBoxTableCell.forTableColumn(chckTc));*/
+		/**
+		 * 전체 선택 체크 체인지 리스너
+		 * */
+		pdtCheck.selectedProperty().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(newValue) {
+					for(Product pdt : myList) {
+						pdt.setCheckedBox(true);
+					}
+				}else {
+					for(Product pdt : myList) {
+						pdt.setCheckedBox(false);
+					}
+				}				
+			}
+			
+		});
+		
 		codeTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
 		nameTc.setCellValueFactory(cellData -> cellData.getValue().getPdtNameProperty());
 		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
@@ -146,18 +173,24 @@ public class ProductController {
 		
 		pdtTable.setItems(myList);
 		bigCb.setItems(biglist);
+		
+		
 	}
 	
 	public ProductController() {}
 	
 	@FXML
-	private void selectCheckEvent(ActionEvent event) {
+	private void deleteSelectedCell(ActionEvent event) {
 		
-		for(Product pdt : myList) {
-			pdt.setCheckedBox(true);
+		for(int i=0; myList.size()>i; i++) {
+			Product pdt = myList.get(i);
+			System.out.println(pdt);
+			if(pdt.getCheckedBox()) {
+				 myList.remove(pdt);
+				 pdtService.deleteProduct(pdt);
+				 i = 0;
+			};
 		}
-		
-		
 	}
 	
 	
