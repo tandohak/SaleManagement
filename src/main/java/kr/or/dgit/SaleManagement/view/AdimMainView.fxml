@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootPane" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.MainViewController">
+<BorderPane fx:id="admNode" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.MainViewController">
    <left>
       <AnchorPane prefHeight="675.0" prefWidth="160.0" style="-fx-background-color: #354052;" BorderPane.alignment="CENTER">
          <children>

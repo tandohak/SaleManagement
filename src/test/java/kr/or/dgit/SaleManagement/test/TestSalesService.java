@@ -70,14 +70,15 @@ public class TestSalesService {
 		
 		int res = salesService.updateSales(sales);
 		Assert.assertEquals(1, res);
-	}
+	}*/
 	
 	@Test
 	public void test5FindByCode() {
 		Sales sales = new Sales();
-		sales.setSaleCode(99999992);
-		
+		sales.setSaleId("admin");
+		sales.setSalePw("admin");
 		Sales sales2 = salesService.findSalesByCode(sales);
-		Assert.assertEquals(sales.getSaleCode(),sales2.getSaleCode());
-	}*/
+		System.out.println(sales2);
+		Assert.assertEquals(sales.getSaleId(),sales2.getSaleId());
+	}
 }

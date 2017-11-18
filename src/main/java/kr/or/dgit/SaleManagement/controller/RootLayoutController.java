@@ -5,15 +5,30 @@ import java.io.IOException;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import kr.or.dgit.SaleManagement.MainApp;
+import kr.or.dgit.SaleManagement.dto.Account;
+import kr.or.dgit.SaleManagement.dto.Sales;
 
 public class RootLayoutController {
 	@FXML
 	private BorderPane rootPane;
+	
+	@FXML
+	private MainViewController mainViewController;
+	
+	@FXML
+	private LoginController loginController;
+	
+	@FXML
+	private Label nameLb;
+	
+	public Sales saleUser;
+	private Account accUser;
 	
 	private double dx;
 	private double dy;
@@ -24,13 +39,18 @@ public class RootLayoutController {
 	private void initialize() throws IOException {
 		setWindowMove();
 		
+		changeLoginView();		
+	}
+
+	public void changeLoginView() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("view/loginView.fxml"));
 		AnchorPane pane = loader.load();
+		loginController = loader.getController();
+		loginController.init(this);		
 		
 		rootPane.setCenter(pane);
 	}
-	
 	private void setWindowMove() {
 		rootPane.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
@@ -50,4 +70,55 @@ public class RootLayoutController {
 			}
 		});
 	}	
+	
+	public void setSaleUser(Sales saleUser) {
+		this.saleUser = saleUser;
+	}
+
+	public void changeSaleView(Sales saleFind) {
+		saleUser = saleFind;
+		FXMLLoader loader = new FXMLLoader();
+		BorderPane pane = null;
+		try {
+			if(saleUser.getSaleId().equals("admin")) {
+				loader.setLocation(MainApp.class.getResource("view/AdimMainView.fxml"));
+				
+				pane = loader.load();	
+			}else {				
+				loader.setLocation(MainApp.class.getResource("view/AdimMainView.fxml"));
+				
+				pane = loader.load();	
+			}
+			
+			mainViewController = loader.getController();
+			mainViewController.init(this);
+			rootPane.getScene().getWindow().setWidth(1080);
+			rootPane.getScene().getWindow().setHeight(675);
+			rootPane.setCenter(pane);
+			mainViewController.setSaleUser(saleFind);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void changeAccView(Account accFind) {
+		
+		try {
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(MainApp.class.getResource("view/AdimMainView.fxml"));
+				
+				BorderPane pane = loader.load();	
+				
+				rootPane.getScene().getWindow().setWidth(1080);
+				rootPane.getScene().getWindow().setHeight(675);
+				rootPane.setCenter(pane);
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
 }

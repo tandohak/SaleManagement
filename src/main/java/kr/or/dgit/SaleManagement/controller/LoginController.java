@@ -1,9 +1,12 @@
 package kr.or.dgit.SaleManagement.controller;
- 
+
 import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.Charset;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -19,99 +22,113 @@ import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.SalesService;
- 
+
 public class LoginController {
 	@FXML
 	private BorderPane Node;
 	
 	@FXML
-	private Button changView;
+	private RootLayoutController rootLayoutController;
 	
+	@FXML
+	private Button changView;
+
 	@FXML
 	private TextField idTf;
-	
+
 	@FXML
 	private PasswordField pwTf;
-	
+
 	private MainApp mainApp;
-	
+
 	private static AccountService accService;
 	private static SalesService salesService;
-	
+	private String loginId;
+
 	@FXML
 	private void initialize() {
 		salesService = SalesService.getInstance();
 		accService = AccountService.getInstance();
 	}
-	
+
 	@FXML
 	public void SaleTfTypeHandle(KeyEvent event) {
-		if(idTf.getText().equals("") || pwTf.getText().equals("")) {
+		if (idTf.getText().equals("") || pwTf.getText().equals("")) {
 			changView.setDisable(true);
-		}else {
+		} else {
 			changView.setDisable(false);
-		}				
+		}
 	}
-	
-	
+
+	@SuppressWarnings("unused")
 	@FXML
 	private void changeView() {
 		Sales sales = new Sales();
 		sales.setSaleId(idTf.getText());
 		sales.setSalePw(pwTf.getText());
 		
+
 		Account acc = new Account();
 		acc.setAccId(idTf.getText());
 		acc.setAccPw(pwTf.getText());
 		Sales saleFind = salesService.findSalesByCode(sales);
 		Account accFind = accService.findAccountById(acc);
-		
+
 		boolean checkId = false;
-		
-		if(saleFind != null) {
+
+		if (saleFind != null) {
 			checkId = true;
+			loginId = saleFind.getSaleId();
 		}
-		
-		if(accFind != null) {
+
+		if (accFind != null) {
 			checkId = true;
+			loginId = accFind.getAccId();
 		}
-		if(!checkId) {
+		if (!checkId) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle(null);
 			alert.setHeaderText(null);
 			alert.setContentText("존재하지 않는 아이디 이거나 비밀번호가 틀립니다.");
-			
+
 			alert.showAndWait();
 			return;
 		}
-		try {			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdimMainView.fxml"));
-			BorderPane pane = (BorderPane)loader.load();
- 
-			changView.getScene().getWindow().setWidth(1080);
-			changView.getScene().getWindow().setHeight(675);
-			((BorderPane)changView.getScene().getRoot()).setCenter(pane);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			FXMLLoader loader = null;
+//			BorderPane pane =null;
+			
+			System.out.println(saleFind.getSaleId());
+			System.out.println(rootLayoutController);
+			if(saleFind != null) {
+				rootLayoutController.changeSaleView(saleFind);
+			}else {
+				rootLayoutController.changeAccView(accFind);
+			}
+			
 	}
-	
+
+	public FXMLLoader createFXMLLoader(URL location) {
+		return new FXMLLoader(location, null, new JavaFXBuilderFactory(), null,
+				Charset.forName(FXMLLoader.DEFAULT_CHARSET_NAME));
+	}
+
 	@FXML
 	private void handleCloseBtn() {
 		System.exit(0);
 	}
-	
+
 	@FXML
 	private void showJoinDialogAcc() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dialog/AccountjoinUserDialog.fxml"));
-			BorderPane pane = (BorderPane)loader.load();
-			
+			BorderPane pane = (BorderPane) loader.load();
+
 			Stage dialogStage = new Stage();
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			Scene scene = new Scene(pane);
 			dialogStage.setScene(scene);
- 
+
 			JoinUserController joinUserDialog = loader.getController();
 			joinUserDialog.setDialogStage(dialogStage);
 			joinUserDialog.setAccService(accService);
@@ -120,6 +137,10 @@ public class LoginController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void init(RootLayoutController rootLayoutController) {
+		this.rootLayoutController = rootLayoutController;
 	}
 
 }

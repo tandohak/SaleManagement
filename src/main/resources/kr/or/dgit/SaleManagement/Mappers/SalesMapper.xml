@@ -48,7 +48,7 @@
 		<result property="saleLevel" column="sLevel"/>
 	</resultMap>
 	
-	<select id="selectSalesByCode" parameterType="Sales" resultType="Sales">
+	<select id="selectSalesByCode" parameterType="Sales" resultMap="SalesResult">
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
 	</select>

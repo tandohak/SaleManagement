@@ -13,7 +13,6 @@ import kr.or.dgit.SaleManagement.controller.MainViewController;
 public class MainApp extends Application {
 	private Stage primaryStage;
 	private Parent rootLayout;
-	private MainViewController controller;
 	private Boolean resizebottom = false;
 	private double dx;
 	private double dy;
@@ -35,10 +34,6 @@ public class MainApp extends Application {
 		
 //		windowResize(primaryStage);
 
-		
-		controller = new MainViewController();
-		controller.setMainApp(this);
-		
 //		fontLoad();
 
 	}
