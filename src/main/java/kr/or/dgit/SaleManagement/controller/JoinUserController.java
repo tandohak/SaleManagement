@@ -236,13 +236,17 @@ public class JoinUserController{
 			account.setAccAddr("[" + addrZipTf.getText() +"]"+ addrTf.getText());
 			String code = "2";
 			String year   = new java.text.SimpleDateFormat("yy").format(new java.util.Date());
-		
-
-			int maxCode = accService.findMaxCode() + 1;
-			String maxCodeStr = maxCode+"";
-			code += year+ maxCodeStr.substring(3, maxCodeStr.length());
 			
-			account.setAccCode(Integer.parseInt(code));
+			int codeNum = Integer.parseInt(code+year+00001);
+			int maxCode = accService.findMaxCode();
+			
+			if(maxCode > codeNum) {				
+				maxCode++;
+				String maxCodeStr = maxCode+"";
+				code += year+ maxCodeStr.substring(3, maxCodeStr.length());
+				codeNum = Integer.parseInt(code);
+			}
+			account.setAccCode(codeNum);
 			accService.insertAccount(account);
 			
 			this.closeDialogAction();

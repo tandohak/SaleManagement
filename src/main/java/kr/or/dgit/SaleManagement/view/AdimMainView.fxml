@@ -9,14 +9,14 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootPane" maxHeight="1080.0" maxWidth="1980.0" minHeight="675.0" minWidth="1080.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.MainViewController">
+<BorderPane fx:id="rootPane" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.MainViewController">
    <left>
-      <AnchorPane prefHeight="675.0" prefWidth="200.0" style="-fx-background-color: #252525;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="675.0" prefWidth="160.0" style="-fx-background-color: #354052;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutY="633.0" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #363636;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <AnchorPane layoutY="633.0" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #363636;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <children>
-                  <JFXButton fx:id="changeViewBtn" layoutX="14.0" layoutY="10.0" onAction="#handleLogoutBtn" text="Logout" textFill="#666666" />
-                  <Button layoutX="111.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCloseBtn" text="exit" />
+                  <JFXButton fx:id="changeViewBtn" layoutY="10.0" onAction="#handleLogoutBtn" prefWidth="48.0" text="Logout" textFill="#666666" AnchorPane.leftAnchor="0.0" />
+                  <Button layoutX="80.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCloseBtn" text="exit" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
             <Label layoutX="78.0" layoutY="157.0" text="사원" textFill="#8d7070" AnchorPane.leftAnchor="78.0" AnchorPane.topAnchor="157.0">
