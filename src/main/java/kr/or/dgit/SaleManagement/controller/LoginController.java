@@ -64,27 +64,36 @@ public class LoginController {
 	@FXML
 	private void changeView() {
 		Sales sales = new Sales();
-		sales.setSaleId(idTf.getText());
-		sales.setSalePw(pwTf.getText());
-		
+		sales.setSaleId(idTf.getText().trim());
+	
 
 		Account acc = new Account();
-		acc.setAccId(idTf.getText());
-		acc.setAccPw(pwTf.getText());
+		acc.setAccId(idTf.getText().trim());
+		
 		Sales saleFind = salesService.findSalesByCode(sales);
 		Account accFind = accService.findAccountById(acc);
-
+		
+		
+		
+		
 		boolean checkId = false;
 
 		if (saleFind != null) {
-			checkId = true;
-			loginId = saleFind.getSaleId();
+			String findSalePw = saleFind.getSalePw().trim();
+			if(findSalePw.equals(pwTf.getText().trim())) {
+				checkId = true;
+				loginId = saleFind.getSaleId();
+			}			
 		}
 
 		if (accFind != null) {
-			checkId = true;
-			loginId = accFind.getAccId();
+			String findAccPw = accFind.getAccPw().trim();
+			if(findAccPw.equals(pwTf.getText().trim())) {
+				checkId = true;
+				loginId = accFind.getAccId();
+			}
 		}
+		
 		if (!checkId) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle(null);
@@ -94,17 +103,12 @@ public class LoginController {
 			alert.showAndWait();
 			return;
 		}
-//		try {
-//			FXMLLoader loader = null;
-//			BorderPane pane =null;
 			
-			System.out.println(saleFind.getSaleId());
-			System.out.println(rootLayoutController);
-			if(saleFind != null) {
-				rootLayoutController.changeSaleView(saleFind);
-			}else {
-				rootLayoutController.changeAccView(accFind);
-			}
+		if(saleFind != null) {
+			rootLayoutController.changeSaleView(saleFind);
+		}else {
+			rootLayoutController.changeAccView(accFind);
+		}
 			
 	}
 

@@ -39,16 +39,19 @@ public class RootLayoutController {
 	private void initialize() throws IOException {
 		setWindowMove();
 		
-		changeLoginView();		
+		changeLoginView(false);
 	}
 
-	public void changeLoginView() throws IOException {
+	public void changeLoginView(boolean sizeDown) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("view/loginView.fxml"));
 		AnchorPane pane = loader.load();
 		loginController = loader.getController();
 		loginController.init(this);		
-		
+		if(sizeDown) {
+		rootPane.getScene().getWindow().setWidth(500);
+		rootPane.getScene().getWindow().setHeight(400);		
+		}
 		rootPane.setCenter(pane);
 	}
 	private void setWindowMove() {
@@ -85,7 +88,7 @@ public class RootLayoutController {
 				
 				pane = loader.load();	
 			}else {				
-				loader.setLocation(MainApp.class.getResource("view/AdimMainView.fxml"));
+				loader.setLocation(MainApp.class.getResource("view/SalesMainView.fxml"));
 				
 				pane = loader.load();	
 			}
@@ -95,25 +98,27 @@ public class RootLayoutController {
 			rootPane.getScene().getWindow().setWidth(1080);
 			rootPane.getScene().getWindow().setHeight(675);
 			rootPane.setCenter(pane);
-			mainViewController.setSaleUser(saleFind);
+			mainViewController.setSaleUser(saleUser);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void changeAccView(Account accFind) {
-		
+	public void changeAccView(Account accUser) {
+		this.accUser = accUser;
 		try {
 				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(MainApp.class.getResource("view/AdimMainView.fxml"));
+				loader.setLocation(MainApp.class.getResource("view/AccountMainView.fxml"));
 				
 				BorderPane pane = loader.load();	
 				
+				mainViewController = loader.getController();
+				mainViewController.init(this);
 				rootPane.getScene().getWindow().setWidth(1080);
 				rootPane.getScene().getWindow().setHeight(675);
 				rootPane.setCenter(pane);
-		
+				mainViewController.setAccUser(accUser);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

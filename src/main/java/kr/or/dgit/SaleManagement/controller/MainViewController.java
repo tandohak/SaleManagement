@@ -97,6 +97,11 @@ public class MainViewController  {
 		nameLb.setText(saleUser.getSaleName());
 	}
 	
+	public void setAccUser(Account user) {
+		this.accUser = user;
+		nameLb.setText(accUser.getAccName());
+	}
+	
 	@FXML
 	private void hadleShowSellManager() {
 		try {
@@ -121,17 +126,8 @@ public class MainViewController  {
 	
 	
 	@FXML
-	private void handleLogoutBtn() {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/loginView.fxml"));
-			Parent pane = (AnchorPane)loader.load();
-//			((Stage)changeViewBtn.getScene().getWindow()).setScene(new Scene(pane, 500, 400));
-			
-			((BorderPane)changeViewBtn.getScene().getRoot()).setCenter(pane);;
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	private void handleLogoutBtn() throws IOException {
+		rootLayoutController.changeLoginView(true);
 	}
 	
 	

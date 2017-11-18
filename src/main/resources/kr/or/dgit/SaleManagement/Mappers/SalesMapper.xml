@@ -34,6 +34,9 @@
 			<if test="saleLevel != null">
 				AND sLevel = #{saleLevel}
 			</if>
+			<if test="salePw != null">
+				AND pw = #{salePw}
+			</if>
 		</where>
 	</sql>	
 	

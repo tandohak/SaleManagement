@@ -40,17 +40,17 @@
  		<result property="accPw" column="pw"/>
  	</resultMap>
  	
-	<select id="selectAccountByCode" parameterType="Account" resultType="Account">
+	<select id="selectAccountByCode" parameterType="Account" resultMap="AccountResult">
 		<include refid="selectAccount"/>
 		<include refid="whereAccount"/>
 	</select>
 	
-	<select id="selectAccountByName" parameterType="Account" resultType="Account">
+	<select id="selectAccountByName" parameterType="Account"  resultMap="AccountResult">
 		<include refid="selectAccount"/>
 		<include refid="whereAccount"/>
 	</select>
 	
-	<select id="selectAccountById" parameterType="Account" resultType="Account">
+	<select id="selectAccountById" parameterType="Account"  resultMap="AccountResult">
 		<include refid="selectAccount"/>
 		<include refid="whereAccount"/>
 	</select>
@@ -64,12 +64,12 @@
 		SELECT MAX(accCode) FROM account
 	</select>
 	
-	<select id="selectAccountByAllAdmit" resultType="Account">
+	<select id="selectAccountByAllAdmit"  resultMap="AccountResult">
 		<include refid="selectAccount"/>
 		<include refid="whereAccount"/>
 	</select>
 	
-	<select id="selectAccountByAll" resultType="Account">
+	<select id="selectAccountByAll"  resultMap="AccountResult">
 		<include refid="selectAccount"/>
 	</select>
 	
