@@ -21,6 +21,9 @@ public class MainViewController {
 	@FXML
 	private Button changeViewBtn;
 	
+	@FXML
+	
+	
 	private MainApp mainApp;
 	
 	@FXML
@@ -34,7 +37,7 @@ public class MainViewController {
 	@FXML
 	private void hadleShowSalesManager() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SalesManagementView.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/SalesManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			rootPane.setCenter(pane);
 		} catch (IOException e) {
@@ -45,7 +48,7 @@ public class MainViewController {
 	@FXML
 	private void hadleShowProductManager() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ProductManagementView.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/ProductManager.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			rootPane.setCenter(pane);
 		} catch (IOException e) {
@@ -67,7 +70,19 @@ public class MainViewController {
 	@FXML
 	private void hadleShowAccountManager() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AccountManagementView.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/AccountManagement.fxml"));
+			BorderPane pane = (BorderPane)loader.load();
+			
+			rootPane.setCenter(pane);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	private void hadleShowSellManager() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/SellManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			
 			rootPane.setCenter(pane);

@@ -6,6 +6,7 @@ BorderPane{
 /*
  * 모든 버튼
  */
+ 
 .text-field{
 	-fx-background-radius: 11.5 11.5 11.5 11.5;
 }
@@ -111,3 +112,23 @@ HBox > .label{
 	-fx-pref-height:25px;
 	-fx-background-color:none;
 }
+
+.mainVeiwOutBtn{
+ 	-fx-background-color: #363636;
+ 	-fx-background-radius:none;
+ 	-fx-pref-height:39px;
+ 	-fx-pref-width:80px;
+ }
+ .mainVeiwOutBtn:hover{
+ 	-fx-background-color: rgba(100,100,100,0.2);
+ }
+ .mainButton{
+ 	-fx-background-color: #354052;
+ 	-fx-background-radius:none;
+ 	-fx-pref-height:40px;
+ 	-fx-pref-width:160px;
+ }
+
+.mainButton:hover{
+ 	-fx-background-color: rgb(100,100,100,0.2);
+ }

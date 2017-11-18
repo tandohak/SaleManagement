@@ -1,47 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootPane" maxHeight="1080.0" maxWidth="1980.0" minHeight="675.0" minWidth="1080.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.MainViewController">
+<BorderPane fx:id="rootPane" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.MainViewController">
    <left>
-      <AnchorPane prefHeight="675.0" prefWidth="200.0" style="-fx-background-color: #252525;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="675.0" prefWidth="160.0" style="-fx-background-color: #354052;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutY="633.0" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #363636;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <AnchorPane layoutY="633.0" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #363636;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <children>
-                  <JFXButton fx:id="changeViewBtn" layoutX="14.0" layoutY="10.0" onAction="#handleLogoutBtn" text="Logout" textFill="#666666" />
-                  <Button layoutX="111.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCloseBtn" text="exit" />
+                  <JFXButton fx:id="changeViewBtn" layoutY="10.0" onAction="#handleLogoutBtn" prefWidth="48.0" styleClass="mainVeiwOutBtn" text="Logout" textFill="#666666" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <JFXButton layoutX="80.0" layoutY="9.0" onAction="#handleCloseBtn" styleClass="mainVeiwOutBtn" text="Exit" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
-            <Label layoutX="78.0" layoutY="157.0" text="사원" textFill="#8d7070" AnchorPane.leftAnchor="78.0" AnchorPane.topAnchor="157.0">
+            <Label fx:id="myPage" layoutX="52.0" layoutY="125.0" opacity="0.45" text="마이페이지" textFill="WHITE" AnchorPane.bottomAnchor="535.0" AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="125.0">
                <font>
                   <Font name="NanumGothicBold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="69.0" layoutY="139.0" text="홍길동" textFill="WHITE" AnchorPane.leftAnchor="69.0" AnchorPane.topAnchor="139.0">
+            <Label fx:id="nameLb" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="18.0" layoutY="101.0" prefHeight="18.0" prefWidth="125.0" text="DAUM" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="101.0">
                <font>
                   <Font name="NanumGothicBold" size="14.0" />
                </font>
             </Label>
-            <Circle fill="#d8dde1" layoutX="90.0" layoutY="99.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="68.0" layoutY="33.0" style="-fx-background-color: #ddd;" text="로고" textFill="WHITE">
-               <padding>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-               </padding>
-            </Label>
-            <JFXButton layoutX="5.0" layoutY="314.0" styleClass="accor_Btn" text="제품 관리" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="314.0" />
-            <JFXButton layoutX="5.0" layoutY="222.0" onAction="#hadleShowSalesManager" styleClass="accor_Btn" stylesheets="@css/style.css" text="마이페이지" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="222.0" />
-            <JFXButton layoutX="5.0" layoutY="245.0" styleClass="accor_Btn" stylesheets="@css/style.css" text="사원통계" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="245.0" />
-            <JFXButton layoutX="5.0" layoutY="268.0" styleClass="accor_Btn" text="거래처통계" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="268.0" />
-            <JFXButton layoutX="5.0" layoutY="291.0" styleClass="accor_Btn" text="제품통계" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="291.0" />
-            <JFXButton layoutX="53.0" layoutY="338.0" text="제품 추가" />
-            <JFXButton layoutX="53.0" layoutY="361.0" prefWidth="107.0" text="제품 내역 관리" />
+            <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="48.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 50%;" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="25.0" />
+            <ImageView fitHeight="2.0" fitWidth="160.0" layoutX="-21.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="160.0">
+               <image>
+                  <Image url="file:/D:/workspace/workspace_mybatis/SaleManagement/DataFile/menu_line.jpg" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="53.0" layoutY="272.0" onAction="#hadleShowSellManager" styleClass="mainButton" text="거래내역관리" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="221.0" />
+            <JFXButton layoutX="43.0" layoutY="307.0" onAction="#hadleShowInsertSell" styleClass="mainButton" text="신규거래등록" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="261.0" />
+            <JFXButton layoutX="53.0" layoutY="240.0" onAction="#hadleShowProductManager" styleClass="mainButton" text="제품관리" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="181.0" />
+            <JFXButton layoutX="14.0" layoutY="396.0" styleClass="mainButton" text="통계" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="301.0" />
          </children>
       </AnchorPane>
    </left>
