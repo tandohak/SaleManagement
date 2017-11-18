@@ -51,7 +51,7 @@
 		<result property="saleLevel" column="sLevel"/>
 	</resultMap>
 	
-	<select id="selectSalesByCode" parameterType="Sales" resultMap="SalesResult">
+	<select id="selectSalesByCode" parameterType="Sales" resultType="SalesResult">
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
 	</select>
@@ -93,4 +93,9 @@
 		</set>
 		where saleCode = #{saleCode}
 	</update>
+	
+	<delete id="deletSales" parameterType="Sales">
+		delete from sales
+		<include refid="whereSql"/>
+	</delete>
 </mapper>

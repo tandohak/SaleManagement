@@ -6,44 +6,44 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class SalesLevel {
-	private StringProperty salesLevel = new SimpleStringProperty();
-	private IntegerProperty salesDisrate = new SimpleIntegerProperty();
+	private StringProperty sLevel = new SimpleStringProperty();
+	private IntegerProperty sDisrate = new SimpleIntegerProperty();
 
 	public SalesLevel() {
 		
 	}
 	
 	public SalesLevel(String salesLevel) {
-		this.salesLevel.set(salesLevel);
+		this.sLevel.set(salesLevel);
 	}
 
 	public String getSalesLevel() {
-		return salesLevel.get();
+		return sLevel.get();
 	}
 	
 	public StringProperty getSalesLevelProperty() {
-		return salesLevel;
+		return sLevel;
 	}
 
 	public void setSalesLevel(String salesLevel) {
-		this.salesLevel.set(salesLevel);
+		this.sLevel.set(salesLevel);
 	}
 
 	public int getSalesDisrate() {
-		return salesDisrate.get();
+		return sDisrate.get();
 	}
 	
 	public IntegerProperty getSalesDisrateProperty() {
-		return salesDisrate;
+		return sDisrate;
 	}
 
 	public void setSalesDisrate(int salesDisrate) {
-		this.salesDisrate.set(salesDisrate);
+		this.sDisrate.set(salesDisrate);
 	}
 
 	@Override
 	public String toString() {
-		return String.format("SalesLevel [salesLevel=%s, salesDisrate=%s]", salesLevel, salesDisrate);
+		return String.format("SalesLevel [salesLevel=%s, salesDisrate=%s]", sLevel, sDisrate);
 	}
 
 }

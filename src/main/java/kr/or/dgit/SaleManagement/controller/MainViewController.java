@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Sales;
+import kr.or.dgit.SaleManagement.service.ProductService;
 
 public class MainViewController  {
 	@FXML
@@ -24,9 +25,7 @@ public class MainViewController  {
 	@FXML
 	private Label nameLb;
 	
-	@FXML
 	private RootLayoutController rootLayoutController;
-	
 	
 	private Sales saleUser;
 	
@@ -35,7 +34,8 @@ public class MainViewController  {
 	private MainApp mainApp;
 	
 	private String userName;
-
+	
+	
 	@FXML
 	private void initialize() {
 	}

@@ -5,9 +5,9 @@ import java.util.List;
 import kr.or.dgit.SaleManagement.dto.Sales;
 
 public interface SalesDao {
-	public Sales selectSalesByCode(Sales sales);
-	public List<Sales> selectSalseByAll();
-	public List<Sales> selectSalesSearch(Sales sales);
-	public int insertSales(Sales sales);
-	public int updateSales(Sales sales);
+	Sales selectSalesByCode(Sales sales);
+	List<Sales> selectSalseByAll();
+	List<Sales> selectSalesSearch(Sales sales);
+	int insertSales(Sales sales);
+	int updateSales(Sales sales);
 }

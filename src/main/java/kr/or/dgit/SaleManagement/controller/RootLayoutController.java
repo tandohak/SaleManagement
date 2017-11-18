@@ -13,6 +13,9 @@ import javafx.scene.layout.BorderPane;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Sales;
+import kr.or.dgit.SaleManagement.service.AccountService;
+import kr.or.dgit.SaleManagement.service.ProductService;
+import kr.or.dgit.SaleManagement.service.SalesService;
 
 public class RootLayoutController {
 	@FXML
@@ -39,8 +42,9 @@ public class RootLayoutController {
 	private void initialize() throws IOException {
 		setWindowMove();
 		
+		
 		changeLoginView(false);
-	}
+	}	
 
 	public void changeLoginView(boolean sizeDown) throws IOException {
 		FXMLLoader loader = new FXMLLoader();

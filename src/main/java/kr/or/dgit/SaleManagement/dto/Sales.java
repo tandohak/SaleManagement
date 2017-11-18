@@ -1,11 +1,15 @@
 package kr.or.dgit.SaleManagement.dto;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 
 public class Sales {
+	private BooleanProperty checkedBox = new SimpleBooleanProperty(false);
 	private IntegerProperty saleCode = new SimpleIntegerProperty();	
 	private StringProperty saleName = new SimpleStringProperty();
 	private StringProperty saleTel = new SimpleStringProperty();
@@ -16,6 +20,22 @@ public class Sales {
 	private StringProperty saleLevel = new SimpleStringProperty();;
 
 	public Sales() {}
+
+	public BooleanProperty getCheckedBoxProperty() {
+		return checkedBox;
+	}
+	
+	public Boolean getCheckedBox() {
+		return checkedBox.get();
+	}
+	
+	public void setCheckedBox(Boolean checkedBox) {
+		this.checkedBox.set(checkedBox);
+	}
+	
+	public ObservableValue<Boolean> selectedProperty() {
+		return checkedBox;
+	}	
 
 	public int getSaleCode() {
 		return saleCode.get();	

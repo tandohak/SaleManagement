@@ -60,22 +60,17 @@ public class LoginController {
 		}
 	}
 
-	@SuppressWarnings("unused")
 	@FXML
 	private void changeView() {
 		Sales sales = new Sales();
 		sales.setSaleId(idTf.getText().trim());
 	
-
 		Account acc = new Account();
 		acc.setAccId(idTf.getText().trim());
 		
 		Sales saleFind = salesService.findSalesByCode(sales);
-		Account accFind = accService.findAccountById(acc);
-		
-		
-		
-		
+		Account accFind = accService.findAccountByCode(acc);
+			
 		boolean checkId = false;
 
 		if (saleFind != null) {

@@ -5,16 +5,16 @@ import java.util.List;
 import kr.or.dgit.SaleManagement.dto.Account;
 
 public interface AccountDao {
-	public Account selectAccountByCode(Account account);
-	public Account selectAccountByName(Account account);
-	public Account selectAccountById(Account account);
-	public List<Account> selectAccountByLevel(Account account);
-	public List<Account> selectAccountByAllAdmit(Account account);
-	public List<Account> selectAccountByAll();
+	Account selectAccountByCode(Account account);
+	Account selectAccountByName(Account account);
+	Account selectAccountById(Account account);
+	List<Account> selectAccountByLevel(Account account);
+	List<Account> selectAccountByAllAdmit(Account account);
+	List<Account> selectAccountByAll();
 	
-	public int insertAccount(Account account);
+	int insertAccount(Account account);
 	
-	public int updateAccount(Account account);	
+	int updateAccount(Account account);	
 	
-	public int selectMaxCode();
+	int selectMaxCode();
 }

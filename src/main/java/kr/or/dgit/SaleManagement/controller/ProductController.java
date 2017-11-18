@@ -99,8 +99,7 @@ public class ProductController {
 	
 	private static ProductService pdtService;
 	private static BigClassService bigService;
-	
-	
+		
 	private ObservableList<Product> myList = FXCollections.observableArrayList();
 	
 	private ObservableList<String> biglist = FXCollections.observableArrayList();
@@ -125,8 +124,8 @@ public class ProductController {
 		 * 테이블 cell안 체크박스 삽입   *
 		 * ********************* */
 		chckTc.setCellFactory(new Callback<TableColumn<Product,Boolean>,TableCell<Product,Boolean>>(){
-	        @Override public
-	        TableCell<Product,Boolean> call( TableColumn<Product,Boolean> p ){
+	        @Override 
+	        public TableCell<Product,Boolean> call( TableColumn<Product,Boolean> p ){
 	           CheckBoxTableCell<Product, Boolean> checkBoxTbC = new CheckBoxTableCell<>(); 
 	           checkBoxTbC.setSelectedStateCallback(new Callback<Integer, ObservableValue<Boolean>>() {
 	        	   //checkbox에 callback 함수 달기 
@@ -139,7 +138,7 @@ public class ProductController {
 				}
 			});
 	           
-	           return checkBoxTbC;
+	           return checkBoxTbC;//checboxtablecell 리턴
 	      
 	           }
 	        });		
@@ -199,7 +198,7 @@ public class ProductController {
 	public void setMainApp(ProductTestMain mainApp) {
 	        this.mainApp = mainApp;
 	        
-	   }
+	  }
 
  
 	
