@@ -69,6 +69,12 @@
                         <PasswordField fx:id="pwComfTf" />
                      </children>
                   </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="연락처" />
+                        <TextField fx:id="telTf" />
+                     </children>
+                  </HBox>
                   <HBox prefHeight="100.0" prefWidth="735.0" GridPane.rowIndex="3">
                      <children>
                         <Label text="주소" />
@@ -90,12 +96,6 @@
                               <Button fx:id="picBtn" layoutX="112.0" layoutY="4.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="27.0" styleClass="uploadBtn" text="Button" />
                            </children>
                         </Pane>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-                     <children>
-                        <Label text="연락처" />
-                        <TextField fx:id="telTf" />
                      </children>
                   </HBox>
                </children>
@@ -123,8 +123,8 @@
                   <CheckBox fx:id="saleCheck" mnemonicParsing="false" />
                </graphic>
             </TableColumn>
-          <TableColumn fx:id="codeTc" prefWidth="117.0" resizable="false" text="코드" />
-          <TableColumn fx:id="nameTc" prefWidth="128.0" resizable="false" text="이름" />
+            <TableColumn fx:id="codeTc" prefWidth="117.0" resizable="false" text="코드" />
+            <TableColumn fx:id="nameTc" prefWidth="128.0" resizable="false" text="이름" />
             <TableColumn fx:id="telTc" prefWidth="142.0" resizable="false" text="연락처" />
             <TableColumn fx:id="addrTc" prefWidth="246.0" resizable="false" text="주소" />
             <TableColumn fx:id="levelTc" prefWidth="106.0" resizable="false" text="등급" />

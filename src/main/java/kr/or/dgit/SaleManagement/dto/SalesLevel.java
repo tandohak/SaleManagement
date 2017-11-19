@@ -29,5 +29,12 @@ public class SalesLevel {
 	public StringProperty getSalLevelProperty() {
 		return salLevel;
 	}
+	@Override
+	public String toString() {
+		return String.format("%s", salLevel.getValue());
+	}
+	
+	
+	
 	
 }

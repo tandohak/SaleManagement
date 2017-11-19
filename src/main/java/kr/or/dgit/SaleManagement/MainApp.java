@@ -3,12 +3,13 @@ package kr.or.dgit.SaleManagement;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import kr.or.dgit.SaleManagement.controller.MainViewController;
 
 public class MainApp extends Application {
 	private Stage primaryStage;
@@ -32,13 +33,13 @@ public class MainApp extends Application {
 		
 //		setWindowMove(primaryStage);
 		
-//		windowResize(primaryStage);
+		windowResize(primaryStage);
 
 //		fontLoad();
 
 	}
 
-	/*private void windowResize(Stage primaryStage) {
+	private void windowResize(Stage primaryStage) {
 		rootLayout.setOnMousePressed(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -72,7 +73,7 @@ public class MainApp extends Application {
 		});
 	}
 
-	*/
+	
 
 	private void fontLoad() {
 //		Font.loadFont(getClass().getResourceAsStream("view/font/NotoSansCJKkr-Black.otf"),14);		

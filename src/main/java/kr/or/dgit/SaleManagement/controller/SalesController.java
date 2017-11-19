@@ -1,6 +1,5 @@
 package kr.or.dgit.SaleManagement.controller;
 
-import java.awt.Checkbox;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
@@ -17,8 +16,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.util.Callback;
-import kr.or.dgit.SaleManagement.dto.Product;
 import kr.or.dgit.SaleManagement.dto.Sales;
+import kr.or.dgit.SaleManagement.dto.SalesLevel;
+import kr.or.dgit.SaleManagement.service.SalesLevelService;
 import kr.or.dgit.SaleManagement.service.SalesService;
 
 public class SalesController {
@@ -42,18 +42,27 @@ public class SalesController {
 	@FXML private TableColumn<Sales, Boolean> chckTc;
 	@FXML private TableColumn<Sales, String> addrTc;
 	
-	@FXML private ComboBox<String> levelCb;
+	@FXML private ComboBox<SalesLevel> levelCb;
 	@FXML private CheckBox saleCheck;
 	
 	@FXML private TableView<Sales> saleTable;
 	private ObservableList<Sales> myList = FXCollections.observableArrayList();
 	
-	private ObservableList<String> levellist = FXCollections.observableArrayList();
+	private ObservableList<SalesLevel> levellist = FXCollections.observableArrayList();
 	
-	SalesService saleSerivce;
+	private SalesService saleSerivce;
+	private SalesLevelService slevelService;
 	
 	@FXML
 	private void initialize() {
+		slevelService = SalesLevelService.getInstance();
+		List<SalesLevel> sLevelLists = slevelService.findAllSalesLevel();
+		for(SalesLevel saleLevel : sLevelLists) {
+			levellist.add(saleLevel);
+		}	
+		levelCb.setItems(levellist);
+		
+		
 		saleSerivce = SalesService.getInstance();
 		List<Sales> lists = saleSerivce.findSaleAll();
 		for(Sales sale : lists) {

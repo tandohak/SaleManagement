@@ -27,7 +27,9 @@ public class TestSalesLevel {
 	@Test
 	public void test1SelectAll() {
 		List<SalesLevel> lists = service.findAllSalesLevel();
-		
+		for(SalesLevel sl : lists) {
+			System.out.println(sl);
+		}
 		Assert.assertNotNull(lists);
 	}
 	
