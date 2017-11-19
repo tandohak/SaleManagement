@@ -24,7 +24,8 @@ public class TextFieldUtil {
 		accService = AccountService.getInstance();
 		salesService = SalesService.getInstance();
 	}
-
+	
+		
 	public void cbComfrim(ComboBox<?> cb) throws Exception {
 		if(cb.getValue() == null) {
 			throw new Exception("콤보박스를 선택하세요.");
@@ -45,6 +46,20 @@ public class TextFieldUtil {
 		{
 			throw new Exception(errmsg);
 		}
+	}
+	
+	public void regexTfComfirmId(TextField idTf) throws Exception {
+		String pattern = "^[a-zA-Z0-9_]{1,15}$";
+		String errmsg = "아이디는 영'문자/숫자/_' 만 가능합니다.";
+
+		Pattern p = Pattern.compile(pattern);
+		
+		Matcher m = p.matcher(idTf.getText());
+		if(!m.find())
+		{
+			throw new Exception(errmsg);
+		}
+		
 	}
 	
 	public void regexTfComfirmSaleName(TextField nameTf) throws Exception {
@@ -147,5 +162,7 @@ public class TextFieldUtil {
 			return false;
 		}
 	}
+
+	
 	
 }

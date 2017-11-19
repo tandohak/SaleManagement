@@ -137,7 +137,20 @@ public class JoinUserController{
 	private void idTypeHandler() {
 		String path = System.getProperty("user.dir");
 		
+		try {
+			util.regexTfComfirmId(idTf);
+		} catch (Exception e) {		
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle(null);
+			alert.setHeaderText(null);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+			e.printStackTrace();
+			return;
+		}
+		
 		idCheckOk = util.idOverlapCheck(idTf);
+		
 		if(idCheckOk) {
 			File file = new File(path + "/DataFile/ic_check_circle_black_48dp_1x.png" );
 			Image image = new Image(file.toURI().toString());

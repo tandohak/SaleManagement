@@ -9,10 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -60,6 +60,8 @@ public class SalesController {
 	
 	@FXML private ImageView checkIdIcon;;
 	@FXML private ImageView checkPwIcon;;
+	
+	@FXML private Button submitBtn;
 	
 	private TextFieldUtil tfUtil = new TextFieldUtil();
 	private ObservableList<Sales> myList = FXCollections.observableArrayList();
@@ -134,6 +136,15 @@ public class SalesController {
 		saleTable.setItems(myList);
 	}
 	
+	
+	@FXML
+	private void deleteCellMenuAction() {
+		int index = saleTable.getSelectionModel().getSelectedIndex();
+		Sales sales = saleTable.getSelectionModel().getSelectedItem();
+		saleSerivce.deleteSales(sales);
+		saleTable.getItems().remove(index);
+	}
+	
 	@FXML
 	private void deleteSelectedCell(ActionEvent event) {
 		for(int i=0; myList.size()>i; i++) {
@@ -148,7 +159,24 @@ public class SalesController {
 	}
 	
 	@FXML
-	private void submitClickAction() {
+	private void getCellMenuAction() {
+		int index = saleTable.getSelectionModel().getSelectedIndex();
+		Sales sales = saleTable.getSelectionModel().getSelectedItem();
+		
+		codeLabel.setText(sales.getSaleCode()+"");
+		nameTf.setText(sales.getSaleName());
+		idTf.setText(sales.getSaleId());
+		idTf.setDisable(false);
+		levelCb.setValue(new SalesLevel(sales.getSaleLevel()));
+		telTf.setText(sales.getSaleTel());
+		String addrs =  sales.getSaleAddr();
+		addrZipTf.setText(addrs.substring(addrs.indexOf("[")+1, addrs.indexOf("]")));
+		addrTf.setText(addrs.substring(addrs.indexOf("]")+1, addrs.length()));		
+	}
+	
+	
+	@FXML
+	private void submitClickAction() {		
 		if(tfComfrimField()) {
 			try {
 				checkAlert(idCheckOk,"아이디 중복 체크를 해주세요.");
@@ -199,10 +227,10 @@ public class SalesController {
 			}
 			sales.setSaleCode(codeNum);
 			saleSerivce.insertSales(sales);
+			myList.add(sales);
 		}
-		
 	}
-	
+
 	private void checkAlert(boolean isOk,String pwck) throws Exception {
 		if(!isOk) {
 			throw new Exception(pwck);
@@ -218,6 +246,18 @@ public class SalesController {
 	@FXML
 	private void idTypeHandler() {
 		String path = System.getProperty("user.dir");
+		
+		try {
+			tfUtil.regexTfComfirmId(idTf);
+		} catch (Exception e) {		
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle(null);
+			alert.setHeaderText(null);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+			e.printStackTrace();
+			return;
+		}
 		
 		idCheckOk = tfUtil.idOverlapCheck(idTf);
 		
