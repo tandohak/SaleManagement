@@ -46,6 +46,18 @@ public class SalesDaoImpl implements SalesDao {
 		log.debug("updateSales()");
 		return sqlSession.update(namespace + "updateSales", sales);
 	}
+
+	@Override
+	public int deleteSales(Sales sales) {
+		log.debug("deleteSales()");
+		return sqlSession.delete(namespace + "deleteSales", sales);
+	}
+
+	@Override
+	public int selectMaxCode() {
+		log.debug("selectMaxCode()");
+		return sqlSession.selectOne(namespace + "selectMaxCode");
+	}
 	
 	
 

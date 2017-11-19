@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.dgit.SaleManagement.dao.AccountDao;
+import kr.or.dgit.SaleManagement.dao.AccountDaoImpl;
 import kr.or.dgit.SaleManagement.dao.SalesDao;
 import kr.or.dgit.SaleManagement.dao.SalesDaoImpl;
 import kr.or.dgit.SaleManagement.dto.Sales;
@@ -63,6 +65,32 @@ public class SalesService {
 			throw new RuntimeException(e.getCause());
 		}finally {
 			sqlSession.close();
+		}
+	}
+
+	public int deleteSales(Sales sales) {
+		int res = -1;
+		SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();
+		try{
+			SalesDao salesDao = new SalesDaoImpl(sqlSession);
+			res = salesDao.deleteSales(sales);
+			
+			sqlSession.commit();
+			return res;
+		}catch (Exception e) {
+			e.getStackTrace();
+			sqlSession.rollback();
+			throw new RuntimeException(e.getCause());
+		}finally {
+			sqlSession.close();
+		}
+		
+	}
+
+	public int findMaxCode() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			SalesDao salesDao = new SalesDaoImpl(sqlSession);
+			return salesDao.selectMaxCode();
 		}
 	}
 }

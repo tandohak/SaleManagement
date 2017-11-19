@@ -57,7 +57,7 @@ public class ProductController {
 	private TextField priceTf;
 	
 	@FXML
-	private ComboBox<String> bigCb;
+	private ComboBox<BigClass> bigCb;
 	
 	@FXML
 	private ComboBox smallCb;
@@ -102,7 +102,7 @@ public class ProductController {
 		
 	private ObservableList<Product> myList = FXCollections.observableArrayList();
 	
-	private ObservableList<String> biglist = FXCollections.observableArrayList();
+	private ObservableList<BigClass> biglist = FXCollections.observableArrayList();
 
 	@FXML
 	private void initialize() {
@@ -116,7 +116,7 @@ public class ProductController {
 		List<BigClass> blist = bigService.findAll();
 		
 		for(BigClass big : blist) {	
-			biglist.add(big.getBigName().trim());
+			biglist.add(big);
 			//공백 콤보박스에 공백 들어가서 크기가 커지니까 trim()으로 공백 없앤뒤 입력해야함
 		}
 		

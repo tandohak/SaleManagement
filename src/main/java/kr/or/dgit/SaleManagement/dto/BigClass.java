@@ -75,7 +75,7 @@ public class BigClass {
 
 	@Override
 	public String toString() {
-		return String.format("BigClass [bigClass=%s, bigName=%s]", bigClass, bigName);
+		return String.format("%s",bigName.getValue().trim());
 	}
-
+	
 }

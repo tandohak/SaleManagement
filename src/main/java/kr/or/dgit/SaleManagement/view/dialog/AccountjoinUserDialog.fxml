@@ -74,7 +74,7 @@
                   <PasswordField fx:id="pwTfComf" onKeyReleased="#pwTypeHandler" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <HBox style="-fx-spacing: 5px;" GridPane.columnIndex="1">
                      <children>
-                        <TextField fx:id="idTf" maxWidth="150.0" prefHeight="23.0" prefWidth="116.0" />
+                        <TextField fx:id="idTf" maxWidth="150.0" onKeyTyped="#idTypeCheck" prefHeight="23.0" prefWidth="116.0" />
                         <JFXButton fx:id="idCheckBtn" onAction="#idTypeHandler" style="-fx-pref-width: 40px;" styleClass="greenBtn" text="확인" />
                      </children>
                   </HBox>

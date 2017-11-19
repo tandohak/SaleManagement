@@ -10,4 +10,7 @@ public interface SalesDao {
 	List<Sales> selectSalesSearch(Sales sales);
 	int insertSales(Sales sales);
 	int updateSales(Sales sales);
+	int deleteSales(Sales sales);
+	
+	int selectMaxCode();
 }

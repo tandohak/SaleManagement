@@ -94,8 +94,12 @@
 		where saleCode = #{saleCode}
 	</update>
 	
-	<delete id="deletSales" parameterType="Sales">
+	<delete id="deleteSales" parameterType="Sales">
 		delete from sales
 		<include refid="whereSql"/>
 	</delete>
+	
+	<select id="selectMaxCode" resultType="int">
+		SELECT MAX(salecode) FROM sales
+	</select>
 </mapper>

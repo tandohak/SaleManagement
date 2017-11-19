@@ -33,13 +33,13 @@ public class MainApp extends Application {
 		
 //		setWindowMove(primaryStage);
 		
-		windowResize(primaryStage);
+//		windowResize(primaryStage);
 
 //		fontLoad();
 
 	}
 
-	private void windowResize(Stage primaryStage) {
+	/*private void windowResize(Stage primaryStage) {
 		rootLayout.setOnMousePressed(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -71,7 +71,7 @@ public class MainApp extends Application {
 		            }
 		        }
 		});
-	}
+	}*/
 
 	
 

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -125,57 +127,25 @@ public class JoinUserController{
 	}
 	
 	@FXML
+	private void idTypeCheck(KeyEvent event) {
+		idCheckOk = false;
+		checkIdIcon.setVisible(false);
+		
+	}
+	
+	@FXML
 	private void idTypeHandler() {
 		String path = System.getProperty("user.dir");
 		
-		Sales sales = new Sales();
-		sales.setSaleId(idTf.getText());
-		
-		Account acc = new Account();
-		acc.setAccId(idTf.getText());
-		
-		Sales saleFind = salesService.findSalesByCode(sales);
-		Account accFind = accService.findAccountById(acc);
-		
-		boolean checkId = true;	
-		try{util.tfComfrim(idTf);}catch (Exception e) {
-			Alert alert =new Alert(AlertType.WARNING);
-			alert.setTitle("공백존재");			
-			alert.setContentText("공백이 존재합니다.");
-			alert.show();
-			e.printStackTrace();
-			return;
-		}
-			
-		if(saleFind != null) {
-			checkId = false;
-		}
-		
-		if(accFind != null) {
-			checkId = false;
-		}
-			
-		if(checkId) {
+		idCheckOk = util.idOverlapCheck(idTf);
+		if(idCheckOk) {
 			File file = new File(path + "/DataFile/ic_check_circle_black_48dp_1x.png" );
 			Image image = new Image(file.toURI().toString());
 			checkIdIcon.setImage(image);
 			checkIdIcon.setVisible(true);
-			
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle(null);
-			alert.setHeaderText(null);
-			alert.setContentText("사용가능한 아이디 입니다.");
-			alert.showAndWait();
-			idCheckOk= true;
 		}else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle(null);
-			alert.setHeaderText(null);
-			alert.setContentText("아이디가 이미 존재합니다.");
-			alert.showAndWait();
 			checkIdIcon.setVisible(false);
-			idCheckOk= false;
-		}
+		}	
 	}
 	
 	@FXML
@@ -207,11 +177,10 @@ public class JoinUserController{
 			try {
 				checkAlert(idCheckOk,"아이디 중복 체크를 해주세요.");
 				checkAlert(pwCheckOk,"비밀번호가 같지 않습니다.");
-				String pattern = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$";
-				String errmsg = "핸드폰 형식에 맞춰 입력해 주세요 ex) 010-1234-1234";
-				util.regexTfComfirm(pattern, errmsg, phoneTf);
-				util.regexTfComfirm("^.*(?=^.{8,15}$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$", "비밀번호는 8-15자리 이내로 영문자,숫자,특수문자 조합이어야 합니다.", pwTf);
-				util.regexTfComfirm("^[a-zA-Z가-힣]{1,15}$", "업체명은 한글/영문만 가능합니다.", nameTf);;
+				
+				util.regexTfComfirmTel(phoneTf);
+				util.regexTfComfirmPw(pwTf);
+				util.regexTfComfirmAccName(nameTf);
 			} catch (Exception e) {
 				Alert alert =new Alert(AlertType.WARNING);
 				alert.setTitle(null);			
@@ -227,20 +196,29 @@ public class JoinUserController{
 			alert.setTitle(null);			
 			alert.setHeaderText(null);
 			alert.setContentText("정말 가입하시겠습니까?");
-			alert.showAndWait();
+			
+			ButtonType clickType= alert.showAndWait().get();
+			
+			if(clickType.getText().equals("취소")) {
+//				this.closeDialogAction(); 
+				return;
+			}
+			
+			
 			Account account = new Account();
 			account.setAccName(nameTf.getText());
 			account.setAccPw(pwTf.getText());
 			account.setAccId(idTf.getText());
 			account.setAccTel(phoneTf.getText());
-			account.setAccAddr("[" + addrZipTf.getText() +"]"+ addrTf.getText());
+			account.setAccAddr("[" + addrZipTf.getText() +"]"+ addrTf.getText());			
+			// 코드 지정
 			String code = "2";
 			String year   = new java.text.SimpleDateFormat("yy").format(new java.util.Date());
 			
 			int codeNum = Integer.parseInt(code+year+00001);
 			int maxCode = accService.findMaxCode();
 			
-			if(maxCode > codeNum) {				
+			if(maxCode >= codeNum) {				
 				maxCode++;
 				String maxCodeStr = maxCode+"";
 				code += year+ maxCodeStr.substring(3, maxCodeStr.length());
@@ -274,7 +252,8 @@ public class JoinUserController{
 		} catch (Exception e) {
 			Alert alert =new Alert(AlertType.WARNING);
 			alert.setTitle("공백존재");			
-			alert.setContentText("공백이 존재합니다.");
+			alert.setHeaderText(null);
+			alert.setContentText(e.getMessage());
 			alert.show();
 			e.printStackTrace();
 			return false;
