@@ -1,8 +1,5 @@
 package kr.or.dgit.SaleManagement.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -11,7 +8,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.dgit.SaleManagement.dto.Sales;
-import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.service.SalesService;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

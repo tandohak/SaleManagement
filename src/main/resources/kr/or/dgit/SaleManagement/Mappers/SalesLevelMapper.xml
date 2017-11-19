@@ -1,44 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper	namespace="kr.or.dgit.SaleManagement.dto.SaleLevelDao">
-	<resultMap type="SalesLevel" id="salesLevelResult">
-		<id property="sLevel" column="level"/>	
-		<result property="sDisrate" column="disrate"/>
+<mapper namespace="kr.or.dgit.SaleManagement.dao.SalesLevelDao">
+	<resultMap type="SalesLevel" id="SalesLevelrs">
+		<id property="salLevel" column="level"/>
+		<result property="salDisrate" column="disrate"/>
 	</resultMap>
 	
 	<sql id="selectSql">
-		SELECT level, disrate
-		FROM saleslevel
+		select  level, disrate
+		from saleslevel
 	</sql>
 	
-	<sql id="whereSql">
-		<where>
-			<if test="sLevel != null">
-				AND level = #{sLevel}
-			</if>
-			<if test="sDisrate != 0">
-				AND disrate = #{sDisrate}
-			</if>
-		</where>
-	</sql>
-	
-	<select id="selectAllSaleLevel" resultMap="salesLevelResult">
+	<select  id="selectAllSaleLevel" parameterType="SalesLevel" resultMap="SalesLevelrs">
 		<include refid="selectSql"/>
 	</select>
 	
-	<select id="selectSalesByOne" resultMap="salesLevelResult" parameterType="SalesLevel">
+	<select  id="selectSalesByOne" parameterType="SalesLevel" resultMap="SalesLevelrs">
 		<include refid="selectSql"/>
-		<include refid="whereSql"/>
-	</select>	
+		WHERE level = #{salLevel}
+	</select>
+	
+	<insert id="insertSalesLevel" parameterType="SalesLevel">
+		insert into saleslevel(level,disrate)
+		values(#{salLevel},#{salDisrate})
+	</insert>
 	
 	<delete id="deletSalesLevel" parameterType="SalesLevel">
-		delete from salesLevel
-		<include refid="whereSql"/>
+		delete from saleslevel
+		where level = #{salLevel}
 	</delete>
 	
 	<update id="updateSalesLevel" parameterType="SalesLevel">
-		update saleslevel
-		set disrate = #{sDisrate}
-		where level = #{sLevel}
+		UPDATE saleslevel
+		SET disrate = #{salDisrate}
+		WHERE level = #{salLevel}
 	</update>
 </mapper>
