@@ -168,7 +168,7 @@ public class JoinUserController{
 		String pwComVal = pwTfComf.getText();
 	
 		if(pwVal.equals("") || pwComVal.equals("")) {
-			 
+			checkPwIcon.setVisible(false);
 		}else if(pwVal.equals(pwComVal)) {
 			File file = new File(path + "/DataFile/ic_check_circle_black_48dp_1x.png" );
 			Image image = new Image(file.toURI().toString());
@@ -191,9 +191,7 @@ public class JoinUserController{
 				checkAlert(idCheckOk,"아이디 중복 체크를 해주세요.");
 				checkAlert(pwCheckOk,"비밀번호가 같지 않습니다.");
 				
-				util.regexTfComfirmTel(phoneTf);
-				util.regexTfComfirmPw(pwTf);
-				util.regexTfComfirmAccName(nameTf);
+				
 			} catch (Exception e) {
 				Alert alert =new Alert(AlertType.WARNING);
 				alert.setTitle(null);			
@@ -254,6 +252,9 @@ public class JoinUserController{
 
 	private boolean tfComfrimField() {		
 		try {
+			util.regexTfComfirmTel(phoneTf);
+			util.regexTfComfirmPw(pwTf);
+			util.regexTfComfirmAccName(nameTf);
 			util.tfComfrim(idTf);
 			util.tfComfrim(nameTf);
 			util.tfComfrim(phoneTf);
@@ -264,7 +265,7 @@ public class JoinUserController{
 			return true;
 		} catch (Exception e) {
 			Alert alert =new Alert(AlertType.WARNING);
-			alert.setTitle("공백존재");			
+			alert.setTitle(null);			
 			alert.setHeaderText(null);
 			alert.setContentText(e.getMessage());
 			alert.show();

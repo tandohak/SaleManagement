@@ -1,6 +1,7 @@
 package kr.or.dgit.SaleManagement.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
@@ -9,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -24,7 +27,12 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import kr.or.dgit.SaleManagement.MainApp;
+import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
 import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.service.SalesLevelService;
@@ -32,6 +40,7 @@ import kr.or.dgit.SaleManagement.service.SalesService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
 public class SalesController {
+	@FXML private BorderPane pane;
 	@FXML private TextField searchAllTf;
 
 	@FXML private TextField nameTf;	
@@ -159,19 +168,49 @@ public class SalesController {
 	}
 	
 	@FXML
-	private void getCellMenuAction() {
-		int index = saleTable.getSelectionModel().getSelectedIndex();
+	private void getCellMenuAction() {		
 		Sales sales = saleTable.getSelectionModel().getSelectedItem();
 		
-		codeLabel.setText(sales.getSaleCode()+"");
-		nameTf.setText(sales.getSaleName());
-		idTf.setText(sales.getSaleId());
-		idTf.setDisable(false);
-		levelCb.setValue(new SalesLevel(sales.getSaleLevel()));
-		telTf.setText(sales.getSaleTel());
-		String addrs =  sales.getSaleAddr();
-		addrZipTf.setText(addrs.substring(addrs.indexOf("[")+1, addrs.indexOf("]")));
-		addrTf.setText(addrs.substring(addrs.indexOf("]")+1, addrs.length()));		
+		try {
+			checkAlert(sales==null ? false : true,"수정할 열을 선택 해주세요.");
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle(null);
+			alert.setHeaderText(null);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+			e.printStackTrace();
+			e.printStackTrace();
+			return ;
+		}
+
+		try {
+		        FXMLLoader loader = new FXMLLoader();
+		        loader.setLocation(MainApp.class.getResource("view/dialog/SalesEditDialog.fxml"));
+		        BorderPane page = (BorderPane) loader.load();
+
+		        Stage dialogStage = new Stage();
+		        dialogStage.setTitle("Edit Person");
+		        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+		        dialogStage.initOwner(pane.getScene().getWindow());
+		        Scene scene = new Scene(page);
+		        dialogStage.setScene(scene);
+		        
+		        SalesEditDialogController controller = loader.getController();
+		        controller.setDialogStage(dialogStage);
+		        controller.setLevellist(levellist);
+		        controller.setSales(sales);
+		        
+		        dialogStage.showAndWait();
+
+		        if(controller.isOkClicked()) {
+		        	System.out.println(controller.getSales());
+		        	saleSerivce.updateSales(controller.getSales());
+		        	refreshTable();
+		        }
+		   } catch (IOException e) {
+		        e.printStackTrace();
+		   }	
 	}
 	
 	
@@ -180,11 +219,7 @@ public class SalesController {
 		if(tfComfrimField()) {
 			try {
 				checkAlert(idCheckOk,"아이디 중복 체크를 해주세요.");
-				checkAlert(pwCheckOk,"비밀번호가 같지 않습니다.");
-				
-				tfUtil.regexTfComfirmSaleName(nameTf);
-				tfUtil.regexTfComfirmPw(pwTf);
-				tfUtil.regexTfComfirmTel(telTf);
+				checkAlert(pwCheckOk,"비밀번호가 같지 않습니다.");				
 			} catch (Exception e) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle(null);
@@ -227,7 +262,7 @@ public class SalesController {
 			}
 			sales.setSaleCode(codeNum);
 			saleSerivce.insertSales(sales);
-			myList.add(sales);
+			refreshTable();
 		}
 	}
 
@@ -243,6 +278,7 @@ public class SalesController {
 		checkIdIcon.setVisible(false);		
 	}
 	
+		
 	@FXML
 	private void idTypeHandler() {
 		String path = System.getProperty("user.dir");
@@ -271,6 +307,14 @@ public class SalesController {
 		}	
 	}
 	
+	private void refreshTable() {
+		saleSerivce = SalesService.getInstance();
+		List<Sales> lists = saleSerivce.findSaleAll();
+		for(Sales sale : lists) {
+			myList.add(sale);
+		}		
+	}
+	
 	@FXML
 	private void pwTypeHandler(KeyEvent event) {
 		String path = System.getProperty("user.dir");
@@ -278,7 +322,7 @@ public class SalesController {
 		String pwComVal = pwComfTf.getText();
 	
 		if(pwVal.equals("") || pwComVal.equals("")) {
-			 
+			checkPwIcon.setVisible(false);
 		}else if(pwVal.equals(pwComVal)) {
 			File file = new File(path + "/DataFile/ic_check_circle_black_48dp_1x.png" );
 			Image image = new Image(file.toURI().toString());
@@ -296,6 +340,9 @@ public class SalesController {
 
 	private Boolean tfComfrimField() {
 		try {
+			tfUtil.regexTfComfirmSaleName(nameTf);
+			tfUtil.regexTfComfirmPw(pwTf);
+			tfUtil.regexTfComfirmTel(telTf);
 			tfUtil.tfComfrim(nameTf);
 			tfUtil.cbComfrim(levelCb);
 			tfUtil.tfComfrim(idTf);
@@ -307,13 +354,12 @@ public class SalesController {
 			return true;
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("공백존재");
+			alert.setTitle(null);
 			alert.setHeaderText(null);
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
 			e.printStackTrace();
 			return false;
-		}
-		
+		}		
 	}
 }

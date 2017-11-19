@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="pane" prefHeight="515.0" prefWidth="364.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.JoinUserDialog">
+<BorderPane fx:id="pane" prefHeight="515.0" prefWidth="364.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController">
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #dddddd;" BorderPane.alignment="CENTER">
          <children>
@@ -28,8 +28,8 @@
          <children>
             <ButtonBar layoutX="87.0" layoutY="3.0" prefHeight="23.0" prefWidth="145.0">
               <buttons>
-                  <JFXButton fx:id="joinSalesBtn" onAction="#submitClickAction" styleClass="greenBtn" text="수정" />
-                  <JFXButton fx:id="closeDialog" onAction="#closeDialogAction" text="취소" />
+                  <JFXButton fx:id="joinSalesBtn" onAction="#handleOk" styleClass="greenBtn" text="수정" />
+                  <JFXButton fx:id="closeDialog" onAction="#handleCancel" text="취소" />
               </buttons>
             </ButtonBar>
          </children>
@@ -60,11 +60,11 @@
                         <Insets />
                      </GridPane.margin>
                   </Label>
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="levelCb" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="비밀번호" GridPane.rowIndex="3" />
-                  <PasswordField fx:id="pwTf" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <PasswordField fx:id="pwTf" onKeyReleased="#pwTypeHandler" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="비밀번호확인" GridPane.rowIndex="4" />
-                  <PasswordField fx:id="pwComfTf" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <PasswordField fx:id="pwComfTf" onKeyReleased="#pwTypeHandler" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="성명" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets />
@@ -84,9 +84,9 @@
                   <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </GridPane>
-            <TextField layoutX="177.0" layoutY="324.0" maxWidth="134.0" prefHeight="23.0" prefWidth="111.0" promptText="우편번호검색" styleClass="searchTF" />
+            <TextField fx:id="addrZipTf" layoutX="177.0" layoutY="324.0" maxWidth="134.0" prefHeight="23.0" prefWidth="111.0" promptText="우편번호검색" styleClass="searchTF" />
             <Label layoutX="35.0" layoutY="328.0" text="주소" />
-            <TextField layoutX="99.0" layoutY="358.0" prefHeight="23.0" prefWidth="214.0" />
+            <TextField fx:id="addrTf" layoutX="99.0" layoutY="358.0" prefHeight="23.0" prefWidth="214.0" />
             <Label layoutX="34.0" layoutY="362.0" text="상세주소" />
             <ImageView fx:id="userImg" fitHeight="75.0" fitWidth="75.0" layoutX="25.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -95,8 +95,9 @@
             </ImageView>
             <TextField fx:id="imgNameTf" editable="false" layoutX="107.0" layoutY="48.0" prefHeight="23.0" prefWidth="127.0" />
             <Label layoutX="107.0" layoutY="25.0" text="이미지추가" />
-            <JFXButton layoutX="244.0" layoutY="48.0" onAction="#openDialogFileChooser" text="삽입하기" />
+            <JFXButton layoutX="244.0" layoutY="48.0" text="삽입하기" />
             <JFXButton layoutX="288.0" layoutY="324.0" styleClass="searchBtn" />
+            <ImageView fx:id="checkPwIcon" fitHeight="22.0" fitWidth="18.0" layoutX="324.0" layoutY="226.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </center>

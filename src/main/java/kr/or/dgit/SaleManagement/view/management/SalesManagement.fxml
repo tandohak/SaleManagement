@@ -24,7 +24,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="675.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.SalesController">
+<BorderPane fx:id="pane" prefHeight="675.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.SalesController">
    <top>
       <AnchorPane prefHeight="100.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
@@ -114,7 +114,7 @@
                      </font>
                   </JFXButton>
                   <JFXButton onAction="#deleteSelectedCell" style="-fx-background-color: #DDDDDD;" text="선택삭제" textFill="#7c8991" />
-                  <JFXButton style="-fx-background-color: #DDDDDD;" text="수정" textFill="#7c8991" />
+                  <JFXButton onAction="#getCellMenuAction" style="-fx-background-color: #DDDDDD;" text="수정" textFill="#7c8991" />
                </buttons>
             </ButtonBar>
             <JFXButton layoutX="794.0" layoutY="189.0" stylesheets="@../css/style.css" text="인쇄" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="189.0" />
@@ -142,7 +142,7 @@
          <contextMenu>
             <ContextMenu>
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#updateCellMenuAction" text="수정" />
+                <MenuItem mnemonicParsing="false" text="수정" />
                   <MenuItem mnemonicParsing="false" onAction="#deleteCellMenuAction" text="삭제" />
               </items>
             </ContextMenu>
