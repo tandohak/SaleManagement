@@ -97,7 +97,7 @@
                         <Label text="주소" />
                         <Label text="우편번호" textFill="#553ad0" />
                         <TextField fx:id="addrZipTf" prefHeight="23.0" prefWidth="134.0" style="-fx-pref-height: 23;" styleClass="searchTF" />
-                        <Button mnemonicParsing="false" prefHeight="7.0" prefWidth="28.0" styleClass="searchBtn" text="검색" />
+                        <Button mnemonicParsing="false" onAction="#searchAddrAction" prefHeight="7.0" prefWidth="28.0" styleClass="searchBtn" text="검색" />
                      </children>
                      <opaqueInsets>
                         <Insets />

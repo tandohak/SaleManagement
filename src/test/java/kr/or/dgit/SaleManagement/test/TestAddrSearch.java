@@ -25,9 +25,15 @@ public class TestAddrSearch {
 	@Test
 	public void test() {
 		Addr addr = new Addr();
-		addr.setDoro("대명%");
-		List<Addr> list = addrService.findAddrSearch(addr);
-		
-		Assert.assertNotNull(list);
+//		addr.setDoro("대명%");
+//		
+//		addr.setDoro("대명%");
+//		addr.setSido("대명%");
+//		addr.setSigungu("대명%");
+//		List<Addr> res = addrService.findAddrSearch(addr);
+//		for(Addr adr : res) {
+//			System.out.println(adr);
+//		}
+//		Assert.assertNotNull(res);
 	}
 }

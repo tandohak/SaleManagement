@@ -13,7 +13,7 @@ public class MainApp extends Application {
 	private Stage primaryStage;
 	private Parent rootLayout;
 	private Boolean resizebottom = false;
-	private double dx;
+	 private double dx;
 	private double dy;
 
 	final Delta dragDelta = new Delta();
@@ -34,7 +34,6 @@ public class MainApp extends Application {
 //		windowResize(primaryStage);
 
 //		fontLoad();
-
 	}
 
 	/*private void windowResize(Stage primaryStage) {
