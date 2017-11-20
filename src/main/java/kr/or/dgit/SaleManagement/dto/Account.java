@@ -19,20 +19,21 @@ public class Account {
 	private StringProperty accId = new SimpleStringProperty();
 	private StringProperty accPw = new SimpleStringProperty();
 
-	public Account() {}
+	public Account() {
+	}
 
 	public BooleanProperty getCheckedBoxProperty() {
 		return checkedBox;
 	}
-	
+
 	public Boolean getCheckedBox() {
 		return checkedBox.get();
 	}
-	
+
 	public void setCheckedBox(Boolean checkedBox) {
 		this.checkedBox.set(checkedBox);
 	}
-	
+
 	public ObservableValue<Boolean> selectedProperty() {
 		return checkedBox;
 	}
@@ -40,11 +41,6 @@ public class Account {
 	public int getAccCode() {
 		return accCode.get();
 	}
-	
-	
-	
-	
-
 
 	public IntegerProperty getAccCodeProperty() {
 		return accCode;
@@ -63,7 +59,7 @@ public class Account {
 	}
 
 	public void setAccName(String accName) {
-		this.accName.set(accName);;
+		this.accName.set(accName);
 	}
 
 	public String getAccTel() {
@@ -78,8 +74,6 @@ public class Account {
 		this.accTel.set(accTel);
 	}
 
-
-
 	public String getAccAddr() {
 		return accAddr.get();
 	}
@@ -92,8 +86,6 @@ public class Account {
 		this.accAddr.set(accAddr);
 	}
 
-
-
 	public String getAccAdmit() {
 		return accAdmit.get();
 	}
@@ -102,12 +94,9 @@ public class Account {
 		return accAdmit;
 	}
 
-
 	public void setAccAdmit(String accAdmit) {
-		this.accAdmit.set(accAdmit);;
+		this.accAdmit.set(accAdmit);
 	}
-	
-
 
 	public String getAccLevel() {
 		return accLevel.get();
@@ -116,12 +105,10 @@ public class Account {
 	public StringProperty getAccLevelProperty() {
 		return accLevel;
 	}
-	
+
 	public void setAccLevel(String accLevel) {
 		this.accLevel.set(accLevel);
 	}
-
-
 
 	public String getAccId() {
 		return accId.get();
@@ -135,8 +122,6 @@ public class Account {
 		this.accId.set(accId);
 	}
 
-
-
 	public String getAccPw() {
 		return accPw.get();
 	}
@@ -144,12 +129,10 @@ public class Account {
 	public StringProperty getAccPwProperty() {
 		return accPw;
 	}
-	
+
 	public void setAccPw(String accPw) {
-		this.accPw.set(accPw);;
+		this.accPw.set(accPw);
 	}
-
-
 
 	@Override
 	public String toString() {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="kr.or.dgit.SaleManagement.dao.AccountLevelDao">
+	<sql id="selectAccountLevel">
+		SELECT level, disrate
+		FROM accountlevel
+	</sql>
+	
+	<resultMap type="AccountLevel" id="AccountLevels">
+		<id property="accLevel" column="level"/>
+		<result property="accDisrate" column="disrate"/>
+	</resultMap>
+		
+	<select id="selectAccountLevelByAll" parameterType="AccountLevel" resultMap="AccountLevels">
+		<include refid="selectAccountLevel"/>
+	</select>
+</mapper>

@@ -6,9 +6,7 @@
 		SELECT accCode, name, tel, addr, admit, alevel, id, pw
 		FROM account
 	</sql>
-	
-	
-	
+		
 	<sql id = "whereAccount">
 		<where>
 			<if test="accCode != 0">
