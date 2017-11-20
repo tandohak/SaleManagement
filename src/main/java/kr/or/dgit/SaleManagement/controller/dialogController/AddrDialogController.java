@@ -76,14 +76,13 @@ public class AddrDialogController {
 			addr.setDoro(text[2]+"%");
 		}
 		
-		System.out.println(addr);
 		List<Addr> res = addrService.findAddrSearch(addr, new RowBounds(0,50));
 		
 		for(Addr add : res) {
 			AddrItem addrIt = new AddrItem();
 	
 			addrIt.setAddr(add.getAddrs());
-			addrIt.setAddrZip(addr.getZipCode());
+			addrIt.setAddrZip(add.getZipCode());
 			myList.add(addrIt);
 		}
 		

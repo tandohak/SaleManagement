@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.dialogController.AddrDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
+import kr.or.dgit.SaleManagement.dto.AddrItem;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.SalesService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
@@ -148,10 +149,11 @@ public class JoinUserController{
 	        
 	        dialogStage.showAndWait();
 
-//	        if(controller.isOkClicked()) {
-//	        	
-//	        	
-//	        }
+	        if(controller.isOkClicked()) {
+	          AddrItem addrItem  = controller.getAddrItem();
+	          addrTf.setText(addrItem.getAddr());
+	          addrZipTf.setText(addrItem.getAddrZip());
+	        }
 	   } catch (IOException e) {
 	        e.printStackTrace();
 	   }
@@ -161,7 +163,6 @@ public class JoinUserController{
 	private void idTypeCheck(KeyEvent event) {
 		idCheckOk = false;
 		checkIdIcon.setVisible(false);
-		
 	}
 	
 
