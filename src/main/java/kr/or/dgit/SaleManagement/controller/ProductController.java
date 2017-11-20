@@ -1,6 +1,7 @@
 package kr.or.dgit.SaleManagement.controller;
 
 import java.awt.Event;
+import java.io.IOException;
 import java.util.List;
 import java.util.Observer;
 
@@ -14,6 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -26,10 +29,16 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.ProductTestMain;
+import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
 import kr.or.dgit.SaleManagement.dto.BigClass;
 import kr.or.dgit.SaleManagement.dto.Product;
+import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.dto.SmallClass;
 import kr.or.dgit.SaleManagement.service.BigClassService;
 import kr.or.dgit.SaleManagement.service.ProductService;
@@ -37,10 +46,7 @@ import kr.or.dgit.SaleManagement.service.SmallClassService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
 public class ProductController {
-	
-	@FXML
-	private AnchorPane Node;
-	
+	@FXML private BorderPane pane;
 	@FXML
 	private TextField searchTf;
 	
@@ -49,8 +55,6 @@ public class ProductController {
 	
 	@FXML
 	private TextField nameTf;
-	
-
 	
 	@FXML
 	private ComboBox<String> admitCb;
@@ -102,9 +106,10 @@ public class ProductController {
 	@FXML
 	private TableColumn<Product, Integer> priceTc;
 	
-	@FXML
-	private TableColumn<Product, String> admitTc;
+	@FXML private TableColumn<Product, String> admitTc;
 	
+	
+	private ObservableList<Product> levellist = FXCollections.observableArrayList();
 	
 	private static ProductService pdtService;
 	private static BigClassService bigService;
@@ -271,6 +276,8 @@ public class ProductController {
 			pdt.setAccCode(21722051);
 			pdtService.insertProduct(pdt);
 			
+			myList = FXCollections.observableArrayList();
+			
 			refreshTable();
 		}
 		
@@ -288,12 +295,7 @@ public class ProductController {
 
 	@FXML
 	public void SearchClickAction() {
-		/*Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle(null);
-		alert.setHeaderText(null);
-		alert.setContentText("a");
-		alert.showAndWait();*/
-		
+
 		myList = FXCollections.observableArrayList();
 		
 		String searchtf = searchTf.getText();
@@ -309,12 +311,99 @@ public class ProductController {
 		
 	}
 	
+	private void checkAlert(boolean isOk,String pwck) throws Exception {
+		if(!isOk) {
+			throw new Exception(pwck);
+		}
+	}
+	
+	@FXML
+	public void getCellClassAction() {
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("view/dialog/AddClassDialog.fxml"));
+        BorderPane page;
+		try {
+			page = (BorderPane) loader.load();
+			
+			Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Product");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+	        dialogStage.initOwner(pane.getScene().getWindow());
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+//	        AddClassDialogController controller = loader.getController();
+//	        controller.setDialogStage(dialogStage);
+	       
+
+	        
+	        dialogStage.showAndWait();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	@FXML
+	public void getCellMenuAction() {
+		Product pdt = pdtTable.getSelectionModel().getSelectedItem();
+		
+		try {
+			checkAlert(pdt==null ? false : true,"수정할 열을 선택 해주세요.");
+		}catch(Exception e) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle(null);
+			alert.setHeaderText(null);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+			e.printStackTrace();
+			e.printStackTrace();
+			return ;
+		}try {
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/dialog/AdminInsertProduct.fxml"));
+	        BorderPane page = (BorderPane) loader.load();
+
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Product");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+	        dialogStage.initOwner(pane.getScene().getWindow());
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+	        ProductDialogController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
+	        controller.setLevellist(levellist);
+	        controller.setProduct(pdt);
+	
+	        
+	        dialogStage.showAndWait();
+
+	        if(controller.isOkClicked()) {
+	        	System.out.println(controller.getProduct());
+	        	pdtService.updatePdt(controller.getProduct());
+	        	refreshTable();
+	        }
+	   } catch (IOException e) {
+	        e.printStackTrace();
+	   }	
+		
+		
+	}
+	
+	
+	
 	private void refreshTable() {
+		
+		
 		pdtService = ProductService.getInstance();
 		List<Product> lists = pdtService.findAll();
 		for(Product pdt : lists) {
 			myList.add(pdt);
 		}
+		pdtTable.setItems(myList);
 	}
 	
 	
@@ -328,7 +417,9 @@ public class ProductController {
 			tfUtil.cbComfrim(admitCb);
 			tfUtil.regexTfComfirmNumber(priceTf);
 			tfUtil.regexTfComfirmNumber(costTf);
-			tfUtil.regexTfComfirmCost(priceTf, costTf);
+			if(!tfUtil.regexTfComfirmCost(priceTf, costTf)) {
+				return false;
+			}
 			return true;
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.WARNING);

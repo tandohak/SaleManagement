@@ -22,12 +22,12 @@ public class TestAddrSearch {
 		addrService = null;
 	}
 
-	@Test
+/*	@Test
 	public void test() {
 		Addr addr = new Addr();
 		addr.setDoro("대명%");
 		List<Addr> list = addrService.findAddrSearch(addr);
 		
 		Assert.assertNotNull(list);
-	}
+	}*/
 }

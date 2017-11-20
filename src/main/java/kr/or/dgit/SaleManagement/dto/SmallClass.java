@@ -20,6 +20,13 @@ public class SmallClass {
 
 	
 
+	public SmallClass(IntegerProperty smallClass) {
+		super();
+		this.smallClass = smallClass;
+	}
+
+
+
 	public SmallClass() {}
 
 	
