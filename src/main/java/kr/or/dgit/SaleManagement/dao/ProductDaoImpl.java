@@ -54,4 +54,10 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.getMapper(ProductDao.class).updatePdt(product);
 	}
 
+	@Override
+	public int selectMaxCode() {
+		log.debug("selectMaxCode()");
+		return sqlSession.getMapper(ProductDao.class).selectMaxCode();
+	}
+
 }

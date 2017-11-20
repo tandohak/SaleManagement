@@ -84,5 +84,9 @@
 		admit=#{pdtAdmit}, aCode=#{accCode}
 		where pdtCode=#{pdtCode};
 	</update>
-
+	
+	
+	<select id="selectMaxCode" resultType="int">
+		SELECT MAX(pdtCode) FROM product
+	</select>
 </mapper>

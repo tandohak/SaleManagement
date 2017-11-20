@@ -31,7 +31,7 @@ public class TestSmallClass {
 		SmallClassService.findBySmallClassLisk(SmallClass);
 	}
 */
-	/*@Test
+/*	@Test
 	public void test() {
 		List<SmallClass> lists = SmallClassService.findAll();
 		Assert.assertNotNull(lists);
@@ -39,9 +39,8 @@ public class TestSmallClass {
 			System.out.println(pdt);
 			
 		}
-		
-	}
-*/	
+	}*/
+	
 	
 	
 /*	@Test
@@ -50,14 +49,14 @@ public class TestSmallClass {
 		int res = SmallClassService.insertSmallClass(row);
 		Assert.assertEquals(1, res);
 	}*/
-	
-/*	@Test
+/*	
+	@Test
 	public void test4ByBigClass() {
 		SmallClass SmallClass = new SmallClass();
 		SmallClass.setsBigClass(20);
 		SmallClassService.findByBigClass(SmallClass);
-	}*/
-	
+	}
+	*/
 /*	@Test
 	public void test4update() {
 		

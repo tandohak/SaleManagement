@@ -10,7 +10,13 @@ import kr.or.dgit.SaleManagement.dto.SmallClass;
 import kr.or.dgit.SaleManagement.util.MyBatisSqlSessionFactory;
 
 public class SmallClassService {
+	private final static SmallClassService instance = new SmallClassService();
 	
+	
+	public static SmallClassService getInstance() {
+		return instance;
+	}
+
 	public List<SmallClass> findAll() {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
 			SmallClassDao dao = new SmallClassDaoImpl(sqlSession);

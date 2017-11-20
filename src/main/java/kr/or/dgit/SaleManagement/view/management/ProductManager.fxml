@@ -28,7 +28,7 @@
                <padding>
                   <Insets bottom="4.0" left="7.0" right="7.0" top="4.0" />
                </padding></TextField>
-            <JFXButton fx:id="searchBtn" layoutX="152.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
+            <JFXButton fx:id="submitClickAction" layoutX="152.0" layoutY="14.0" onAction="#SearchClickAction" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
             <Separator layoutY="57.0" prefHeight="0.0" prefWidth="900.0" />
          </children>
       </AnchorPane>
@@ -53,7 +53,14 @@
                         <Label text="제품명" />
                         <TextField fx:id="nameTf" />
                         <Label text="코드" />
-                        <TextField fx:id="codeTf" />
+                        <Label fx:id="codeTf" />
+                        <Label text="거래처코드" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: none;">
+                           <children>
+                              <TextField fx:id="accCodeTf" styleClass="searchTF" />
+                              <JFXButton styleClass="searchBtn" text="Button" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -84,7 +91,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
                         <Label text="분류" />
-                        <ComboBox fx:id="bigCb" prefHeight="23.0" prefWidth="130.0" />
+                        <ComboBox fx:id="bigCb" onAction="#comboboxChange" prefHeight="23.0" prefWidth="130.0" />
                         <ComboBox fx:id="smallCb" prefWidth="130.0" />
                         <Button fx:id="classAddBtn" mnemonicParsing="false" prefWidth="90.0" style="-fx-pref-width: 95;" styleClass="addBtn" text="분류 추가 +" />
                      </children>
@@ -93,7 +100,7 @@
             </GridPane>
             <ButtonBar layoutX="14.0" layoutY="127.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0">
                <buttons>
-                  <JFXButton fx:id="addBtn" buttonType="RAISED" styleClass="greenBtn" text="등록" textFill="WHITE">
+                  <JFXButton fx:id="addBtn" buttonType="RAISED" onAction="#submitClickAction" styleClass="greenBtn" text="등록" textFill="WHITE">
                      <font>
                         <Font name="NanumBarunGothic Bold" size="12.0" />
                      </font>
