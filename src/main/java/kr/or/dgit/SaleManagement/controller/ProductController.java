@@ -36,10 +36,12 @@ import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.ProductTestMain;
 import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
+import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.BigClass;
 import kr.or.dgit.SaleManagement.dto.Product;
 import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.dto.SmallClass;
+import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.BigClassService;
 import kr.or.dgit.SaleManagement.service.ProductService;
 import kr.or.dgit.SaleManagement.service.SmallClassService;
@@ -114,6 +116,7 @@ public class ProductController {
 	private static ProductService pdtService;
 	private static BigClassService bigService;
 	private static SmallClassService smallService;
+	private static AccountService accService;
 	
 	private ObservableList<Product> myList = FXCollections.observableArrayList();
 	
@@ -196,7 +199,12 @@ public class ProductController {
 			
 		});
 		
-		codeTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
+//		accService = AccountService.getInstance();
+//		
+//		accService.findAccountByCode(new Account());
+		//cellData.getValue().getAccCodeProperty().asObject()
+		
+		codeTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCodeProperty().asObject());
 		nameTc.setCellValueFactory(cellData -> cellData.getValue().getPdtNameProperty());
 		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
 		costTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCostProperty().asObject());
