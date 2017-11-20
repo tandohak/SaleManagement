@@ -30,5 +30,4 @@ public class TestAddrSearch {
 		
 		Assert.assertNotNull(list);
 	}
-\
 }
