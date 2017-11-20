@@ -90,7 +90,7 @@ public class SalesEditDialogController {
 			sales.setSaleTel(telTf.getText());
 			sales.setSaleAddr("["+ addrZipTf.getText() + "]" + addrTf.getText());
 			sales.setSaleCode(Integer.parseInt(codeLabel.getText()));
-		
+			sales.setSaleLevel(levelCb.getValue().getSalLevel());
 			okClicked = true;		
 			dialogStage.close();
         }

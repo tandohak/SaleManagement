@@ -246,7 +246,7 @@ public class SalesController {
 			sales.setSalePw(pwTf.getText());
 			sales.setSaleTel(telTf.getText());
 			sales.setSaleAddr("["+ addrZipTf.getText() + "]" + addrTf.getText());
-
+			sales.setSaleLevel(levelCb.getValue().getSalLevel());
 			String code = "";
 			String year   = new java.text.SimpleDateFormat("yy").format(new java.util.Date());
 			

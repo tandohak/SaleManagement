@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.SaleManagement.dao.AddrDao">
+	<sql id="whereSql">
+		<where>
+			<if test="sido != null">
+				AND	sido like #{sido}
+			</if>
+			<if test="sigungu != null">
+				AND	sigungu like #{sigungu}
+			</if>
+			<if test="sido != null">
+				AND	doro like #{doro}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="searchAddr" resultType="Addr" parameterType="Addr">
+		select zipcode, sido, sigungu, doro, building1, building2
+		from addr
+		<include refid="whereSql"/>
+	</select>
+</mapper>
