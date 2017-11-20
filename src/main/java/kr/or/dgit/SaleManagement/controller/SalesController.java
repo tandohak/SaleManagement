@@ -45,8 +45,7 @@ public class SalesController {
 
 	@FXML private TextField nameTf;	
 	@FXML private Label codeLabel;
-	@FXML 
-	private TextField idTf;	
+	@FXML private TextField idTf;	
 	@FXML private TextField pwTf;	
 	@FXML private TextField pwComfTf;	
 	@FXML private TextField picTf;	

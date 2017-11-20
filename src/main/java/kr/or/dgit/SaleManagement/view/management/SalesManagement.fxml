@@ -66,7 +66,7 @@
                      <children>
                         <Label text="아이디" />
                         <TextField fx:id="idTf" onKeyTyped="#idTypeCheck" />
-                        <JFXButton onAction="#idTypeHandler" style="-fx-pref-width: 40px;" styleClass="greenBtn" text="버튼" />
+                        <JFXButton onAction="#idTypeHandler" style="-fx-pref-width: 40px;" styleClass="greenBtn" text="확인" />
                         <ImageView fx:id="checkIdIcon" fitHeight="22.0" fitWidth="18.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" />
                         <Label text="비밀번호" />
                         <PasswordField fx:id="pwTf" onKeyReleased="#pwTypeHandler" />
