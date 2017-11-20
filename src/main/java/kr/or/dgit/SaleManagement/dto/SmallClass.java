@@ -69,8 +69,7 @@ public class SmallClass {
 
 	@Override
 	public String toString() {
-		return String.format("SmallClass [smallClass=%s, smallName=%s, sBigClass=%s]", smallClass, smallName,
-				sBigClass);
+		return String.format("%s",  smallName.get());
 	}
 
 }

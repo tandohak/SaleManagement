@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -21,14 +22,19 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.ProductTestMain;
 import kr.or.dgit.SaleManagement.dto.BigClass;
 import kr.or.dgit.SaleManagement.dto.Product;
+import kr.or.dgit.SaleManagement.dto.SmallClass;
 import kr.or.dgit.SaleManagement.service.BigClassService;
 import kr.or.dgit.SaleManagement.service.ProductService;
+import kr.or.dgit.SaleManagement.service.SmallClassService;
+import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
 public class ProductController {
 	
@@ -44,11 +50,10 @@ public class ProductController {
 	@FXML
 	private TextField nameTf;
 	
-	@FXML
-	private TextField codeTf;
+
 	
 	@FXML
-	private ComboBox admitCb;
+	private ComboBox<String> admitCb;
 	
 	@FXML
 	private TextField costTf;
@@ -60,7 +65,7 @@ public class ProductController {
 	private ComboBox<BigClass> bigCb;
 	
 	@FXML
-	private ComboBox smallCb;
+	private ComboBox<SmallClass> smallCb;
 	
 	@FXML
 	private Button classAddBtn;
@@ -70,6 +75,9 @@ public class ProductController {
 	
 	@FXML
 	private Button changeBtn;
+	
+	@FXML
+	private Button addBtn;
 	
 	@FXML
 	private TableView<Product> pdtTable;
@@ -97,15 +105,25 @@ public class ProductController {
 	@FXML
 	private TableColumn<Product, String> admitTc;
 	
+	
 	private static ProductService pdtService;
 	private static BigClassService bigService;
-		
+	private static SmallClassService smallService;
+	
 	private ObservableList<Product> myList = FXCollections.observableArrayList();
 	
 	private ObservableList<BigClass> biglist = FXCollections.observableArrayList();
-
+	private ObservableList<SmallClass> smalllist = FXCollections.observableArrayList();
+	
+	private ObservableList<String> abminlist = FXCollections.observableArrayList();
+	
+	private TextFieldUtil tfUtil = new TextFieldUtil();
+	
+	
 	@FXML
 	private void initialize() {
+		abminlist.add("true");
+		abminlist.add("false");
 		pdtService = ProductService.getInstance();
 		List<Product> lists = pdtService.findAll();
 		for(Product pdt : lists) {
@@ -115,10 +133,17 @@ public class ProductController {
 		bigService = BigClassService.getInstance();
 		List<BigClass> blist = bigService.findAll();
 		
+		
 		for(BigClass big : blist) {	
 			biglist.add(big);
 			//공백 콤보박스에 공백 들어가서 크기가 커지니까 trim()으로 공백 없앤뒤 입력해야함
 		}
+		
+//		smallService = SmallClassService.getInstance();
+//		List<SmallClass> slist = smallService.findAll();
+//		for(SmallClass small: slist) {
+//			smalllist.add(small);
+//		}
 		
 		/* ********************* *
 		 * 테이블 cell안 체크박스 삽입   *
@@ -142,6 +167,9 @@ public class ProductController {
 	      
 	           }
 	        });		
+		
+		
+		
 		
 		/**
 		 * 전체 선택 체크 체인지 리스너
@@ -172,7 +200,8 @@ public class ProductController {
 		
 		pdtTable.setItems(myList);
 		bigCb.setItems(biglist);
-		
+		//smallCb.setItems(smalllist);
+		admitCb.setItems(abminlist);
 		
 	}
 	
@@ -199,10 +228,117 @@ public class ProductController {
 	        this.mainApp = mainApp;
 	        
 	  }
+	
+	
+	
+	@FXML
+	public void comboboxChange() {
+	/*	Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle(null);
+		alert.setHeaderText(null);
+		alert.setContentText("a");
+		alert.showAndWait();*/
+		
+		int big = bigCb.getValue().getBigClass();
+		SmallClass sm = new SmallClass();
+		sm.setsBigClass(big);
+		
+		smalllist = FXCollections.observableArrayList();
+		
+		smallService = SmallClassService.getInstance();
+		List<SmallClass> slist = smallService.findByBigClass(sm);
+		for(SmallClass small: slist) {
+			smalllist.add(small);
+		}
+		smallCb.setItems(smalllist);
+	}
+	
+	@FXML
+	public void submitClickAction() {
+		
+		if(tfComfrimField()) {
+			
+			int maxCode = pdtService.findMaxCode();
+			
+			Product pdt = new Product();
+			
+			pdt.setPdtCode(maxCode+1);
+			pdt.setPdtName(nameTf.getText());
+			pdt.setPdtClass(smallCb.getValue().getSmallClass());
+			pdt.setPdtAdmit(admitCb.getValue().toString());
+			pdt.setPdtCost(Integer.parseInt(costTf.getText().trim()));
+			pdt.setPdtPrice(Integer.parseInt(priceTf.getText().trim()));
+			pdt.setAccCode(21722051);
+			pdtService.insertProduct(pdt);
+			
+			refreshTable();
+		}
+		
+		/*alert.setContentText(bigCb.getAccessibleText());*/
+		
+		
+		/*if (nameTf.getText().equals("") || codeTf.getText().equals("")|| bigCb.getValue().getBigName().equals("")
+				||smallCb.getValue().getSmallName().equals("")||admitCb.getValue().equals("")||
+				costTf.getText().equals("")||priceTc.getText().equals("")) {
+			Alert alert1 = new Alert(AlertType.WARNING);
+			alert1.setContentText("공백을 존재합니다.");
+		}*/
+	}
+	
 
- 
+	@FXML
+	public void SearchClickAction() {
+		/*Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle(null);
+		alert.setHeaderText(null);
+		alert.setContentText("a");
+		alert.showAndWait();*/
+		
+		myList = FXCollections.observableArrayList();
+		
+		String searchtf = searchTf.getText();
+		searchtf  = "%" + searchtf +  "%";
+		Product pdt1 = new Product();
+		pdt1.setPdtName(searchtf);
+		
+		List<Product> lists = pdtService.findByAllItem(pdt1);
+		for(Product pdt : lists) {
+			myList.add(pdt);
+		}
+		pdtTable.setItems(myList);
+		
+	}
+	
+	private void refreshTable() {
+		pdtService = ProductService.getInstance();
+		List<Product> lists = pdtService.findAll();
+		for(Product pdt : lists) {
+			myList.add(pdt);
+		}
+	}
 	
 	
 	
+
+	private Boolean tfComfrimField() {
+		try {
+			tfUtil.regexTfComfirmAccProductName(nameTf);
+			tfUtil.cbComfrim(bigCb);
+			tfUtil.cbComfrim(smallCb);
+			tfUtil.cbComfrim(admitCb);
+			tfUtil.regexTfComfirmNumber(priceTf);
+			tfUtil.regexTfComfirmNumber(costTf);
+			tfUtil.regexTfComfirmCost(priceTf, costTf);
+			return true;
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle(null);
+			alert.setHeaderText(null);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+			e.printStackTrace();
+			return false;
+		}		
+	}
 	
 }

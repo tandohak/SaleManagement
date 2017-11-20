@@ -13,4 +13,5 @@ public interface ProductDao {
 	int deletePdt(Product product);
 	
 	int updatePdt(Product product);
+	int selectMaxCode() ;
 }

@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.SaleManagement.dao.ProductDao;
 import kr.or.dgit.SaleManagement.dao.ProductDaoImpl;
+import kr.or.dgit.SaleManagement.dao.SalesDao;
+import kr.or.dgit.SaleManagement.dao.SalesDaoImpl;
 import kr.or.dgit.SaleManagement.dto.Product;
 import kr.or.dgit.SaleManagement.util.MyBatisSqlSessionFactory;
 
@@ -78,5 +80,12 @@ public class ProductService {
 			sqlSession.close();
 		}
 		return 1;
+	}
+
+	public int findMaxCode() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			ProductDao dao = new ProductDaoImpl(sqlSession);
+			return dao.selectMaxCode();
+		}
 	}
 }

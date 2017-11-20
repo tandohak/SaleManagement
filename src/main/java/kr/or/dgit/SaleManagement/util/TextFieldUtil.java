@@ -48,6 +48,19 @@ public class TextFieldUtil {
 		}
 	}
 	
+	public void regexTfComfirmNumber(TextField idTf) throws Exception {
+		String pattern = "^[0-9]{1,20}$";
+		String errmsg = "숫자만 입력 가능합니다.";
+
+		Pattern p = Pattern.compile(pattern);
+		
+		Matcher m = p.matcher(idTf.getText());
+		if(!m.find())
+		{
+			throw new Exception(errmsg);
+		}
+	}
+	
 	public void regexTfComfirmId(TextField idTf) throws Exception {
 		String pattern = "^[a-zA-Z0-9_]{1,15}$";
 		String errmsg = "아이디는 영'문자/숫자/_' 만 가능합니다.";
@@ -59,7 +72,6 @@ public class TextFieldUtil {
 		{
 			throw new Exception(errmsg);
 		}
-		
 	}
 	
 	public void regexTfComfirmSaleName(TextField nameTf) throws Exception {
@@ -74,6 +86,20 @@ public class TextFieldUtil {
 			throw new Exception(errmsg);
 		}
 	}
+	
+	public void regexTfComfirmAccProductName(TextField nameTf) throws Exception {
+		String pattern = "^[a-zA-Z가-힣]{1,15}$";
+		String errmsg = "제품명은 한글/영문만 가능합니다.";
+
+		Pattern p = Pattern.compile(pattern);
+		
+		Matcher m = p.matcher(nameTf.getText());
+		if(!m.find())
+		{
+			throw new Exception(errmsg);
+		}
+	}
+	
 	
 	public void regexTfComfirmAccName(TextField nameTf) throws Exception {
 		String pattern = "^[a-zA-Z가-힣]{1,15}$";
@@ -160,6 +186,19 @@ public class TextFieldUtil {
 			alert.setContentText("아이디가 이미 존재합니다.");
 			alert.showAndWait();
 			return false;
+		}
+	}
+
+
+	public void regexTfComfirmCost(TextField priceTf, TextField costTf) {
+		int p = Integer.parseInt(priceTf.getText());
+		int c = Integer.parseInt(costTf.getText());
+		if(p < c) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle(null);
+			alert.setHeaderText(null);
+			alert.setContentText("원가가 판매원가보다 클 수 없습니다.");
+			alert.showAndWait();
 		}
 	}
 
