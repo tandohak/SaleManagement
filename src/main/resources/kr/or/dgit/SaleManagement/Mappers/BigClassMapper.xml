@@ -31,12 +31,12 @@
 		<include refid="selectSql"/>		
 	</select>
 	
-	<select id="selectbigClass" parameterType="BigClass" resultType="BigClass">
+	<select id="selectbigClass" parameterType="BigClass" resultType="BigClass" resultMap="resultMap">
 		<include refid="selectSql"/>		
 		<include refid="wherebigClass"/>
 	</select>
 	
-	<select id="selectbigName" parameterType="BigClass">
+	<select id="selectbigName" parameterType="BigClass" resultType="BigClass" resultMap="resultMap">
 		<include refid="selectSql"/>		
 		<include refid="wherename"/>
 	</select>
@@ -54,5 +54,9 @@
 		DELETE FROM bigClass WHERE big =#{bigClass}
 	</update>
 	
+	
+	<select id="selectMaxCode" resultType="int">
+		SELECT MAX(big) FROM bigClass
+	</select>
 	
 </mapper>

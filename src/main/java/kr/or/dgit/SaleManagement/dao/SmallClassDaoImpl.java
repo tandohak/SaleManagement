@@ -73,6 +73,14 @@ public class SmallClassDaoImpl implements SmallClassDao {
 		return sqlSession.getMapper(SmallClassDao.class).selectBySmallClasslike(Smallclass);
 	}
 
+
+
+	@Override
+	public int selectMaxCode() {
+		log.debug("selectMaxCode()");
+		return sqlSession.getMapper(SmallClassDao.class).selectMaxCode();
+	}
+
 	
 
 

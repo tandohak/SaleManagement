@@ -1,6 +1,7 @@
 package kr.or.dgit.SaleManagement.controller;
 
 import java.awt.Event;
+import java.io.IOException;
 import java.util.List;
 import java.util.Observer;
 
@@ -14,6 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -26,21 +29,26 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.ProductTestMain;
+import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
+import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.BigClass;
 import kr.or.dgit.SaleManagement.dto.Product;
+import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.dto.SmallClass;
+import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.BigClassService;
 import kr.or.dgit.SaleManagement.service.ProductService;
 import kr.or.dgit.SaleManagement.service.SmallClassService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
 public class ProductController {
-	
-	@FXML
-	private AnchorPane Node;
-	
+	@FXML private BorderPane pane;
 	@FXML
 	private TextField searchTf;
 	
@@ -49,8 +57,6 @@ public class ProductController {
 	
 	@FXML
 	private TextField nameTf;
-	
-
 	
 	@FXML
 	private ComboBox<String> admitCb;
@@ -94,7 +100,7 @@ public class ProductController {
 	private TableColumn<Product, String> nameTc;
 	
 	@FXML
-	private TableColumn<Product, Integer> accTc;
+	private TableColumn<Product, String> accTc;
 	
 	@FXML
 	private TableColumn<Product, Integer> costTc;
@@ -102,13 +108,15 @@ public class ProductController {
 	@FXML
 	private TableColumn<Product, Integer> priceTc;
 	
-	@FXML
-	private TableColumn<Product, String> admitTc;
+	@FXML private TableColumn<Product, String> admitTc;
 	
+	
+	private ObservableList<Product> levellist = FXCollections.observableArrayList();
 	
 	private static ProductService pdtService;
 	private static BigClassService bigService;
 	private static SmallClassService smallService;
+	private static AccountService accService;
 	
 	private ObservableList<Product> myList = FXCollections.observableArrayList();
 	
@@ -125,8 +133,15 @@ public class ProductController {
 		abminlist.add("true");
 		abminlist.add("false");
 		pdtService = ProductService.getInstance();
+		accService = AccountService.getInstance();
+		
+		Account findAcc = new Account();
+		Account resAcc = new Account();
 		List<Product> lists = pdtService.findAll();
 		for(Product pdt : lists) {
+			findAcc.setAccCode(pdt.getAccCode());
+			resAcc = accService.findAccountByCode(findAcc);
+			pdt.setAccName(resAcc.getAccNameProperty());
 			myList.add(pdt);
 		}
 		
@@ -191,12 +206,18 @@ public class ProductController {
 			
 		});
 		
-		codeTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
+//		accService = AccountService.getInstance();
+//		
+//		accService.findAccountByCode(new Account());
+		//cellData.getValue().getAccCodeProperty().asObject()
+		
+		codeTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCodeProperty().asObject());
 		nameTc.setCellValueFactory(cellData -> cellData.getValue().getPdtNameProperty());
-		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
+		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccName());
 		costTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCostProperty().asObject());
 		priceTc.setCellValueFactory(cellData -> cellData.getValue().getPdtPriceProperty().asObject());
 		admitTc.setCellValueFactory(cellData -> cellData.getValue().getPdtAdmitProperty());
+
 		
 		pdtTable.setItems(myList);
 		bigCb.setItems(biglist);
@@ -268,32 +289,20 @@ public class ProductController {
 			pdt.setPdtAdmit(admitCb.getValue().toString());
 			pdt.setPdtCost(Integer.parseInt(costTf.getText().trim()));
 			pdt.setPdtPrice(Integer.parseInt(priceTf.getText().trim()));
-			pdt.setAccCode(21722051);
+			//pdt.setAccCode(21722051);
 			pdtService.insertProduct(pdt);
+			
+			myList = FXCollections.observableArrayList();
 			
 			refreshTable();
 		}
 		
-		/*alert.setContentText(bigCb.getAccessibleText());*/
-		
-		
-		/*if (nameTf.getText().equals("") || codeTf.getText().equals("")|| bigCb.getValue().getBigName().equals("")
-				||smallCb.getValue().getSmallName().equals("")||admitCb.getValue().equals("")||
-				costTf.getText().equals("")||priceTc.getText().equals("")) {
-			Alert alert1 = new Alert(AlertType.WARNING);
-			alert1.setContentText("공백을 존재합니다.");
-		}*/
 	}
 	
 
 	@FXML
 	public void SearchClickAction() {
-		/*Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle(null);
-		alert.setHeaderText(null);
-		alert.setContentText("a");
-		alert.showAndWait();*/
-		
+
 		myList = FXCollections.observableArrayList();
 		
 		String searchtf = searchTf.getText();
@@ -309,15 +318,150 @@ public class ProductController {
 		
 	}
 	
+	private void checkAlert(boolean isOk,String pwck) throws Exception {
+		if(!isOk) {
+			throw new Exception(pwck);
+		}
+	}
+	
+	@FXML
+	public void getCellClassAction() {
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("view/dialog/AddClassDialog.fxml"));
+        BorderPane page;
+		try {
+			page = (BorderPane) loader.load();
+			
+			Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Product");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+	        dialogStage.initOwner(pane.getScene().getWindow());
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+//	        AddClassDialogController controller = loader.getController();
+//	        controller.setDialogStage(dialogStage);
+	        AddClassDialogController controller = loader.getController(); 
+	        
+	        dialogStage.showAndWait();
+	        
+	        
+	        
+	        if(controller.isOkClicked()) {
+	        	 resetBigCb();
+	        }
+
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+
+	}
+	
+	@FXML
+	public void SearchAccountAction() {
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("view/dialog/AccountSearchDialog.fxml"));
+        BorderPane page;
+		try {
+			page = (BorderPane) loader.load();
+			
+			Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Product");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+	        dialogStage.initOwner(pane.getScene().getWindow());
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+//	        ProductSearchAccountController controller = loader.getController();
+//	        controller.setDialogStage(dialogStage);
+	        ProductSearchAccountController controller = loader.getController(); 
+	        
+	        dialogStage.showAndWait();
+	        
+	        
+	        
+//	        if(controller.isOkClicked()) {
+//	        	 
+//	        }
+
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	@FXML
+	public void getCellMenuAction() {
+		Product pdt = pdtTable.getSelectionModel().getSelectedItem();
+		
+		try {
+			checkAlert(pdt==null ? false : true,"수정할 열을 선택 해주세요.");
+		}catch(Exception e) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle(null);
+			alert.setHeaderText(null);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+			e.printStackTrace();
+			e.printStackTrace();
+			return ;
+		}try {
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/dialog/AdminInsertProduct.fxml"));
+	        BorderPane page = (BorderPane) loader.load();
+
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Product");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+	        dialogStage.initOwner(pane.getScene().getWindow());
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+	        ProductDialogController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
+	        controller.setLevellist(levellist);
+	        controller.setProduct(pdt);
+	
+	        
+	        dialogStage.showAndWait();
+
+	        if(controller.isOkClicked()) {
+	        	System.out.println(controller.getProduct());
+	        	pdtService.updatePdt(controller.getProduct());
+	        	refreshTable();
+	        }
+	   } catch (IOException e) {
+	        e.printStackTrace();
+	   }	
+		
+		
+	}
+	
+	
+	
 	private void refreshTable() {
 		pdtService = ProductService.getInstance();
 		List<Product> lists = pdtService.findAll();
 		for(Product pdt : lists) {
 			myList.add(pdt);
 		}
+		pdtTable.setItems(myList);
 	}
 	
-	
+	private void resetBigCb() {
+		smallService = SmallClassService.getInstance();
+		
+		
+		List<BigClass> blist = bigService.findAll();
+		for(BigClass big : blist) {	
+			biglist.add(big);
+			//공백 콤보박스에 공백 들어가서 크기가 커지니까 trim()으로 공백 없앤뒤 입력해야함
+		}
+		bigCb.setItems(biglist);
+	}
 	
 
 	private Boolean tfComfrimField() {
@@ -328,7 +472,9 @@ public class ProductController {
 			tfUtil.cbComfrim(admitCb);
 			tfUtil.regexTfComfirmNumber(priceTf);
 			tfUtil.regexTfComfirmNumber(costTf);
-			tfUtil.regexTfComfirmCost(priceTf, costTf);
+			if(!tfUtil.regexTfComfirmCost(priceTf, costTf)) {
+				return false;
+			}
 			return true;
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.WARNING);

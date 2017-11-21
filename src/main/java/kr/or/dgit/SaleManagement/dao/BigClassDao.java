@@ -15,4 +15,5 @@ public interface BigClassDao {
 	
 	int updatebigClass(BigClass bigClass);
 	int deletebigClass(int bigClass);
+	int selectMaxCode();
 }

@@ -101,8 +101,8 @@ public class TextFieldUtil {
 	}
 	
 	public void regexTfComfirmAccProductName(TextField nameTf) throws Exception {
-		String pattern = "^[a-zA-Z가-힣]{1,15}$";
-		String errmsg = "제품명은 한글/영문만 가능합니다.";
+		String pattern = "^[a-zA-Z가-힣0-9]{1,15}$";
+		String errmsg = "제품명은 한글/영문/숫자만 가능합니다.";
 
 		Pattern p = Pattern.compile(pattern);
 		
@@ -203,7 +203,7 @@ public class TextFieldUtil {
 	}
 
 
-	public void regexTfComfirmCost(TextField priceTf, TextField costTf) {
+	public Boolean regexTfComfirmCost(TextField priceTf, TextField costTf) {
 		int p = Integer.parseInt(priceTf.getText());
 		int c = Integer.parseInt(costTf.getText());
 		if(p < c) {
@@ -212,7 +212,11 @@ public class TextFieldUtil {
 			alert.setHeaderText(null);
 			alert.setContentText("원가가 판매원가보다 클 수 없습니다.");
 			alert.showAndWait();
+			return false;
+		}else {
+			return true;
 		}
+		
 	}
 
 	

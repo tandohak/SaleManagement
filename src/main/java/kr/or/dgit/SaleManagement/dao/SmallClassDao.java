@@ -15,4 +15,6 @@ public interface SmallClassDao {
 	
 	int updateSmallClass(SmallClass Smallclass);
 	int deleteSmallClass(int SmallClass);
+	
+	public int selectMaxCode();
 }	

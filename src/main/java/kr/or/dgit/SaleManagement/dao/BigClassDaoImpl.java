@@ -54,4 +54,10 @@ public class BigClassDaoImpl implements BigClassDao {
 		return sqlSession.getMapper(BigClassDao.class).deletebigClass(bigClass);
 	}
 
+	@Override
+	public int selectMaxCode() {
+		log.debug("selectMaxCode()");
+		return sqlSession.getMapper(BigClassDao.class).selectMaxCode();
+	}
+
 }

@@ -24,13 +24,13 @@ public class TestAccountLevel {
 		service = null;
 	}
 
-	@Test
+	/*@Test
 	public void test1SelectAll() {
 		List<AccountLevel> lists = service.findAllAccountLevel();
 		for(AccountLevel sl : lists) {
 			System.out.println(sl);
 		}
 		Assert.assertNotNull(lists);
-	}
+	}*/
 
 }

@@ -75,11 +75,13 @@ public class TestSmallClass {
 	/*@Test
 	public void test4ByClass() {
 		SmallClass SmallClass = new SmallClass();
-		SmallClass.setSmallClass(1);
-		SmallClassService.findBySmallClass(SmallClass);
-	}
+		SmallClass SmallClass1 = new SmallClass();
+		SmallClass.setSmallClass(11);
+		 SmallClass1 = SmallClassService.findBySmallClass(SmallClass);
+		System.out.println(SmallClass1);
+	}*/
 	
-	@Test
+	/*	@Test
 	public void test4ByName() {
 		SmallClass SmallClass = new SmallClass();
 		SmallClass.setRowName("이어폰");

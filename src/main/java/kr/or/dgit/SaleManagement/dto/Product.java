@@ -17,7 +17,7 @@ public class Product {
 	private IntegerProperty pdtPrice = new SimpleIntegerProperty();
 	private StringProperty pdtAdmit = new SimpleStringProperty();
 	private IntegerProperty accCode = new SimpleIntegerProperty();
-	
+	private StringProperty accName = new SimpleStringProperty();
 	
 	public BooleanProperty getCheckedBoxProperty() {
 		return checkedBox;
@@ -136,6 +136,14 @@ public class Product {
 	public String toString() {
 		return String.format("Product [Code=%s, Class=%s, Name=%s, Cost=%s, Price=%s, Admit=%s, Code=%s]", pdtCode,
 				pdtClass, pdtName, pdtCost, pdtPrice, pdtAdmit, accCode);
+	}
+
+	public StringProperty getAccName() {
+		return accName;
+	}
+
+	public void setAccName(StringProperty accName) {
+		this.accName = accName;
 	}
 
 

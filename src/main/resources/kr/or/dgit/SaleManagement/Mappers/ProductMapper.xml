@@ -49,7 +49,9 @@
 		<result property="pdtAdmit" column="admit" />
 		<result property="accCode" column="aCode" />
 	</resultMap>
-
+	
+	
+	
 	<select id="selectAll" resultType="Product" resultMap="pdtResult">
 		<include refid="selectSql" />
 	</select>

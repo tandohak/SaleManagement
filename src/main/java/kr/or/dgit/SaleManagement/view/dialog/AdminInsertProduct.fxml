@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="400.0" prefWidth="300.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="400.0" prefWidth="300.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.ProductDialogController">
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #dddddd;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="38.0" layoutY="18.0" text="신규 제품 등록" />
+            <Label layoutX="38.0" layoutY="18.0" text="제품 수정" />
          </children>
       </AnchorPane>
    </top>
@@ -30,6 +30,8 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -50,38 +52,40 @@
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Label text="제품이름" GridPane.rowIndex="3">
+            <Label text="제품이름" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Label text="제품원가" GridPane.rowIndex="4">
+            <Label text="제품원가" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Label text="제품정가" GridPane.rowIndex="5">
+            <Label text="제품정가" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Label>
-            <TextField maxWidth="138.0" GridPane.columnIndex="1" />
-            <TextField maxWidth="138.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField maxWidth="138.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="codeTf" maxWidth="138.0" GridPane.columnIndex="1" />
+            <TextField fx:id="nameTf" maxWidth="138.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="costTf" maxWidth="138.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 5;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <ComboBox prefHeight="23.0" prefWidth="44.0" />
-                  <ComboBox prefHeight="23.0" prefWidth="5.0" />
+                  <ComboBox fx:id="smallCb" prefHeight="23.0" prefWidth="138.0" />
                </children>
             </HBox>
-            <Label text="거래처명" GridPane.rowIndex="2" />
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 0;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label text="거래처명" GridPane.rowIndex="4" />
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 0;" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <TextField editable="false" prefHeight="23.0" prefWidth="110.0" promptText="검색하세요" styleClass="searchTF" />
+                  <TextField fx:id="accTf" editable="false" prefHeight="23.0" prefWidth="110.0" promptText="검색하세요" styleClass="searchTF" />
                   <Button mnemonicParsing="false" styleClass="searchBtn" text="검색" />
                </children>
             </HBox>
-            <TextField maxWidth="138.0" prefHeight="23.0" prefWidth="118.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="priceTf" maxWidth="138.0" prefHeight="23.0" prefWidth="118.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label text="허가여부" GridPane.rowIndex="3" />
+            <ComboBox fx:id="admitCb" prefHeight="23.0" prefWidth="138.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ComboBox fx:id="bigCb" onAction="#comboboxChange" prefHeight="23.0" prefWidth="138.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -93,8 +97,8 @@
          <children>
             <ButtonBar layoutX="52.0" layoutY="3.0">
               <buttons>
-                  <JFXButton styleClass="greenBtn" text="등록" />
-                  <JFXButton text="취소" />
+                  <JFXButton onAction="#handleOk" styleClass="greenBtn" text="등록" />
+                  <JFXButton fx:id="handleCancel" onAction="#handleCancel" text="취소" />
               </buttons>
             </ButtonBar>
          </children>

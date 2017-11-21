@@ -59,5 +59,12 @@ public class ProductDaoImpl implements ProductDao {
 		log.debug("selectMaxCode()");
 		return sqlSession.getMapper(ProductDao.class).selectMaxCode();
 	}
+	private String namespace = "kr.or.dgit.SaleManagement.dao.ProductDao";
+
+	@Override
+	public List<Product> selectProductJoinAccount() {
+		log.debug("selectProductJoinAccount()");
+		return sqlSession.selectList(namespace + ".selectProductJoinAccount");
+	}
 
 }

@@ -68,7 +68,7 @@ public class TestSalesService {
 		Assert.assertEquals(1, res);
 	}*/
 	
-	@Test
+	/*@Test
 	public void test5FindByCode() {
 		Sales sales = new Sales();
 		sales.setSaleId("admin");
@@ -76,5 +76,5 @@ public class TestSalesService {
 		Sales sales2 = salesService.findSalesByCode(sales);
 		System.out.println(sales2);
 		Assert.assertEquals(sales.getSaleId(),sales2.getSaleId());
-	}
+	}*/
 }
