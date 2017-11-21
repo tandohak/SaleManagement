@@ -58,6 +58,18 @@ public class SalesDaoImpl implements SalesDao {
 		log.debug("selectMaxCode()");
 		return sqlSession.selectOne(namespace + "selectMaxCode");
 	}
+
+	@Override
+	public List<Sales> selectSalesByLeave(Sales sales) {
+		log.debug("selectSalesByLeave()");
+		return sqlSession.getMapper(SalesDao.class).selectSalesByLeave(sales);
+	}
+
+	@Override
+	public List<Sales> selectSalesLikeName(Sales sales) {
+		log.debug("selectSalesLikeName()");
+		return sqlSession.getMapper(SalesDao.class).selectSalesLikeName(sales);
+	}
 	
 	
 

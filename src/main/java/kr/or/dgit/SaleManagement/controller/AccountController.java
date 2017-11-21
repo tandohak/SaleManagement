@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -37,10 +35,8 @@ import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.dialogController.AccountEditDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.AccountLevel;
-import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.service.AccountLevelService;
 import kr.or.dgit.SaleManagement.service.AccountService;
-import kr.or.dgit.SaleManagement.service.SalesService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
 public class AccountController {
