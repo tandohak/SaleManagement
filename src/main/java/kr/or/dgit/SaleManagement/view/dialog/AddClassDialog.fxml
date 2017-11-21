@@ -40,9 +40,9 @@
                         <Insets />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="bigTb" maxWidth="150.0" prefHeight="23.0" prefWidth="147.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="bigTf" maxWidth="150.0" prefHeight="23.0" prefWidth="147.0" GridPane.columnIndex="1" />
                   <Label text="소분류" GridPane.rowIndex="1" />
-                  <TextField fx:id="smallTb" prefHeight="23.0" prefWidth="144.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="smallTf" prefHeight="23.0" prefWidth="144.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <JFXButton onAction="#bigAddAction" styleClass="greenBtn" text="추가" GridPane.columnIndex="2" />
                   <JFXButton onAction="#smallAddAction" styleClass="greenBtn" text="추가" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <ComboBox fx:id="bigCb" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />

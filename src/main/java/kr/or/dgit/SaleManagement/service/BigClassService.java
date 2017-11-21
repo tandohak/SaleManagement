@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.SaleManagement.dao.BigClassDao;
 import kr.or.dgit.SaleManagement.dao.BigClassDaoImpl;
+import kr.or.dgit.SaleManagement.dao.ProductDao;
+import kr.or.dgit.SaleManagement.dao.ProductDaoImpl;
 import kr.or.dgit.SaleManagement.dto.BigClass;
 import kr.or.dgit.SaleManagement.util.MyBatisSqlSessionFactory;
 
@@ -37,6 +39,13 @@ public class BigClassService {
 		}
 	}
 
+	public int findMaxCode() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			BigClassDao dao = new BigClassDaoImpl(sqlSession);
+			return dao.selectMaxCode();
+		}
+	}
+	
 	public int insertbigClass(BigClass bigClass) {
 		int res = -1;
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {

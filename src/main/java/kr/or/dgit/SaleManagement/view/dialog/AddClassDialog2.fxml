@@ -1,0 +1,85 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane fx:id="page" prefHeight="237.0" prefWidth="500.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.AddClassDialogController">
+   <top>
+      <AnchorPane fx:id="pane" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #dddddd;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="22.0" layoutY="18.0" text="제품 분류 추가" />
+            <GridPane layoutX="14.0" layoutY="41.0" prefHeight="241.0" prefWidth="478.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="215.0" minHeight="10.0" prefHeight="215.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                    </columns>
+                  </TableView>
+                  <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                    </columns>
+                  </TableView>
+                  <Label text="대분류" />
+                  <Label text="소분류" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </top>
+  
+   <center>
+      <AnchorPane prefWidth="364.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane hgap="10.0" layoutX="14.0" layoutY="-8.0" prefHeight="150.0" prefWidth="486.0" vgap="10.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="68.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="127.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="56.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="151.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints />
+                <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="7.0" prefHeight="17.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="대분류" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="bigTb" maxWidth="150.0" prefHeight="23.0" prefWidth="147.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="소분류" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <JFXButton onAction="#bigAddAction" styleClass="greenBtn" text="추가" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <JFXButton onAction="#smallAddAction" styleClass="greenBtn" text="추가" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

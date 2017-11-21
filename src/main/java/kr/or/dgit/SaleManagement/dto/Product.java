@@ -2,10 +2,8 @@ package kr.or.dgit.SaleManagement.dto;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -18,8 +16,8 @@ public class Product {
 	private IntegerProperty pdtCost = new SimpleIntegerProperty();
 	private IntegerProperty pdtPrice = new SimpleIntegerProperty();
 	private StringProperty pdtAdmit = new SimpleStringProperty();
-	private ObjectProperty<Account> accCode = new SimpleObjectProperty<Account>();
-	
+	private IntegerProperty accCode = new SimpleIntegerProperty();
+	private StringProperty accName = new SimpleStringProperty();
 	
 	public BooleanProperty getCheckedBoxProperty() {
 		return checkedBox;
@@ -38,7 +36,7 @@ public class Product {
 	}
 	
 	public Product(int pdtCode, int pdtClass, String pdtName, int pdtCost, int pdtPrice, String pdtAdmit,
-			Account accCode) {
+			int accCode) {
 		this.pdtCode.set(pdtCode);
 		this.pdtClass.set(pdtClass);
 		this.pdtName.set(pdtName);
@@ -122,15 +120,15 @@ public class Product {
 		this.pdtAdmit.set(pdtAdmit);
 	}
 
-	public Account getAccCode() {
+	public int getAccCode() {
 		return accCode.get();
 	}
 	
-	public ObjectProperty<Account> getAccCodeProperty() {
+	public IntegerProperty getAccCodeProperty() {
 		return accCode;
 	}
 
-	public void setAccCode(Account accCode) {
+	public void setAccCode(int accCode) {
 		this.accCode.set(accCode);
 	}
 
@@ -138,6 +136,14 @@ public class Product {
 	public String toString() {
 		return String.format("Product [Code=%s, Class=%s, Name=%s, Cost=%s, Price=%s, Admit=%s, Code=%s]", pdtCode,
 				pdtClass, pdtName, pdtCost, pdtPrice, pdtAdmit, accCode);
+	}
+
+	public StringProperty getAccName() {
+		return accName;
+	}
+
+	public void setAccName(StringProperty accName) {
+		this.accName = accName;
 	}
 
 

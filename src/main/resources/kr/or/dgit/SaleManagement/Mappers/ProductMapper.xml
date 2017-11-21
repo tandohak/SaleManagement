@@ -50,35 +50,7 @@
 		<result property="accCode" column="aCode" />
 	</resultMap>
 	
-	<!-- <resultMap type="Account" id="ProductWithAccount" extends="pdtResult">
-		<id property="account.accCode" column="accCode"/>
- 		<result property="account.accName" column="name"/>
- 		<result property="account.accTel" column="tel"/>
- 		<result property="account.accAddr" column="addr"/>
- 		<result property="account.accAdmit" column="admit"/>
- 		<result property="account.accLevel" column="alevel"/>
- 		<result property="account.accId" column="id"/>
- 		<result property="account.accPw" column="pw"/>
-	</resultMap> -->
 	
-	<!-- <resultMap type="Product" id="ProductWithAccount">
-		<id property="pdtCode" column="pdtCode" />
-		<result property="pdtClass" column="class" />
-		<result property="pdtName" column="name" />
-		<result property="pdtCost" column="cost" />
-		<result property="pdtPrice" column="price" />
-		<result property="pdtAdmit" column="admit" />
-		<collection property="accCode" resultMap="kr.or.dgit.SaleManagement.dao.AccountDao.AccountResult"/>
-	</resultMap>
-	
-	<sql id="selectJoinAccount">
-		select pdtCode, class, p.name, cost, price, p.admit, aCode, accCode, a.name, tel, addr, a.admit, alevel,
-		id, pw from product p join account a on accCode = aCode
-	</sql> -->
-	
-<!-- 	<select id="selectProductJoinAccount" parameterType="Product" resultMap="ProductWithAccount">
-		<include refid="selectJoinAccount"/>
-	</select> -->
 	
 	<select id="selectAll" resultType="Product" resultMap="pdtResult">
 		<include refid="selectSql" />

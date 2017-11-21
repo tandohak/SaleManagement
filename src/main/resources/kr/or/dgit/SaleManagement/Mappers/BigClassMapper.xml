@@ -55,4 +55,8 @@
 	</update>
 	
 	
+	<select id="selectMaxCode" resultType="int">
+		SELECT MAX(big) FROM bigClass
+	</select>
+	
 </mapper>

@@ -58,7 +58,7 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: none;">
                            <children>
                               <TextField fx:id="accCodeTf" styleClass="searchTF" />
-                              <JFXButton styleClass="searchBtn" text="Button" />
+                              <JFXButton onAction="#SearchAccountAction" styleClass="searchBtn" text="Button" />
                            </children>
                         </HBox>
                      </children>

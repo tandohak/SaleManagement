@@ -100,7 +100,7 @@ public class ProductController {
 	private TableColumn<Product, String> nameTc;
 	
 	@FXML
-	private TableColumn<Product, Integer> accTc;
+	private TableColumn<Product, String> accTc;
 	
 	@FXML
 	private TableColumn<Product, Integer> costTc;
@@ -133,8 +133,15 @@ public class ProductController {
 		abminlist.add("true");
 		abminlist.add("false");
 		pdtService = ProductService.getInstance();
+		accService = AccountService.getInstance();
+		
+		Account findAcc = new Account();
+		Account resAcc = new Account();
 		List<Product> lists = pdtService.findAll();
 		for(Product pdt : lists) {
+			findAcc.setAccCode(pdt.getAccCode());
+			resAcc = accService.findAccountByCode(findAcc);
+			pdt.setAccName(resAcc.getAccNameProperty());
 			myList.add(pdt);
 		}
 		
@@ -206,10 +213,11 @@ public class ProductController {
 		
 		codeTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCodeProperty().asObject());
 		nameTc.setCellValueFactory(cellData -> cellData.getValue().getPdtNameProperty());
-//		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
+		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccName());
 		costTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCostProperty().asObject());
 		priceTc.setCellValueFactory(cellData -> cellData.getValue().getPdtPriceProperty().asObject());
 		admitTc.setCellValueFactory(cellData -> cellData.getValue().getPdtAdmitProperty());
+
 		
 		pdtTable.setItems(myList);
 		bigCb.setItems(biglist);
@@ -289,15 +297,6 @@ public class ProductController {
 			refreshTable();
 		}
 		
-		/*alert.setContentText(bigCb.getAccessibleText());*/
-		
-		
-		/*if (nameTf.getText().equals("") || codeTf.getText().equals("")|| bigCb.getValue().getBigName().equals("")
-				||smallCb.getValue().getSmallName().equals("")||admitCb.getValue().equals("")||
-				costTf.getText().equals("")||priceTc.getText().equals("")) {
-			Alert alert1 = new Alert(AlertType.WARNING);
-			alert1.setContentText("공백을 존재합니다.");
-		}*/
 	}
 	
 
@@ -342,10 +341,50 @@ public class ProductController {
 	        
 //	        AddClassDialogController controller = loader.getController();
 //	        controller.setDialogStage(dialogStage);
-	       
-
+	        AddClassDialogController controller = loader.getController(); 
 	        
 	        dialogStage.showAndWait();
+	        
+	        
+	        
+	        if(controller.isOkClicked()) {
+	        	 resetBigCb();
+	        }
+
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+
+	}
+	
+	@FXML
+	public void SearchAccountAction() {
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("view/dialog/AccountSearchDialog.fxml"));
+        BorderPane page;
+		try {
+			page = (BorderPane) loader.load();
+			
+			Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Product");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+	        dialogStage.initOwner(pane.getScene().getWindow());
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+//	        ProductSearchAccountController controller = loader.getController();
+//	        controller.setDialogStage(dialogStage);
+	        ProductSearchAccountController controller = loader.getController(); 
+	        
+	        dialogStage.showAndWait();
+	        
+	        
+	        
+//	        if(controller.isOkClicked()) {
+//	        	 
+//	        }
+
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -404,8 +443,6 @@ public class ProductController {
 	
 	
 	private void refreshTable() {
-		
-		
 		pdtService = ProductService.getInstance();
 		List<Product> lists = pdtService.findAll();
 		for(Product pdt : lists) {
@@ -414,7 +451,17 @@ public class ProductController {
 		pdtTable.setItems(myList);
 	}
 	
-	
+	private void resetBigCb() {
+		smallService = SmallClassService.getInstance();
+		
+		
+		List<BigClass> blist = bigService.findAll();
+		for(BigClass big : blist) {	
+			biglist.add(big);
+			//공백 콤보박스에 공백 들어가서 크기가 커지니까 trim()으로 공백 없앤뒤 입력해야함
+		}
+		bigCb.setItems(biglist);
+	}
 	
 
 	private Boolean tfComfrimField() {

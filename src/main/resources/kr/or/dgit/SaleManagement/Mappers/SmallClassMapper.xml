@@ -71,6 +71,9 @@
 		<include refid="whereBigClass"/>
 	</select>
 	
+	<select id="selectMaxCode" resultType="int">
+		SELECT MAX(small) FROM smallClass
+	</select>
 	
 	
 	<sql id="insertSql">
