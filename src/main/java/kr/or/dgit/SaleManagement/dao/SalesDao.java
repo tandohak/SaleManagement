@@ -13,4 +13,7 @@ public interface SalesDao {
 	int deleteSales(Sales sales);
 	
 	int selectMaxCode();
+	
+	List<Sales> selectSalesByLeave(Sales sales);
+	List<Sales> selectSalesLikeName(Sales sales);
 }

@@ -8,6 +8,7 @@ import kr.or.dgit.SaleManagement.dao.AccountDao;
 import kr.or.dgit.SaleManagement.dao.AccountDaoImpl;
 import kr.or.dgit.SaleManagement.dao.SalesDao;
 import kr.or.dgit.SaleManagement.dao.SalesDaoImpl;
+import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.util.MyBatisSqlSessionFactory;
 
@@ -91,6 +92,20 @@ public class SalesService {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
 			SalesDao salesDao = new SalesDaoImpl(sqlSession);
 			return salesDao.selectMaxCode();
+		}
+	}
+	
+	public List<Sales> findSalesByLeave(Sales sales){
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			SalesDao salesDao = new SalesDaoImpl(sqlSession);
+			return salesDao.selectSalesByLeave(sales);
+		}
+	}
+	
+	public List<Sales> findSalesLikeName(Sales sales){
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			SalesDao dao = new SalesDaoImpl(sqlSession);
+			return dao.selectSalesLikeName(sales);
 		}
 	}
 }

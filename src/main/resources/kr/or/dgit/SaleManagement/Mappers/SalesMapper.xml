@@ -38,6 +38,17 @@
 				AND pw = #{salePw}
 			</if>
 		</where>
+	</sql>
+	
+	<sql id = "whereSalesNameLike">
+		<where>
+			<if test="accName != null">
+				AND name LIKE #{saleName}
+			</if>
+			<if test="accAdmit != null">
+				AND sLeave LIKE #{saleLeave}
+			</if>
+		</where>
 	</sql>	
 	
 	<resultMap type="Sales" id="SalesResult">
@@ -54,6 +65,16 @@
 	<select id="selectSalesByCode" parameterType="Sales" resultMap="SalesResult">
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
+	</select>
+	
+	<select id="selectSalesByLeave" resultMap="SalesResult">
+		<include refid="selectSql"/>
+		WHERE sLeave = #{saleLeave}
+	</select>
+	
+	<select id="selectSalesLikeName" resultMap="SalesResult">
+		<include refid="selectSql"/>
+		<include refid="whereSalesNameLike"/>
 	</select>
 	
 	<select id="selectSalseByAll" resultMap="SalesResult">

@@ -33,6 +33,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
+import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.service.SalesLevelService;
@@ -63,6 +64,7 @@ public class SalesController {
 	
 	@FXML private ComboBox<SalesLevel> levelCb;
 	@FXML private CheckBox saleCheck;
+	@FXML private CheckBox allSales;
 	
 	@FXML private TableView<Sales> saleTable;
 	
@@ -91,9 +93,12 @@ public class SalesController {
 			levellist.add(saleLevel);
 		}	
 		levelCb.setItems(levellist);
-				
+		
+		Sales leaveSales = new Sales();
+		leaveSales.setSaleLeave("true");
+		System.out.println(leaveSales.getSaleLeave());
 		saleSerivce = SalesService.getInstance();
-		List<Sales> lists = saleSerivce.findSaleAll();
+		List<Sales> lists = saleSerivce.findSalesByLeave(leaveSales);
 		for(Sales sale : lists) {
 			myList.add(sale);
 		}		
@@ -308,11 +313,13 @@ public class SalesController {
 	}
 	
 	private void refreshTable() {
+		myList = FXCollections.observableArrayList();
 		saleSerivce = SalesService.getInstance();
 		List<Sales> lists = saleSerivce.findSaleAll();
 		for(Sales sale : lists) {
 			myList.add(sale);
-		}		
+		}
+		saleTable.setItems(myList);
 	}
 	
 	@FXML
@@ -361,5 +368,46 @@ public class SalesController {
 			e.printStackTrace();
 			return false;
 		}		
+	}
+	
+	@FXML
+	private boolean allSalesCheck() {
+		return allSales.isSelected();
+	}
+	
+	@FXML
+	private void searchSales() {
+		Sales findSales = new Sales();
+		List<Sales> lists;
+		findSales.setSaleName("%" + searchAllTf.getText() + "%");
+		if(findSales.getSaleName().equals("%%")) {
+			if(allSalesCheck()) {
+				refreshTable();
+			}
+			else {
+				findSales.setSaleName(null);
+				findSales.setSaleLeave("true");
+				lists = saleSerivce.findSalesByLeave(findSales);
+				setSalesModel(lists);
+			}
+			return;
+		}
+		if(!allSalesCheck()) {
+			findSales.setSaleLeave("true");
+			lists = saleSerivce.findSalesLikeName(findSales);
+		}
+		else {
+			lists = saleSerivce.findSalesLikeName(findSales);
+		}
+		setSalesModel(lists);
+	}
+	
+	@FXML
+	private void setSalesModel(List<Sales> lists) {
+		myList = FXCollections.observableArrayList();
+		for(Sales sales : lists) {
+			myList.add(sales);
+		}
+		saleTable.setItems(myList);
 	}
 }
