@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.SaleManagement.dao.AddrDao">
+	<!-- <resultMap type="Addr" id="AddrResult">
+		<id property="zipCode" column="zipCode"></id>
+		<result property="sido" column="sido"/>
+		<result property="sigungu" column="sigungu"/>
+		<result property="doro" column="doro"/>
+		<result property="building1" column="building1"/>
+		<result property="building2" column="building2"/>
+	</resultMap> -->
+
 	<sql id="whereSql">
 		<where>
 			<if test="sido != null">
-				AND	sido like #{sido}
+				And	sido like #{sido}
 			</if>
 			<if test="sigungu != null">
-				AND	sigungu like #{sigungu}
+				And	sigungu like #{sigungu}
 			</if>
-			<if test="sido != null">
-				AND	doro like #{doro}
+			<if test="doro != null">
+				And	doro like #{doro}
 			</if>
 		</where>
 	</sql>
@@ -20,4 +29,5 @@
 		from addr
 		<include refid="whereSql"/>
 	</select>
+	
 </mapper>

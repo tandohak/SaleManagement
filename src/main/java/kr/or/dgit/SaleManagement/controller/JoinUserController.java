@@ -3,14 +3,13 @@ package kr.or.dgit.SaleManagement.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
-import java.util.Calendar;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -20,10 +19,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import kr.or.dgit.SaleManagement.MainApp;
+import kr.or.dgit.SaleManagement.controller.dialogController.AddrDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
-import kr.or.dgit.SaleManagement.dto.Sales;
+import kr.or.dgit.SaleManagement.dto.AddrItem;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.SalesService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
@@ -127,12 +130,42 @@ public class JoinUserController{
 	}
 	
 	@FXML
+	private void searchAddrAction() {
+		try {
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/dialog/AddrZipSearchDialog.fxml"));
+	        BorderPane page = (BorderPane) loader.load();
+
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle(null);
+	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+	        dialogStage.initOwner(pane.getScene().getWindow());
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+	        AddrDialogController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
+	     
+	        
+	        dialogStage.showAndWait();
+
+	        if(controller.isOkClicked()) {
+	          AddrItem addrItem  = controller.getAddrItem();
+	          addrTf.setText(addrItem.getAddr());
+	          addrZipTf.setText(addrItem.getAddrZip());
+	        }
+	   } catch (IOException e) {
+	        e.printStackTrace();
+	   }
+	}
+	
+	@FXML
 	private void idTypeCheck(KeyEvent event) {
 		idCheckOk = false;
 		checkIdIcon.setVisible(false);
-		
 	}
 	
+
 	@FXML
 	private void idTypeHandler() {
 		String path = System.getProperty("user.dir");

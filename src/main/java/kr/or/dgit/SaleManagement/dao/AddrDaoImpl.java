@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.SaleManagement.dto.Addr;
@@ -18,9 +19,9 @@ public class AddrDaoImpl implements AddrDao {
 	}
 
 	@Override
-	public List<Addr> searchAddr(Addr addr) {
+	public List<Addr> searchAddr(Addr addr,RowBounds rowBounds) {
 		log.debug("searchAddr()");
-		return sqlSession.selectList(namespace + "searchAddr" , addr);
+		return sqlSession.selectList(namespace + "searchAddr" , addr,rowBounds);
 	}
 
 }

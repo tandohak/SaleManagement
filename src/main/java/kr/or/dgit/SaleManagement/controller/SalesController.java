@@ -144,6 +144,8 @@ public class SalesController {
 	}
 	
 	
+	
+	
 	@FXML
 	private void deleteCellMenuAction() {
 		int index = saleTable.getSelectionModel().getSelectedIndex();
@@ -188,7 +190,7 @@ public class SalesController {
 		        BorderPane page = (BorderPane) loader.load();
 
 		        Stage dialogStage = new Stage();
-		        dialogStage.setTitle("Edit Person");
+		        dialogStage.setTitle(null);
 		        dialogStage.initModality(Modality.WINDOW_MODAL);		        
 		        dialogStage.initOwner(pane.getScene().getWindow());
 		        Scene scene = new Scene(page);

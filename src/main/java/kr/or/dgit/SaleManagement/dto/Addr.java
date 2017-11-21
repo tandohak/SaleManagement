@@ -1,15 +1,21 @@
 package kr.or.dgit.SaleManagement.dto;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Addr {
-	private StringProperty zipCode;
-	private StringProperty sido;
-	private StringProperty sigungu;
-	private StringProperty doro;
-	private IntegerProperty building1;
-	private IntegerProperty building2;
+	private StringProperty zipCode = new SimpleStringProperty();
+	private StringProperty sido = new SimpleStringProperty();
+	private StringProperty sigungu = new SimpleStringProperty();
+	private StringProperty doro = new SimpleStringProperty();
+	private IntegerProperty building1 = new SimpleIntegerProperty();
+	private IntegerProperty building2 = new SimpleIntegerProperty();	
 
 	public Addr(String zipCode, String sido, String sigungu, String doro, int building1, int building2) {
 		this.zipCode.set(zipCode);
