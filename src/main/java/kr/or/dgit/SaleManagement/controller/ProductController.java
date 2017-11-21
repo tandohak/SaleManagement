@@ -375,7 +375,7 @@ public class ProductController {
 	        
 //	        ProductSearchAccountController controller = loader.getController();
 //	        controller.setDialogStage(dialogStage);
-	        ProductSearchAccountController controller = loader.getController(); 
+//	        ProductSearchAccountController controller = loader.getController(); 
 	        
 	        dialogStage.showAndWait();
 	        
