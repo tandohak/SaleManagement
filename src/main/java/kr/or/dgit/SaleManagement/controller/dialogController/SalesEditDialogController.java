@@ -46,10 +46,9 @@ public class SalesEditDialogController {
 	}
 
 	public void setLevellist(ObservableList<SalesLevel> levellist) {
-		this.levellist = levellist;	
+		this.levellist = levellist;
 		System.out.println(levellist);
 		levelCb.setItems(levellist);
-		
 	}
 
 	public void setSales(Sales sales) {
