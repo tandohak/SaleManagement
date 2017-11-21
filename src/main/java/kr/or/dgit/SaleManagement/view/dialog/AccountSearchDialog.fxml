@@ -31,15 +31,15 @@
          <children>
             <Label layoutX="21.0" layoutY="34.0" text="거래처명" />
             <TextField fx:id="searchAllTf" layoutX="101.0" layoutY="30.0" styleClass="searchTF" />
-            <JFXButton layoutX="242.0" layoutY="30.0" styleClass="searchBtn" />
+            <JFXButton layoutX="242.0" layoutY="30.0" onAction="#searchAccount" styleClass="searchBtn" />
          </children>
       </AnchorPane>
    </top>
    <bottom>
       <AnchorPane prefHeight="77.0" prefWidth="632.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton layoutX="422.0" layoutY="27.0" text="취소" />
-          <Button layoutX="336.0" layoutY="27.0" mnemonicParsing="false" styleClass="greenBtn" text="확인" />
+            <JFXButton layoutX="422.0" layoutY="27.0" onAction="#handleCancel" text="취소" />
+          <Button layoutX="336.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleOk" styleClass="greenBtn" text="확인" />
          </children>
       </AnchorPane>
    </bottom>

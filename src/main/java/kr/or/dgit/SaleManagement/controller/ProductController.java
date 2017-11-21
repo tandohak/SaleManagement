@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Observer;
 
+import javax.security.auth.login.AccountNotFoundException;
 import javax.swing.text.StyledEditorKit.BoldAction;
 
 import javafx.beans.value.ChangeListener;
@@ -66,7 +67,8 @@ public class ProductController {
 	
 	@FXML
 	private TextField priceTf;
-	
+	@FXML
+	private TextField accCodeTf;
 	@FXML
 	private ComboBox<BigClass> bigCb;
 	
@@ -289,7 +291,7 @@ public class ProductController {
 			pdt.setPdtAdmit(admitCb.getValue().toString());
 			pdt.setPdtCost(Integer.parseInt(costTf.getText().trim()));
 			pdt.setPdtPrice(Integer.parseInt(priceTf.getText().trim()));
-			//pdt.setAccCode(21722051);
+			pdt.setAccCode(Integer.parseInt(accCodeTf.getText()));
 			pdtService.insertProduct(pdt);
 			
 			myList = FXCollections.observableArrayList();
@@ -310,8 +312,17 @@ public class ProductController {
 		Product pdt1 = new Product();
 		pdt1.setPdtName(searchtf);
 		
+		pdtService = ProductService.getInstance();
+		accService = AccountService.getInstance();
+		
+		Account findAcc = new Account();
+		Account resAcc = new Account();
+		
 		List<Product> lists = pdtService.findByAllItem(pdt1);
 		for(Product pdt : lists) {
+			findAcc.setAccCode(pdt.getAccCode());
+			resAcc = accService.findAccountByCode(findAcc);
+			pdt.setAccName(resAcc.getAccNameProperty());
 			myList.add(pdt);
 		}
 		pdtTable.setItems(myList);
@@ -373,17 +384,17 @@ public class ProductController {
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
 	        
-//	        ProductSearchAccountController controller = loader.getController();
-//	        controller.setDialogStage(dialogStage);
-//	        ProductSearchAccountController controller = loader.getController(); 
+	       
+	        ProductSearchAccountController controller = loader.getController(); 
+	        controller.setDialogStage(dialogStage);
 	        
 	        dialogStage.showAndWait();
+
+	       
 	        
-	        
-	        
-//	        if(controller.isOkClicked()) {
-//	        	 
-//	        }
+	        if(controller.isOkClicked()) {
+	        	accCodeTf.setText(controller.getGetAcc().getAccCode()+"");
+	        }
 
 		} catch (IOException e) {
 			
@@ -416,7 +427,7 @@ public class ProductController {
 	        Stage dialogStage = new Stage();
 	        dialogStage.setTitle("Product");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
-	        dialogStage.initOwner(pane.getScene().getWindow());
+	        dialogStage.initOwner(pane.getScene().getWindow());	        
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
 	        
@@ -444,8 +455,15 @@ public class ProductController {
 	
 	private void refreshTable() {
 		pdtService = ProductService.getInstance();
+		accService = AccountService.getInstance();
+		
+		Account findAcc = new Account();
+		Account resAcc = new Account();
 		List<Product> lists = pdtService.findAll();
 		for(Product pdt : lists) {
+			findAcc.setAccCode(pdt.getAccCode());
+			resAcc = accService.findAccountByCode(findAcc);
+			pdt.setAccName(resAcc.getAccNameProperty());
 			myList.add(pdt);
 		}
 		pdtTable.setItems(myList);

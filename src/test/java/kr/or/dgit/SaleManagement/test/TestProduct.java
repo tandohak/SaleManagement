@@ -25,7 +25,7 @@ public class TestProduct {
 	public static void tearDownAfterClass() throws Exception {
 		pdt = null;
 	}
-	@Test
+	/*@Test
 	public void test() {
 		List<Product> lists = pdt.findJoinAccount();
 		Assert.assertNotNull(lists);	
@@ -35,7 +35,7 @@ public class TestProduct {
 	public void test1() {
 		List<Product> lists = pdt.findAll();
 		Assert.assertNotNull(lists);	
-	}
+	}*/
 
 	
 	/*@Test
