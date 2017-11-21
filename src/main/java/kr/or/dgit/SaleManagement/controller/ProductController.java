@@ -206,7 +206,7 @@ public class ProductController {
 		
 		codeTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCodeProperty().asObject());
 		nameTc.setCellValueFactory(cellData -> cellData.getValue().getPdtNameProperty());
-		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
+//		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccCodeProperty().asObject());
 		costTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCostProperty().asObject());
 		priceTc.setCellValueFactory(cellData -> cellData.getValue().getPdtPriceProperty().asObject());
 		admitTc.setCellValueFactory(cellData -> cellData.getValue().getPdtAdmitProperty());
@@ -281,7 +281,7 @@ public class ProductController {
 			pdt.setPdtAdmit(admitCb.getValue().toString());
 			pdt.setPdtCost(Integer.parseInt(costTf.getText().trim()));
 			pdt.setPdtPrice(Integer.parseInt(priceTf.getText().trim()));
-			pdt.setAccCode(21722051);
+			//pdt.setAccCode(21722051);
 			pdtService.insertProduct(pdt);
 			
 			myList = FXCollections.observableArrayList();

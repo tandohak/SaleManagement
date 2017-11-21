@@ -116,13 +116,13 @@ public class ProductDialogController {
 	@FXML
     private void handleOk() {
         if (tfComfrimField()) {
-        	pdt.setAccCode(Integer.parseInt(accTf.getText()));
+        	//pdt.setAccCode(Integer.parseInt(accTf.getText()));
         	pdt.setPdtName(nameTf.getText());
         	pdt.setPdtClass(smallCb.getValue().getSmallClass());
 			pdt.setPdtAdmit(admitCb.getValue().toString());
 			pdt.setPdtCost(Integer.parseInt(costTf.getText().trim()));
 			pdt.setPdtPrice(Integer.parseInt(priceTf.getText().trim()));
-			pdt.setAccCode(21722051);
+			//pdt.setAccCode(21722051);
 			
 			okClicked = true;		
 			dialogStage.close();

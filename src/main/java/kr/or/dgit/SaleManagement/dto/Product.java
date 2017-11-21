@@ -2,8 +2,10 @@ package kr.or.dgit.SaleManagement.dto;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -16,7 +18,7 @@ public class Product {
 	private IntegerProperty pdtCost = new SimpleIntegerProperty();
 	private IntegerProperty pdtPrice = new SimpleIntegerProperty();
 	private StringProperty pdtAdmit = new SimpleStringProperty();
-	private IntegerProperty accCode = new SimpleIntegerProperty();
+	private ObjectProperty<Account> accCode = new SimpleObjectProperty<Account>();
 	
 	
 	public BooleanProperty getCheckedBoxProperty() {
@@ -36,7 +38,7 @@ public class Product {
 	}
 	
 	public Product(int pdtCode, int pdtClass, String pdtName, int pdtCost, int pdtPrice, String pdtAdmit,
-			int accCode) {
+			Account accCode) {
 		this.pdtCode.set(pdtCode);
 		this.pdtClass.set(pdtClass);
 		this.pdtName.set(pdtName);
@@ -120,15 +122,15 @@ public class Product {
 		this.pdtAdmit.set(pdtAdmit);
 	}
 
-	public int getAccCode() {
+	public Account getAccCode() {
 		return accCode.get();
 	}
 	
-	public IntegerProperty getAccCodeProperty() {
+	public ObjectProperty<Account> getAccCodeProperty() {
 		return accCode;
 	}
 
-	public void setAccCode(int accCode) {
+	public void setAccCode(Account accCode) {
 		this.accCode.set(accCode);
 	}
 

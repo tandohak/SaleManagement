@@ -39,6 +39,13 @@ public class ProductService {
 			return dao.SearchAllItem(product);
 		}
 	}
+	
+	public List<Product> findJoinAccount() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			ProductDao dao = new ProductDaoImpl(sqlSession);
+			return dao.selectProductJoinAccount();
+		}
+	}
 
 	public int insertProduct(Product product) {
 		int res = -1;
