@@ -1,33 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.SaleManagement.dao.AddrDao">
-	<!-- <resultMap type="Addr" id="AddrResult">
+	
+	<resultMap type="Addr" id="AddrResult">
 		<id property="zipCode" column="zipCode"></id>
 		<result property="sido" column="sido"/>
 		<result property="sigungu" column="sigungu"/>
 		<result property="doro" column="doro"/>
 		<result property="building1" column="building1"/>
 		<result property="building2" column="building2"/>
-	</resultMap> -->
+	</resultMap>
 
-	<sql id="whereSql">
-		<where>
-			<if test="sido != null">
-				And	sido like #{sido}
-			</if>
-			<if test="sigungu != null">
-				And	sigungu like #{sigungu}
-			</if>
-			<if test="doro != null">
-				And	doro like #{doro}
-			</if>
-		</where>
-	</sql>
-	
-	<select id="searchAddr" resultType="Addr" parameterType="Addr">
-		select zipcode, sido, sigungu, doro, building1, building2
-		from addr
-		<include refid="whereSql"/>
+	<select id="selectAddrBySido" resultMap="AddrResult">
+		SELECT DISTINCT sido
+		FROM addr
 	</select>
+	
+	<select id="selectAddrBySigungu" resultMap="AddrResult">
+		SELECT DISTINCT sigungu
+		FROM addr
+		WHERE sido = #{sido}
+	</select>
+	
+	<select id="selectAddrByDoro" resultMap="AddrResult">
+		SELECT DISTINCT doro
+		FROM addr
+		WHERE sido = #{sido}
+		AND sigungu = #{sigungu}
+	</select>
+	
+<!-- 	<sql id="whereSql"> -->
+<!-- 		<where> -->
+<!-- 			<if test="sido != null"> -->
+<!-- 				And	sido like #{sido} -->
+<!-- 			</if> -->
+<!-- 			<if test="sigungu != null"> -->
+<!-- 				And	sigungu like #{sigungu} -->
+<!-- 			</if> -->
+<!-- 			<if test="doro != null"> -->
+<!-- 				And	doro like #{doro} -->
+<!-- 			</if> -->
+<!-- 		</where> -->
+<!-- 	</sql> -->
+	
+<!-- 	<select id="searchAddr" resultType="Addr" parameterType="Addr"> -->
+<!-- 		select zipcode, sido, sigungu, doro, building1, building2 -->
+<!-- 		from addr -->
+<!-- 		<include refid="whereSql"/> -->
+<!-- 	</select> -->
 	
 </mapper>

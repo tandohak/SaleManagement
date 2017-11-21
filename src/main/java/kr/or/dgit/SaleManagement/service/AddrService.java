@@ -2,7 +2,6 @@ package kr.or.dgit.SaleManagement.service;
 
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.SaleManagement.dao.AddrDao;
@@ -17,10 +16,17 @@ public class AddrService {
 		return instance;
 	}
 	
-	public List<Addr> findAddrSearch(Addr addr,RowBounds rowBounds){
+	public List<Addr> findAddrBySido(){
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			AddrDao addrDao = new AddrDaoImpl(sqlSession);
-			return addrDao.searchAddr(addr,rowBounds);
+			return addrDao.selectAddrBySido();
+		}		
+	}
+	
+	public List<Addr> findAddrBySigungu(Addr addr){
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			AddrDao addrDao = new AddrDaoImpl(sqlSession);
+			return addrDao.selectAddrBySigungu(addr);
 		}		
 	}
 }

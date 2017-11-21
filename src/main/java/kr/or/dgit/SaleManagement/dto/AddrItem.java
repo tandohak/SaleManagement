@@ -15,7 +15,7 @@ public class AddrItem {
 		return addrZip.get();
 	}
 	public void setAddrZip(String addrZip) {
-		this.addrZip.set(addrZip);;
+		this.addrZip.set(addrZip);
 	}
 	public StringProperty getAddrProperty() {
 		return addr;

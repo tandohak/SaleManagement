@@ -32,9 +32,8 @@
                <padding>
                   <Insets bottom="4.0" left="7.0" right="7.0" top="4.0" />
                </padding></TextField>
-            <JFXButton layoutX="152.0" layoutY="14.0" onAction="#searchSales" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
+            <JFXButton layoutX="152.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
             <Separator layoutY="57.0" prefHeight="0.0" prefWidth="900.0" />
-            <CheckBox fx:id="allSales" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" text="전체DB" />
          </children>
       </AnchorPane>
    </top>
