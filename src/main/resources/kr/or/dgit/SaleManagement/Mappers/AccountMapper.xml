@@ -6,23 +6,34 @@
 		SELECT accCode, name, tel, addr, admit, alevel, id, pw
 		FROM account
 	</sql>
-		
+	
 	<sql id = "whereAccount">
 		<where>
 			<if test="accCode != 0">
-			accCode = #{accCode}
+				AND accCode = #{accCode}
 			</if>
 			<if test="accName != null">
-				name = #{accName}
+				AND name = #{accName}
 			</if>
 			<if test="accLevel != null">
-				alevel = #{accLevel}
+				AND alevel = #{accLevel}
 			</if>
 			<if test="accId != null">
-				id = #{accId}
+				AND id = #{accId}
 			</if>
 			<if test="accAdmit != null">
-				admit = #{accAdmit}
+				AND admit = #{accAdmit}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id = "whereAccountNameLike">
+		<where>
+			<if test="accName != null">
+				AND name LIKE #{accName}
+			</if>
+			<if test="accAdmit != null">
+				AND admit LIKE #{accAdmit}
 			</if>
 		</where>
 	</sql>
@@ -59,7 +70,8 @@
 	</select>
 	
 	<select id="selectMaxCode" resultType="int">
-		SELECT MAX(accCode) FROM account
+		SELECT MAX(accCode)
+		FROM account
 	</select>
 	
 	<select id="selectAccountByAllAdmit"  resultMap="AccountResult">
@@ -69,6 +81,11 @@
 	
 	<select id="selectAccountByAll"  resultMap="AccountResult">
 		<include refid="selectAccount"/>
+	</select>
+	
+	<select id="selectAccountLikeName" resultMap="AccountResult">
+		<include refid="selectAccount"/>
+		<include refid="whereAccountNameLike"/>
 	</select>
 	
 	<insert id="insertAccount" parameterType="Account">

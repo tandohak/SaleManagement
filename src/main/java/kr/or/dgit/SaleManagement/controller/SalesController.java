@@ -91,8 +91,7 @@ public class SalesController {
 			levellist.add(saleLevel);
 		}	
 		levelCb.setItems(levellist);
-		
-		
+				
 		saleSerivce = SalesService.getInstance();
 		List<Sales> lists = saleSerivce.findSaleAll();
 		for(Sales sale : lists) {
@@ -229,7 +228,7 @@ public class SalesController {
 				return;
 			}
 			
-			Alert alert =new Alert(AlertType.CONFIRMATION);
+			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle(null);			
 			alert.setHeaderText(null);
 			alert.setContentText("정말 등록하시겠습니까?");

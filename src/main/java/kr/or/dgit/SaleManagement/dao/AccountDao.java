@@ -11,6 +11,7 @@ public interface AccountDao {
 	List<Account> selectAccountByLevel(Account account);
 	List<Account> selectAccountByAllAdmit(Account account);
 	List<Account> selectAccountByAll();
+	List<Account> selectAccountLikeName(Account account);
 	
 	int insertAccount(Account account);
 	

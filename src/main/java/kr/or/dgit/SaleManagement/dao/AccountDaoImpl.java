@@ -72,4 +72,10 @@ public class AccountDaoImpl implements AccountDao {
 		return sqlSession.getMapper(AccountDao.class).selectMaxCode();
 	}
 
+	@Override
+	public List<Account> selectAccountLikeName(Account account) {
+		log.debug("selectAccountLikeName()");
+		return sqlSession.getMapper(AccountDao.class).selectAccountLikeName(account);
+	}
+
 }

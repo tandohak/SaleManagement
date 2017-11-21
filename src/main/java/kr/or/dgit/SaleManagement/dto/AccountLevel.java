@@ -30,7 +30,7 @@ public class AccountLevel {
 
 	@Override
 	public String toString() {
-		return String.format("AccountLevel [accLevel=%s, accDisrate=%s]", accLevel, accDisrate);
+		return String.format("%s", accLevel);
 	}
 
 }

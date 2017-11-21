@@ -84,5 +84,11 @@ public class AccountService {
 			return dao.selectMaxCode();
 		}
 	}
- 
+	
+	public List<Account> findAccountLikeName(Account account){
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			AccountDao dao = new AccountDaoImpl(sqlSession);
+			return dao.selectAccountLikeName(account);
+		}
+	}
 }

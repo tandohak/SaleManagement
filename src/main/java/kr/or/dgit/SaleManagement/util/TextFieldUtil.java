@@ -87,6 +87,19 @@ public class TextFieldUtil {
 		}
 	}
 	
+	public void regexTfComfirmAccountName(TextField nameTf) throws Exception {
+		String pattern = "^[a-zA-Z가-힣0-9]{1,20}$";
+		String errmsg = "관리자에게 문의하세요";
+
+		Pattern p = Pattern.compile(pattern);
+		
+		Matcher m = p.matcher(nameTf.getText());
+		if(!m.find())
+		{
+			throw new Exception(errmsg);
+		}
+	}
+	
 	public void regexTfComfirmAccProductName(TextField nameTf) throws Exception {
 		String pattern = "^[a-zA-Z가-힣]{1,15}$";
 		String errmsg = "제품명은 한글/영문만 가능합니다.";
