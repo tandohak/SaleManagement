@@ -97,7 +97,7 @@ public class SalesController {
 		
 		Sales leaveSales = new Sales();
 		leaveSales.setSaleLeave("true");
-		
+		saleSerivce = SalesService.getInstance();
 		List<Sales> lists = saleSerivce.findSalesByLeave(leaveSales);
 		for(Sales sale : lists) {
 			myList.add(sale);

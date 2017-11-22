@@ -97,6 +97,7 @@ public class SalesService {
 	
 	public List<Sales> findSalesByLeave(Sales sales){
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			System.out.println("접근");
 			SalesDao salesDao = new SalesDaoImpl(sqlSession);
 			return salesDao.selectSalesByLeave(sales);
 		}
