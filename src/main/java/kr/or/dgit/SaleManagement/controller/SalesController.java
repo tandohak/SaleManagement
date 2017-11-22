@@ -97,8 +97,7 @@ public class SalesController {
 		
 		Sales leaveSales = new Sales();
 		leaveSales.setSaleLeave("true");
-		System.out.println(leaveSales.getSaleLeave());
-		saleSerivce = SalesService.getInstance();
+		
 		List<Sales> lists = saleSerivce.findSalesByLeave(leaveSales);
 		for(Sales sale : lists) {
 			myList.add(sale);
@@ -135,7 +134,7 @@ public class SalesController {
 					}
 				}							
 			}
-			
+		
 		});
 		
 				
@@ -406,7 +405,7 @@ public class SalesController {
 		setSalesModel(lists);
 	}
 	
-	@FXML
+	
 	private void setSalesModel(List<Sales> lists) {
 		myList = FXCollections.observableArrayList();
 		for(Sales sales : lists) {

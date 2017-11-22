@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane fx:id="pane" prefHeight="469.0" prefWidth="510.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.dialogController.RecordEditDialogController">
+   <top>
+      <AnchorPane prefHeight="48.0" prefWidth="510.0" style="-fx-background-color: #dddddd;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="22.0" layoutY="18.0" text="거래 내역 수정" />
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="67.0" prefWidth="510.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="joinSalesBtn" layoutX="179.0" layoutY="14.0" onAction="#handleOk" styleClass="greenBtn" text="수정" />
+            <JFXButton fx:id="closeDialog" layoutX="257.0" layoutY="14.0" onAction="#handleCancel" text="취소" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="337.0" prefWidth="510.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane layoutX="13.0" layoutY="17.0" prefHeight="287.0" prefWidth="458.0" AnchorPane.leftAnchor="26.5" AnchorPane.topAnchor="25.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="거래일자" />
+                        <DatePicker fx:id="dateDP" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label text="거래처" />
+                        <HBox style="-fx-spacing: none;">
+                           <children>
+                              <TextField fx:id="accTf" editable="false" prefHeight="24.0" prefWidth="110.0" styleClass="searchTF" />
+                              <Button mnemonicParsing="false" onAction="#SearchAccountAction" styleClass="searchBtn" text="Button">
+                                 <HBox.margin>
+                                    <Insets bottom="1.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Label style="-fx-min-width: 50;" text="등급" />
+                        <TextField fx:id="accLevelTf" editable="false" prefHeight="24.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="관리담당자" />
+                        <HBox style="-fx-spacing: none;">
+                           <children>
+                              <TextField fx:id="saleTf" prefHeight="24.0" prefWidth="110.0" styleClass="searchTF" />
+                              <Button mnemonicParsing="false" onAction="#SearchSalesAction" styleClass="searchBtn" text="Button">
+                                 <HBox.margin>
+                                    <Insets bottom="1.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Label minWidth="33.0" prefHeight="15.0" prefWidth="33.0" style="-fx-min-width: 50;" text="등급" />
+                        <TextField fx:id="saleLevelTf" editable="false" prefHeight="24.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                        <Label text="제품명" />
+                        <HBox style="-fx-spacing: none;">
+                           <children>
+                              <TextField fx:id="pdtTf" editable="false" prefHeight="24.0" prefWidth="110.0" styleClass="searchTF" />
+                              <Button mnemonicParsing="false" styleClass="searchBtn" text="Button" />
+                           </children>
+                        </HBox>
+                        <Label style="-fx-min-width: 50;" text="품목" />
+                        <TextField fx:id="pdtClassTf" editable="false" prefHeight="24.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                     <children>
+                        <Label text="판매금액" />
+                        <TextField fx:id="priceTf" editable="false" />
+                        <Label style="-fx-min-width: 50;" text="판매원가" />
+                        <TextField fx:id="costTf" editable="false" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+                     <children>
+                        <Label text="판매수량" />
+                        <TextField fx:id="countTf" />
+                        <Label style="-fx-min-width: 50;" text="할인금액" />
+                        <TextField fx:id="disPriceTf" editable="false" />
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

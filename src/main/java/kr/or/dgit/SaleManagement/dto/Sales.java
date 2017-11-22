@@ -21,6 +21,10 @@ public class Sales {
 
 	public Sales() {}
 
+	public Sales(int saleCode) {
+		this.saleCode.set(saleCode);
+	}
+
 	public BooleanProperty getCheckedBoxProperty() {
 		return checkedBox;
 	}

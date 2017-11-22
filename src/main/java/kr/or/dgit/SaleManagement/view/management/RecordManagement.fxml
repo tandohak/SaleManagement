@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="675.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.RecordController">
+<BorderPane fx:id="pane" prefHeight="675.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.RecordController">
    <top>
       <AnchorPane prefHeight="80.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
@@ -31,7 +31,7 @@
          <children>
             <ButtonBar layoutX="601.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0">
                <buttons>
-                  <JFXButton styleClass="greenBtn" stylesheets="@../css/style.css" text="수정" textFill="#7c8991" />
+                  <JFXButton onAction="#getCellMenuAction" styleClass="greenBtn" stylesheets="@../css/style.css" text="수정" textFill="#7c8991" />
                   <JFXButton onAction="#deleteSelectedCell" text="선택삭제" />
                   <JFXButton stylesheets="@../css/style.css" text="인쇄" />
                </buttons>
