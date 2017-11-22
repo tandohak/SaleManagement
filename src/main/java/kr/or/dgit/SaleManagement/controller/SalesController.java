@@ -33,7 +33,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
-import kr.or.dgit.SaleManagement.dto.Account;
+import kr.or.dgit.SaleManagement.dto.AddrItem;
 import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.service.SalesLevelService;
@@ -96,7 +96,6 @@ public class SalesController {
 		
 		Sales leaveSales = new Sales();
 		leaveSales.setSaleLeave("true");
-		System.out.println(leaveSales.getSaleLeave());
 		saleSerivce = SalesService.getInstance();
 		List<Sales> lists = saleSerivce.findSalesByLeave(leaveSales);
 		for(Sales sale : lists) {
@@ -134,7 +133,7 @@ public class SalesController {
 					}
 				}							
 			}
-			
+		
 		});
 		
 				

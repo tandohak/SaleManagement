@@ -46,7 +46,7 @@
 				AND name LIKE #{saleName}
 			</if>
 			<if test="saleLeave != null">
-				AND sLeave = #{saleLeave}
+				AND sLeave LIKE #{saleLeave}
 			</if>
 		</where>
 	</sql>	
@@ -69,7 +69,7 @@
 	
 	<select id="selectSalesByLeave" resultMap="SalesResult">
 		<include refid="selectSql"/>
-		WHERE sLeave = #{saleLeave}
+		WHERE sleave = #{saleLeave}
 	</select>
 	
 	<select id="selectSalesLikeName" resultMap="SalesResult">
@@ -121,6 +121,6 @@
 	</delete>
 	
 	<select id="selectMaxCode" resultType="int">
-		SELECT MAX(salecode) FROM sales
+		SELECT MAX(saleCode) FROM sales
 	</select>
 </mapper>
