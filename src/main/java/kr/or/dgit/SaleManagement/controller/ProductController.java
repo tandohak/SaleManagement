@@ -36,6 +36,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.ProductTestMain;
+import kr.or.dgit.SaleManagement.controller.dialogController.ProductSearchDialog;
 import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.BigClass;
@@ -403,6 +404,33 @@ public class ProductController {
 
 	}
 	
+//	제품 검색화면 태그
+	/*@FXML
+	public void SearchAccountAction() {
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("view/dialog/productSearchDialog.fxml"));
+        BorderPane page;
+		try {
+			page = (BorderPane) loader.load();
+			
+			Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Product");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+	        dialogStage.initOwner(pane.getScene().getWindow());
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+	       
+	        ProductSearchDialog controller = loader.getController(); 
+	        controller.setDialogStage(dialogStage);
+	        
+	        dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}*/
 	
 	@FXML
 	public void getCellMenuAction() {

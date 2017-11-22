@@ -20,7 +20,7 @@ public class ProductTestMain extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("영업관리 프로그램");
-		initRootLayout();	
+		initRootLayout();
 	}
 
 	private static ProductService pdtService;
