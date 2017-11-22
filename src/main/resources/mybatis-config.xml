@@ -9,8 +9,8 @@
 	
 	<typeAliases>
 		<package name="kr.or.dgit.SaleManagement.dto"/> 
-	</typeAliases>
-
+	</typeAliases>	
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />

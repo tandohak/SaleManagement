@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.dgit.SaleManagement.dao.Record">
+<mapper namespace="kr.or.dgit.SaleManagement.dao.RecordDao">
 	<resultMap type="Record" id="recordResult">
 		<id property="recNo"  column="recNo"/>
 		<result property="rProductCode" column="pCode"/>
@@ -9,7 +9,9 @@
 		<result property="recDisprice" column="disprice"/>
 		<result property="recDisrate" column="disrate"/>
 		<result property="recCount" column="count"/>
-	</resultMap>
+	</resultMap>	
+	
+	
 	
 	<sql id="selectSql">
 		select recNo,pcode,scode,date,disprice,disrate,count

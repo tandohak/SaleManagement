@@ -6,15 +6,13 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.SaleManagement.dao.RecordDao;
 import kr.or.dgit.SaleManagement.dao.RecordDaoImpl;
-import kr.or.dgit.SaleManagement.dao.SalesLevelDao;
-import kr.or.dgit.SaleManagement.dao.SalesLevelDaoImpl;
 import kr.or.dgit.SaleManagement.dto.Record;
 import kr.or.dgit.SaleManagement.util.MyBatisSqlSessionFactory;
 
 public class RecordSerivce {
-	private final RecordSerivce instance = new RecordSerivce();
+	private final static RecordSerivce instance = new RecordSerivce();
 
-	public RecordSerivce getInstance() {
+	public static RecordSerivce getInstance() {
 		return instance;
 	}
 	

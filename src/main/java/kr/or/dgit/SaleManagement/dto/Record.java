@@ -2,21 +2,109 @@ package kr.or.dgit.SaleManagement.dto;
 
 import java.util.Date;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 
 public class Record {
+	private BooleanProperty checkedBox = new SimpleBooleanProperty(false);
 	private IntegerProperty recNo = new SimpleIntegerProperty();
-	private ObjectProperty<Product> rProductCode = new SimpleObjectProperty<>();
-	private ObjectProperty<Sales> rSalecode = new SimpleObjectProperty<>();
+	private IntegerProperty rProductCode = new SimpleIntegerProperty();
+	private IntegerProperty rSalecode = new SimpleIntegerProperty();
 	private ObjectProperty<Date> recDate = new SimpleObjectProperty<>();
 	private IntegerProperty recDisprice = new SimpleIntegerProperty();
 	private IntegerProperty recDisrate = new SimpleIntegerProperty();
 	private IntegerProperty recCount = new SimpleIntegerProperty();
+	
+	private IntegerProperty recCost = new SimpleIntegerProperty();
+	private IntegerProperty recPrice = new SimpleIntegerProperty();
+	private StringProperty accName = new SimpleStringProperty();
+	private StringProperty pdtName = new SimpleStringProperty();
+	private StringProperty saleName = new SimpleStringProperty();
+	
+	
 
 	public Record() {}
+	
+	public BooleanProperty getCheckedBoxProperty() {
+		return checkedBox;
+	}
+	
+	public Boolean getCheckedBox() {
+		return checkedBox.get();
+	}
+	
+	public void setCheckedBox(Boolean checkedBox) {
+		this.checkedBox.set(checkedBox);
+	}
+	
+	public ObservableValue<Boolean> selectedProperty() {
+		return checkedBox;
+	}
+	
+	public String getSaleNamey() {
+		return saleName.get();
+	}
+	public StringProperty getSaleNameProperty() {
+		return saleName;
+	}
+
+	public void setSaleName(String saleName) {
+		this.saleName.set(saleName);
+	}
+	
+	public IntegerProperty getRecCostProperty() {
+		return recCost;
+	}
+	public int getRecCost() {
+		return recCost.get();
+	}
+
+	public void setRecCost(int recCost) {
+		this.recCost.set(recCost);
+	}
+	
+	public int getRecPrice() {
+		return recPrice.get();
+	}
+	
+	public IntegerProperty getRecPriceProperty() {
+		return recPrice;
+	}
+
+	public void setRecPrice(int recPrice) {
+		this.recPrice.set(recPrice);
+	}
+
+	public String getAccName() {
+		return accName.get();
+	}
+	
+	public StringProperty getAccNameProperty() {
+		return accName;
+	}
+
+	public void setAccName(String accName) {
+		this.accName.set(accName);
+	}
+
+	public String getPdtName() {
+		return pdtName.get();
+	}
+	
+	public StringProperty getPdtNameProperty() {
+		return pdtName;
+	}
+
+	public void setPdtName(String pdtName) {
+		this.pdtName.set(pdtName); ;
+	}
 
 	public int getRecNo() {
 		return recNo.get();
@@ -30,27 +118,27 @@ public class Record {
 		this.recNo.set(recNo); 
 	}
 
-	public Product getrProductCode() {
+	public int getrProductCode() {
 		return rProductCode.get();
 	}
 	
-	public ObjectProperty<Product> getrProductCodeProperty() {
+	public IntegerProperty getrProductCodeProperty() {
 		return rProductCode;
 	}
 
-	public void setrProductCode(Product rProductCode) {
+	public void setrProductCode(int rProductCode) {
 		this.rProductCode.set(rProductCode);
 	}
 
-	public Sales getrSalecode() {
+	public int getrSalecode() {
 		return rSalecode.get();
 	}
 	
-	public ObjectProperty<Sales> getrSalecodeProperty() {
+	public IntegerProperty getrSalecodeProperty() {
 		return rSalecode;
 	}
 
-	public void setrSalecode(Sales rSalecode) {
+	public void setrSalecode(int rSalecode) {
 		this.rSalecode.set(rSalecode);
 	}
 
