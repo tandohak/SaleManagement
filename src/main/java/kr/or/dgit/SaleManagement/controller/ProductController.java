@@ -36,6 +36,8 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.ProductTestMain;
+import kr.or.dgit.SaleManagement.controller.dialogController.AddClassDialogController;
+import kr.or.dgit.SaleManagement.controller.dialogController.AddClassDialogController2;
 import kr.or.dgit.SaleManagement.controller.dialogController.ProductSearchDialog;
 import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
@@ -339,7 +341,7 @@ public class ProductController {
 	@FXML
 	public void getCellClassAction() {
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("view/dialog/AddClassDialog.fxml"));
+        loader.setLocation(MainApp.class.getResource("view/dialog/AddClassDialog2.fxml"));
         BorderPane page;
 		try {
 			page = (BorderPane) loader.load();
@@ -353,7 +355,7 @@ public class ProductController {
 	        
 //	        AddClassDialogController controller = loader.getController();
 //	        controller.setDialogStage(dialogStage);
-	        AddClassDialogController controller = loader.getController(); 
+	        AddClassDialogController2 controller = loader.getController(); 
 	        
 	        dialogStage.showAndWait();
 	        

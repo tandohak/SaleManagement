@@ -1,4 +1,4 @@
-package kr.or.dgit.SaleManagement.controller;
+package kr.or.dgit.SaleManagement.controller.dialogController;
 
 import java.util.List;
 
