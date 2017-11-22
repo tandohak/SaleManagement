@@ -34,6 +34,7 @@ public class TextFieldUtil {
 	
 	public void tfComfrim(TextField tf) throws Exception {
 		if(tf.getText().trim().equals("")) {
+		  tf.requestFocus();
 		  throw new Exception("공백이 존재합니다.");
 		}
 	}
@@ -43,7 +44,7 @@ public class TextFieldUtil {
 		
 		Matcher m = p.matcher(comTf.getText());
 		if(!m.find())
-		{
+		{	
 			throw new Exception(errmsg);
 		}
 	}
@@ -56,7 +57,8 @@ public class TextFieldUtil {
 		
 		Matcher m = p.matcher(idTf.getText());
 		if(!m.find())
-		{
+		{	
+			idTf.requestFocus();
 			throw new Exception(errmsg);
 		}
 	}
@@ -69,7 +71,8 @@ public class TextFieldUtil {
 		
 		Matcher m = p.matcher(idTf.getText());
 		if(!m.find())
-		{
+		{	
+			idTf.requestFocus();
 			throw new Exception(errmsg);
 		}
 	}
@@ -83,6 +86,7 @@ public class TextFieldUtil {
 		Matcher m = p.matcher(nameTf.getText());
 		if(!m.find())
 		{
+			nameTf.requestFocus();
 			throw new Exception(errmsg);
 		}
 	}
@@ -96,6 +100,7 @@ public class TextFieldUtil {
 		Matcher m = p.matcher(nameTf.getText());
 		if(!m.find())
 		{
+			nameTf.requestFocus();
 			throw new Exception(errmsg);
 		}
 	}
@@ -109,6 +114,7 @@ public class TextFieldUtil {
 		Matcher m = p.matcher(nameTf.getText());
 		if(!m.find())
 		{
+			nameTf.requestFocus();
 			throw new Exception(errmsg);
 		}
 	}
@@ -123,6 +129,7 @@ public class TextFieldUtil {
 		Matcher m = p.matcher(nameTf.getText());
 		if(!m.find())
 		{
+			nameTf.requestFocus();
 			throw new Exception(errmsg);
 		}
 	}
@@ -136,6 +143,7 @@ public class TextFieldUtil {
 		Matcher m = p.matcher(pwTf.getText());
 		if(!m.find())
 		{
+			pwTf.requestFocus();
 			throw new Exception(errmsg);
 		}
 	}
@@ -149,6 +157,7 @@ public class TextFieldUtil {
 		Matcher m = p.matcher(telTf.getText());
 		if(!m.find())
 		{
+			telTf.requestFocus();
 			throw new Exception(errmsg);
 		}
 	}

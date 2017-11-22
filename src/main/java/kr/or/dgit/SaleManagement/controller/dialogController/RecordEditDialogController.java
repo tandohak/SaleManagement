@@ -1,11 +1,8 @@
 package kr.or.dgit.SaleManagement.controller.dialogController;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +11,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -51,6 +49,7 @@ public class RecordEditDialogController {
     @FXML private TextField disPriceTf;	
     @FXML private TextField countTf;    
     @FXML private TextField disrateTf;
+    @FXML private TextField sumPriceTf;
     
 	private Stage dialogStage;
 	private Record record;
@@ -98,7 +97,16 @@ public class RecordEditDialogController {
 	    disPriceTf.setText(unitDisPrice+"");
 	    
 	    countTf.setText(record.getRecCount()+"");
-	    disrateTf.setText(record.getRecDisrate()+"");	    
+	    disrateTf.setText(record.getRecDisrate()+"");
+	    
+	    if(!countTf.getText().equals("")) {
+		    int count = record.getRecCount();
+		    int sumPrice = unitPrice*count;
+		    sumPriceTf.setText(sumPrice+"");
+	    }else {
+	    	int sumPrice = unitPrice*1;
+			sumPriceTf.setText(sumPrice+"");
+	    }
 	}
 
 	public Record getRecord() {
@@ -116,11 +124,13 @@ public class RecordEditDialogController {
 	@FXML
     private void handleOk() {
         if (tfComfrimField()) {        	
-			okClicked = true;		
+			okClicked = true;	
+			
+		
+			
 			dialogStage.close();
         }
     }
-	
 	
 	@FXML
 	private void handleCancel() {
@@ -128,7 +138,7 @@ public class RecordEditDialogController {
 	}
 	
 	@FXML
-	public void SearchAccountAction() {
+	public void searchAccountAction() {
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("view/dialog/AccountSearchDialog.fxml"));
         BorderPane page;
@@ -141,13 +151,10 @@ public class RecordEditDialogController {
 	        dialogStage.initOwner(pane.getScene().getWindow());
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
-	        
 	       
 	        ProductSearchAccountController controller = loader.getController(); 
 	        controller.setDialogStage(dialogStage);	        
 	        dialogStage.showAndWait();
-
-	       
 	        
 	        if(controller.isOkClicked()) {
 	        	acc = controller.getGetAcc();
@@ -158,6 +165,14 @@ public class RecordEditDialogController {
 	        	AccountLevel accDis = accLevelService.findOneAccount(new AccountLevel(accLevelTf.getText()));	        	
 	        	int sumDisrate = saleDis.getSalDisrate() + accDis.getAccDisrate(); 
 	        	disrateTf.setText(sumDisrate + "%");
+	        	
+	        	int dis = sumDisrate;
+	        	int unitDisPrice = (pdt.getPdtPrice()/100)*dis;
+	        	int unitPrice = pdt.getPdtPrice() - unitDisPrice;
+	        	unitPriceTf.setText(unitPrice+"");	
+	    	    disPriceTf.setText(unitDisPrice+"");
+	    	    
+	    	    refrashSumPrice(unitPrice);
 	        }
 
 		} catch (IOException e) {
@@ -167,7 +182,18 @@ public class RecordEditDialogController {
 	}
 	
 	@FXML
-	public void SearchSalesAction() {
+	public void changCountNumAction(KeyEvent event) {	
+		if(countTf.getText().equals("")){
+			
+		}
+		int count = Integer.parseInt(countTf.getText());
+		int unitPrice = Integer.parseInt(unitPriceTf.getText());
+	    int sumPrice = unitPrice*count;
+	    sumPriceTf.setText(sumPrice+"");
+	}
+	
+	@FXML
+	public void searchSalesAction() {
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("view/dialog/SalesSearchDialog.fxml"));
         BorderPane page;
@@ -197,6 +223,14 @@ public class RecordEditDialogController {
 	        	AccountLevel accDis = accLevelService.findOneAccount(new AccountLevel(accLevelTf.getText()));	        	
 	        	int sumDisrate = saleDis.getSalDisrate() + accDis.getAccDisrate(); 
 	        	disrateTf.setText(sumDisrate + "%");	
+	        	
+	        	int dis = sumDisrate;
+	        	int unitDisPrice = (pdt.getPdtPrice()/100)*dis;
+	        	int unitPrice = pdt.getPdtPrice() - unitDisPrice;
+	        	unitPriceTf.setText(unitPrice+"");	
+	    	    disPriceTf.setText(unitDisPrice+"");
+	    	    
+	    	    refrashSumPrice(unitPrice);
 	        }
 
 		} catch (IOException e) {
@@ -207,7 +241,7 @@ public class RecordEditDialogController {
 	}
 	
 	@FXML
-	public void SearchProductAction() {
+	public void searchProductAction() {
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("view/dialog/ProductSearchDialog.fxml"));
         BorderPane page;
@@ -230,11 +264,14 @@ public class RecordEditDialogController {
 	        	pdtTf.setText(pdt.getAccName());
 	        	pdtClassTf.setText(pdt.getPdtName());
 	        	priceTf.setText(pdt.getPdtPrice()+"");
-	        	        	
-//	        	int unitDisPrice = (pdt.getPdtPrice()/100)*dis;
-//	        	int unitPrice = pdt.getPdtPrice() - unitDisPrice;
-//	        	unitPriceTf.setText(unitPrice+"");	
-//	    	    disPriceTf.setText(unitDisPrice+"");
+	        	
+	        	int dis = Integer.parseInt(disrateTf.getText().replace("%", ""));
+	        	int unitDisPrice = (pdt.getPdtPrice()/100)*dis;
+	        	int unitPrice = pdt.getPdtPrice() - unitDisPrice;
+	        	unitPriceTf.setText(unitPrice+"");	
+	    	    disPriceTf.setText(unitDisPrice+"");
+	    	    
+	    	    refrashSumPrice(unitPrice);
 	        }
 
 		} catch (IOException e) {
@@ -242,11 +279,23 @@ public class RecordEditDialogController {
 		}
 
 	}
+
+	private void refrashSumPrice(int unitPrice) {
+		if(!countTf.getText().equals("")) {
+			int count = Integer.parseInt(countTf.getText().replace("%", ""));
+			int sumPrice = unitPrice*count;
+			sumPriceTf.setText(sumPrice+"");
+		}else {
+			int sumPrice = unitPrice*1;
+			sumPriceTf.setText(sumPrice+"");
+		}
+	}
 	
 	
 	private boolean tfComfrimField() {
-		try {
+		try {			
 			tfUtil.tfComfrim(countTf);			
+			tfUtil.regexTfComfirmNumber(countTf);
 			return true;
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.WARNING);
