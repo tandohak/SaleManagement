@@ -3,10 +3,6 @@ package kr.or.dgit.SaleManagement.dto;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Addr {
@@ -19,27 +15,18 @@ public class Addr {
 
 	public Addr(String zipCode, String sido, String sigungu, String doro, int building1, int building2) {
 		this.zipCode.set(zipCode);
-		this.sido.set(sido);;
-		this.sigungu.set(sigungu);;
+		this.sido.set(sido);
+		this.sigungu.set(sigungu);
 		this.doro.set(doro);
-		this.building1.set(building1);;
-		this.building2.set(building2);;
+		this.building1.set(building1);
+		this.building2.set(building2);
 	}
 
 	public Addr() {}
 	
-	public String getAddrs() {
-		String addr = sido.get() + " " + sigungu.get() + " " + doro.get() + " " + building1.get();
-		if(building2.get() != 0) {
-			addr += "-" + building2.get();
-		}
-		return addr;		
-	}
-	
 	@Override
 	public String toString() {
-		return String.format("UserAddr [zipCode=%s, sido=%s, sigungu=%s, doro=%s, building1=%s, building2=%s]", zipCode,
-				sido, sigungu, doro, building1, building2);
+		return String.format("%s %s %s", sido, sigungu, doro);
 	}
 
 	public String getZipCode() {

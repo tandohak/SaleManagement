@@ -26,11 +26,11 @@ public class AddrDialogController {
 
 	private AddrService addrService = AddrService.getInstance();
 	private Stage dialogStage;
-	private AddrItem addrItem;
+	private AddrItem addrItem = new AddrItem();
 	private boolean okClicked = false;
-	private ObservableList<Addr> myList = FXCollections.observableArrayList();
+	private ObservableList<AddrItem> myList;
 	private ObservableList<String> sidoList = FXCollections.observableArrayList();
-	private ObservableList<String> sigunguList = FXCollections.observableArrayList();
+	private ObservableList<String> sigunguList;
 	
 	@FXML
 	private void initialize() {
@@ -54,6 +54,7 @@ public class AddrDialogController {
 	
 	@FXML
 	public void changeSigungu() {
+		sigunguList = FXCollections.observableArrayList();
 		String sido = searchSido.getValue().toString();
 		Addr addrSido = new Addr();
 		addrSido.setSido(sido);
@@ -61,6 +62,32 @@ public class AddrDialogController {
 		for(Addr sigungu : listSigungu)
 			sigunguList.add(sigungu.getSigungu());
 		searchSigungu.setItems(sigunguList);
+	}
+	
+	@FXML
+	public void findAddressList() {
+		myList = FXCollections.observableArrayList();
+		String sido = searchSido.getValue().toString();
+		String sigungu = searchSigungu.getValue().toString();
+		String doro = "%"+searchDoro.getText()+"%";
+		
+		Addr findAddress = new Addr();
+		findAddress.setSido(sido);
+		findAddress.setSigungu(sigungu);
+		findAddress.setDoro(doro);
+		
+		List<Addr> lists = addrService.findAddrByDoro(findAddress);
+		for(Addr findAddr : lists) {
+			AddrItem addr = new AddrItem();
+			addr.setAddrZip(findAddr.getZipCode().toString());
+			String sumAddr = findAddr.getSido() + " " + findAddr.getSigungu() + " " + findAddr.getDoro();
+			addr.setAddr(sumAddr);
+			myList.add(addr);
+		}
+		addrZipTc.setCellValueFactory(cellData -> cellData.getValue().getAddrZipProperty());
+		addrTc.setCellValueFactory(cellData -> cellData.getValue().getAddrProperty());
+		
+		addrTb.setItems(myList);
 	}
 	
 	@FXML
