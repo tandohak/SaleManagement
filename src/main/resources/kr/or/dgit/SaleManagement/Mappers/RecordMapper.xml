@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.SaleManagement.dao.RecordDao">
+	<resultMap type="Record" id="recordResult">
+		<id property="recNo"  column="recNo"/>
+		<result property="rProductCode" column="pCode"/>
+		<result property="rSalecode" column="sCode"/>
+		<result property="recDate" column="date"/>
+		<result property="recDisprice" column="disprice"/>
+		<result property="recDisrate" column="disrate"/>
+		<result property="recCount" column="count"/>
+	</resultMap>	
+	
+	
+	
+	<sql id="selectSql">
+		select recNo,pcode,scode,date,disprice,disrate,count
+		from record
+	</sql>
+	
+	<sql id="whereSql">
+		<where>
+			<if test="recNo > 0">
+				and recNo = #{recNo}
+			</if>
+			<if test="rProductCode > 0">
+				and pcode = #{rProductCode}
+			</if>
+			<if test="rSalecode > 0">
+				and scode = #{rSalecode}
+			</if>
+			<if test="recDate != null">
+				and date = #{recDate}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectRecordByOne" resultMap="recordResult" parameterType="Record">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	
+	<select id="selectRecordBySearch" resultMap="recordResult" parameterType="Record">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	
+	<select id="selectRecordByAll" resultMap="recordResult" parameterType="Record">
+		<include refid="selectSql"/>
+	</select>
+	
+	<insert id="insertRecord" parameterType="Record">	
+		insert into record(recNo,pcode,scode,date,disprice,disrate,count)
+		values(#{recNo},#{rProductCode},#{rSalecode},#{recDate},#{recDisprice},#{recDisrate},#{recCount})
+	</insert>
+	
+	<update id="updateRecord">
+		update record
+		<set>
+			<if test="recNo > 0">
+				recNo = #{recNo},
+			</if>
+			<if test="rProductCode > 0">
+				pcode = #{rProductCode},
+			</if>
+			<if test="rSalecode > 0">
+				scode = #{rSalecode},
+			</if>
+			<if test="recDate != null">
+				date = #{recDate},
+			</if>
+			<if test="recDisprice > 0">
+				disprice = #{recDisprice},
+			</if>
+			<if test="recDisrate > 0">
+				disrate = #{recDisrate},
+			</if>
+			<if test="recCount > 0">
+				count = #{recCount}
+			</if>
+		</set>
+	</update>
+	
+	<delete id="deleteRecord">
+		delete from record
+		<include refid="whereSql"/>
+	</delete>
+</mapper>

@@ -215,7 +215,7 @@ public class ProductController {
 		
 		codeTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCodeProperty().asObject());
 		nameTc.setCellValueFactory(cellData -> cellData.getValue().getPdtNameProperty());
-		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccName());
+		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccNameProperty());
 		costTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCostProperty().asObject());
 		priceTc.setCellValueFactory(cellData -> cellData.getValue().getPdtPriceProperty().asObject());
 		admitTc.setCellValueFactory(cellData -> cellData.getValue().getPdtAdmitProperty());

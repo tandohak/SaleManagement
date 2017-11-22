@@ -105,7 +105,7 @@ public class MainViewController  {
 	@FXML
 	private void hadleShowSellManager() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/SellManagement.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/RecordManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			
 			admNode.setCenter(pane);

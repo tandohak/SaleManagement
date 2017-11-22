@@ -138,10 +138,14 @@ public class Product {
 				pdtClass, pdtName, pdtCost, pdtPrice, pdtAdmit, accCode);
 	}
 
-	public StringProperty getAccName() {
+	public StringProperty getAccNameProperty() {
 		return accName;
 	}
 
+	public String getAccName() {
+		return accName.get();
+	}
+	
 	public void setAccName(StringProperty accName) {
 		this.accName = accName;
 	}

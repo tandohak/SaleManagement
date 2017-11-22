@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="675.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.RecordController">
+   <top>
+      <AnchorPane prefHeight="80.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="searchAllTf" layoutX="116.0" layoutY="14.0" styleClass="searchTF" stylesheets="@../css/style.css" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="14.0">
+               <padding>
+                  <Insets bottom="4.0" left="7.0" right="7.0" top="4.0" />
+               </padding></TextField>
+            <JFXButton layoutX="254.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
+            <Separator layoutY="57.0" prefHeight="3.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.5" />
+            <ComboBox fx:id="optionCb" layoutX="14.0" layoutY="14.0" prefHeight="23.0" prefWidth="87.0" />
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="73.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <ButtonBar layoutX="601.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0">
+               <buttons>
+                  <JFXButton styleClass="greenBtn" stylesheets="@../css/style.css" text="수정" textFill="#7c8991" />
+                  <JFXButton onAction="#deleteSelectedCell" text="선택삭제" />
+                  <JFXButton stylesheets="@../css/style.css" text="인쇄" />
+               </buttons>
+            </ButtonBar>
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="452.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="recTable" editable="true" prefHeight="515.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                  <TableColumn fx:id="chckTc" prefWidth="32.0">
+                     <graphic>
+                        <CheckBox fx:id="recCheck" mnemonicParsing="false" />
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="noTc" editable="false" prefWidth="38.0" text="No." />
+                <TableColumn fx:id="dateTc" editable="false" prefWidth="111.0" text="거래일자" />
+                <TableColumn fx:id="accNameTc" editable="false" prefWidth="110.0" text="거래처" />
+                  <TableColumn fx:id="pdtNameTc" editable="false" prefWidth="108.0" text="제품명" />
+                  <TableColumn fx:id="costTc" editable="false" prefWidth="87.0" text="판매원가" />
+                  <TableColumn fx:id="priceTc" editable="false" prefWidth="74.0" text="판매금액" />
+                  <TableColumn fx:id="dispriceTc" editable="false" prefWidth="90.0" text="할인금액" />
+                  <TableColumn fx:id="disrateTc" editable="false" prefWidth="65.0" text="할인율" />
+                  <TableColumn fx:id="countTc" editable="false" prefWidth="68.0" text="판매수량" />
+                  <TableColumn fx:id="saleNameTc" editable="false" prefWidth="115.0" text="관리담당자" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

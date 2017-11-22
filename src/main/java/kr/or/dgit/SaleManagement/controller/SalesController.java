@@ -162,11 +162,11 @@ public class SalesController {
 	@FXML
 	private void deleteSelectedCell(ActionEvent event) {
 		for(int i=0; myList.size()>i; i++) {
-			Sales Sales = myList.get(i);
+			Sales sales = myList.get(i);
 			
-			if(Sales.getCheckedBox()) {
-				 myList.remove(Sales);
-				 saleSerivce.deleteSales(Sales);
+			if(sales.getCheckedBox()) {
+				 myList.remove(sales);
+				 saleSerivce.deleteSales(sales);
 				 i = 0;
 			};
 		}
