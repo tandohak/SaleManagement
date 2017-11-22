@@ -4,6 +4,8 @@ import java.io.File;
 
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -24,7 +26,7 @@ public class PasswordChangeDialogController{
 	
 	private Stage dialogStage;
 	private AccountService accountService;
-	private Account existUser = new Account();
+	private Account existUser;
 	private boolean pwChecker = false;
 	
 	
@@ -38,20 +40,43 @@ public class PasswordChangeDialogController{
 		this.dialogStage = dialogStage;
 	}
 	
+	public void Alert(String str, int type) {
+		Alert alert = new Alert(null);
+		switch(type) {
+			case 1:
+				alert.setAlertType(AlertType.WARNING);
+				break;
+			case 2:
+				alert.setAlertType(AlertType.INFORMATION);
+				break;
+		}
+		alert.setTitle(null);
+		alert.setHeaderText(null);
+		alert.setContentText(str);
+		alert.showAndWait();
+		return;
+	}
+	
 	// 유저 존재여부 확인 메소드
 	public void findUser() {
 		Account findAccount = new Account();
 				
 		// 확인1 : 텍스트필드 내 문자열 존재확인
 		if(tfName.getText().equals("") || tfId.getText().equals("")) {
-			// 경고알람 출력 : 업체명,ID 필수입력해주셔야 합니다.
-			System.out.println("걸림");
+			Alert("업체명,ID는 필수입력입니다.", 1);
 			return;
 		}
 		
 		// ID를 기반으로 거래처 검색
 		findAccount.setAccId(tfId.getText());
-		existUser = accountService.findAccountById(findAccount);
+		if(accountService.findAccountById(findAccount) != null) {
+			existUser = accountService.findAccountById(findAccount);
+		}
+		else {
+			Alert("존재하지 않는 ID입니다.", 1);
+			return;
+		}
+		
 		// ID,업체명 동일 할 경우 거래처 복사 후 비밀번호 텍스트 활성화
 		if(existUser.getAccName().equals(tfName.getText())) {
 			imgId.setVisible(true);
@@ -59,7 +84,8 @@ public class PasswordChangeDialogController{
 			tfPasswordConfirm.setVisible(true);
 		}
 		else {
-			// 경고알람 출력 : 존재하지 않거나 정보가 일치하지 않습니다.
+			Alert("정보가 일치하지 않습니다.", 1);
+			return;
 		}
 	}
 	
@@ -67,8 +93,7 @@ public class PasswordChangeDialogController{
 	@FXML
 	private void ok() {
 		changePassword();
-		// 알람출력 : 비밀번호 변경에 성공하였습니다.
-		
+		Alert("비밀번호 변경에 성공하였습니다.", 2);
 		dialogStage.close();
 	}
 	
@@ -82,6 +107,7 @@ public class PasswordChangeDialogController{
 		// 패스워드체커가 불허 상태일 때 경고 후 포커스 이동
 		else {
 			// 경고알람 : 패스워드를 다시 확인해주세요.
+			Alert("비밀번호를 다시 확인해주세요.", 1);
 			tfPassword.setFocusTraversable(true);
 		}
 	}
