@@ -36,6 +36,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.MainApp;
+import kr.or.dgit.SaleManagement.controller.dialogController.RecordEditDialogController;
 import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Product;
@@ -48,20 +49,10 @@ import kr.or.dgit.SaleManagement.service.SalesService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
 public class RecordController {
+		@FXML private BorderPane pane;
 	    @FXML private TextField searchAllTf;
 	    @FXML private ComboBox<String> optionCb;
-	    @FXML private DatePicker dateDP;
-	    @FXML private TextField accTf;
-	    @FXML private TextField accLevelTf;
-	    @FXML private TextField pdtTf;
-	    @FXML private TextField pdtClassTf;
-	    @FXML private TextField sellCountTf;
-	    @FXML private TextField costTf;
-	    @FXML private TextField priceTf;
-	    @FXML private TextField saleTf;
-	    @FXML private TextField saleLevelTf;
-	    @FXML private TextField disPriceTf;
-	    @FXML private TextField noTf;
+	    
 	    @FXML private TableView<Record> recTable;
 	    @FXML private TableColumn<Record, Boolean> chckTc;
 	    @FXML private CheckBox recCheck;
@@ -170,7 +161,7 @@ public class RecordController {
 			}
 		}
 		
-		/*@FXML
+		@FXML
 		private void getCellMenuAction() {		
 			Record rec = recTable.getSelectionModel().getSelectedItem();
 			
@@ -189,7 +180,7 @@ public class RecordController {
 
 			try {
 		        FXMLLoader loader = new FXMLLoader();
-		        loader.setLocation(MainApp.class.getResource("view/dialog/SalesEditDialog.fxml"));
+		        loader.setLocation(MainApp.class.getResource("view/dialog/RecordEditDialog.fxml"));
 		        BorderPane page = (BorderPane) loader.load();
 
 		        Stage dialogStage = new Stage();
@@ -199,12 +190,12 @@ public class RecordController {
 		        Scene scene = new Scene(page);
 		        dialogStage.setScene(scene);
 		        
-		        SalesEditDialogController controller = loader.getController();
+		        RecordEditDialogController controller = loader.getController();
 		        controller.setDialogStage(dialogStage);
+		        controller.setRecord(rec);
 		        dialogStage.showAndWait();
 
 		        if(controller.isOkClicked()) {
-		        	System.out.println(controller.getSales());
 		        
 		        	refreshTable();
 		        }
@@ -212,7 +203,7 @@ public class RecordController {
 		        e.printStackTrace();
 		   }
 			  
-		}*/
+		}
 		
 		private void checkAlert(boolean isOk,String pwck) throws Exception {
 			if(!isOk) {

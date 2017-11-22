@@ -52,6 +52,10 @@ public class Product {
 		return pdtCode.get();
 	}
 	
+	public Product(int pdtCode) {
+		this.pdtCode.set(pdtCode);
+	}
+
 	public IntegerProperty getPdtCodeProperty() {
 		return pdtCode;
 	}

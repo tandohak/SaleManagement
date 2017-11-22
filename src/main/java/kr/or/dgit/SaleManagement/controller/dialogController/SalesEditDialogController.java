@@ -70,7 +70,7 @@ public class SalesEditDialogController {
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
-	}	
+	}
 	
 	public boolean isOkClicked() {
         return okClicked;
