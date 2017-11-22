@@ -93,7 +93,6 @@ public class PasswordChangeDialogController{
 	@FXML
 	private void ok() {
 		changePassword();
-		Alert("비밀번호 변경에 성공하였습니다.", 2);
 		dialogStage.close();
 	}
 	
@@ -103,6 +102,7 @@ public class PasswordChangeDialogController{
 		if(pwChecker) {
 			existUser.setAccPw(tfPassword.getText());
 			accountService.updateAccount(existUser);
+			Alert("비밀번호 변경에 성공하였습니다.", 2);
 		}
 		// 패스워드체커가 불허 상태일 때 경고 후 포커스 이동
 		else {
