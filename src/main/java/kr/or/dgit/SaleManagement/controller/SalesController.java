@@ -394,10 +394,13 @@ public class SalesController {
 			return;
 		}
 		if(!allSalesCheck()) {
+			System.out.println("체커상태:"+allSalesCheck());
 			findSales.setSaleLeave("true");
+			System.out.println(findSales.getSaleLeave());
 			lists = saleSerivce.findSalesLikeName(findSales);
 		}
 		else {
+			System.out.println("체커상태:"+allSalesCheck());
 			lists = saleSerivce.findSalesLikeName(findSales);
 		}
 		setSalesModel(lists);

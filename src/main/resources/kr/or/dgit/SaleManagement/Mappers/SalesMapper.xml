@@ -42,11 +42,11 @@
 	
 	<sql id = "whereSalesNameLike">
 		<where>
-			<if test="accName != null">
+			<if test="saleName != null">
 				AND name LIKE #{saleName}
 			</if>
-			<if test="accAdmit != null">
-				AND sLeave LIKE #{saleLeave}
+			<if test="saleLeave != null">
+				AND sLeave = #{saleLeave}
 			</if>
 		</where>
 	</sql>	
