@@ -24,13 +24,20 @@ public class TestAccountLevel {
 		service = null;
 	}
 
-	/*@Test
+	@Test
 	public void test1SelectAll() {
 		List<AccountLevel> lists = service.findAllAccountLevel();
 		for(AccountLevel sl : lists) {
 			System.out.println(sl);
 		}
 		Assert.assertNotNull(lists);
-	}*/
-
+	}
+	
+	@Test
+	public void test1SelectOne() {
+		AccountLevel acc  =service.findOneAccount(new AccountLevel("L"));
+//		AccountLevel acc = new AccountLevel("L");
+		System.out.println(acc);
+		Assert.assertEquals( "L",acc.getAccLevel());
+	}
 }

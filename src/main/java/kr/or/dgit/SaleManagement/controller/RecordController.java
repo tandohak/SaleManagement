@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -124,8 +125,8 @@ public class RecordController {
 			noTc.setCellValueFactory(cellData -> cellData.getValue().getRecNoProperty().asObject());
 			dateTc.setCellValueFactory(cellData -> {
 	              SimpleStringProperty property = new SimpleStringProperty();
-	              DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	              property.setValue(dateFormat.format(cellData.getValue().getRecDate()));
+	              DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	              property.setValue(formatter.format(cellData.getValue().getRecDate()));
 	              return property;
 	           });
 			accNameTc.setCellValueFactory(cellData -> cellData.getValue().getAccNameProperty());

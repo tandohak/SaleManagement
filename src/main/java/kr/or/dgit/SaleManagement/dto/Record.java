@@ -1,5 +1,6 @@
 package kr.or.dgit.SaleManagement.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javafx.beans.property.BooleanProperty;
@@ -17,7 +18,7 @@ public class Record {
 	private IntegerProperty recNo = new SimpleIntegerProperty();
 	private IntegerProperty rProductCode = new SimpleIntegerProperty();
 	private IntegerProperty rSalecode = new SimpleIntegerProperty();
-	private ObjectProperty<Date> recDate = new SimpleObjectProperty<>();
+	private ObjectProperty<LocalDate> recDate = new SimpleObjectProperty<>();
 	private IntegerProperty recDisprice = new SimpleIntegerProperty();
 	private IntegerProperty recDisrate = new SimpleIntegerProperty();
 	private IntegerProperty recCount = new SimpleIntegerProperty();
@@ -142,15 +143,15 @@ public class Record {
 		this.rSalecode.set(rSalecode);
 	}
 
-	public Date getRecDate() {
+	public LocalDate getRecDate() {
 		return recDate.get();
 	}
 	
-	public ObjectProperty<Date> getRecDateProperty() {
+	public ObjectProperty<LocalDate> getRecDateProperty() {
 		return recDate;
 	}
 
-	public void setRecDate(Date recDate) {
+	public void setRecDate(LocalDate recDate) {
 		this.recDate.set(recDate);
 	}
 

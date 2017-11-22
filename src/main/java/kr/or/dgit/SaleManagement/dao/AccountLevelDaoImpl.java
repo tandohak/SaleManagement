@@ -23,5 +23,11 @@ public class AccountLevelDaoImpl implements AccountLevelDao{
 		log.debug("selectAccountLevelByAll()");
 		return sqlSession.selectList(namespace+"selectAccountLevelByAll");
 	}
+
+	@Override
+	public AccountLevel selectAccountLevelByOne(AccountLevel accountLevel) {
+		log.debug("selectAccountLevelByOne()");
+		return sqlSession.selectOne(namespace+"selectAccountLevelByOne",accountLevel);
+	}
 	
 }

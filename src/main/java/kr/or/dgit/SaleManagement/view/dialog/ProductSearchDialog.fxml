@@ -14,12 +14,12 @@
       <TableView fx:id="pdtTable" prefHeight="349.0" prefWidth="700.0" BorderPane.alignment="CENTER">
         <columns>
             
-          <TableColumn fx:id="codeTc" prefWidth="92.0" resizable="false" text="코드" />
-          <TableColumn fx:id="nameTc" prefWidth="140.0" resizable="false" text="제품명" />
-            <TableColumn fx:id="accTc" prefWidth="134.0" resizable="false" text="업체명" />
-            <TableColumn fx:id="costTc" prefWidth="194.0" resizable="false" text="원가" />
-            <TableColumn fx:id="priceTc" prefWidth="132.0" resizable="false" text="정가" />
-            <TableColumn fx:id="admitTc" prefWidth="99.0" resizable="false" text="허가여부" />
+          <TableColumn fx:id="codeTc" prefWidth="101.0" resizable="false" text="코드" />
+          <TableColumn fx:id="nameTc" prefWidth="131.0" resizable="false" text="제품명" />
+            <TableColumn fx:id="accTc" prefWidth="147.0" resizable="false" text="업체명" />
+            <TableColumn fx:id="costTc" prefWidth="162.0" resizable="false" text="원가" />
+            <TableColumn fx:id="priceTc" prefWidth="151.0" resizable="false" text="정가" />
+            <TableColumn fx:id="admitTc" prefWidth="138.0" resizable="false" text="허가여부" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -31,7 +31,7 @@
          <children>
             <Label layoutX="21.0" layoutY="34.0" text="제품명" />
             <TextField fx:id="searchTf" layoutX="101.0" layoutY="30.0" styleClass="searchTF" />
-            <JFXButton layoutX="242.0" layoutY="30.0" onAction="#SearchClickAction" styleClass="searchBtn" />
+            <JFXButton layoutX="242.0" layoutY="30.0" onAction="#SearchAction" styleClass="searchBtn" />
          </children>
       </AnchorPane>
    </top>
@@ -39,7 +39,7 @@
       <AnchorPane prefHeight="77.0" prefWidth="632.0" BorderPane.alignment="CENTER">
          <children>
             <JFXButton layoutX="422.0" layoutY="27.0" onAction="#handleCancel" text="취소" />
-          <Button layoutX="336.0" layoutY="27.0" mnemonicParsing="false" styleClass="greenBtn" text="확인" />
+          <Button layoutX="336.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleOk" styleClass="greenBtn" text="확인" />
          </children>
       </AnchorPane>
    </bottom>

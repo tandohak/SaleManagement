@@ -88,7 +88,7 @@
                         <Pane prefHeight="31.0" prefWidth="137.0">
                            <children>
                               <TextField fx:id="addrZipTf" layoutY="4.0" prefHeight="24.0" prefWidth="112.0" promptText="우편번호 검색" styleClass="searchTF" />
-                              <Button layoutX="111.0" layoutY="4.0" mnemonicParsing="false" onAction="#searchAddrAction" prefHeight="22.0" prefWidth="27.0" styleClass="searchBtn" text="Button" />
+                              <Button layoutX="111.0" layoutY="4.0" mnemonicParsing="false"  prefHeight="22.0" prefWidth="27.0" styleClass="searchBtn" text="Button" />
                            </children>
                         </Pane>
                         <Label text="상세주소" />

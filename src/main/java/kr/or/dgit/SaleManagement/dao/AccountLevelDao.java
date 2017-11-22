@@ -6,4 +6,6 @@ import kr.or.dgit.SaleManagement.dto.AccountLevel;
 
 public interface AccountLevelDao {
 	List<AccountLevel> selectAccountLevelByAll();
+
+	AccountLevel selectAccountLevelByOne(AccountLevel accountLevel);
 }

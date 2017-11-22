@@ -5,14 +5,17 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Product;
+import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.BigClassService;
 import kr.or.dgit.SaleManagement.service.ProductService;
@@ -29,28 +32,19 @@ public class ProductSearchDialog {
 	@FXML
 	private TextField nameTf;
 
-	@FXML
-	private TableView<Product> pdtTable;
-	@FXML
-	private TableColumn<Product, Integer> codeTc;
-	
-	@FXML
-	private TableColumn<Product, String> nameTc;
-	
-	@FXML
-	private TableColumn<Product, String> accTc;
-	
-	@FXML
-	private TableColumn<Product, Integer> costTc;
-	
-	@FXML
-	private TableColumn<Product, Integer> priceTc;
-	
+	@FXML private TableView<Product> pdtTable;
+	@FXML private TableColumn<Product, Integer> codeTc;	
+	@FXML private TableColumn<Product, String> nameTc;	
+	@FXML private TableColumn<Product, String> accTc;	
+	@FXML private TableColumn<Product, Integer> costTc;
+	@FXML private TableColumn<Product, Integer> priceTc;
 	@FXML private TableColumn<Product, String> admitTc;
+	
 	private Stage dialogStage;
+	private Product getItem;
+	private boolean okClicked = false;
 	
 	private ObservableList<Product> levellist = FXCollections.observableArrayList();
-	
 	private static ProductService pdtService;
 	private static BigClassService bigService;
 	private static SmallClassService smallService;
@@ -58,8 +52,20 @@ public class ProductSearchDialog {
 	
 	private ObservableList<Product> myList = FXCollections.observableArrayList();
 	
+	public boolean isOkClicked() {
+		 return okClicked;
+	}
+	
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
+	}
+	
+	public Product getItem() {
+		return getItem;
+	}
+
+	public void setItem(Product getItem) {
+		this.getItem = getItem;
 	}
 	
 	@FXML
@@ -88,9 +94,10 @@ public class ProductSearchDialog {
 		
 		pdtTable.setItems(myList);
 	}
-
+	
+	
 	@FXML
-	public void SearchClickAction() {
+	public void SearchAction() {
 
 		myList = FXCollections.observableArrayList();
 		
@@ -112,10 +119,35 @@ public class ProductSearchDialog {
 			pdt.setAccName(resAcc.getAccNameProperty());
 			myList.add(pdt);
 		}
-		pdtTable.setItems(myList);
-		
+		pdtTable.setItems(myList);		
 	}
 	
+	@FXML
+	private void handleOk() {
+		Product selectItem = pdtTable.getSelectionModel().getSelectedItem();
+		getItem = selectItem;
+
+		try {
+			checkAlert(selectItem==null ? false : true,"사원을 선택 해주세요.");
+		}catch(Exception e) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle(null);
+			alert.setHeaderText(null);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+			return ;			
+		}		
+		okClicked = true;
+		
+		dialogStage.close();	
+	}
+	
+	private void checkAlert(boolean isOk,String pwck) throws Exception {
+		if(!isOk) {
+			throw new Exception(pwck);
+		}
+	}
+
 	@FXML
 	private void handleCancel() {
 	      dialogStage.close();

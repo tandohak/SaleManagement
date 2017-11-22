@@ -32,9 +32,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.MainApp;
-import kr.or.dgit.SaleManagement.controller.dialogController.AddrDialogController;
 import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
-import kr.or.dgit.SaleManagement.dto.AddrItem;
+import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.service.SalesLevelService;
@@ -97,7 +96,8 @@ public class SalesController {
 		
 		Sales leaveSales = new Sales();
 		leaveSales.setSaleLeave("true");
-		
+		System.out.println(leaveSales.getSaleLeave());
+		saleSerivce = SalesService.getInstance();
 		List<Sales> lists = saleSerivce.findSalesByLeave(leaveSales);
 		for(Sales sale : lists) {
 			myList.add(sale);
@@ -134,7 +134,7 @@ public class SalesController {
 					}
 				}							
 			}
-		
+			
 		});
 		
 				
@@ -393,54 +393,21 @@ public class SalesController {
 			return;
 		}
 		if(!allSalesCheck()) {
-			System.out.println("체커상태:"+allSalesCheck());
 			findSales.setSaleLeave("true");
-			System.out.println(findSales.getSaleLeave());
 			lists = saleSerivce.findSalesLikeName(findSales);
 		}
 		else {
-			System.out.println("체커상태:"+allSalesCheck());
 			lists = saleSerivce.findSalesLikeName(findSales);
 		}
 		setSalesModel(lists);
 	}
 	
-	
+	@FXML
 	private void setSalesModel(List<Sales> lists) {
 		myList = FXCollections.observableArrayList();
 		for(Sales sales : lists) {
 			myList.add(sales);
 		}
 		saleTable.setItems(myList);
-	}
-	
-	@FXML
-	private void searchAddrAction() {
-		try {
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource("view/dialog/AddrZipSearchDialog.fxml"));
-	        BorderPane page = (BorderPane) loader.load();
-
-	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle(null);
-	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
-	        dialogStage.initOwner(pane.getScene().getWindow());
-	        Scene scene = new Scene(page);
-	        dialogStage.setScene(scene);
-	        
-	        AddrDialogController controller = loader.getController();
-	        controller.setDialogStage(dialogStage);
-	     
-	        
-	        dialogStage.showAndWait();
-
-	        if(controller.isOkClicked()) {
-	          AddrItem addrItem  = controller.getAddrItem();
-	          addrTf.setText(addrItem.getAddr());
-	          addrZipTf.setText(addrItem.getAddrZip());
-	        }
-	   } catch (IOException e) {
-	        e.printStackTrace();
-	   }
 	}
 }

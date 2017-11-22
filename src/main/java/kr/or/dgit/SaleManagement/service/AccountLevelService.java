@@ -22,4 +22,11 @@ public class AccountLevelService {
 			return dao.selectAccountLevelByAll();
 		}
 	}
+
+	public AccountLevel findOneAccount(AccountLevel accountLevel) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			AccountLevelDao dao = new AccountLevelDaoImpl(sqlSession);
+			return dao.selectAccountLevelByOne(accountLevel);
+		}
+	}
 }

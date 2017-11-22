@@ -51,7 +51,7 @@ public class MainApp extends Application {
 		         } else {
 		                resizebottom = false;
 		                dragDelta.x = event.getSceneX();
-		                dragDelta.y = event.getSceneY();
+		                dragDelta.y = event.getSceneY();admin
 		         }
 			}
 			

@@ -1,7 +1,10 @@
 package kr.or.dgit.SaleManagement.controller.dialogController;
 
 import java.io.IOException;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +20,15 @@ import javafx.stage.Stage;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.ProductSearchAccountController;
 import kr.or.dgit.SaleManagement.dto.Account;
+import kr.or.dgit.SaleManagement.dto.AccountLevel;
 import kr.or.dgit.SaleManagement.dto.Product;
 import kr.or.dgit.SaleManagement.dto.Record;
 import kr.or.dgit.SaleManagement.dto.Sales;
+import kr.or.dgit.SaleManagement.dto.SalesLevel;
+import kr.or.dgit.SaleManagement.service.AccountLevelService;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.ProductService;
-import kr.or.dgit.SaleManagement.service.RecordSerivce;
+import kr.or.dgit.SaleManagement.service.SalesLevelService;
 import kr.or.dgit.SaleManagement.service.SalesService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
@@ -41,9 +47,10 @@ public class RecordEditDialogController {
     @FXML private TextField pdtTf;
     @FXML private TextField pdtClassTf;
     @FXML private TextField priceTf;
-    @FXML private TextField costTf;
+    @FXML private TextField unitPriceTf;
     @FXML private TextField disPriceTf;	
     @FXML private TextField countTf;    
+    @FXML private TextField disrateTf;
     
 	private Stage dialogStage;
 	private Record record;
@@ -53,7 +60,9 @@ public class RecordEditDialogController {
 	private SalesService saleService;
 	private AccountService accService;
 	private ProductService pdtService;
-
+	private SalesLevelService sLevelService;
+	private AccountLevelService accLevelService;
+	
 	private Account acc;
 	private Product pdt;
 	private Sales sales;
@@ -63,10 +72,14 @@ public class RecordEditDialogController {
 		saleService = SalesService.getInstance();
 		accService = AccountService.getInstance();
 		pdtService = ProductService.getInstance();
+		sLevelService = SalesLevelService.getInstance();
+		accLevelService= AccountLevelService.getInstance();
 	}
 
 	public void setRecord(Record record) {
 		this.record = record;
+		
+		dateDP.setValue(record.getRecDate());		
 		sales = saleService.findSalesByCode(new Sales(record.getrSalecode()));
 	    saleTf.setText(record.getSaleNamey());;
 	    saleLevelTf.setText(sales.getSaleLevel());
@@ -77,9 +90,15 @@ public class RecordEditDialogController {
 	    acc = accService.findAccountByCode(new Account(pdt.getAccCode()));	   
 	    accLevelTf.setText(acc.getAccLevel());
 	    priceTf.setText(record.getRecPrice()+"");
-	    costTf.setText(record.getRecCost()+"");
-	    disPriceTf.setText(record.getRecPrice()+"");
+	    
+	    int dis =  record.getRecDisrate();
+    	int unitDisPrice = (pdt.getPdtPrice()/100)*dis;
+    	int unitPrice = pdt.getPdtPrice() - unitDisPrice;
+    	unitPriceTf.setText(unitPrice+"");	
+	    disPriceTf.setText(unitDisPrice+"");
+	    
 	    countTf.setText(record.getRecCount()+"");
+	    disrateTf.setText(record.getRecDisrate()+"");	    
 	}
 
 	public Record getRecord() {
@@ -132,11 +151,16 @@ public class RecordEditDialogController {
 	        
 	        if(controller.isOkClicked()) {
 	        	acc = controller.getGetAcc();
-	        	System.out.println(acc);
+	        	accTf.setText(acc.getAccName());
+	        	accLevelTf.setText(acc.getAccLevel());
+	        	
+	        	SalesLevel saleDis = sLevelService.findOneSalesLevel(new SalesLevel(saleLevelTf.getText()));	        	
+	        	AccountLevel accDis = accLevelService.findOneAccount(new AccountLevel(accLevelTf.getText()));	        	
+	        	int sumDisrate = saleDis.getSalDisrate() + accDis.getAccDisrate(); 
+	        	disrateTf.setText(sumDisrate + "%");
 	        }
 
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 		}
 
@@ -159,14 +183,20 @@ public class RecordEditDialogController {
 	        
 	       
 	        SalesSearchDialogController controller = loader.getController(); 
-	        controller.setDialogStage(dialogStage);	        
+	        controller.setDialogStage(dialogStage);	 	        
 	        dialogStage.showAndWait();
 
 	       
 	        
 	        if(controller.isOkClicked()) {
 	        	sales = controller.getItem();
-	        	System.out.println(sales);
+	        	saleTf.setText(sales.getSaleName());
+	        	saleLevelTf.setText(sales.getSaleLevel());
+	        	
+	        	SalesLevel saleDis = sLevelService.findOneSalesLevel(new SalesLevel(saleLevelTf.getText()));	        	
+	        	AccountLevel accDis = accLevelService.findOneAccount(new AccountLevel(accLevelTf.getText()));	        	
+	        	int sumDisrate = saleDis.getSalDisrate() + accDis.getAccDisrate(); 
+	        	disrateTf.setText(sumDisrate + "%");	
 	        }
 
 		} catch (IOException e) {
@@ -176,15 +206,51 @@ public class RecordEditDialogController {
 
 	}
 	
+	@FXML
+	public void SearchProductAction() {
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("view/dialog/ProductSearchDialog.fxml"));
+        BorderPane page;
+		try {
+			page = (BorderPane) loader.load();
+			
+			Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Product");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+	        dialogStage.initOwner(pane.getScene().getWindow());
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+	        ProductSearchDialog controller = loader.getController(); 
+	        controller.setDialogStage(dialogStage);	        
+	        dialogStage.showAndWait();
+
+	        if(controller.isOkClicked()) {
+	        	pdt = controller.getItem();
+	        	pdtTf.setText(pdt.getAccName());
+	        	pdtClassTf.setText(pdt.getPdtName());
+	        	priceTf.setText(pdt.getPdtPrice()+"");
+	        	        	
+//	        	int unitDisPrice = (pdt.getPdtPrice()/100)*dis;
+//	        	int unitPrice = pdt.getPdtPrice() - unitDisPrice;
+//	        	unitPriceTf.setText(unitPrice+"");	
+//	    	    disPriceTf.setText(unitDisPrice+"");
+	        }
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 	
 	private boolean tfComfrimField() {
 		try {
-			
-			
+			tfUtil.tfComfrim(countTf);			
 			return true;
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("공백존재");
+			alert.setTitle(null);
 			alert.setHeaderText(null);
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
