@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import kr.or.dgit.SaleManagement.MainApp;
+import kr.or.dgit.SaleManagement.controller.dialogController.PasswordChangeDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.service.AccountService;
@@ -132,6 +133,26 @@ public class LoginController {
 			joinUserDialog.setDialogStage(dialogStage);
 			joinUserDialog.setAccService(accService);
 			joinUserDialog.setSalesService(salesService);
+			dialogStage.showAndWait();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 비밀번호변경 다이얼로그 연결
+	@FXML
+	private void showPasswordChangeDialog() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dialog/PasswordChangeDialog.fxml"));
+			BorderPane pane = (BorderPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			Scene scene = new Scene(pane);
+			dialogStage.setScene(scene);
+
+			PasswordChangeDialogController ChangeDialog = loader.getController();
+			ChangeDialog.setDialogStage(dialogStage);
 			dialogStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();

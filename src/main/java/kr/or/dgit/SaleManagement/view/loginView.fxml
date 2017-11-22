@@ -28,7 +28,7 @@
                </font>
             </PasswordField>
             <JFXButton onAction="#handleCloseBtn" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: #dddddd;" text="취소" textFill="#7c8991" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="95.0" />
-            <Label fx:id="findPw" layoutX="11.0" layoutY="151.0" text="비밀번호 찾기" textFill="#da6c6c" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="151.0" />
+            <Label fx:id="findPw" layoutX="11.0" layoutY="151.0" onMouseClicked="#showPasswordChangeDialog" text="비밀번호 변경" textFill="#da6c6c" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="151.0" />
             <Label fx:id="Join" layoutX="115.0" layoutY="151.0" onMouseClicked="#showJoinDialogAcc" text="회원가입하기" textFill="WHITE" />
          </children>
       </AnchorPane>
