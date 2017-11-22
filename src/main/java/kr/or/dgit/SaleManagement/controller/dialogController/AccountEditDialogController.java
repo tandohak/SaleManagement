@@ -1,10 +1,13 @@
 package kr.or.dgit.SaleManagement.controller.dialogController;
 
 import java.io.File;
+import java.io.IOException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
@@ -13,12 +16,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.AccountLevel;
+import kr.or.dgit.SaleManagement.dto.AddrItem;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
 public class AccountEditDialogController {
+	@FXML private BorderPane pane;
 	@FXML private TextField nameTf;	
 	@FXML private Label codeLabel;
 	@FXML private Label idLabel;	
@@ -149,5 +157,35 @@ public class AccountEditDialogController {
 			e.printStackTrace();
 			return false;
 		}		
+	}
+	
+	@FXML
+	private void searchAddrAction() {
+		try {
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/dialog/AddrZipSearchDialog.fxml"));
+	        BorderPane page = (BorderPane) loader.load();
+
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle(null);
+	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+	        dialogStage.initOwner(pane.getScene().getWindow());
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+	        AddrDialogController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
+	     
+	        
+	        dialogStage.showAndWait();
+
+	        if(controller.isOkClicked()) {
+	          AddrItem addrItem  = controller.getAddrItem();
+	          addrTf.setText(addrItem.getAddr());
+	          addrZipTf.setText(addrItem.getAddrZip());
+	        }
+	   } catch (IOException e) {
+	        e.printStackTrace();
+	   }
 	}
 }

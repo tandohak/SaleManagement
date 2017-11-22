@@ -33,8 +33,10 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.dialogController.AccountEditDialogController;
+import kr.or.dgit.SaleManagement.controller.dialogController.AddrDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.AccountLevel;
+import kr.or.dgit.SaleManagement.dto.AddrItem;
 import kr.or.dgit.SaleManagement.service.AccountLevelService;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
@@ -392,5 +394,35 @@ public class AccountController {
 				 i = 0;
 			};
 		}
+	}
+	
+	@FXML
+	private void searchAddrAction() {
+		try {
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/dialog/AddrZipSearchDialog.fxml"));
+	        BorderPane page = (BorderPane) loader.load();
+
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle(null);
+	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
+	        dialogStage.initOwner(pane.getScene().getWindow());
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+	        AddrDialogController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
+	     
+	        
+	        dialogStage.showAndWait();
+
+	        if(controller.isOkClicked()) {
+	          AddrItem addrItem  = controller.getAddrItem();
+	          addrTf.setText(addrItem.getAddr());
+	          addrZipTf.setText(addrItem.getAddrZip());
+	        }
+	   } catch (IOException e) {
+	        e.printStackTrace();
+	   }
 	}
 }

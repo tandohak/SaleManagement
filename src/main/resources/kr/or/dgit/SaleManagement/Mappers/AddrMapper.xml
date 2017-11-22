@@ -23,30 +23,10 @@
 	</select>
 	
 	<select id="selectAddrByDoro" resultMap="AddrResult">
-		SELECT DISTINCT doro
+		SELECT DISTINCT zipcode, sido, sigungu, doro
 		FROM addr
 		WHERE sido = #{sido}
 		AND sigungu = #{sigungu}
+		AND doro LIKE #{doro}
 	</select>
-	
-<!-- 	<sql id="whereSql"> -->
-<!-- 		<where> -->
-<!-- 			<if test="sido != null"> -->
-<!-- 				And	sido like #{sido} -->
-<!-- 			</if> -->
-<!-- 			<if test="sigungu != null"> -->
-<!-- 				And	sigungu like #{sigungu} -->
-<!-- 			</if> -->
-<!-- 			<if test="doro != null"> -->
-<!-- 				And	doro like #{doro} -->
-<!-- 			</if> -->
-<!-- 		</where> -->
-<!-- 	</sql> -->
-	
-<!-- 	<select id="searchAddr" resultType="Addr" parameterType="Addr"> -->
-<!-- 		select zipcode, sido, sigungu, doro, building1, building2 -->
-<!-- 		from addr -->
-<!-- 		<include refid="whereSql"/> -->
-<!-- 	</select> -->
-	
 </mapper>

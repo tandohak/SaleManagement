@@ -29,4 +29,10 @@ public class AddrDaoImpl implements AddrDao {
 		return sqlSession.getMapper(AddrDao.class).selectAddrBySigungu(addr);
 	}
 
+	@Override
+	public List<Addr> selectAddrByDoro(Addr addr) {
+		log.debug("selectAddrByDoro()");
+		return sqlSession.getMapper(AddrDao.class).selectAddrByDoro(addr);
+	}
+
 }

@@ -29,4 +29,11 @@ public class AddrService {
 			return addrDao.selectAddrBySigungu(addr);
 		}		
 	}
+	
+	public List<Addr> findAddrByDoro(Addr addr){
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			AddrDao addrDao = new AddrDaoImpl(sqlSession);
+			return addrDao.selectAddrByDoro(addr);
+		}		
+	}
 }
