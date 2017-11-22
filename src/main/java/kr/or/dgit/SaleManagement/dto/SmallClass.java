@@ -9,9 +9,26 @@ public class SmallClass {
 	private IntegerProperty smallClass = new SimpleIntegerProperty();
 	private StringProperty smallName = new SimpleStringProperty();
 	private IntegerProperty sBigClass = new SimpleIntegerProperty();
+	private StringProperty bigName = new SimpleStringProperty();
+
+	
+	public StringProperty getBigNameProperty() {
+		return bigName;
+	}
+
+	public String bigName() {
+		return bigName.get();
+	}
+	
+	public void setBigName(StringProperty bigName) {
+		this.bigName = bigName;
+	}
+	
 
 
 	
+	
+
 	public SmallClass(int smallClass, String smallName, int sBigClass) {
 		this.smallClass.set(smallClass);
 		this.smallName.set(smallName);

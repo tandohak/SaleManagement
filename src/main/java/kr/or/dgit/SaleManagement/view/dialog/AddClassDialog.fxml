@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="page" prefHeight="237.0" prefWidth="364.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.AddClassDialogController">
+<BorderPane fx:id="page" prefHeight="237.0" prefWidth="364.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.dialogController.AddClassDialogController">
    <top>
       <AnchorPane fx:id="pane" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #dddddd;" BorderPane.alignment="CENTER">
          <children>
