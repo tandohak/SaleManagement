@@ -218,9 +218,10 @@ public class RecordController {
 
 			for(Record rec : reclists) {				
 				Product pdt = new Product();
+				System.out.println(rec.getrProductCode());
 				pdt.setPdtCode(rec.getrProductCode());
 				pdt = pdtService.findBypdtProduct(pdt);
-				
+				System.out.println(pdt);
 				Account acc = new Account();
 				acc.setAccCode(pdt.getAccCode());
 				acc = accService.findAccountByCode(acc);

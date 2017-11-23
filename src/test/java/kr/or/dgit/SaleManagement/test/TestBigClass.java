@@ -24,7 +24,15 @@ public class TestBigClass {
 	public static void tearDownAfterClass() throws Exception {
 		bigClassService =null;
 	}
+	
+	/*@Test
+	public void test2() {
+		BigClass big = new BigClass();
+		big.setBigName("기타");
+		bigClassService.findBigClassByBigName(big);
 
+	}
+*/
 	/*@Test
 	public void test() {
 		List<BigClass> lists = bigClassService.findAll();
@@ -43,13 +51,7 @@ public class TestBigClass {
 		bigClassService.findBigClassByBigClass(big1);
 	}
 	
-	@Test
-	public void test2() {
-		BigClass big = new BigClass();
-		big.setBigName("기타");
-		bigClassService.findBigClassByBigName(big);
-
-	}
+	
 	
 	@Test
 	public void test3insert() {

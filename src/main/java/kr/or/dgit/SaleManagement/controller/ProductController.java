@@ -353,12 +353,10 @@ public class ProductController {
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
 	        
-//	        AddClassDialogController controller = loader.getController();
-//	        controller.setDialogStage(dialogStage);
+
 	        AddClassDialogController2 controller = loader.getController(); 
 	        
 	        dialogStage.showAndWait();
-	        
 	        
 	        
 	        if(controller.isOkClicked()) {
@@ -515,6 +513,7 @@ public class ProductController {
 	private Boolean tfComfrimField() {
 		try {
 			tfUtil.regexTfComfirmAccProductName(nameTf);
+			tfUtil.tfComfrimAcc(accCodeTf);
 			tfUtil.cbComfrim(bigCb);
 			tfUtil.cbComfrim(smallCb);
 			tfUtil.cbComfrim(admitCb);

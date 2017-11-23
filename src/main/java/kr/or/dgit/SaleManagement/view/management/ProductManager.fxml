@@ -57,7 +57,7 @@
                         <Label text="거래처코드" />
                         <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: none;">
                            <children>
-                              <TextField fx:id="accCodeTf" styleClass="searchTF" />
+                              <TextField fx:id="accCodeTf" editable="false" styleClass="searchTF" />
                               <JFXButton onAction="#SearchAccountAction" styleClass="searchBtn" text="Button" />
                            </children>
                         </HBox>

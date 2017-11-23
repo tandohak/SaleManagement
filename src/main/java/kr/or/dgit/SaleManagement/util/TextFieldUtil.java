@@ -38,6 +38,12 @@ public class TextFieldUtil {
 		}
 	}
 	
+	public void tfComfrimAcc(TextField tf) throws Exception {
+		if(tf.getText().trim().equals("")) {
+		  throw new Exception("거래처 코드를 입력하세요");
+		}
+	}
+	
 	public void regexTfComfirm(String pattern, String errmsg, TextField comTf) throws Exception {
 		Pattern p = Pattern.compile(pattern);
 		
