@@ -24,11 +24,44 @@ public class Record {
 	private IntegerProperty recCount = new SimpleIntegerProperty();
 	
 	private IntegerProperty recCost = new SimpleIntegerProperty();
+	private IntegerProperty accCode = new SimpleIntegerProperty();
 	private IntegerProperty recPrice = new SimpleIntegerProperty();
 	private StringProperty accName = new SimpleStringProperty();
 	private StringProperty pdtName = new SimpleStringProperty();
 	private StringProperty saleName = new SimpleStringProperty();
+	private IntegerProperty profit = new SimpleIntegerProperty();
+	private IntegerProperty margin = new SimpleIntegerProperty();
 	
+	
+	
+	public IntegerProperty getMargin() {
+		return margin;
+	}
+	public void setMargin(int margin) {
+		this.margin.set(margin);
+	}
+	public IntegerProperty getMarginProperty() {
+		return margin;
+	}
+	public IntegerProperty getProfit() {
+		return profit;
+	}
+	public IntegerProperty getProfitProperty() {
+		return profit;
+	}
+
+	public void setProfit(int profit) {
+		this.profit.set(profit);
+	}
+
+	public IntegerProperty getaccCodeProperty() {
+		return accCode;
+	}
+
+	public IntegerProperty getAccCode() {
+		return accCode;
+	}
+
 	
 
 	public Record() {}
@@ -69,6 +102,10 @@ public class Record {
 
 	public void setRecCost(int recCost) {
 		this.recCost.set(recCost);
+	}
+	
+	public void setAccCode(int accCode) {
+		this.accCode.set(accCode);
 	}
 	
 	public int getRecPrice() {
