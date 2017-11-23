@@ -134,7 +134,7 @@ public class AccountEditDialogController {
 	
 	private boolean tfComfrimField() {
 		try {
-			tfUtil.regexTfComfirmSaleName(nameTf);
+			tfUtil.regexTfComfirmAccName(nameTf);
 			if(!pwTf.getText().equals("")) {
 				if(!pwCheckOk) {
 					throw new Exception("비밀번호가 틀립니다.");
