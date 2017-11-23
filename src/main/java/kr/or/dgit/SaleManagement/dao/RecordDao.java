@@ -8,7 +8,7 @@ public interface RecordDao {
 	Record selectRecordByOne(Record record);
 	List<Record> selectRecordBySearch(Record record);
 	List<Record> selectRecordByAll();
-	
+	int selectMaxCode();
 	int insertRecord(Record record);
 	int updateRecord(Record record);
 	int deleteRecord(Record record);

@@ -102,7 +102,7 @@ public class AddClassDialogController2 {
 			b2 = bigService.findBigClassByBigClass(b1);
 			b1.setBigClass(b2.getBigClass());
 			b1.setBigName(b2.getBigName().trim());
-			s.setBigName(b1.getBigNameProperty());
+			s.setBigName(b1.getBigName());
 			smalllist.add(s);
 		}
 		
@@ -240,7 +240,7 @@ public class AddClassDialogController2 {
 				b2 = bigService.findBigClassByBigClass(b1);
 				b1.setBigClass(b2.getBigClass());
 				b1.setBigName(b2.getBigName().trim());
-				s.setBigName(b1.getBigNameProperty());
+				s.setBigName(b1.getBigName());
 				smalllist.add(s);
 			}
 		

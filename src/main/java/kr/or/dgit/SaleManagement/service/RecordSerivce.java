@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.SaleManagement.dao.RecordDao;
 import kr.or.dgit.SaleManagement.dao.RecordDaoImpl;
+import kr.or.dgit.SaleManagement.dao.SalesDao;
+import kr.or.dgit.SaleManagement.dao.SalesDaoImpl;
 import kr.or.dgit.SaleManagement.dto.Record;
 import kr.or.dgit.SaleManagement.util.MyBatisSqlSessionFactory;
 
@@ -22,6 +24,8 @@ public class RecordSerivce {
 			return recordDao.selectRecordByOne(record);
 		}		 
 	}
+	
+	
 	
 	public List<Record> findRecordBySearch(Record record) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
@@ -42,6 +46,7 @@ public class RecordSerivce {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			RecordDao recordDao = new RecordDaoImpl(sqlSession);
 			res = recordDao.insertRecord(record);
+			sqlSession.commit();
 			return res;
 		}		 
 	}
@@ -82,5 +87,11 @@ public class RecordSerivce {
 		}
 	}
 	
+	public int findMaxCode() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			RecordDao recordDao = new RecordDaoImpl(sqlSession);
+			return recordDao.selectMaxCode();
+		}
+	}
 	
 }

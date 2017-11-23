@@ -51,7 +51,7 @@ public class ProductSearchDialog {
 	private static AccountService accService;
 	
 	private ObservableList<Product> myList = FXCollections.observableArrayList();
-	
+	private Account acc;
 	public boolean isOkClicked() {
 		 return okClicked;
 	}
@@ -74,25 +74,12 @@ public class ProductSearchDialog {
 		pdtService = ProductService.getInstance();
 		accService = AccountService.getInstance();
 		
-		Account findAcc = new Account();
-		Account resAcc = new Account();
-		List<Product> lists = pdtService.findAll();
-		for(Product pdt : lists) {
-			findAcc.setAccCode(pdt.getAccCode());
-			resAcc = accService.findAccountByCode(findAcc);
-			pdt.setAccName(resAcc.getAccNameProperty());
-			myList.add(pdt);
-		}
-		
 		codeTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCodeProperty().asObject());
 		nameTc.setCellValueFactory(cellData -> cellData.getValue().getPdtNameProperty());
 		accTc.setCellValueFactory(cellData -> cellData.getValue().getAccNameProperty());
 		costTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCostProperty().asObject());
 		priceTc.setCellValueFactory(cellData -> cellData.getValue().getPdtPriceProperty().asObject());
 		admitTc.setCellValueFactory(cellData -> cellData.getValue().getPdtAdmitProperty());
-
-		
-		pdtTable.setItems(myList);
 	}
 	
 	
@@ -105,7 +92,7 @@ public class ProductSearchDialog {
 		searchtf  = "%" + searchtf +  "%";
 		Product pdt1 = new Product();
 		pdt1.setPdtName(searchtf);
-		
+		pdt1.setAccCode(acc.getAccCode());
 		pdtService = ProductService.getInstance();
 		accService = AccountService.getInstance();
 		
@@ -151,5 +138,24 @@ public class ProductSearchDialog {
 	@FXML
 	private void handleCancel() {
 	      dialogStage.close();
+	}
+
+	public void setAccounnt(Account acc) {
+		this.acc = acc;
+		
+		Product pdt1 = new Product();
+		pdt1.setAccCode(acc.getAccCode());
+		
+		Account findAcc = new Account();
+		Account resAcc = new Account();
+		List<Product> lists = pdtService.findByAllItem(pdt1);
+		for(Product pdt : lists) {
+			findAcc.setAccCode(pdt.getAccCode());
+			resAcc = accService.findAccountByCode(findAcc);
+			pdt.setAccName(resAcc.getAccNameProperty());
+			myList.add(pdt);
+		}
+		
+		pdtTable.setItems(myList);
 	}
 }

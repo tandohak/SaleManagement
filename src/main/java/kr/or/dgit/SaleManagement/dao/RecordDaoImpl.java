@@ -52,4 +52,10 @@ public class RecordDaoImpl implements RecordDao {
 		log.debug("deleteRecord()");
 		return sqlSession.getMapper(RecordDao.class).deleteRecord(record);
 	}
+
+	@Override
+	public int selectMaxCode() {
+		log.debug("selectMaxCode()");
+		return sqlSession.getMapper(RecordDao.class).selectMaxCode();
+	}
 }

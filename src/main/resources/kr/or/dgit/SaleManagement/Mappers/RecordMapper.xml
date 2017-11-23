@@ -57,9 +57,6 @@
 	<update id="updateRecord">
 		update record
 		<set>
-			<if test="recNo > 0">
-				recNo = #{recNo},
-			</if>
 			<if test="rProductCode > 0">
 				pcode = #{rProductCode},
 			</if>
@@ -79,7 +76,12 @@
 				count = #{recCount}
 			</if>
 		</set>
+		where recNo = #{recNo}			
 	</update>
+	
+	<select id="selectMaxCode" resultType="int">
+		SELECT MAX(recNo) FROM record
+	</select>
 	
 	<delete id="deleteRecord">
 		delete from record

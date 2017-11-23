@@ -228,6 +228,11 @@ public class TextFieldUtil {
 		
 	}
 
+
+	public void tfClear(TextField accTf) {
+		accTf.setText("");
+	}
+
 	
 	
 }

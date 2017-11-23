@@ -58,7 +58,7 @@
                         <HBox style="-fx-spacing: none;">
                            <children>
                               <TextField fx:id="accTf" editable="false" prefHeight="24.0" prefWidth="110.0" styleClass="searchTF" />
-                              <Button mnemonicParsing="false" onAction="#searchSalesAction" styleClass="searchBtn" text="Button">
+                              <Button mnemonicParsing="false" onAction="#searchAccountAction" styleClass="searchBtn" text="Button">
                                  <HBox.margin>
                                     <Insets bottom="1.0" />
                                  </HBox.margin>
@@ -92,7 +92,10 @@
                         <HBox style="-fx-spacing: none;">
                            <children>
                               <TextField fx:id="pdtTf" editable="false" prefHeight="24.0" prefWidth="110.0" styleClass="searchTF" />
-                              <Button mnemonicParsing="false" onAction="#searchProductAction" styleClass="searchBtn" text="Button" />
+                              <Button mnemonicParsing="false" onAction="#searchProductAction" styleClass="searchBtn" text="Button">
+                                 <HBox.margin>
+                                    <Insets bottom="1.0" />
+                                 </HBox.margin></Button>
                            </children>
                         </HBox>
                         <Label style="-fx-min-width: 50;" text="품목" />
