@@ -95,6 +95,9 @@ public class ProductController {
 	
 	@FXML
 	private CheckBox pdtCheck;
+	
+	@FXML
+	private CheckBox dbCheck;
 	@FXML
 	private TableColumn<Product, Boolean> chckTc;
 	
@@ -255,7 +258,17 @@ public class ProductController {
 	        
 	  }
 	
-	
+	@FXML
+	public void checkboxChange() {
+		if(dbCheck.isSelected()) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle(null);
+			alert.setHeaderText(null);
+			alert.setContentText("a");
+			alert.showAndWait();			
+		}
+
+	}
 	
 	@FXML
 	public void comboboxChange() {

@@ -30,6 +30,7 @@
                </padding></TextField>
             <JFXButton layoutX="152.0" layoutY="14.0" onAction="#SearchClickAction" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
             <Separator layoutY="57.0" prefHeight="0.0" prefWidth="900.0" />
+            <CheckBox fx:id="dbCheck" layoutX="22.0" layoutY="60.0" mnemonicParsing="false" onAction="#checkboxChange" text="전체DB보기" />
          </children>
       </AnchorPane>
    </top>
