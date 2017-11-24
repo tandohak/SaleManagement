@@ -35,6 +35,23 @@
 		</where>
 	</sql>
 	
+	<sql id="whereSqlOr">
+		<where>
+			<if test="recNo > 0">
+				or recNo = #{recNo}
+			</if>
+			<if test="rProductCode > 0">
+				or pcode = #{rProductCode}
+			</if>
+			<if test="rSalecode > 0">
+				or scode = #{rSalecode}
+			</if>
+			<if test="recDate != null">
+				or date = #{recDate}
+			</if>
+		</where>
+	</sql>
+	
 	<select id="selectRecordByOne" resultMap="recordResult" parameterType="Record">
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>

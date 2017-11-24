@@ -66,7 +66,7 @@ public class RecordEditDialogController {
 	private ProductService pdtService;
 	private SalesLevelService sLevelService;
 	private AccountLevelService accLevelService;
-	
+	SmallClassService sClassService;
 	private Account acc;
 	private Product pdt;
 	private Sales sales;
@@ -78,6 +78,7 @@ public class RecordEditDialogController {
 		pdtService = ProductService.getInstance();
 		sLevelService = SalesLevelService.getInstance();
 		accLevelService= AccountLevelService.getInstance();
+		sClassService = SmallClassService.getInstance();
 		
 		dateDP.valueProperty().addListener(new ChangeListener<LocalDate>() {
 
@@ -107,7 +108,8 @@ public class RecordEditDialogController {
 	    saleLevelTf.setText(sales.getSaleLevel());
 	    pdt = pdtService.findBypdtProduct(new Product(record.getrProductCode()));
 	    pdtTf.setText(record.getPdtName());
-	    pdtClassTf.setText(pdt.getPdtClass()+"");
+	    SmallClass sClass = sClassService.findBySmallClass(new SmallClass(pdt.getPdtClass()));
+	    pdtClassTf.setText(sClass.getSmallName());
 	    accTf.setText(record.getAccName());
 	    acc = accService.findAccountByCode(new Account(pdt.getAccCode()));	   
 	    accLevelTf.setText(acc.getAccLevel());
@@ -192,7 +194,6 @@ public class RecordEditDialogController {
 	        	AccountLevel accDis = accLevelService.findOneAccount(new AccountLevel(accLevelTf.getText()));	        	
 	        	int sumDisrate = saleDis.getSalDisrate() + accDis.getAccDisrate(); 
 	        	disrateTf.setText(sumDisrate + "%");
-	        	
 
 	    	    pdtTf.setText("");
 	    	    pdtClassTf.setText("");	    	    
@@ -306,7 +307,7 @@ public class RecordEditDialogController {
 
 	        if(controller.isOkClicked()) {
 	        	pdt = controller.getItem();
-	        	SmallClassService sClassService = SmallClassService.getInstance();
+	        	
 	        	pdtTf.setText(pdt.getPdtName());
 	        	SmallClass sClass = sClassService.findBySmallClass(new SmallClass(pdt.getPdtClass()));
 	        	pdtClassTf.setText(sClass.getSmallName());

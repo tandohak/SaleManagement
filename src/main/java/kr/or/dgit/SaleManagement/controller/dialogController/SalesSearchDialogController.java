@@ -97,7 +97,7 @@ public class SalesSearchDialogController {
 			
 		findItem.setSaleLeave("true");
 		lists = saleSerivce.findSalesSearch(findItem);
-		setTableModel(lists);;
+		setTableModel(lists);
 	}
 	
 	private void checkAlert(boolean isOk,String pwck) throws Exception {

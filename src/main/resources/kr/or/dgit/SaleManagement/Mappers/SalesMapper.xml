@@ -13,11 +13,11 @@
 	
 	<sql id="whereSql">
 		<where>
-			<if test="saleCode != 0">
+			<if test="saleCode > 0">
 				AND saleCode = #{saleCode}
 			</if>
 			<if test="saleName != null">
-				AND name = #{saleName}
+				AND name like #{saleName}
 			</if>
 			<if test="saleTel != null">
 				AND tel = #{saleTel}

@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import com.mysql.jdbc.Util;
 
@@ -83,8 +85,9 @@ public class RecordController {
 			accService = AccountService.getInstance();
 			pdtService = ProductService.getInstance();
 			recService = RecordSerivce.getInstance();
-			
-			insesrtTable();
+
+			List<Record> reclists = recService.findRecordByAll();
+			insesrtTable(reclists);
 					
 			chckTc.setCellFactory(new Callback<TableColumn<Record,Boolean>, TableCell<Record,Boolean>>() {
 					@Override
@@ -161,6 +164,16 @@ public class RecordController {
 		}
 		
 		@FXML
+		private void searchAction() {
+			
+			String searchText = searchAllTf.getText();
+			
+			Record rec = new Record();	
+//			myList.filtered();
+				
+		}
+		
+		@FXML
 		private void getCellMenuAction() {		
 			Record rec = recTable.getSelectionModel().getSelectedItem();
 			
@@ -212,8 +225,7 @@ public class RecordController {
 		}
 		
 		
-		private void insesrtTable() {
-			List<Record> reclists = recService.findRecordByAll();
+		private void insesrtTable(List<Record> reclists) {
 
 			for(Record rec : reclists) {				
 				Product pdt = new Product();
@@ -234,6 +246,7 @@ public class RecordController {
 				rec.setSumPrice(pdt.getPdtCost()*rec.getRecCount());
 				
 				myList.add(rec);
+				
 			}		
 		}
 			

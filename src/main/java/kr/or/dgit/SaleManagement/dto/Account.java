@@ -26,6 +26,10 @@ public class Account {
 		this.accCode.set(accCode); 
 	}
 
+	public Account(String accName) {
+		this.accName.set(accName);
+	}
+
 	public BooleanProperty getCheckedBoxProperty() {
 		return checkedBox;
 	}
