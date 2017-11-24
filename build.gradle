@@ -34,7 +34,7 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/com.jfoenix/jfoenix
 	compile group: 'com.jfoenix', name: 'jfoenix', version: '1.9.1'
-	
+
 	 testImplementation 'junit:junit:4.12'
 }
 
