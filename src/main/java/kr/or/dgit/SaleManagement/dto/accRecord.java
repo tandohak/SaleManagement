@@ -13,7 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 
-public class Record {
+public class accRecord {
 	private BooleanProperty checkedBox = new SimpleBooleanProperty(false);
 	private IntegerProperty recNo = new SimpleIntegerProperty();
 	private IntegerProperty rProductCode = new SimpleIntegerProperty();
@@ -23,73 +23,15 @@ public class Record {
 	private IntegerProperty recDisrate = new SimpleIntegerProperty();
 	private IntegerProperty recCount = new SimpleIntegerProperty();
 	
-	private IntegerProperty sumPrice = new SimpleIntegerProperty();
 	private IntegerProperty recCost = new SimpleIntegerProperty();
-	private IntegerProperty accCode = new SimpleIntegerProperty();
 	private IntegerProperty recPrice = new SimpleIntegerProperty();
 	private StringProperty accName = new SimpleStringProperty();
 	private StringProperty pdtName = new SimpleStringProperty();
 	private StringProperty saleName = new SimpleStringProperty();
-	private IntegerProperty profit = new SimpleIntegerProperty();
-	private IntegerProperty margin = new SimpleIntegerProperty();
 	
 	
-	
-	public IntegerProperty getRecCostProperty() {
-		return recCost;
-	}
-	
-	public int getRecCost() {
-		return recCost.get();
-	}
 
-	public void setRecCost(int recCost) {
-		this.recCost.set(recCost);;
-	}
-	
-	
-	
-	public IntegerProperty getSumPriceProperty() {
-		return sumPrice;
-	}
-
-	public int getSumPrice() {
-		return sumPrice.get();
-	}
-
-	public void setSumPrice(int sumPrice) {
-		this.sumPrice.set(sumPrice);
-	}
-	
-	public IntegerProperty getMargin() {
-		return margin;
-	}
-	public void setMargin(int margin) {
-		this.margin.set(margin);
-	}
-	public IntegerProperty getMarginProperty() {
-		return margin;
-	}
-	public IntegerProperty getProfit() {
-		return profit;
-	}
-	public IntegerProperty getProfitProperty() {
-		return profit;
-	}
-
-	public void setProfit(int profit) {
-		this.profit.set(profit);
-	}
-
-	public IntegerProperty getaccCodeProperty() {
-		return accCode;
-	}
-
-	public IntegerProperty getAccCode() {
-		return accCode;
-	}
-
-	public Record() {}
+	public accRecord() {}
 	
 	public BooleanProperty getCheckedBoxProperty() {
 		return checkedBox;
@@ -118,9 +60,15 @@ public class Record {
 		this.saleName.set(saleName);
 	}
 	
-	
-	public void setAccCode(int accCode) {
-		this.accCode.set(accCode);
+	public IntegerProperty getRecCostProperty() {
+		return recCost;
+	}
+	public int getRecCost() {
+		return recCost.get();
+	}
+
+	public void setRecCost(int recCost) {
+		this.recCost.set(recCost);
 	}
 	
 	public int getRecPrice() {
@@ -134,6 +82,7 @@ public class Record {
 	public void setRecPrice(int recPrice) {
 		this.recPrice.set(recPrice);
 	}
+
 	public String getAccName() {
 		return accName.get();
 	}
