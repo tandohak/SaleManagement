@@ -70,7 +70,7 @@ public class MainViewController  {
 	@FXML
 	private void hadleShowInsertSell() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/InsertSell.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/InsertRecordManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			admNode.setCenter(pane);
 		} catch (IOException e) {

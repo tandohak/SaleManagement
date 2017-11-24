@@ -20,14 +20,11 @@ public class SmallClass {
 		return bigName.get();
 	}
 	
-	public void setBigName(StringProperty bigName) {
-		this.bigName = bigName;
+	public void setBigName(String bigName) {
+		this.bigName.set(bigName);
 	}
 	
 
-
-	
-	
 
 	public SmallClass(int smallClass, String smallName, int sBigClass) {
 		this.smallClass.set(smallClass);
@@ -37,9 +34,8 @@ public class SmallClass {
 
 	
 
-	public SmallClass(IntegerProperty smallClass) {
-		super();
-		this.smallClass = smallClass;
+	public SmallClass(int smallClass) {
+		this.smallClass.set(smallClass);
 	}
 
 

@@ -53,12 +53,11 @@
                 <TableColumn fx:id="dateTc" editable="false" prefWidth="111.0" text="거래일자" />
                 <TableColumn fx:id="accNameTc" editable="false" prefWidth="110.0" text="거래처" />
                   <TableColumn fx:id="pdtNameTc" editable="false" prefWidth="108.0" text="제품명" />
-                  <TableColumn fx:id="costTc" editable="false" prefWidth="87.0" text="판매원가" />
-                  <TableColumn fx:id="priceTc" editable="false" prefWidth="74.0" text="판매금액" />
+                  <TableColumn fx:id="sumPriceTc" editable="false" prefWidth="82.0" text="판매금액" />
                   <TableColumn fx:id="dispriceTc" editable="false" prefWidth="90.0" text="할인금액" />
-                  <TableColumn fx:id="disrateTc" editable="false" prefWidth="65.0" text="할인율" />
-                  <TableColumn fx:id="countTc" editable="false" prefWidth="68.0" text="판매수량" />
-                  <TableColumn fx:id="saleNameTc" editable="false" prefWidth="115.0" text="관리담당자" />
+                  <TableColumn fx:id="disrateTc" editable="false" prefWidth="84.0" text="할인율" />
+                  <TableColumn fx:id="countTc" editable="false" prefWidth="93.0" text="판매수량" />
+                  <TableColumn fx:id="saleNameTc" editable="false" prefWidth="151.0" text="관리담당자" />
               </columns>
             </TableView>
          </children>

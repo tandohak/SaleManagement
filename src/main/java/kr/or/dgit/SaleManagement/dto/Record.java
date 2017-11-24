@@ -23,11 +23,23 @@ public class Record {
 	private IntegerProperty recDisrate = new SimpleIntegerProperty();
 	private IntegerProperty recCount = new SimpleIntegerProperty();
 	
-	private IntegerProperty recCost = new SimpleIntegerProperty();
-	private IntegerProperty recPrice = new SimpleIntegerProperty();
+	private IntegerProperty sumPrice = new SimpleIntegerProperty();
 	private StringProperty accName = new SimpleStringProperty();
 	private StringProperty pdtName = new SimpleStringProperty();
 	private StringProperty saleName = new SimpleStringProperty();
+	
+	
+	public IntegerProperty getSumPriceProperty() {
+		return sumPrice;
+	}
+
+	public int getSumPrice() {
+		return sumPrice.get();
+	}
+
+	public void setSumPrice(int sumPrice) {
+		this.sumPrice.set(sumPrice);
+	}
 	
 	
 
@@ -60,28 +72,7 @@ public class Record {
 		this.saleName.set(saleName);
 	}
 	
-	public IntegerProperty getRecCostProperty() {
-		return recCost;
-	}
-	public int getRecCost() {
-		return recCost.get();
-	}
-
-	public void setRecCost(int recCost) {
-		this.recCost.set(recCost);
-	}
 	
-	public int getRecPrice() {
-		return recPrice.get();
-	}
-	
-	public IntegerProperty getRecPriceProperty() {
-		return recPrice;
-	}
-
-	public void setRecPrice(int recPrice) {
-		this.recPrice.set(recPrice);
-	}
 
 	public String getAccName() {
 		return accName.get();

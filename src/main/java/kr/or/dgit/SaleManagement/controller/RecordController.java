@@ -61,8 +61,7 @@ public class RecordController {
 	    @FXML private TableColumn<Record, String> dateTc;
 	    @FXML private TableColumn<Record, String> accNameTc;
 	    @FXML private TableColumn<Record, String> pdtNameTc;
-	    @FXML private TableColumn<Record, Integer> costTc;
-	    @FXML private TableColumn<Record, Integer> priceTc;
+	    @FXML private TableColumn<Record, Integer> sumPriceTc;
 	    @FXML private TableColumn<Record, Integer> dispriceTc;
 	    @FXML private TableColumn<Record, Integer> disrateTc;
 	    @FXML private TableColumn<Record, Integer> countTc;
@@ -85,7 +84,7 @@ public class RecordController {
 			pdtService = ProductService.getInstance();
 			recService = RecordSerivce.getInstance();
 			
-			refreshTable();
+			insesrtTable();
 					
 			chckTc.setCellFactory(new Callback<TableColumn<Record,Boolean>, TableCell<Record,Boolean>>() {
 					@Override
@@ -131,12 +130,11 @@ public class RecordController {
 	           });
 			accNameTc.setCellValueFactory(cellData -> cellData.getValue().getAccNameProperty());
 			pdtNameTc.setCellValueFactory(cellData -> cellData.getValue().getPdtNameProperty());
-			costTc.setCellValueFactory(cellData -> cellData.getValue().getRecCostProperty().asObject());
-			priceTc.setCellValueFactory(cellData -> cellData.getValue().getRecPriceProperty().asObject());
+			sumPriceTc.setCellValueFactory(cellData -> cellData.getValue().getSumPriceProperty().asObject());
 			dispriceTc.setCellValueFactory(cellData -> cellData.getValue().getRecDispriceProperty().asObject());;
 			disrateTc.setCellValueFactory(cellData -> cellData.getValue().getRecDisrateProperty().asObject());;
 			countTc.setCellValueFactory(cellData -> cellData.getValue().getRecCountProperty().asObject());;
-			saleNameTc.setCellValueFactory(cellData -> cellData.getValue().getAccNameProperty());		
+			saleNameTc.setCellValueFactory(cellData -> cellData.getValue().getSaleNameProperty());		
 			
 			recTable.setItems(myList);
 		}
@@ -197,8 +195,9 @@ public class RecordController {
 		        dialogStage.showAndWait();
 
 		        if(controller.isOkClicked()) {
-		        
-		        	refreshTable();
+		        	Record record = controller.getRecord();
+		        	recService.updateRecord(record);
+		        	recTable.refresh();
 		        }
 		   } catch (IOException e) {
 		        e.printStackTrace();
@@ -213,7 +212,7 @@ public class RecordController {
 		}
 		
 		
-		private void refreshTable() {
+		private void insesrtTable() {
 			List<Record> reclists = recService.findRecordByAll();
 
 			for(Record rec : reclists) {				
@@ -232,8 +231,7 @@ public class RecordController {
 				rec.setAccName(acc.getAccName());
 				rec.setPdtName(pdt.getPdtName());
 				rec.setSaleName(sale.getSaleName());
-				rec.setRecCost(pdt.getPdtCost());
-				rec.setRecPrice(pdt.getPdtPrice());
+				rec.setSumPrice(pdt.getPdtCost()*rec.getRecCount());
 				
 				myList.add(rec);
 			}		

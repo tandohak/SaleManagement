@@ -58,7 +58,7 @@
                         <HBox style="-fx-spacing: none;">
                            <children>
                               <TextField fx:id="accTf" editable="false" prefHeight="24.0" prefWidth="110.0" styleClass="searchTF" />
-                              <Button mnemonicParsing="false" onAction="#SearchAccountAction" styleClass="searchBtn" text="Button">
+                              <Button mnemonicParsing="false" onAction="#searchAccountAction" styleClass="searchBtn" text="Button">
                                  <HBox.margin>
                                     <Insets bottom="1.0" />
                                  </HBox.margin>
@@ -75,7 +75,7 @@
                         <HBox style="-fx-spacing: none;">
                            <children>
                               <TextField fx:id="saleTf" editable="false" prefHeight="24.0" prefWidth="110.0" styleClass="searchTF" />
-                              <Button mnemonicParsing="false" onAction="#SearchSalesAction" styleClass="searchBtn" text="Button">
+                              <Button mnemonicParsing="false" onAction="#searchSalesAction" styleClass="searchBtn" text="Button">
                                  <HBox.margin>
                                     <Insets bottom="1.0" />
                                  </HBox.margin>
@@ -92,7 +92,10 @@
                         <HBox style="-fx-spacing: none;">
                            <children>
                               <TextField fx:id="pdtTf" editable="false" prefHeight="24.0" prefWidth="110.0" styleClass="searchTF" />
-                              <Button mnemonicParsing="false" onAction="#SearchProductAction" styleClass="searchBtn" text="Button" />
+                              <Button mnemonicParsing="false" onAction="#searchProductAction" styleClass="searchBtn" text="Button">
+                                 <HBox.margin>
+                                    <Insets bottom="1.0" />
+                                 </HBox.margin></Button>
                            </children>
                         </HBox>
                         <Label style="-fx-min-width: 50;" text="품목" />
@@ -112,15 +115,15 @@
                         <Label text="할인금액" />
                         <TextField fx:id="disPriceTf" editable="false" />
                         <Label style="-fx-min-width: 50;" text="할인율" />
-                        <TextField fx:id="disrateTf" prefHeight="23.0" prefWidth="51.0" />
+                        <TextField fx:id="disrateTf" editable="false" prefHeight="23.0" prefWidth="51.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                      <children>
                         <Label text="판매금액" />
-                        <TextField />
+                        <TextField fx:id="sumPriceTf" editable="false" />
                         <Label style="-fx-min-width: 50;" text="판매수량" />
-                        <TextField fx:id="countTf" />
+                        <TextField fx:id="countTf" onKeyReleased="#changCountNumAction" />
                      </children>
                   </HBox>
                </children>
