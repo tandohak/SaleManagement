@@ -33,8 +33,8 @@
             <Label layoutX="31.0" layoutY="34.0" text="제품명" />
             <TextField fx:id="searchTf" layoutX="77.0" layoutY="30.0" styleClass="searchTF" />
             <JFXButton layoutX="218.0" layoutY="30.0" onAction="#SearchAction" styleClass="searchBtn" />
-            <ComboBox layoutX="266.0" layoutY="30.0" prefWidth="150.0" promptText="대분류" />
-            <ComboBox layoutX="448.0" layoutY="30.0" prefWidth="150.0" promptText="소분류" />
+            <ComboBox layoutX="266.0" layoutY="30.0" prefWidth="150.0" promptText="대분류" visible="false" />
+            <ComboBox layoutX="448.0" layoutY="30.0" prefWidth="150.0" promptText="소분류" visible="false" />
          </children>
       </AnchorPane>
    </top>

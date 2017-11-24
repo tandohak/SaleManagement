@@ -4,7 +4,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -16,13 +15,12 @@
    <top>
       <AnchorPane prefHeight="80.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="searchAllTf" layoutX="116.0" layoutY="14.0" styleClass="searchTF" stylesheets="@../css/style.css" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="14.0">
+            <TextField fx:id="searchAllTf" layoutX="14.0" layoutY="14.0" styleClass="searchTF" stylesheets="@../css/style.css" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
                <padding>
                   <Insets bottom="4.0" left="7.0" right="7.0" top="4.0" />
                </padding></TextField>
-            <JFXButton layoutX="254.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
+            <JFXButton layoutX="152.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
             <Separator layoutY="57.0" prefHeight="3.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.5" />
-            <ComboBox fx:id="optionCb" layoutX="14.0" layoutY="14.0" prefHeight="23.0" prefWidth="87.0" />
          </children>
       </AnchorPane>
    </top>
