@@ -140,22 +140,11 @@ public class ProductController {
 	private void initialize() {
 		abminlist.add("true");
 		abminlist.add("false");
-		pdtService = ProductService.getInstance();
-		accService = AccountService.getInstance();
 		
-		Account findAcc = new Account();
-		Account resAcc = new Account();
-		List<Product> lists = pdtService.findAll();
-		for(Product pdt : lists) {
-			findAcc.setAccCode(pdt.getAccCode());
-			resAcc = accService.findAccountByCode(findAcc);
-			pdt.setAccName(resAcc.getAccNameProperty());
-			myList.add(pdt);
-		}
+		accService = AccountService.getInstance();
 		
 		bigService = BigClassService.getInstance();
 		List<BigClass> blist = bigService.findAll();
-		
 		
 		for(BigClass big : blist) {	
 			biglist.add(big);
@@ -191,9 +180,6 @@ public class ProductController {
 	           }
 	        });		
 		
-		
-		
-		
 		/**
 		 * 전체 선택 체크 체인지 리스너
 		 * */
@@ -211,13 +197,7 @@ public class ProductController {
 					}
 				}				
 			}
-			
 		});
-		
-//		accService = AccountService.getInstance();
-//		
-//		accService.findAccountByCode(new Account());
-		//cellData.getValue().getAccCodeProperty().asObject()
 		
 		codeTc.setCellValueFactory(cellData -> cellData.getValue().getPdtCodeProperty().asObject());
 		nameTc.setCellValueFactory(cellData -> cellData.getValue().getPdtNameProperty());
@@ -226,12 +206,12 @@ public class ProductController {
 		priceTc.setCellValueFactory(cellData -> cellData.getValue().getPdtPriceProperty().asObject());
 		admitTc.setCellValueFactory(cellData -> cellData.getValue().getPdtAdmitProperty());
 
+		refreshTableAdmitTrue();
 		
-		pdtTable.setItems(myList);
 		bigCb.setItems(biglist);
 		//smallCb.setItems(smalllist);
 		admitCb.setItems(abminlist);
-		
+		admitCb.setValue("true");
 	}
 	
 	public ProductController() {}
@@ -244,7 +224,8 @@ public class ProductController {
 			System.out.println(pdt);
 			if(pdt.getCheckedBox()) {
 				 myList.remove(pdt);
-				 pdtService.deleteProduct(pdt);
+				 pdt.setPdtAdmit("false");
+				 pdtService.updatePdt(pdt);
 				 i = 0;
 			};
 		}
@@ -255,29 +236,24 @@ public class ProductController {
 	
 	public void setMainApp(ProductTestMain mainApp) {
 	        this.mainApp = mainApp;
-	        
 	  }
+	
+	private boolean checkAdmit;
 	
 	@FXML
 	public void checkboxChange() {
 		if(dbCheck.isSelected()) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle(null);
-			alert.setHeaderText(null);
-			alert.setContentText("a");
-			alert.showAndWait();			
+			refreshTableAll();
+			checkAdmit = true;
+		}else {
+			refreshTableAdmitTrue();	
+			checkAdmit = false;
 		}
 
 	}
 	
 	@FXML
-	public void comboboxChange() {
-	/*	Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle(null);
-		alert.setHeaderText(null);
-		alert.setContentText("a");
-		alert.showAndWait();*/
-		
+	public void comboboxChange() {		
 		int big = bigCb.getValue().getBigClass();
 		SmallClass sm = new SmallClass();
 		sm.setsBigClass(big);
@@ -312,7 +288,7 @@ public class ProductController {
 			
 			myList = FXCollections.observableArrayList();
 			
-			refreshTable();
+			refreshTableAll();
 		}
 		
 	}
@@ -334,15 +310,28 @@ public class ProductController {
 		Account findAcc = new Account();
 		Account resAcc = new Account();
 		
-		List<Product> lists = pdtService.findByAllItem(pdt1);
-		for(Product pdt : lists) {
-			findAcc.setAccCode(pdt.getAccCode());
-			resAcc = accService.findAccountByCode(findAcc);
-			pdt.setAccName(resAcc.getAccNameProperty());
-			myList.add(pdt);
+		if(checkAdmit) {
+			List<Product> lists = pdtService.findByAllItem(pdt1);
+			
+			for(Product pdt : lists) {
+				findAcc.setAccCode(pdt.getAccCode());
+				resAcc = accService.findAccountByCode(findAcc);
+				pdt.setAccName(resAcc.getAccNameProperty());
+				myList.add(pdt);
+			}
+		}else if(!checkAdmit){
+			pdt1.setPdtAdmit("true");
+			List<Product> lists = pdtService.findByAllItem(pdt1);
+			
+			for(Product pdt : lists) {
+				findAcc.setAccCode(pdt.getAccCode());
+				resAcc = accService.findAccountByCode(findAcc);
+				pdt.setAccName(resAcc.getAccNameProperty());
+				myList.add(pdt);
+			}
 		}
-		pdtTable.setItems(myList);
 		
+		pdtTable.setItems(myList);
 	}
 	
 	private void checkAlert(boolean isOk,String pwck) throws Exception {
@@ -483,7 +472,7 @@ public class ProductController {
 	        if(controller.isOkClicked()) {
 	        	System.out.println(controller.getProduct());
 	        	pdtService.updatePdt(controller.getProduct());
-	        	refreshTable();
+	        	refreshTableAll();
 	        }
 	   } catch (IOException e) {
 	        e.printStackTrace();
@@ -493,8 +482,29 @@ public class ProductController {
 	}
 	
 	
+	private void refreshTableAdmitTrue() {
+		myList = FXCollections.observableArrayList();
+		pdtService = ProductService.getInstance();
+		accService = AccountService.getInstance();
+		
+		Account findAcc = new Account();
+		Account resAcc = new Account();
+		List<Product> lists = pdtService.findAllByAdmin();
+		
+		for(Product pdt : lists) {
+			
+			findAcc.setAccCode(pdt.getAccCode());
+			resAcc = accService.findAccountByCode(findAcc);
+			pdt.setAccName(resAcc.getAccNameProperty());
+			
+			myList.add(pdt);
+		}
+		pdtTable.setItems(myList);
+	}
 	
-	private void refreshTable() {
+	
+	private void refreshTableAll() {
+		myList = FXCollections.observableArrayList();
 		pdtService = ProductService.getInstance();
 		accService = AccountService.getInstance();
 		
@@ -512,7 +522,6 @@ public class ProductController {
 	
 	private void resetBigCb() {
 		smallService = SmallClassService.getInstance();
-		
 		
 		List<BigClass> blist = bigService.findAll();
 		for(BigClass big : blist) {	
