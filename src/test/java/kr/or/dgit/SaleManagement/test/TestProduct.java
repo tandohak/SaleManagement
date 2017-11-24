@@ -25,6 +25,26 @@ public class TestProduct {
 	public static void tearDownAfterClass() throws Exception {
 		pdt = null;
 	}
+
+	
+/*	@Test
+	public void test3insert() {	
+		pdt = ProductService.getInstance();
+		
+		Product product = new Product(1002, 21, "테스트", 700, 70, "false", 21722051);
+		pdt.updatePdt(product);
+		//Assert.assertEquals(1, res);
+	}
+	
+	
+	@Test
+	public void test5() {
+		pdt = ProductService.getInstance();
+		List<Product> lists = pdt.findAllAdmit();
+		System.out.println(lists);
+		Assert.assertNotNull(lists);	
+	}*/
+	
 	/*@Test
 	public void test() {
 		List<Product> lists = pdt.findJoinAccount();

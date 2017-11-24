@@ -55,6 +55,7 @@
 	<select id="selectAll" resultType="Product" resultMap="pdtResult">
 		<include refid="selectSql" />
 	</select>
+	
 
 	<select id="selectBypdtCode" resultType="Product" resultMap="pdtResult">
 		<include refid="selectSql" />
@@ -86,6 +87,21 @@
 		admit=#{pdtAdmit}, aCode=#{accCode}
 		where pdtCode=#{pdtCode};
 	</update>
+	
+	<update id="deletePdtfalse" parameterType="Product">
+		update product set
+		admit= false
+		where pdtCode=#{pdtCode};
+	</update>
+	
+	<sql id="selectAdmit">
+		select pdtCode, class, name, cost, price, admit, aCode from
+		product where admit = 'true'
+	</sql>
+	
+	<select id="selectByAdmit"  resultType="Product" resultMap="pdtResult">
+		<include refid="selectAdmit" />	
+	</select>
 	
 	
 	<select id="selectMaxCode" resultType="int">

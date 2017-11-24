@@ -2,6 +2,7 @@ package kr.or.dgit.SaleManagement.dao;
 
 import java.util.List;
 
+import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Product;
 
 public interface ProductDao {
@@ -16,4 +17,7 @@ public interface ProductDao {
 	
 	int updatePdt(Product product);
 	int selectMaxCode() ;
+	
+	List<Product> selectByAdmit();
+	int deletePdtfalse(Product product);
 }

@@ -25,6 +25,20 @@ public class ProductService {
 			return dao.selectAll();
 		}
 	}
+	
+	public List<Product> findAllByAdmin() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			ProductDao dao = new ProductDaoImpl(sqlSession);
+			return dao.selectByAdmit();
+		}
+	}
+	
+	public List<Product> findAllAdmit() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			ProductDao dao = new ProductDaoImpl(sqlSession);
+			return dao.selectByAdmit();
+		}
+	}
 
 	public Product findBypdtProduct(Product product) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
@@ -88,6 +102,24 @@ public class ProductService {
 		}
 		return 1;
 	}
+	
+	public int updatePdtAdmit(Product product) {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();
+		try {
+			ProductDao dao = new ProductDaoImpl(sqlSession);
+			int res = dao.deletePdtfalse(product);
+			sqlSession.commit();
+			return res;
+		} catch (Exception e) {
+			sqlSession.rollback();
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return 1;
+	}
+	
+	
 
 	public int findMaxCode() {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {

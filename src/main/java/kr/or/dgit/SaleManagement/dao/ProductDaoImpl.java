@@ -67,4 +67,16 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.selectList(namespace + ".selectProductJoinAccount");
 	}
 
+	@Override
+	public List<Product> selectByAdmit() {
+		log.debug("selectByAdmit()");
+		return sqlSession.getMapper(ProductDao.class).selectByAdmit();
+	}
+
+	@Override
+	public int deletePdtfalse(Product product) {
+		log.debug("deletePdtfalse()");
+		return sqlSession.getMapper(ProductDao.class).deletePdtfalse(product);
+	}
+
 }
