@@ -220,21 +220,6 @@ public class JoinUserController{
 	@FXML
 	private void submitClickAction() {
 		if(tfComfrimField()) {
-			try {
-				checkAlert(idCheckOk,"아이디 중복 체크를 해주세요.");
-				checkAlert(pwCheckOk,"비밀번호가 같지 않습니다.");
-				
-				
-			} catch (Exception e) {
-				Alert alert =new Alert(AlertType.WARNING);
-				alert.setTitle(null);			
-				alert.setHeaderText(null);
-				alert.setContentText(e.getMessage());
-				alert.showAndWait();
-				e.printStackTrace();
-				return;
-			}
-			
 			
 			Alert alert =new Alert(AlertType.CONFIRMATION);
 			alert.setTitle(null);			
@@ -244,7 +229,6 @@ public class JoinUserController{
 			ButtonType clickType= alert.showAndWait().get();
 			
 			if(clickType.getText().equals("취소")) {
-//				this.closeDialogAction(); 
 				return;
 			}
 			
@@ -284,10 +268,7 @@ public class JoinUserController{
 	}
 
 	private boolean tfComfrimField() {		
-		try {
-			util.regexTfComfirmTel(phoneTf);
-			util.regexTfComfirmPw(pwTf);
-			util.regexTfComfirmAccName(nameTf);
+		try {			
 			util.tfComfrim(idTf);
 			util.tfComfrim(nameTf);
 			util.tfComfrim(phoneTf);
@@ -295,6 +276,11 @@ public class JoinUserController{
 			util.tfComfrim(pwTfComf);
 			util.tfComfrim(addrTf);
 			util.tfComfrim(addrZipTf);
+			checkAlert(idCheckOk,"아이디 중복 체크를 해주세요.");
+			checkAlert(pwCheckOk,"비밀번호가 같지 않습니다.");
+			util.regexTfComfirmTel(phoneTf);
+			util.regexTfComfirmPw(pwTf);
+			util.regexTfComfirmAccName(nameTf);
 			return true;
 		} catch (Exception e) {
 			Alert alert =new Alert(AlertType.WARNING);

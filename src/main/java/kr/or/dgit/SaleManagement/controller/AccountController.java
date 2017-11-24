@@ -227,18 +227,6 @@ public class AccountController {
 	@FXML
 	private void submitClickAction() {		
 		if(tfComfrimField()) {
-			try {
-				checkAlert(idCheckOk,"아이디 중복 체크를 해주세요.");
-				checkAlert(pwCheckOk,"비밀번호가 같지 않습니다.");				
-			} catch (Exception e) {
-				Alert alert = new Alert(AlertType.WARNING);
-				alert.setTitle(null);
-				alert.setHeaderText(null);
-				alert.setContentText(e.getMessage());
-				alert.showAndWait();
-				e.printStackTrace();
-				return;
-			}
 			
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle(null);			
@@ -350,10 +338,7 @@ public class AccountController {
 	}
 
 	private Boolean tfComfrimField() {
-		try {
-			tfUtil.regexTfComfirmAccountName(nameTf);
-			tfUtil.regexTfComfirmPw(pwTf);
-			tfUtil.regexTfComfirmTel(telTf);
+		try {			
 			tfUtil.tfComfrim(nameTf);
 			tfUtil.cbComfrim(levelCb);
 			tfUtil.tfComfrim(idTf);
@@ -362,6 +347,11 @@ public class AccountController {
 			tfUtil.tfComfrim(telTf);
 			tfUtil.tfComfrim(addrTf);
 			tfUtil.tfComfrim(addrZipTf);
+			checkAlert(idCheckOk,"아이디 중복 체크를 해주세요.");
+			checkAlert(pwCheckOk,"비밀번호가 같지 않습니다.");				
+			tfUtil.regexTfComfirmAccountName(nameTf);
+			tfUtil.regexTfComfirmPw(pwTf);
+			tfUtil.regexTfComfirmTel(telTf);
 			return true;
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.WARNING);

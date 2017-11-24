@@ -127,7 +127,7 @@ public class TextFieldUtil {
 	
 	
 	public void regexTfComfirmAccName(TextField nameTf) throws Exception {
-		String pattern = "^[a-zA-Z가-힣]{1,15}$";
+		String pattern = "^[a-zA-Z가-힣0-9]{1,15}$";
 		String errmsg = "업체명은 한글/영문만 가능합니다.";
 
 		Pattern p = Pattern.compile(pattern);
@@ -198,9 +198,8 @@ public class TextFieldUtil {
 			checkId = false;
 		}
 		
-		if(checkId) {
-									
-			Alert alert = new Alert(AlertType.CONFIRMATION);
+		if(checkId) {			
+			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle(null);
 			alert.setHeaderText(null);
 			alert.setContentText("사용가능한 아이디 입니다.");
