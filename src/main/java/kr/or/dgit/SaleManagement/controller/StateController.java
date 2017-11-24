@@ -59,34 +59,43 @@ public class StateController {
     private RecordSerivce recService;
     private ObservableList<Record> myList = FXCollections.observableArrayList();
     
-    private ObservableList<Record> accList = FXCollections.observableArrayList(); 
+    private ObservableList<Record> accList = FXCollections.observableArrayList();
+    private ObservableList<Record> accList1 = FXCollections.observableArrayList();
     
 	@FXML
 	private void initialize() {
 		
-		/*saleService = SalesService.getInstance();
+		saleService = SalesService.getInstance();
 		pdtService = ProductService.getInstance();
 		accService = AccountService.getInstance();
 		recService = RecordSerivce.getInstance();
 		
 		List<Record> lists = recService.findRecordByAll();
+		List<Record> rlists1 = recService.findRecordByAll();
 		Record record = new Record();
+		
+		
+		
+		accTableSet();
+		
+
+		int price2 = 0;
+		int num2 = 0;
+		int cost2 = 0;
+		int disPrice2 = 0;
+		int profit2 = 0;
+		int margin2 = 0;
 		
 		for(Record r : lists) {
 			Account acc = new Account();
 			Product pdt = new Product();
-			Sales sal = new Sales();
-			Sales sal1 = new Sales();
-			sal.setSaleCode(r.getAccCode().get());
+			
 			Account acc1 = new Account();
 			
 			pdt = pdtService.findBypdtProduct(new Product(r.getrProductCode()));
 			acc.setAccCode(pdt.getAccCode());
 			acc1 =	accService.findAccountByCode(acc);
-			//sal1 = saleService.findSalesByCode(sal);
-			
-			//System.out.println(sal);
-			
+	
 			int num = r.getRecCount();
 			int price = pdt.getPdtPrice()*num;
 			int cost = pdt.getPdtCost()*num;
@@ -95,26 +104,37 @@ public class StateController {
 			int profit = price - cost-disPrice;
 			int margin = profit*100/price;
 			
-//			if(acc1.getAccCode() == 20503005) {
-//				price += pdt.getPdtPrice()*num;
-//			}
 			
+	
+			if(acc1.getAccCode() == 20703003) {
+				price2 += pdt.getPdtPrice()*num;
+				num2 += num;
+				cost2 += cost;
+				disPrice2 += disPrice; 
+				profit2 += profit;
+				
+				margin2 = profit2*100/price2;
+			}
 			
-			
+			r.setRecCount(num2);
 			r.setAccName(acc1.getAccName());
-			r.setRecPrice(price);
-			r.setRecCost(cost);
-			r.setAccCode(acc1.getAccCode());
-			r.setProfit(profit);
-			r.setMargin(margin);
-			acclist.add(r);
-		}*/
+			r.setRecPrice(price2);
+			r.setRecCost(cost2);
+			r.setRecDisprice(disPrice2);
+//			r.setAccCode(acc1.getAccCode());
+			r.setProfit(profit2);
+			r.setMargin(margin2);
+			
+			accList.setAll(r);
+		}
 		
 		
 		
-		accTableSet();
 		
-		//refreshTable();
+		
+		//accTableSet();
+		
+		
 		accCode.setCellValueFactory(cellData -> cellData.getValue().getaccCodeProperty().asObject());
 		accName.setCellValueFactory(cellData -> cellData.getValue().getAccNameProperty());
 		accCount.setCellValueFactory(cellData -> cellData.getValue().getRecCountProperty().asObject());
@@ -126,7 +146,7 @@ public class StateController {
 	
 		//accName.setCellValueFactory(cellData -> cellData.getValue().getAccNameProperty());
 		
-		accTable.setItems(acclist);
+		accTable.setItems(accList);
 		
 	}
 
@@ -176,7 +196,7 @@ public class StateController {
 			r.setAccCode(acc1.getAccCode());
 			r.setProfit(profit);
 			r.setMargin(margin);
-			acclist.add(r);
+			myList.add(r);
 		}
 	}
 	

@@ -225,7 +225,7 @@ public class TextFieldUtil {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle(null);
 			alert.setHeaderText(null);
-			alert.setContentText("원가가 판매원가보다 클 수 없습니다.");
+			alert.setContentText("제품원가가 판매정가보다 클 수 없습니다.");
 			alert.showAndWait();
 			return false;
 		}else {
