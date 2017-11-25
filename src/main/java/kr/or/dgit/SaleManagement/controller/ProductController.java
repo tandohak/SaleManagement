@@ -152,7 +152,7 @@ public class ProductController {
 		priceTc.setCellValueFactory(cellData -> cellData.getValue().getPdtPriceProperty().asObject());
 		admitTc.setCellValueFactory(cellData -> cellData.getValue().getPdtAdmitProperty());
 
-		refreshTableAll();
+		refreshTableAdmitTrue();
 		
 		bigCb.setItems(biglist);
 		admitCb.setItems(abminlist);

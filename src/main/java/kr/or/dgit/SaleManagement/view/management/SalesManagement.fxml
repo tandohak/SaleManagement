@@ -32,7 +32,7 @@
                </padding></TextField>
             <JFXButton layoutX="152.0" layoutY="14.0" onAction="#searchSales" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
             <Separator layoutY="57.0" prefHeight="0.0" prefWidth="900.0" />
-            <CheckBox fx:id="allSales" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" text="전체DB" />
+            <CheckBox fx:id="allSales" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#checkboxChange" text="전체DB" />
          </children>
       </AnchorPane>
    </top>
