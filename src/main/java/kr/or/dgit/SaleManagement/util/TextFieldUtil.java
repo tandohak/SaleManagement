@@ -71,7 +71,7 @@ public class TextFieldUtil {
 	
 	public void regexTfComfirmId(TextField idTf) throws Exception {
 		String pattern = "^[a-zA-Z0-9_]{1,15}$";
-		String errmsg = "아이디는 영'문자/숫자/_' 만 가능합니다.";
+		String errmsg = "아이디는 '영문자/숫자/_' 만 가능합니다.";
 
 		Pattern p = Pattern.compile(pattern);
 		
@@ -300,7 +300,7 @@ public class TextFieldUtil {
 		accTf.setText("");
 	}
 
-	public static String changeKorean(String word) {
+	/*public static String changeKorean(String word) {
 		// 분리할 단어
 		String result = "";
 		// 결과 저장할 변수
@@ -328,38 +328,38 @@ public class TextFieldUtil {
 		String[] arrSingleJaumEng = { "r", "R", "rt", "s", "sw", "sg", "e", "E", "f", "fr", "fa", "fq", "ft", "fx",
 				"fv", "fg", "a", "q", "Q", "qt", "t", "T", "d", "w", "W", "c", "z", "x", "v", "g" };
 
-		for (int i = 0; i < word.length(); i++) { /* 한글자씩 읽어들인다. */
+		for (int i = 0; i < word.length(); i++) {  한글자씩 읽어들인다. 
 			char chars = (char) (word.charAt(i) - 0xAC00);
 			if (chars >= 0 && chars <= 11172) {
-				/* A. 자음과 모음이 합쳐진 글자인경우 */ /* A-1. 초/중/종성 분리 */
+				 A. 자음과 모음이 합쳐진 글자인경우   A-1. 초/중/종성 분리 
 				int chosung = chars / (21 * 28);
 				int jungsung = chars % (21 * 28) / 28;
 				int jongsung = chars % (21 * 28) % 28;
-				/* A-2. result에 담기 */
+				 A-2. result에 담기 
 				result = result + arrChoSung[chosung] + arrJungSung[jungsung];
-				/* 자음분리 */
-				if (jongsung != 0x0000) { /* A-3. 종성이 존재할경우 result에 담는다 */
+				 자음분리 
+				if (jongsung != 0x0000) {  A-3. 종성이 존재할경우 result에 담는다 
 					result = result + arrJongSung[jongsung];
-				} /* 알파벳으로 */
+				}  알파벳으로 
 				resultEng = resultEng + arrChoSungEng[chosung] + arrJungSungEng[jungsung];
-				if (jongsung != 0x0000) { /* A-3. 종성이 존재할경우 result에 담는다 */
+				if (jongsung != 0x0000) {  A-3. 종성이 존재할경우 result에 담는다 
 					resultEng = resultEng + arrJongSungEng[jongsung];
 				}
-			} else { /* B. 한글이 아니거나 자음만 있을경우 */
-				/* 자음분리 */
-				result = result + ((char) (chars + 0xAC00)); /* 알파벳으로 */
-				if (chars >= 34097 && chars <= 34126) { /* 단일자음인 경우 */
+			} else {  B. 한글이 아니거나 자음만 있을경우 
+				 자음분리 
+				result = result + ((char) (chars + 0xAC00));  알파벳으로 
+				if (chars >= 34097 && chars <= 34126) {  단일자음인 경우 
 					int jaum = (chars - 34097);
 					resultEng = resultEng + arrSingleJaumEng[jaum];
-				} else if (chars >= 34127 && chars <= 34147) { /* 단일모음인 경우 */
+				} else if (chars >= 34127 && chars <= 34147) {  단일모음인 경우 
 					int moum = (chars - 34127);
 					resultEng = resultEng + arrJungSungEng[moum];
-				} else { /* 알파벳인 경우 */
+				} else {  알파벳인 경우 
 					resultEng = resultEng + ((char) (chars + 0xAC00));
 				}
 			}
 		}
 		return resultEng;
-	}
+	}*/
 	
 }

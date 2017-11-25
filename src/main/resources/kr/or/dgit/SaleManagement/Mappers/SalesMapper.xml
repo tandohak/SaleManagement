@@ -106,7 +106,7 @@
 				 sLeave = #{saleLeave},
 			</if>
 			<if test="salePw != null">
-				 pw = #{saleId},
+				 pw = #{salePw},
 			</if>
 			<if test="saleLevel != null">
 				 sLevel = #{saleLevel},

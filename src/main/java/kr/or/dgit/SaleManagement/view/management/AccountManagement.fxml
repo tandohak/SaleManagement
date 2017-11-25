@@ -88,7 +88,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
                         <Label text="연락처" />
-                        <TextField fx:id="telTf" />
+                        <TextField fx:id="telTf" promptText="010-000-0000" />
                      </children>
                   </HBox>
                </children>
@@ -104,7 +104,6 @@
                   <JFXButton onAction="#getCellMenuAction" style="-fx-background-color: #DDDDDD;" text="수정" textFill="#7c8991" />
                </buttons>
             </ButtonBar>
-            <JFXButton layoutX="794.0" layoutY="189.0" stylesheets="@../css/style.css" text="인쇄" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="189.0" />
          </children>
       </AnchorPane>
    </bottom>

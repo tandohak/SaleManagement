@@ -29,8 +29,7 @@
    <bottom>
       <AnchorPane prefHeight="63.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton layoutX="900.0" layoutY="23.0" stylesheets="@../css/style.css" text="인쇄" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="23.0" />
-            <JFXButton layoutX="816.0" layoutY="23.0" styleClass="greenBtn" stylesheets="@../css/style.css" text="취소" textFill="#7c8991" />
+            <JFXButton layoutX="816.0" layoutY="23.0" styleClass="greenBtn" stylesheets="@../css/style.css" text="취소" textFill="#7c8991" AnchorPane.rightAnchor="34.0" />
          </children>
       </AnchorPane>
    </bottom>

@@ -1,46 +1,35 @@
 package kr.or.dgit.SaleManagement.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.function.Predicate;
-
-import com.mysql.jdbc.Util;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.dialogController.RecordEditDialogController;
-import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Product;
 import kr.or.dgit.SaleManagement.dto.Record;
@@ -122,7 +111,6 @@ public class RecordController {
 				}
 				
 			});
-			
 					
 			noTc.setCellValueFactory(cellData -> cellData.getValue().getRecNoProperty().asObject());
 			dateTc.setCellValueFactory(cellData -> {
@@ -139,7 +127,42 @@ public class RecordController {
 			countTc.setCellValueFactory(cellData -> cellData.getValue().getRecCountProperty().asObject());;
 			saleNameTc.setCellValueFactory(cellData -> cellData.getValue().getSaleNameProperty());		
 			
-			recTable.setItems(myList);
+			noTc.setSortType(TableColumn.SortType.DESCENDING);
+			
+			//recTable 역순 정렬
+			recTable.getSortOrder().add(noTc);
+			
+			FilteredList<Record> filterData = new FilteredList<>(myList, r -> true);
+			searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
+				filterData.setPredicate(record ->{
+					 if (newValue == null || newValue.isEmpty()) {
+		                    return true;
+		                }
+					 
+					 //대문자 -> 소문자로 변경
+					 String lowerCaseFilter = newValue.toLowerCase();				
+					 
+					 if(record.getAccName().contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 
+					 if(record.getSaleNamey().contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 
+					 if(record.getPdtName().contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 
+					return false;
+				});
+			});
+			// 필터리스트를 sorted리스트에 넣는다
+			SortedList<Record> sortedData = new SortedList<>(filterData);
+			
+			sortedData.comparatorProperty().bind(recTable.comparatorProperty());
+			
+	        recTable.setItems(sortedData);
 		}
 		
 		@FXML
@@ -245,8 +268,7 @@ public class RecordController {
 				rec.setSaleName(sale.getSaleName());
 				rec.setSumPrice(pdt.getPdtCost()*rec.getRecCount());
 				
-				myList.add(rec);
-				
+				myList.add(rec);				
 			}		
 		}
 			

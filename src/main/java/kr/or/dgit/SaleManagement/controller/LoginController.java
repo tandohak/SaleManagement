@@ -134,6 +134,13 @@ public class LoginController {
 			joinUserDialog.setAccService(accService);
 			joinUserDialog.setSalesService(salesService);
 			dialogStage.showAndWait();
+			
+			if(joinUserDialog.isOkJoin()) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText(null);
+				alert.setContentText("회원 가입이 완료 되었습니다.");
+				alert.showAndWait();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -150,7 +157,7 @@ public class LoginController {
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			Scene scene = new Scene(pane);
 			dialogStage.setScene(scene);
-
+			
 			PasswordChangeDialogController ChangeDialog = loader.getController();
 			ChangeDialog.setDialogStage(dialogStage);
 			dialogStage.showAndWait();

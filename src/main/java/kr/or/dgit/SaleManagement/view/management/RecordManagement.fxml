@@ -27,11 +27,10 @@
    <bottom>
       <AnchorPane prefHeight="73.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <ButtonBar layoutX="601.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0">
+            <ButtonBar layoutX="601.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.rightAnchor="34.0">
                <buttons>
                   <JFXButton onAction="#getCellMenuAction" styleClass="greenBtn" stylesheets="@../css/style.css" text="수정" textFill="#7c8991" />
                   <JFXButton onAction="#deleteSelectedCell" text="선택삭제" />
-                  <JFXButton stylesheets="@../css/style.css" text="인쇄" />
                </buttons>
             </ButtonBar>
          </children>

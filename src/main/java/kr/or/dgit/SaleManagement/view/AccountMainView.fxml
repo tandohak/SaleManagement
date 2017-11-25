@@ -18,7 +18,7 @@
                   <JFXButton layoutX="80.0" layoutY="9.0" onAction="#handleCloseBtn" styleClass="mainVeiwOutBtn" text="Exit" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
-            <Label fx:id="myPage" layoutX="52.0" layoutY="125.0" opacity="0.45" text="마이페이지" textFill="WHITE" AnchorPane.bottomAnchor="535.0" AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="125.0">
+            <Label fx:id="myPage" layoutX="41.0" layoutY="125.0" onMouseClicked="#editAccUserInfoAction" opacity="0.45" text="회원 정보 수정" textFill="WHITE" AnchorPane.bottomAnchor="535.0" AnchorPane.leftAnchor="41.0" AnchorPane.topAnchor="125.0">
                <font>
                   <Font name="NanumGothicBold" size="12.0" />
                </font>

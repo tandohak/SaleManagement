@@ -30,6 +30,7 @@ public class SalesEditDialogController {
 	@FXML private TextField nameTf;	
 	@FXML private Label codeLabel;
 	@FXML private Label idLabel;	
+	@FXML private Label headLabel;
 	@FXML private TextField pwTf;	
 	@FXML private TextField pwComfTf;	
 	@FXML private TextField picTf;	
@@ -51,6 +52,10 @@ public class SalesEditDialogController {
 	@FXML
 	private void initialize() {
 		
+	}
+	
+	public void changeHeader() {
+		headLabel.setText("회원 정보 수정");
 	}
 
 	public void setLevellist(ObservableList<SalesLevel> levellist) {
@@ -90,7 +95,7 @@ public class SalesEditDialogController {
 			sales.setSaleName(nameTf.getText());
 			
 			String pwVal =pwTf.getText();
-			if(pwCheckOk || pwVal.equals("")) {
+			if(pwCheckOk || !pwVal.equals("")) {
 				sales.setSalePw(pwTf.getText());
 			}
 			

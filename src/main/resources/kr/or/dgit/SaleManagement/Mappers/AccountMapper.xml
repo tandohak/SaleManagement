@@ -95,7 +95,26 @@
 	
 	<update id="updateAccount" parameterType="Account">
 		UPDATE account
-		SET name=#{accName}, tel=#{accTel}, addr=#{accAddr}, admit=#{accAdmit}, alevel=#{accLevel}, pw=#{accPw}
+		<set>
+			<if test="accName != null">
+				name=#{accName},
+			</if>
+			<if test="accLevel != null">
+				alevel=#{accLevel},
+			</if>
+			<if test="accAddr != null">
+				 addr=#{accAddr},
+			</if>
+			<if test="accAdmit != null">
+				admit=#{accAdmit},
+			</if>
+			<if test="accTel != null">
+				tel=#{accTel}, 
+			</if>
+			<if test="accPw != null">
+				 pw=#{accPw},
+			</if>			  
+		</set>		 
 		WHERE accCode=#{accCode}
 	</update>
 

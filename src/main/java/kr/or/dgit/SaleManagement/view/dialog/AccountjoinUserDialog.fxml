@@ -67,7 +67,7 @@
                      </GridPane.margin>
                   </Label>
                   <TextField fx:id="nameTf" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="phoneTf" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="phoneTf" promptText="010-000-0000" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="비밀번호" GridPane.rowIndex="1" />
                   <Label text="비밀번호확인" GridPane.rowIndex="2" />
                   <PasswordField fx:id="pwTf" onKeyReleased="#pwTypeHandler" prefHeight="23.0" prefWidth="116.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />

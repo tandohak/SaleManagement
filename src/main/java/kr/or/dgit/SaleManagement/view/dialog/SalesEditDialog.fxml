@@ -19,7 +19,7 @@
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #dddddd;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="22.0" layoutY="18.0" text="사원 수정" />
+            <Label fx:id="headLabel" layoutX="22.0" layoutY="18.0" text="사원 수정" />
          </children>
       </AnchorPane>
    </top>
@@ -76,7 +76,7 @@
                      </GridPane.margin>
                   </Label>
                   <TextField fx:id="nameTf" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="telTf" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="telTf" maxWidth="150.0" promptText="010-000-0000" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label text="아이디" GridPane.rowIndex="1" />
                   <Label fx:id="idLabel" text="아이디" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>

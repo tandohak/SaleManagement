@@ -79,11 +79,16 @@ public class JoinUserController{
 	private boolean pwCheckOk = false;
 	private AccountService accService;
 	private SalesService salesService;
+	private boolean okJoin = false;
 	
 	@FXML
 	private void initialize() {
 	}
-		
+
+	public boolean isOkJoin() {
+		return okJoin;
+	}
+	
 	public AccountService getAccService() {
 		return accService;
 	}
@@ -232,7 +237,6 @@ public class JoinUserController{
 				return;
 			}
 			
-			
 			Account account = new Account();
 			account.setAccName(nameTf.getText());
 			account.setAccPw(pwTf.getText());
@@ -253,8 +257,9 @@ public class JoinUserController{
 				codeNum = Integer.parseInt(code);
 			}
 			account.setAccCode(codeNum);
-			accService.insertAccount(account);
+			accService.insertAccount(account);			
 			
+			okJoin = true;
 			this.closeDialogAction();
 		};
 	}
