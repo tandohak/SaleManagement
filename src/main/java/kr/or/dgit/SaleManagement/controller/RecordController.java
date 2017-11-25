@@ -141,16 +141,18 @@ public class RecordController {
 					 
 					 //대문자 -> 소문자로 변경
 					 String lowerCaseFilter = newValue.toLowerCase();				
-					 
-					 if(record.getAccName().contains(lowerCaseFilter)) {
+					 String recordAccName = record.getAccName().toLowerCase();
+					 String recordSaleName = record.getSaleNamey().toLowerCase();
+					 String recordPdtName = record.getPdtName().toLowerCase();
+					 if(recordAccName.contains(lowerCaseFilter)) {
 						 return true;
 					 }
 					 
-					 if(record.getSaleNamey().contains(lowerCaseFilter)) {
+					 if(recordSaleName.contains(lowerCaseFilter)) {
 						 return true;
 					 }
 					 
-					 if(record.getPdtName().contains(lowerCaseFilter)) {
+					 if(recordPdtName.contains(lowerCaseFilter)) {
 						 return true;
 					 }
 					 
@@ -187,12 +189,13 @@ public class RecordController {
 					 //대문자 -> 소문자로 변경
 					 
 					 String lowerCaseFilter = newValue.toLowerCase();				
-					 
-					 if(record.getSaleNamey().contains(lowerCaseFilter) && record.getAccName().contains(accUser.getAccName())) {
+					 String recordSaleName = record.getSaleNamey().toLowerCase();
+					 String recordPdtName = record.getPdtName().toLowerCase();
+					 if(recordSaleName.contains(lowerCaseFilter) && record.getAccName().contains(accUser.getAccName())) {
 						 return true;
-					 }
+					 } 
 					 
-					 if(record.getPdtName().contains(lowerCaseFilter) && record.getAccName().contains(accUser.getAccName())) {
+					 if(recordPdtName.contains(lowerCaseFilter) && record.getAccName().contains(accUser.getAccName())) {
 						 return true;
 					 }
 					 

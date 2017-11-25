@@ -167,12 +167,12 @@ public class ProductController {
 				 
 				 //대문자 -> 소문자로 변경
 				 String lowerCaseFilter = newValue.toLowerCase();				
-				 
-				 if(pdt.getAccName().contains(lowerCaseFilter)) {
+				 String pdtAccName = pdt.getAccName().toLowerCase();
+				 if(pdtAccName.contains(lowerCaseFilter)) {
 					 return true;
 				 }
-				 
-				 if(pdt.getPdtName().contains(lowerCaseFilter)) {
+				 String pdtName = pdt.getPdtName().toLowerCase();
+				 if(pdtName.contains(lowerCaseFilter)) {
 					 return true;
 				 }
 				 
@@ -214,9 +214,10 @@ public class ProductController {
 	                }
 				 
 				 //대문자 -> 소문자로 변경
-				 String lowerCaseFilter = newValue.toLowerCase();				
-
-				 if(pdt.getAccName().contains(accUser.getAccName()) && pdt.getPdtName().contains(lowerCaseFilter)) {
+				 String lowerCaseFilter = newValue.toLowerCase();			
+				 String pdtName = pdt.getPdtName().toLowerCase();
+				 
+				 if(pdt.getAccName().contains(accUser.getAccName()) && pdtName.contains(lowerCaseFilter)) {
 					 return true;
 				 }
 				 
@@ -445,7 +446,6 @@ public class ProductController {
 	        controller.setLevellist(levellist);
 	        controller.setProduct(pdt);
 	
-	        
 	        dialogStage.showAndWait();
 
 	        if(controller.isOkClicked()) {
