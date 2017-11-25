@@ -1,24 +1,20 @@
 package kr.or.dgit.SaleManagement.controller;
 
-import java.awt.Event;
 import java.io.IOException;
 import java.util.List;
-import java.util.Observer;
-
-import javax.security.auth.login.AccountNotFoundException;
-import javax.swing.text.StyledEditorKit.BoldAction;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -26,24 +22,17 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.ProductTestMain;
-import kr.or.dgit.SaleManagement.controller.dialogController.AddClassDialogController;
 import kr.or.dgit.SaleManagement.controller.dialogController.AddClassDialogController2;
-import kr.or.dgit.SaleManagement.controller.dialogController.ProductSearchDialog;
-import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.BigClass;
 import kr.or.dgit.SaleManagement.dto.Product;
-import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.dto.SmallClass;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.BigClassService;
@@ -53,71 +42,33 @@ import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
 public class ProductController {
 	@FXML private BorderPane pane;
-	@FXML
-	private TextField searchTf;
+	@FXML private TextField searchTf;
+	@FXML private Button searchBtn;
 	
-	@FXML
-	private Button searchBtn;
+	@FXML private TextField nameTf;
+	@FXML private ComboBox<String> admitCb;
+	@FXML private TextField costTf;
+	@FXML private TextField priceTf;
+	@FXML private TextField accCodeTf;
+	@FXML private ComboBox<BigClass> bigCb;
+	@FXML private ComboBox<SmallClass> smallCb;
 	
-	@FXML
-	private TextField nameTf;
-	
-	@FXML
-	private ComboBox<String> admitCb;
-	
-	@FXML
-	private TextField costTf;
-	
-	@FXML
-	private TextField priceTf;
-	@FXML
-	private TextField accCodeTf;
-	@FXML
-	private ComboBox<BigClass> bigCb;
-	
-	@FXML
-	private ComboBox<SmallClass> smallCb;
-	
-	@FXML
-	private Button classAddBtn;
-	
-	@FXML
-	private Button deleteBtn;
-	
-	@FXML
-	private Button changeBtn;
-	
-	@FXML
-	private Button addBtn;
-	
-	@FXML
-	private TableView<Product> pdtTable;
-	
-	@FXML
-	private CheckBox pdtCheck;
-	
-	@FXML
-	private CheckBox dbCheck;
-	@FXML
-	private TableColumn<Product, Boolean> chckTc;
-	
-	@FXML
-	private TableColumn<Product, Integer> codeTc;
-	
-	@FXML
-	private TableColumn<Product, String> nameTc;
-	
-	@FXML
-	private TableColumn<Product, String> accTc;
-	
-	@FXML
-	private TableColumn<Product, Integer> costTc;
-	
-	@FXML
-	private TableColumn<Product, Integer> priceTc;
+	@FXML private Button classAddBtn;
+	@FXML private Button deleteBtn;
+	@FXML private Button changeBtn;
+	@FXML private Button addBtn;
+	@FXML private TableView<Product> pdtTable;
+	@FXML private CheckBox pdtCheck;
+	@FXML private CheckBox dbCheck;
+	@FXML private TableColumn<Product, Boolean> chckTc;
+	@FXML private TableColumn<Product, Integer> codeTc;
+	@FXML private TableColumn<Product, String> nameTc;
+	@FXML private TableColumn<Product, String> accTc;
+	@FXML private TableColumn<Product, Integer> costTc;
+	@FXML private TableColumn<Product, Integer> priceTc;
 	
 	@FXML private TableColumn<Product, String> admitTc;
-	
+	@FXML private Button accSerachBtn;
 	
 	private ObservableList<Product> levellist = FXCollections.observableArrayList();
 	
@@ -151,11 +102,6 @@ public class ProductController {
 			//공백 콤보박스에 공백 들어가서 크기가 커지니까 trim()으로 공백 없앤뒤 입력해야함
 		}
 		
-//		smallService = SmallClassService.getInstance();
-//		List<SmallClass> slist = smallService.findAll();
-//		for(SmallClass small: slist) {
-//			smalllist.add(small);
-//		}
 		
 		/* ********************* *
 		 * 테이블 cell안 체크박스 삽입   *
@@ -206,19 +152,87 @@ public class ProductController {
 		priceTc.setCellValueFactory(cellData -> cellData.getValue().getPdtPriceProperty().asObject());
 		admitTc.setCellValueFactory(cellData -> cellData.getValue().getPdtAdmitProperty());
 
-		refreshTableAdmitTrue();
+		refreshTableAll();
 		
 		bigCb.setItems(biglist);
-		//smallCb.setItems(smalllist);
 		admitCb.setItems(abminlist);
 		admitCb.setValue("true");
+		
+		FilteredList<Product> filterData = new FilteredList<>(myList, pdt -> true);
+		searchTf.textProperty().addListener((observable, oldValue, newValue)->{
+			filterData.setPredicate(pdt ->{
+				 if (newValue == null || newValue.isEmpty()) {
+	                    return true;
+	                }
+				 
+				 //대문자 -> 소문자로 변경
+				 String lowerCaseFilter = newValue.toLowerCase();				
+				 
+				 if(pdt.getAccName().contains(lowerCaseFilter)) {
+					 return true;
+				 }
+				 
+				 if(pdt.getPdtName().contains(lowerCaseFilter)) {
+					 return true;
+				 }
+				 
+				return false;
+			});
+		});
+		// 필터리스트를 sorted리스트에 넣는다
+		SortedList<Product> sortedData = new SortedList<>(filterData);
+		
+		sortedData.comparatorProperty().bind(pdtTable.comparatorProperty());
+		
+        pdtTable.setItems(sortedData);
+        
 	}
 	
 	public ProductController() {}
 	
-	@FXML
-	private void deleteSelectedCell(ActionEvent event) {
+	public void setPrdController(Account accUser) {
+		classAddBtn.setVisible(false);
+		admitCb.setValue("false");
+		admitCb.setDisable(true);
+		dbCheck.setVisible(false);
+		accCodeTf.setText(accUser.getAccCode()+"");
+		accSerachBtn.setVisible(false);
+		accCodeTf.setStyle("-fx-background-radius: 11.5 11.5 11.5 11.5");
 		
+		FilteredList<Product> filterData = new FilteredList<>(myList, pdt -> true);
+		filterData.setPredicate(pdt ->{	
+				if(pdt.getAccCode() == accUser.getAccCode()) {
+					 return true;
+				 }
+				return false;
+		});
+		
+		searchTf.textProperty().addListener((observable, oldValue, newValue)->{
+			filterData.setPredicate(pdt ->{
+				 if ((newValue == null || newValue.isEmpty()) && (pdt.getAccCode() == accUser.getAccCode())) {
+	                    return true;
+	                }
+				 
+				 //대문자 -> 소문자로 변경
+				 String lowerCaseFilter = newValue.toLowerCase();				
+
+				 if(pdt.getAccName().contains(accUser.getAccName()) && pdt.getPdtName().contains(lowerCaseFilter)) {
+					 return true;
+				 }
+				 
+				return false;
+			});
+		});
+		
+		SortedList<Product> sortedData = new SortedList<>(filterData);
+		
+		sortedData.comparatorProperty().bind(pdtTable.comparatorProperty());
+		
+        pdtTable.setItems(sortedData);
+	}
+	
+	@FXML
+	private void deleteSelectedCell(ActionEvent event) {		
 		for(int i=0; myList.size()>i; i++) {
 			Product pdt = myList.get(i);
 			System.out.println(pdt);
@@ -230,7 +244,6 @@ public class ProductController {
 			};
 		}
 	}
-	
 	
 	private ProductTestMain mainApp;
 	
@@ -249,7 +262,6 @@ public class ProductController {
 			refreshTableAdmitTrue();	
 			checkAdmit = false;
 		}
-
 	}
 	
 	@FXML
@@ -284,17 +296,16 @@ public class ProductController {
 			pdt.setPdtCost(Integer.parseInt(costTf.getText().trim()));
 			pdt.setPdtPrice(Integer.parseInt(priceTf.getText().trim()));
 			pdt.setAccCode(Integer.parseInt(accCodeTf.getText()));
+			pdt.setAccName(accService.findAccountByCode(new Account(pdt.getAccCode())).getAccName());
 			pdtService.insertProduct(pdt);
 			
-			myList = FXCollections.observableArrayList();
-			
-			refreshTableAll();
+			myList.add(pdt);
+			pdtTable.refresh();
 		}
 		
 	}
-	
 
-	@FXML
+	/*@FXML
 	public void SearchClickAction() {
 
 		myList = FXCollections.observableArrayList();
@@ -308,7 +319,7 @@ public class ProductController {
 		accService = AccountService.getInstance();
 		
 		Account findAcc = new Account();
-		Account resAcc = new Account();
+		Account resAcc = new Account(); 
 		
 		if(checkAdmit) {
 			List<Product> lists = pdtService.findByAllItem(pdt1);
@@ -332,7 +343,7 @@ public class ProductController {
 		}
 		
 		pdtTable.setItems(myList);
-	}
+	}*/
 	
 	private void checkAlert(boolean isOk,String pwck) throws Exception {
 		if(!isOk) {
@@ -354,13 +365,9 @@ public class ProductController {
 	        dialogStage.initOwner(pane.getScene().getWindow());
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
-	        
 
 	        AddClassDialogController2 controller = loader.getController(); 
-	        
-	        dialogStage.showAndWait();
-	        
-	        
+	        dialogStage.showAndWait();	        
 	        if(controller.isOkClicked()) {
 	        	 resetBigCb();
 	        }
@@ -406,34 +413,6 @@ public class ProductController {
 
 	}
 	
-//	제품 검색화면 태그
-	/*@FXML
-	public void SearchAccountAction() {
-		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("view/dialog/productSearchDialog.fxml"));
-        BorderPane page;
-		try {
-			page = (BorderPane) loader.load();
-			
-			Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Product");
-	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
-	        dialogStage.initOwner(pane.getScene().getWindow());
-	        Scene scene = new Scene(page);
-	        dialogStage.setScene(scene);
-	        
-	       
-	        ProductSearchDialog controller = loader.getController(); 
-	        controller.setDialogStage(dialogStage);
-	        
-	        dialogStage.showAndWait();
-
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-	}*/
-	
 	@FXML
 	public void getCellMenuAction() {
 		Product pdt = pdtTable.getSelectionModel().getSelectedItem();
@@ -472,7 +451,7 @@ public class ProductController {
 	        if(controller.isOkClicked()) {
 	        	System.out.println(controller.getProduct());
 	        	pdtService.updatePdt(controller.getProduct());
-	        	refreshTableAll();
+	        	pdtTable.refresh();
 	        }
 	   } catch (IOException e) {
 	        e.printStackTrace();
@@ -489,13 +468,13 @@ public class ProductController {
 		
 		Account findAcc = new Account();
 		Account resAcc = new Account();
-		List<Product> lists = pdtService.findAllByAdmin();
+		List<Product> lists = pdtService.findAllAdmit();
 		
 		for(Product pdt : lists) {
 			
 			findAcc.setAccCode(pdt.getAccCode());
 			resAcc = accService.findAccountByCode(findAcc);
-			pdt.setAccName(resAcc.getAccNameProperty());
+			pdt.setAccName(resAcc.getAccName());
 			
 			myList.add(pdt);
 		}
@@ -514,7 +493,7 @@ public class ProductController {
 		for(Product pdt : lists) {
 			findAcc.setAccCode(pdt.getAccCode());
 			resAcc = accService.findAccountByCode(findAcc);
-			pdt.setAccName(resAcc.getAccNameProperty());
+			pdt.setAccName(resAcc.getAccName());
 			myList.add(pdt);
 		}
 		pdtTable.setItems(myList);

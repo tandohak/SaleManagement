@@ -109,7 +109,7 @@ public class MainViewController  {
 	        controller.setAccount(accUser);
 	        controller.changeHeader();
 	        dialogStage.showAndWait();
-
+	        
 	        if(controller.isOkClicked()) {
 	        	System.out.println(controller.getAccount());
 	        	accountService.updateAccount(controller.getAccount());
@@ -135,6 +135,11 @@ public class MainViewController  {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/ProductManager.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
+			ProductController controller = loader.getController();
+			if(accUser != null) {
+				controller.setPrdController(accUser);
+			}
+			
 			admNode.setCenter(pane);
 		} catch (IOException e) {
 			e.printStackTrace();

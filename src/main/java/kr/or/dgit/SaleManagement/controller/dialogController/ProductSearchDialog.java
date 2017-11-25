@@ -103,7 +103,7 @@ public class ProductSearchDialog {
 		for(Product pdt : lists) {
 			findAcc.setAccCode(pdt.getAccCode());
 			resAcc = accService.findAccountByCode(findAcc);
-			pdt.setAccName(resAcc.getAccNameProperty());
+			pdt.setAccName(resAcc.getAccName());
 			myList.add(pdt);
 		}
 		pdtTable.setItems(myList);		
@@ -152,7 +152,7 @@ public class ProductSearchDialog {
 		for(Product pdt : lists) {
 			findAcc.setAccCode(pdt.getAccCode());
 			resAcc = accService.findAccountByCode(findAcc);
-			pdt.setAccName(resAcc.getAccNameProperty());
+			pdt.setAccName(resAcc.getAccName());
 			myList.add(pdt);
 		}
 		

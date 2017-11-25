@@ -150,8 +150,8 @@ public class Product {
 		return accName.get();
 	}
 	
-	public void setAccName(StringProperty accName) {
-		this.accName = accName;
+	public void setAccName(String accName) {
+		this.accName.set(accName);;
 	}
 
 

@@ -28,9 +28,9 @@
                <padding>
                   <Insets bottom="4.0" left="7.0" right="7.0" top="4.0" />
                </padding></TextField>
-            <JFXButton layoutX="152.0" layoutY="14.0" onAction="#SearchClickAction" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
+            <JFXButton layoutX="152.0" layoutY="14.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
             <Separator layoutY="57.0" prefHeight="0.0" prefWidth="900.0" />
-            <CheckBox fx:id="dbCheck" layoutX="22.0" layoutY="60.0" mnemonicParsing="false" onAction="#checkboxChange" text="전체DB보기" />
+            <CheckBox fx:id="dbCheck" layoutX="22.0" layoutY="62.0" mnemonicParsing="false" onAction="#checkboxChange" selected="true" text="전체DB보기" AnchorPane.topAnchor="70.0" />
          </children>
       </AnchorPane>
    </top>
@@ -53,13 +53,11 @@
                      <children>
                         <Label text="제품명" />
                         <TextField fx:id="nameTf" />
-                        <Label text="코드" />
-                        <Label fx:id="codeTf" />
                         <Label text="거래처코드" />
                         <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: none;">
                            <children>
                               <TextField fx:id="accCodeTf" editable="false" styleClass="searchTF" />
-                              <JFXButton onAction="#SearchAccountAction" styleClass="searchBtn" text="Button" />
+                              <JFXButton fx:id="accSerachBtn" onAction="#SearchAccountAction" styleClass="searchBtn" text="Button" />
                            </children>
                         </HBox>
                      </children>
