@@ -190,7 +190,7 @@ public class ProductController {
 	
 	public ProductController() {}
 	
-	public void setPrdController(Account accUser) {
+	public void setUserAccSetting(Account accUser) {
 		classAddBtn.setVisible(false);
 		admitCb.setValue("false");
 		admitCb.setDisable(true);

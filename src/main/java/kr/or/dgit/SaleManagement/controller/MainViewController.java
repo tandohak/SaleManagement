@@ -137,7 +137,7 @@ public class MainViewController  {
 			BorderPane pane = (BorderPane)loader.load();
 			ProductController controller = loader.getController();
 			if(accUser != null) {
-				controller.setPrdController(accUser);
+				controller.setUserAccSetting(accUser);
 			}
 			
 			admNode.setCenter(pane);
@@ -188,6 +188,10 @@ public class MainViewController  {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/RecordManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
+			RecordController controller = loader.getController();
+			if(accUser != null) {
+				controller.setUserAccSetting(accUser);
+			}
 			
 			admNode.setCenter(pane);
 		} catch (IOException e) {

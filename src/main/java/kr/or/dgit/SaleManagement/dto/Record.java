@@ -85,8 +85,8 @@ public class Record {
 		return accCode;
 	}
 
-	public IntegerProperty getAccCode() {
-		return accCode;
+	public int getAccCode() {
+		return accCode.get();
 	}
 
 	public Record() {}

@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -57,6 +58,7 @@ public class RecordController {
 	    @FXML private TableColumn<Record, Integer> disrateTc;
 	    @FXML private TableColumn<Record, Integer> countTc;
 	    @FXML private TableColumn<Record, String> saleNameTc;
+	    @FXML private ButtonBar btnBar;
 	    
 	    private TextFieldUtil tfUtil = new TextFieldUtil();
 		private ObservableList<Record> myList = FXCollections.observableArrayList();
@@ -155,6 +157,49 @@ public class RecordController {
 					return false;
 				});
 			});
+			
+			// 필터리스트를 sorted리스트에 넣는다
+			SortedList<Record> sortedData = new SortedList<>(filterData);
+			
+			sortedData.comparatorProperty().bind(recTable.comparatorProperty());
+			
+	        recTable.setItems(sortedData);
+		}
+		
+		public void setUserAccSetting(Account accUser) {
+			btnBar.setVisible(false);
+			
+			FilteredList<Record> filterData = new FilteredList<>(myList, r -> true);
+			
+			filterData.setPredicate(record ->{	
+				if(record.getAccName().equals(accUser.getAccName()) ) {
+					 return true;
+				 }
+				return false;
+			});
+			
+			searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
+				filterData.setPredicate(record ->{
+					 if ((newValue == null || newValue.isEmpty()) && (record.getAccName().equals(accUser.getAccName()))) {
+		                    return true;
+		                }
+					 
+					 //대문자 -> 소문자로 변경
+					 
+					 String lowerCaseFilter = newValue.toLowerCase();				
+					 
+					 if(record.getSaleNamey().contains(lowerCaseFilter) && record.getAccName().contains(accUser.getAccName())) {
+						 return true;
+					 }
+					 
+					 if(record.getPdtName().contains(lowerCaseFilter) && record.getAccName().contains(accUser.getAccName())) {
+						 return true;
+					 }
+					 
+					return false; 
+				});
+			});
+			
 			// 필터리스트를 sorted리스트에 넣는다
 			SortedList<Record> sortedData = new SortedList<>(filterData);
 			
@@ -184,15 +229,6 @@ public class RecordController {
 			}
 		}
 		
-		@FXML
-		private void searchAction() {
-			
-			String searchText = searchAllTf.getText();
-			
-			Record rec = new Record();	
-//			myList.filtered();
-				
-		}
 		
 		@FXML
 		private void getCellMenuAction() {		
