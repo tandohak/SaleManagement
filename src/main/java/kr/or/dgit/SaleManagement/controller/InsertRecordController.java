@@ -12,9 +12,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -73,6 +75,7 @@ public class InsertRecordController {
     @FXML private TextField countTf;    
     @FXML private TextField disrateTf;
     @FXML private TextField sumPriceTf;
+    @FXML private Button saleSearchBtn;
     
     private TextFieldUtil tfUtil = new TextFieldUtil();
 	private ObservableList<Record> myList = FXCollections.observableArrayList();
@@ -88,6 +91,7 @@ public class InsertRecordController {
 	private Product pdt;
 	private Sales sales;
 	private int no;
+	
 	
 	@FXML
 	private void initialize() {
@@ -238,6 +242,16 @@ public class InsertRecordController {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void setSaleUserSetting(Sales saleUser) {
+		sales = saleUser;
+		saleTf.setText(saleUser.getSaleName());
+		saleSearchBtn.setVisible(false);
+		saleTf.setStyle("-fx-background-radius: 11.5 11.5 11.5 11.5");		  
+		saleLevelTf.setText(saleUser.getSaleLevel());
+		SalesLevel saleDis = sLevelService.findOneSalesLevel(new SalesLevel(saleUser.getSaleLevel()));	
+		disrateTf.setText(saleDis.getSalDisrate()+"%");
 	}
 	
 	@FXML
@@ -401,15 +415,10 @@ public class InsertRecordController {
 	private void tfAllClear() {
 		LocalDate nowDate = LocalDate.now();
 		dateDP.setValue(nowDate);
-		tfUtil.tfClear(accTf);
-		tfUtil.tfClear(saleTf);	
-		tfUtil.tfClear(accLevelTf);
-		tfUtil.tfClear(saleLevelTf);	
 		tfUtil.tfClear(pdtTf);
 		tfUtil.tfClear(pdtClassTf);
 		tfUtil.tfClear(countTf);	
 		tfUtil.tfClear(priceTf);
-		tfUtil.tfClear(disrateTf);
 		tfUtil.tfClear(disPriceTf);
 		tfUtil.tfClear(sumPriceTf);			
 		tfUtil.tfClear(unitPriceTf);
@@ -438,6 +447,8 @@ public class InsertRecordController {
 			return false;
 		}		
 	}
+
+	
 	
 	
 }	

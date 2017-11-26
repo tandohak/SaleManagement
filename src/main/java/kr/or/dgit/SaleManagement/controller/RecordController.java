@@ -168,6 +168,49 @@ public class RecordController {
 	        recTable.setItems(sortedData);
 		}
 		
+		public void setSaleUserSetting(Sales saleUser) {
+			FilteredList<Record> filterData = new FilteredList<>(myList, r -> true);
+			
+			filterData.setPredicate(record ->{
+				 if ((saleUser.getSaleCode() == record.getrSalecode())) {
+	                    return true;
+	                }
+				 
+				return false;
+			});
+			
+			searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
+				filterData.setPredicate(record ->{
+					boolean saleOk = saleUser.getSaleCode() == record.getrSalecode();
+					 if ((newValue == null || newValue.isEmpty()) && saleOk) {
+		                    return true;
+		                }
+					 
+					 //대문자 -> 소문자로 변경
+					 String lowerCaseFilter = newValue.toLowerCase();				
+					 String recordAccName = record.getAccName().toLowerCase();
+					 
+					 String recordPdtName = record.getPdtName().toLowerCase();
+					 if(recordAccName.contains(lowerCaseFilter) && saleOk) {
+						 return true;
+					 }
+					 
+					 if(recordPdtName.contains(lowerCaseFilter) && saleOk) {
+						 return true;
+					 }
+					 
+					return false;
+				});
+			});
+			
+			// 필터리스트를 sorted리스트에 넣는다
+			SortedList<Record> sortedData = new SortedList<>(filterData);
+			
+			sortedData.comparatorProperty().bind(recTable.comparatorProperty());
+			
+	        recTable.setItems(sortedData);
+		}
+		
 		public void setUserAccSetting(Account accUser) {
 			btnBar.setVisible(false);
 			
@@ -308,6 +351,8 @@ public class RecordController {
 				myList.add(rec);				
 			}		
 		}
+
+		
 			
 		    
 }

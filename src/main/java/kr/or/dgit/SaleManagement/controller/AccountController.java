@@ -27,6 +27,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -137,6 +138,15 @@ public class AccountController {
 		accTable.setItems(myList);
 	}
 	
+	public void setSaleUserSetting() {
+		AnchorPane anchorBotton = new AnchorPane();
+		anchorBotton.setPrefHeight(73);
+		AnchorPane anchorTop = (AnchorPane)pane.getTop();
+		anchorTop.setPrefHeight(80);
+		pane.setBottom(anchorBotton);
+		allAccount.setVisible(false);
+	}
+	
 	@FXML
 	private boolean allAccountCheck() {
 		return allAccount.isSelected();
@@ -168,7 +178,7 @@ public class AccountController {
 		}
 		setAccountModel(lists);
 	}
-	
+
 	@FXML
 	private void setAccountModel(List<Account> lists) {
 		myList = FXCollections.observableArrayList();

@@ -3,16 +3,11 @@ package kr.or.dgit.SaleManagement.controller;
 
 import java.io.IOException;
 
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -124,6 +119,10 @@ public class MainViewController  {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/SalesManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
+			SalesController controller = loader.getController();
+			if(!saleUser.getSaleId().equals("admin")) {
+				controller.setSaleUserSetting();
+			}
 			admNode.setCenter(pane);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -139,7 +138,6 @@ public class MainViewController  {
 			if(accUser != null) {
 				controller.setUserAccSetting(accUser);
 			}
-			
 			admNode.setCenter(pane);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -151,6 +149,10 @@ public class MainViewController  {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/InsertRecordManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
+			InsertRecordController controller = loader.getController();
+			if(!saleUser.getSaleId().equals("admin")) {
+				controller.setSaleUserSetting(saleUser);
+			}
 			admNode.setCenter(pane);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -162,7 +164,10 @@ public class MainViewController  {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/AccountManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
-
+			AccountController controller = loader.getController();
+			if(!saleUser.getSaleId().equals("admin")) {
+				controller.setSaleUserSetting();
+			}
 			admNode.setCenter(pane);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -192,6 +197,12 @@ public class MainViewController  {
 			if(accUser != null) {
 				controller.setUserAccSetting(accUser);
 			}
+			if(saleUser != null) {
+				if(!saleUser.getSaleId().equals("admin")) {
+					controller.setSaleUserSetting(saleUser);
+				}
+			}
+			
 			
 			admNode.setCenter(pane);
 		} catch (IOException e) {

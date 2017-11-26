@@ -27,6 +27,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -43,6 +44,7 @@ import kr.or.dgit.SaleManagement.util.TextFieldUtil;
 
 public class SalesController {
 	@FXML private BorderPane pane;
+	@FXML private AnchorPane bottomPane;
 	@FXML private TextField searchAllTf;
 
 	@FXML private TextField nameTf;	
@@ -149,7 +151,15 @@ public class SalesController {
 	}
 	
 	
-	
+	@FXML
+	public void setSaleUserSetting() {
+		AnchorPane anchorBotton = new AnchorPane();
+		anchorBotton.setPrefHeight(73);
+		AnchorPane anchorTop = (AnchorPane)pane.getTop();
+		anchorTop.setPrefHeight(80);
+		pane.setBottom(anchorBotton);
+		allSales.setVisible(false);
+	}
 	
 	@FXML
 	private void deleteCellMenuAction() {
