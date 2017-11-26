@@ -3,7 +3,6 @@ package kr.or.dgit.SaleManagement.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -12,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -91,6 +89,7 @@ public class InsertRecordController {
 	private Product pdt;
 	private Sales sales;
 	private int no;
+	private boolean isUserLogin = false;
 	
 	
 	@FXML
@@ -247,11 +246,19 @@ public class InsertRecordController {
 	public void setSaleUserSetting(Sales saleUser) {
 		sales = saleUser;
 		saleTf.setText(saleUser.getSaleName());
-		saleSearchBtn.setVisible(false);
-		saleTf.setStyle("-fx-background-radius: 11.5 11.5 11.5 11.5");		  
+		saleSearchBtn.setOnAction(null);
+		saleSearchBtn.setOnMouseClicked(event -> {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle(null);
+			alert.setHeaderText(null);
+			alert.setContentText("사원 검색은 관리자만 가능합니다.");
+		    alert.showAndWait();
+		});
 		saleLevelTf.setText(saleUser.getSaleLevel());
 		SalesLevel saleDis = sLevelService.findOneSalesLevel(new SalesLevel(saleUser.getSaleLevel()));	
 		disrateTf.setText(saleDis.getSalDisrate()+"%");
+		isUserLogin = true;
+		
 	}
 	
 	@FXML
@@ -370,6 +377,9 @@ public class InsertRecordController {
 	        RecordEditDialogController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
 	        controller.setRecord(rec);
+	        if(isUserLogin) {
+	        	controller.setSaleUserSetting();
+	        }
 	        dialogStage.showAndWait();
 
 	        if(controller.isOkClicked()) {

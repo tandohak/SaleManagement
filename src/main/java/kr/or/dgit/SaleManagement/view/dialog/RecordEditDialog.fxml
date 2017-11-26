@@ -75,7 +75,7 @@
                         <HBox style="-fx-spacing: none;">
                            <children>
                               <TextField fx:id="saleTf" editable="false" prefHeight="24.0" prefWidth="110.0" styleClass="searchTF" />
-                              <Button mnemonicParsing="false" onAction="#searchSalesAction" styleClass="searchBtn" text="Button">
+                              <Button fx:id="saleSearchBtn" mnemonicParsing="false" onAction="#searchSalesAction" styleClass="searchBtn" text="Button">
                                  <HBox.margin>
                                     <Insets bottom="1.0" />
                                  </HBox.margin>

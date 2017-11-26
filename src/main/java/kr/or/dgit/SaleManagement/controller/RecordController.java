@@ -69,6 +69,7 @@ public class RecordController {
 		private AccountService accService;
 		private ProductService pdtService;
 	    private RecordSerivce recService;
+		private boolean isUserLogin = false;
 	    
 		@FXML
 		private void initialize() {
@@ -169,6 +170,7 @@ public class RecordController {
 		}
 		
 		public void setSaleUserSetting(Sales saleUser) {
+			isUserLogin = true;
 			FilteredList<Record> filterData = new FilteredList<>(myList, r -> true);
 			
 			filterData.setPredicate(record ->{
@@ -209,6 +211,7 @@ public class RecordController {
 			sortedData.comparatorProperty().bind(recTable.comparatorProperty());
 			
 	        recTable.setItems(sortedData);
+	        
 		}
 		
 		public void setUserAccSetting(Account accUser) {
@@ -292,7 +295,7 @@ public class RecordController {
 				e.printStackTrace();
 				return ;
 			}
-
+			
 			try {
 		        FXMLLoader loader = new FXMLLoader();
 		        loader.setLocation(MainApp.class.getResource("view/dialog/RecordEditDialog.fxml"));
@@ -308,8 +311,12 @@ public class RecordController {
 		        RecordEditDialogController controller = loader.getController();
 		        controller.setDialogStage(dialogStage);
 		        controller.setRecord(rec);
-		        dialogStage.showAndWait();
-
+		        if(isUserLogin) {
+		        	controller.setSaleUserSetting();
+		        }
+		        
+		        dialogStage.showAndWait();		        
+		        
 		        if(controller.isOkClicked()) {
 		        	Record record = controller.getRecord();
 		        	recService.updateRecord(record);

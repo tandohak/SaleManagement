@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -55,6 +56,7 @@ public class RecordEditDialogController {
     @FXML private TextField countTf;    
     @FXML private TextField disrateTf;
     @FXML private TextField sumPriceTf;
+    @FXML private Button saleSearchBtn;
     
 	private Stage dialogStage;
 	private Record record;
@@ -66,10 +68,12 @@ public class RecordEditDialogController {
 	private ProductService pdtService;
 	private SalesLevelService sLevelService;
 	private AccountLevelService accLevelService;
-	SmallClassService sClassService;
+	private SmallClassService sClassService;
 	private Account acc;
 	private Product pdt;
 	private Sales sales;
+
+   
 	
 	@FXML
 	private void initialize() {
@@ -356,5 +360,16 @@ public class RecordEditDialogController {
 			e.printStackTrace();
 			return false;
 		}		
+	}
+
+	public void setSaleUserSetting() {
+		saleSearchBtn.setOnAction(null);
+		saleSearchBtn.setOnMouseClicked(event -> {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle(null);
+			alert.setHeaderText(null);
+			alert.setContentText("사원 검색은 관리자만 가능합니다.");
+		    alert.showAndWait();
+		});
 	}
 }
