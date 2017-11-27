@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Product;
 import kr.or.dgit.SaleManagement.dto.Record;
+import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.ProductService;
 import kr.or.dgit.SaleManagement.service.RecordSerivce;
@@ -37,8 +38,19 @@ public class StateController {
 	@FXML private TableColumn<Record, Integer> accDisprice;
 	@FXML private TableColumn<Record, Integer> accMargin;
 	@FXML private TableColumn<Record, Integer> accProfit;
+	@FXML private TableView<Record> saleTable;
+	@FXML private TableColumn<Record, Integer> saleNo;
+	@FXML private TableColumn<Record, Integer> saleCode;
+	@FXML private TableColumn<Record, String> saleName;
+	@FXML private TableColumn<Record, Integer> saleCount;
+	@FXML private TableColumn<Record, Integer> salePrice;
+	@FXML private TableColumn<Record, Integer> saleCost;
+	@FXML private TableColumn<Record, Integer> saleDisprice;
+	@FXML private TableColumn<Record, Integer> saleMargin;
+	@FXML private TableColumn<Record, Integer> saleProfit;	
 	
 	@FXML private StackedBarChart<String, Integer> stackChartAccount;
+	@FXML private StackedBarChart<String, Integer> stackChartSales;
 	@FXML private CategoryAxis xAxis = new CategoryAxis();
 
 	//차트용 옵저버
@@ -50,9 +62,9 @@ public class StateController {
 	private ProductService productService;
 	private RecordSerivce recordService;
 	
-	private String setStandardType;
 	private Record recStandard;
 	private ObservableList<Record> standardList = FXCollections.observableArrayList();
+	
 		
 	//통계용 변수선언
 	int totalProfit = 0;	//매출이익(마진액)
@@ -72,9 +84,7 @@ public class StateController {
 		recordService = RecordSerivce.getInstance();
 		
 		//거래처별 통계
-		//거래처목록 전체로드
-		setStandardType = "AccountName";
-		
+		//거래처목록 전체로드		
 		List<Account> accAllList = accountService.findAllAccount();
 		//거래처목록을 기준으로 제품 검색
 		for(Account findAccCode : accAllList){			
@@ -151,6 +161,9 @@ public class StateController {
 		accProfit.setCellValueFactory(cellData -> cellData.getValue().getProfitProperty().asObject());
 
 		accTable.setItems(standardList);
+		
+		//먼저 로드를 해놓는 부분
+		salesChart();
 	}
 	
 	public void setData(List<Record> standardList, ObservableList<String> xAxisName) {
@@ -188,5 +201,117 @@ public class StateController {
 		totalSales = 0;		//매매가
 		totalCount = 0;		//판매수량
 		totalRecCount = 0;	//거래내역수
+	}
+	
+	//영업사원별 통계
+	public void salesChart() {
+		
+		standardList = FXCollections.observableArrayList();
+		List<Sales> salesAllList = salesService.findSaleAll();
+		//사원을 기준으로 거래내역 검색
+		for(Sales findSalesCode : salesAllList){			
+			recStandard = new Record();
+			
+			//통계저장용 사원명 SET
+			recStandard.setrSalecode(findSalesCode.getSaleCode());
+			recStandard.setSaleName(findSalesCode.getSaleName());
+			
+			//사원별 거래내역 검색
+			Record findRecBySaleCode = new Record();
+			findRecBySaleCode.setrSalecode(findSalesCode.getSaleCode());
+			List<Record> findRecBySales = recordService.findRecordBySearch(findRecBySaleCode);
+			//예외처리 : 사원에 대한 거래내역이 존재할 경우
+			if(findRecBySales.size() != 0) {
+				//물품정보 검색 
+				for(Record rec : findRecBySales) {
+					Product pdtInfo = new Product();
+					pdtInfo.setPdtCode(rec.getrProductCode());
+					pdtInfo = productService.findBypdtProduct(pdtInfo);
+					//사원 거래내역 결과 합산
+					totalDiscount += ((pdtInfo.getPdtPrice()*rec.getRecCount())*(rec.getRecDisrate()*0.01));
+					totalCost += pdtInfo.getPdtCost()*rec.getRecCount();
+					totalSales += pdtInfo.getPdtPrice()*rec.getRecCount();
+					totalCount += rec.getRecCount();
+					totalRecCount++;
+				}
+				totalProfit = totalSales - totalCost - totalDiscount;
+				double transPer = (double)totalProfit / (double)totalSales;
+				totalMarginPer = (int)(transPer * 100);
+				
+				recStandard.setProfit(totalProfit);			//통계저장용 매출이익 SET
+				recStandard.setMarginPer(totalMarginPer);	//통계저장용 마진율 SET
+				recStandard.setRecDisprice(totalDiscount);	//통계저장용 할인금액 SET
+				recStandard.setRecCost(totalCost);			//통계저장용 원가총액 SET
+				recStandard.setRecPrice(totalSales);		//통계저장용 매매총액 SET
+				recStandard.setRecCount(totalCount);		//통계저장용 판매수량 SET
+				recStandard.setRecNo(totalRecCount);		//통계저장용 거래내역수 SET
+				
+				System.out.println(recStandard.getProfit());
+				System.out.println(recStandard.getMarginPer());
+				System.out.println(recStandard.getRecDisprice());
+				System.out.println(recStandard.getRecCost());
+				System.out.println(recStandard.getRecPrice());
+				System.out.println(recStandard.getRecCount());
+				System.out.println(recStandard.getRecNo());
+				
+				standardList.add(recStandard);
+			}
+		}
+
+		//차트 DATA
+		xAxis = new CategoryAxis();
+		xAxisName = FXCollections.observableArrayList();
+		int index = 0;
+		String[] salesNames = new String[standardList.size()];
+		for(Record name : standardList) {
+			Sales finder = new Sales();
+			finder.setSaleCode(name.getrSalecode());
+			finder = salesService.findSalesByCode(finder);
+			salesNames[index] = finder.getSaleName();
+			index++;
+		}
+		xAxisName.addAll(Arrays.asList(salesNames));
+		xAxis.setCategories(xAxisName);
+		
+		setDataSales(standardList, xAxisName);
+		
+		//테이블 DATA
+		saleCode.setCellValueFactory(cellData -> cellData.getValue().getrSalecodeProperty().asObject());
+		saleName.setCellValueFactory(cellData -> cellData.getValue().getSaleNameProperty());
+		saleCount.setCellValueFactory(cellData -> cellData.getValue().getRecCountProperty().asObject());
+		salePrice.setCellValueFactory(cellData -> cellData.getValue().getRecCostProperty().asObject());
+		saleCost.setCellValueFactory(cellData -> cellData.getValue().getRecPriceProperty().asObject());
+		saleDisprice.setCellValueFactory(cellData -> cellData.getValue().getRecDispriceProperty().asObject());
+		saleMargin.setCellValueFactory(cellData -> cellData.getValue().getMarginPerProperty().asObject());
+		saleProfit.setCellValueFactory(cellData -> cellData.getValue().getProfitProperty().asObject());
+
+		saleTable.setItems(standardList);
+	}
+	
+	public void setDataSales(List<Record> standardList, ObservableList<String> xAxisName) {
+		int index = 0;
+		int[][] chartBar = new int[standardList.size()][3];
+		for(Record rec : standardList) {
+			chartBar[index][0] = rec.getRecCost();
+			chartBar[index][1] = rec.getRecDisprice();
+			chartBar[index][2] = rec.getProfitByInt();
+			index++;
+		}
+		
+		XYChart.Series<String, Integer> seriesCost = new XYChart.Series<>();
+		XYChart.Series<String, Integer> seriesPrice = new XYChart.Series<>();
+		XYChart.Series<String, Integer> seriesProfit = new XYChart.Series<>();
+		
+		seriesCost.setName("원가총액");
+		seriesPrice.setName("할인총액");
+		seriesProfit.setName("총매출이익");
+		
+		index = 0;
+		for(int i=0;i<chartBar.length;i++) {
+			seriesCost.getData().add(new XYChart.Data<>(xAxisName.get(i), chartBar[i][0]));
+			seriesPrice.getData().add(new XYChart.Data<>(xAxisName.get(i), chartBar[i][1]));
+			seriesProfit.getData().add(new XYChart.Data<>(xAxisName.get(i), chartBar[i][2]));
+		}
+		stackChartSales.getData().addAll(seriesCost, seriesPrice, seriesProfit);
 	}
 }
