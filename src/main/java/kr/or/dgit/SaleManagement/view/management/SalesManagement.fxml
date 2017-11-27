@@ -69,9 +69,15 @@
                         <JFXButton onAction="#idTypeHandler" style="-fx-pref-width: 40px;" styleClass="greenBtn" text="확인" />
                         <ImageView fx:id="checkIdIcon" fitHeight="22.0" fitWidth="18.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" />
                         <Label text="비밀번호" />
-                        <PasswordField fx:id="pwTf" onKeyReleased="#pwTypeHandler" />
+                        <PasswordField fx:id="pwTf" onKeyReleased="#pwTypeHandler" prefWidth="137.0">
+                           <font>
+                              <Font name="Modern No. 20" size="12.0" />
+                           </font></PasswordField>
                         <Label text="비밀번호확인" />
-                        <PasswordField fx:id="pwComfTf" onKeyReleased="#pwTypeHandler" />
+                        <PasswordField fx:id="pwComfTf" onKeyReleased="#pwTypeHandler" prefWidth="137.0">
+                           <font>
+                              <Font name="Modern No. 20" size="12.0" />
+                           </font></PasswordField>
                         <ImageView fx:id="checkPwIcon" fitHeight="22.0" fitWidth="18.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
