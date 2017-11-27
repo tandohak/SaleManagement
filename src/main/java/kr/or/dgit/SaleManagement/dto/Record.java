@@ -22,7 +22,7 @@ public class Record {
 	private IntegerProperty recDisprice = new SimpleIntegerProperty();
 	private IntegerProperty recDisrate = new SimpleIntegerProperty();
 	private IntegerProperty recCount = new SimpleIntegerProperty();
-	
+
 	private IntegerProperty sumPrice = new SimpleIntegerProperty();
 	private IntegerProperty recCost = new SimpleIntegerProperty();
 	private IntegerProperty accCode = new SimpleIntegerProperty();
@@ -32,23 +32,21 @@ public class Record {
 	private StringProperty saleName = new SimpleStringProperty();
 	private IntegerProperty profit = new SimpleIntegerProperty();
 	private IntegerProperty margin = new SimpleIntegerProperty();
-	
-	
-	
+	private IntegerProperty marginPer = new SimpleIntegerProperty();
+
 	public IntegerProperty getRecCostProperty() {
 		return recCost;
 	}
-	
+
 	public int getRecCost() {
 		return recCost.get();
 	}
 
 	public void setRecCost(int recCost) {
-		this.recCost.set(recCost);;
+		this.recCost.set(recCost);
+		;
 	}
-	
-	
-	
+
 	public IntegerProperty getSumPriceProperty() {
 		return sumPrice;
 	}
@@ -60,23 +58,31 @@ public class Record {
 	public void setSumPrice(int sumPrice) {
 		this.sumPrice.set(sumPrice);
 	}
-	
+
 	public IntegerProperty getMargin() {
 		return margin;
 	}
+
 	public void setMargin(int margin) {
 		this.margin.set(margin);
 	}
+
 	public IntegerProperty getMarginProperty() {
 		return margin;
 	}
+
 	public IntegerProperty getProfit() {
 		return profit;
 	}
+
 	public IntegerProperty getProfitProperty() {
 		return profit;
 	}
 
+	public int getProfitByInt() {
+		return profit.get();
+	}
+	
 	public void setProfit(int profit) {
 		this.profit.set(profit);
 	}
@@ -89,27 +95,29 @@ public class Record {
 		return accCode.get();
 	}
 
-	public Record() {}
-	
+	public Record() {
+	}
+
 	public BooleanProperty getCheckedBoxProperty() {
 		return checkedBox;
 	}
-	
+
 	public Boolean getCheckedBox() {
 		return checkedBox.get();
 	}
-	
+
 	public void setCheckedBox(Boolean checkedBox) {
 		this.checkedBox.set(checkedBox);
 	}
-	
+
 	public ObservableValue<Boolean> selectedProperty() {
 		return checkedBox;
 	}
-	
+
 	public String getSaleNamey() {
 		return saleName.get();
 	}
+
 	public StringProperty getSaleNameProperty() {
 		return saleName;
 	}
@@ -117,16 +125,15 @@ public class Record {
 	public void setSaleName(String saleName) {
 		this.saleName.set(saleName);
 	}
-	
-	
+
 	public void setAccCode(int accCode) {
 		this.accCode.set(accCode);
 	}
-	
+
 	public int getRecPrice() {
 		return recPrice.get();
 	}
-	
+
 	public IntegerProperty getRecPriceProperty() {
 		return recPrice;
 	}
@@ -134,10 +141,11 @@ public class Record {
 	public void setRecPrice(int recPrice) {
 		this.recPrice.set(recPrice);
 	}
+
 	public String getAccName() {
 		return accName.get();
 	}
-	
+
 	public StringProperty getAccNameProperty() {
 		return accName;
 	}
@@ -149,31 +157,32 @@ public class Record {
 	public String getPdtName() {
 		return pdtName.get();
 	}
-	
+
 	public StringProperty getPdtNameProperty() {
 		return pdtName;
 	}
 
 	public void setPdtName(String pdtName) {
-		this.pdtName.set(pdtName); ;
+		this.pdtName.set(pdtName);
+		;
 	}
 
 	public int getRecNo() {
 		return recNo.get();
 	}
-	
+
 	public IntegerProperty getRecNoProperty() {
 		return recNo;
 	}
 
 	public void setRecNo(int recNo) {
-		this.recNo.set(recNo); 
+		this.recNo.set(recNo);
 	}
 
 	public int getrProductCode() {
 		return rProductCode.get();
 	}
-	
+
 	public IntegerProperty getrProductCodeProperty() {
 		return rProductCode;
 	}
@@ -185,7 +194,7 @@ public class Record {
 	public int getrSalecode() {
 		return rSalecode.get();
 	}
-	
+
 	public IntegerProperty getrSalecodeProperty() {
 		return rSalecode;
 	}
@@ -197,7 +206,7 @@ public class Record {
 	public LocalDate getRecDate() {
 		return recDate.get();
 	}
-	
+
 	public ObjectProperty<LocalDate> getRecDateProperty() {
 		return recDate;
 	}
@@ -209,7 +218,7 @@ public class Record {
 	public int getRecDisprice() {
 		return recDisprice.get();
 	}
-	
+
 	public IntegerProperty getRecDispriceProperty() {
 		return recDisprice;
 	}
@@ -221,25 +230,37 @@ public class Record {
 	public int getRecDisrate() {
 		return recDisrate.get();
 	}
-	
+
 	public IntegerProperty getRecDisrateProperty() {
 		return recDisrate;
 	}
 
 	public void setRecDisrate(int recDisrate) {
-		this.recDisrate.set(recDisrate);;
+		this.recDisrate.set(recDisrate);
 	}
 
 	public int getRecCount() {
 		return recCount.get();
 	}
-	
+
 	public IntegerProperty getRecCountProperty() {
 		return recCount;
 	}
 
 	public void setRecCount(int recCount) {
 		this.recCount.set(recCount);
+	}
+
+	public int getMarginPer() {
+		return marginPer.get();
+	}
+	
+	public IntegerProperty getMarginPerProperty() {
+		return marginPer;
+	}
+
+	public void setMarginPer(int marginPer) {
+		this.marginPer.set(marginPer);
 	}
 
 	@Override
