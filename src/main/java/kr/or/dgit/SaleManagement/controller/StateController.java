@@ -107,7 +107,7 @@ public class StateController {
 		 * acclist.add(r); }
 		 */
 
-		accTableSet();
+		accTableSet1();
 
 		// refreshTable();
 		accCode.setCellValueFactory(cellData -> cellData.getValue().getaccCodeProperty().asObject());
@@ -123,7 +123,54 @@ public class StateController {
 		// cellData.getValue().getAccNameProperty());
 
 		accTable.setItems(acclist);
+		
+		
+	}
+	
+	//테스트
+	private void accTableSet1() {
+		saleService = SalesService.getInstance();
+		pdtService = ProductService.getInstance();
+		accService = AccountService.getInstance();
+		recService = RecordSerivce.getInstance();
+		
+		
+		
+		
+		List<Record> lists = recService.findRecordByAll();		
+		for (Record r : lists) {
+			Account acc = new Account();
+			Product pdt = new Product();
 
+			pdt = pdtService.findBypdtProduct(new Product(r.getrProductCode()));
+			acc.setAccCode(pdt.getAccCode());
+
+			Account acc1 = new Account();
+			acc1 = accService.findAccountByCode(acc);
+
+			Sales sale = new Sales();
+			sale.setSaleCode(r.getrSalecode());
+			sale = saleService.findSalesByCode(sale);
+			
+			
+			
+
+			int num = r.getRecCount();
+			int price = pdt.getPdtPrice() * num;
+			int cost = pdt.getPdtCost() * num;
+			int disPrice = r.getRecDisprice();
+
+			int profit = price - cost - disPrice;
+			int margin = profit * 100 / price;
+
+			r.setAccName(acc1.getAccName());
+			r.setRecPrice(price);
+			r.setRecCost(cost);
+			r.setAccCode(acc1.getAccCode());
+			r.setProfit(profit);
+			r.setMargin(margin);
+			acclist.add(r);
+		}
 	}
 
 	private void accTableSet() {
@@ -133,7 +180,6 @@ public class StateController {
 		recService = RecordSerivce.getInstance();
 
 		List<Record> lists = recService.findRecordByAll();
-		Record record = new Record();
 
 		for (Record r : lists) {
 			Account acc = new Account();
