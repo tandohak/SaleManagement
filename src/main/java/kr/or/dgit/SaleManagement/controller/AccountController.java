@@ -40,6 +40,7 @@ import kr.or.dgit.SaleManagement.controller.dialogController.AddrDialogControlle
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.AccountLevel;
 import kr.or.dgit.SaleManagement.dto.AddrItem;
+import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.service.AccountLevelService;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
@@ -66,7 +67,8 @@ public class AccountController {
 	@FXML private TableColumn<Account, String> addrTc;
 	@FXML private ComboBox<AccountLevel> levelCb;
 	@FXML private CheckBox accCheck;
-	@FXML private CheckBox allAccount;
+	@FXML private CheckBox dbCheck;
+	
 	@FXML private TableView<Account> accTable;
 	@FXML private Button submitBtn;
 	@FXML private ImageView checkIdIcon;
@@ -89,10 +91,8 @@ public class AccountController {
 		}
 		levelCb.setItems(levellist);
 
-		Account admitTrue = new Account();
-		admitTrue.setAccAdmit("true");
 		accountService = AccountService.getInstance();
-		List<Account> lists = accountService.findAllAdmitAccount(admitTrue);
+		List<Account> lists = accountService.findAllAccount();
 		for (Account account : lists) {
 			myList.add(account);
 		}
@@ -136,40 +136,87 @@ public class AccountController {
 		admitTc.setCellValueFactory(cellData -> cellData.getValue().getAccAdmitProperty());
 		addrTc.setCellValueFactory(cellData -> cellData.getValue().getAccAddrProperty());
 		
-		FilteredList<Account> filterData = new FilteredList<>(myList, acc -> true);
-		searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
-			filterData.setPredicate(acc ->{
-				 if (newValue == null || newValue.isEmpty()) {
-	                    return true;
-	                }
-				 
-				 //대문자 -> 소문자로 변경
-				 String lowerCaseFilter = newValue.toLowerCase();				
-				 String saleName = acc.getAccName().toLowerCase();
-				 String SaleLevel = acc.getAccLevel().toLowerCase();
-				 String saleCode = acc.getAccCode()+"";
-				 if(saleName.contains(lowerCaseFilter)) {
+		checkTable(false);
+	}
+	
+	@FXML
+	public void checkboxChange() {
+		checkTable(dbCheck.isSelected());
+		accTable.refresh();
+	}
+	
+	private void checkTable(boolean selected) {
+		FilteredList<Account> filterData = new FilteredList<>(myList, s -> true);
+		if(selected) {
+			searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
+				filterData.setPredicate(acc ->{
+					 if (newValue == null || newValue.isEmpty()) {
+		                    return true;
+		                }
+					 
+					 //대문자 -> 소문자로 변경
+					 String lowerCaseFilter = newValue.toLowerCase();				
+					 String accName = acc.getAccName().toLowerCase();
+					 String accLevel = acc.getAccLevel().toLowerCase();
+					 String accCode = acc.getAccCode()+"";
+					 if(accName.contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 
+					 if(accLevel.contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 
+					 if(accCode.contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 
+					return false;
+				});
+			});
+		}else {
+			filterData.setPredicate(account ->{	
+				if(account.getAccAdmit().contains("true")) {
 					 return true;
 				 }
-				 
-				 if(SaleLevel.contains(lowerCaseFilter)) {
-					 return true;
-				 }
-				 
-				 if(saleCode.contains(lowerCaseFilter)) {
-					 return true;
-				 }
-				 
 				return false;
 			});
-		});
-		
+			
+			searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
+				filterData.setPredicate(acc ->{
+					 if (newValue == null || newValue.isEmpty() && acc.getAccAdmit().contains("true")) {
+		                    return true;
+		                }
+					 
+					 //대문자 -> 소문자로 변경
+					 String lowerCaseFilter = newValue.toLowerCase();				
+					 String accName = acc.getAccName().toLowerCase();
+					 String accLevel = acc.getAccLevel().toLowerCase();
+					 String accCode = acc.getAccCode()+"";
+					 if(accName.contains(lowerCaseFilter) && acc.getAccAdmit().contains("true")) {
+						 return true;
+					 }
+					 
+					 if(accLevel.contains(lowerCaseFilter) && acc.getAccAdmit().contains("true")) {
+						 return true;
+					 }
+					 
+					 if(accCode.contains(lowerCaseFilter) && acc.getAccAdmit().contains("true")) {
+						 return true;
+					 }
+					 
+					return false;
+				});
+			});
+		}
+
 		// 필터리스트를 sorted리스트에 넣는다
 		SortedList<Account> sortedData = new SortedList<>(filterData);
 		
 		sortedData.comparatorProperty().bind(accTable.comparatorProperty());
 		
-		accTable.setItems(sortedData);
+		accTable.setItems(sortedData);	
+		
 	}
 	
 	public void setSaleUserSetting() {
@@ -178,12 +225,12 @@ public class AccountController {
 		AnchorPane anchorTop = (AnchorPane)pane.getTop();
 		anchorTop.setPrefHeight(80);
 		pane.setBottom(anchorBotton);
-		allAccount.setVisible(false);
+		dbCheck.setVisible(false);
 	}
 	
 	@FXML
 	private boolean allAccountCheck() {
-		return allAccount.isSelected();
+		return dbCheck.isSelected();
 	}
 	
 	@FXML
@@ -408,15 +455,6 @@ public class AccountController {
 	}
 	
 	@FXML
-	private void deleteCellMenuAction() {
-		int index = accTable.getSelectionModel().getSelectedIndex();
-		Account account = accTable.getSelectionModel().getSelectedItem();
-		account.setAccAdmit("false");
-		accountService.updateAccount(account);
-		accTable.getItems().remove(index);
-	}
-	
-	@FXML
 	private void deleteSelectedCell(ActionEvent event) {
 		for(int i=0; myList.size()>i; i++) {
 			Account account = myList.get(i);
@@ -425,7 +463,11 @@ public class AccountController {
 				 account.setAccAdmit("false");
 				 accountService.updateAccount(account);
 			};
+			
+			account.setCheckedBox(false);
 		}
+		checkTable(dbCheck.isSelected());
+		accTable.refresh();
 	}
 	
 	@FXML

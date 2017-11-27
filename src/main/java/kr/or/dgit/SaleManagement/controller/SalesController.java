@@ -74,8 +74,8 @@ public class SalesController {
 	
 	@FXML private TableView<Sales> saleTable;
 	
-	@FXML private ImageView checkIdIcon;;
-	@FXML private ImageView checkPwIcon;;
+	@FXML private ImageView checkIdIcon;
+	@FXML private ImageView checkPwIcon;
 	
 	@FXML private Button submitBtn;
 	
