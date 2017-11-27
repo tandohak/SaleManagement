@@ -8,6 +8,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +38,7 @@ import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.dialogController.AddrDialogController;
 import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
 import kr.or.dgit.SaleManagement.dto.AddrItem;
+import kr.or.dgit.SaleManagement.dto.Record;
 import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.service.SalesLevelService;
@@ -67,12 +70,12 @@ public class SalesController {
 	
 	@FXML private ComboBox<SalesLevel> levelCb;
 	@FXML private CheckBox saleCheck;
-	@FXML private CheckBox allSales;
+	@FXML private CheckBox dbCheck;
 	
 	@FXML private TableView<Sales> saleTable;
 	
-	@FXML private ImageView checkIdIcon;;
-	@FXML private ImageView checkPwIcon;;
+	@FXML private ImageView checkIdIcon;
+	@FXML private ImageView checkPwIcon;
 	
 	@FXML private Button submitBtn;
 	
@@ -96,13 +99,14 @@ public class SalesController {
 			levellist.add(saleLevel);
 		}	
 		levelCb.setItems(levellist);
-		SalesLevel s = new SalesLevel();
-		s.setSalLevel("none");
-		s.setSalDisrate(0);
-		levelCb.setValue(s);
-		
-		refreshTableAdmitTrue();
-		
+
+			
+		saleSerivce = SalesService.getInstance();
+		List<Sales> lists = saleSerivce.findSaleAll();
+		for(Sales sale : lists) {
+			myList.add(sale);
+		}		
+				
 		chckTc.setCellFactory(new Callback<TableColumn<Sales,Boolean>, TableCell<Sales,Boolean>>() {
 				@Override
 				public TableCell<Sales, Boolean> call(TableColumn<Sales, Boolean> param) {
@@ -144,10 +148,89 @@ public class SalesController {
 		levelTc.setCellValueFactory(cellData -> cellData.getValue().getSaleLevelProperty());
 		leaveTc.setCellValueFactory(cellData -> cellData.getValue().getSaleLeaveProperty());
 		addrTc.setCellValueFactory(cellData -> cellData.getValue().getSaleAddrProperty());;
-		
-		saleTable.setItems(myList);
+	    
+		checkTable(false);
 	}
 	
+	@FXML
+	public void checkboxChange() {
+		checkTable(dbCheck.isSelected());
+		saleTable.refresh();
+	}
+	
+	private void checkTable(boolean selected) {
+		FilteredList<Sales> filterData = new FilteredList<>(myList, s -> true);
+		if(selected) {
+			searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
+				filterData.setPredicate(sales ->{
+					 if (newValue == null || newValue.isEmpty()) {
+		                    return true;
+		                }
+					 
+					 //대문자 -> 소문자로 변경
+					 String lowerCaseFilter = newValue.toLowerCase();				
+					 String saleName = sales.getSaleName().toLowerCase();
+					 String SaleLevel = sales.getSaleLevel().toLowerCase();
+					 String saleCode = sales.getSaleCode()+"";
+					 if(saleName.contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 
+					 if(SaleLevel.contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 
+					 if(saleCode.contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 
+					return false;
+				});
+			});
+		}else {
+			filterData.setPredicate(sales ->{	
+				if(sales.getSaleLeave().contains("true")) {
+					 return true;
+				 }
+				return false;
+			});
+			
+			searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
+				filterData.setPredicate(sales ->{
+					 if (newValue == null || newValue.isEmpty() && sales.getSaleLeave().contains("true")) {
+		                    return true;
+		                }
+					 
+					 //대문자 -> 소문자로 변경
+					 String lowerCaseFilter = newValue.toLowerCase();				
+					 String saleName = sales.getSaleName().toLowerCase();
+					 String SaleLevel = sales.getSaleLevel().toLowerCase();
+					 String saleCode = sales.getSaleCode()+"";
+					 if(saleName.contains(lowerCaseFilter) && sales.getSaleLeave().contains("true")) {
+						 return true;
+					 }
+					 
+					 if(SaleLevel.contains(lowerCaseFilter) && sales.getSaleLeave().contains("true")) {
+						 return true;
+					 }
+					 
+					 if(saleCode.contains(lowerCaseFilter) && sales.getSaleLeave().contains("true")) {
+						 return true;
+					 }
+					 
+					return false;
+				});
+			});
+		}
+
+		// 필터리스트를 sorted리스트에 넣는다
+		SortedList<Sales> sortedData = new SortedList<>(filterData);
+		
+		sortedData.comparatorProperty().bind(saleTable.comparatorProperty());
+		
+		saleTable.setItems(sortedData);	
+		
+	}
 	
 	@FXML
 	public void setSaleUserSetting() {
@@ -156,22 +239,7 @@ public class SalesController {
 		AnchorPane anchorTop = (AnchorPane)pane.getTop();
 		anchorTop.setPrefHeight(80);
 		pane.setBottom(anchorBotton);
-		allSales.setVisible(false);
-	}
-	
-	@FXML
-	private void deleteCellMenuAction() {
-		int index = saleTable.getSelectionModel().getSelectedIndex();
-		Sales sales = saleTable.getSelectionModel().getSelectedItem();
-		sales.setSaleLeave("false");
-		saleSerivce.updateSales(sales);
-//		saleSerivce.deleteSales(sales);
-//		saleTable.getItems().remove(index);
-		if(allSales.isSelected()) {
-			refreshTable();
-		}else {
-			refreshTableAdmitTrue();
-		}
+		dbCheck.setVisible(false);
 	}
 	
 	@FXML
@@ -180,18 +248,15 @@ public class SalesController {
 			Sales sales = myList.get(i);
 			
 			if(sales.getCheckedBox()) {
-				 myList.remove(sales);
-				 //saleSerivce.deleteSales(sales);
-				sales.setSaleLeave("false");
-				saleSerivce.updateSales(sales);
-				 i = 0;
+				 sales.setSaleLeave("false");
+				 saleSerivce.updateSales(sales);
 			};
+			
+			sales.setCheckedBox(false);
 		}
-		if(allSales.isSelected()) {
-			refreshTable();
-		}else {
-			refreshTableAdmitTrue();
-		}
+
+		checkTable(dbCheck.isSelected());
+		saleTable.refresh();
 	}
 	
 	@FXML
@@ -280,11 +345,9 @@ public class SalesController {
 			}
 			sales.setSaleCode(codeNum);
 			saleSerivce.insertSales(sales);
-			if(allSales.isSelected()) {
-				refreshTable();
-			}else {
-				refreshTableAdmitTrue();
-			}
+			
+			myList.add(sales);
+			saleTable.refresh();
 		}
 	}
 
@@ -300,7 +363,9 @@ public class SalesController {
 		checkIdIcon.setVisible(false);		
 	}
 	
-		
+	
+
+
 	@FXML
 	private void idTypeHandler() {
 		String path = System.getProperty("user.dir");
@@ -399,49 +464,6 @@ public class SalesController {
 			e.printStackTrace();
 			return false;
 		}		
-	}
-	
-	@FXML
-	private boolean allSalesCheck() {
-		return allSales.isSelected();
-	}
-	
-	@FXML
-	public void checkboxChange() {
-		if(allSales.isSelected()) {
-			System.out.println("체크됨");
-			refreshTable();
-		}else {
-			System.out.println("체크안됨");
-			refreshTableAdmitTrue();
-		}
-	}
-	
-	@FXML
-	private void searchSales() {
-		Sales findSales = new Sales();
-		List<Sales> lists;
-		findSales.setSaleName("%" + searchAllTf.getText() + "%");
-		if(findSales.getSaleName().equals("%%")) {
-			if(allSalesCheck()) {
-				refreshTable();
-			}
-			else {
-				findSales.setSaleName(null);
-				findSales.setSaleLeave("true");
-				lists = saleSerivce.findSalesByLeave(findSales);
-				setSalesModel(lists);
-			}
-			return;
-		}
-		if(!allSalesCheck()) {
-			findSales.setSaleLeave("true");
-			lists = saleSerivce.findSalesLikeName(findSales);
-		}
-		else {
-			lists = saleSerivce.findSalesLikeName(findSales);
-		}
-		setSalesModel(lists);
 	}
 	
 	@FXML

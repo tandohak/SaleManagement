@@ -152,44 +152,87 @@ public class ProductController {
 		priceTc.setCellValueFactory(cellData -> cellData.getValue().getPdtPriceProperty().asObject());
 		admitTc.setCellValueFactory(cellData -> cellData.getValue().getPdtAdmitProperty());
 
-		refreshTableAdmitTrue();
+		refreshTableAll();
 		
 		bigCb.setItems(biglist);
 		admitCb.setItems(abminlist);
 		admitCb.setValue("true");
-		
+		checkTable(true);
+        
+	}
+
+	private void checkTable(boolean isAllView) {
 		FilteredList<Product> filterData = new FilteredList<>(myList, pdt -> true);
-		searchTf.textProperty().addListener((observable, oldValue, newValue)->{
-			filterData.setPredicate(pdt ->{
-				 if (newValue == null || newValue.isEmpty()) {
-	                    return true;
-	                }
-				 
-				 //대문자 -> 소문자로 변경
-				 String lowerCaseFilter = newValue.toLowerCase();				
-				 String pdtAccName = pdt.getAccName().toLowerCase();
-				 if(pdtAccName.contains(lowerCaseFilter)) {
+		if(isAllView) {
+			searchTf.textProperty().addListener((observable, oldValue, newValue)->{
+				filterData.setPredicate(pdt ->{
+					 if (newValue == null || newValue.isEmpty()) {
+		                    return true;
+		                }
+					 
+					 //대문자 -> 소문자로 변경
+					 String lowerCaseFilter = newValue.toLowerCase();				
+					 String pdtAccName = pdt.getAccName().toLowerCase();
+					 if(pdtAccName.contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 
+					 String pdtName = pdt.getPdtName().toLowerCase();
+					 if(pdtName.contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 String pdtCode = pdt.getPdtCode() + "";
+					 if(pdtCode.contains(lowerCaseFilter)) {
+						 return true;
+					 }
+					 
+					return false;
+				});
+			});
+		}else {
+			filterData.setPredicate(pdt ->{	
+				if(pdt.getPdtAdmit().contains("true")) {
 					 return true;
 				 }
-				 String pdtName = pdt.getPdtName().toLowerCase();
-				 if(pdtName.contains(lowerCaseFilter)) {
-					 return true;
-				 }
-				 
 				return false;
 			});
-		});
+			
+			searchTf.textProperty().addListener((observable, oldValue, newValue)->{
+				filterData.setPredicate(pdt ->{
+					 if ((newValue == null || newValue.isEmpty()) && (pdt.getPdtAdmit().contains("true"))) {
+		                    return true;
+		                }
+					 
+					 //대문자 -> 소문자로 변경
+					 String lowerCaseFilter = newValue.toLowerCase();				
+					 String pdtAccName = pdt.getAccName().toLowerCase();
+					 if(pdtAccName.contains(lowerCaseFilter) && (pdt.getPdtAdmit().contains("true"))) {
+						 return true;
+					 }
+					 
+					 String pdtName = pdt.getPdtName().toLowerCase();
+					 if(pdtName.contains(lowerCaseFilter) && (pdt.getPdtAdmit().contains("true"))) {
+						 return true;
+					 }
+					 String pdtCode = pdt.getPdtCode() + "";
+					 if(pdtCode.contains(lowerCaseFilter) && (pdt.getPdtAdmit().contains("true"))) {
+						 return true;
+					 }
+					 
+					return false;
+				});
+			});
+		}
 		// 필터리스트를 sorted리스트에 넣는다
 		SortedList<Product> sortedData = new SortedList<>(filterData);
 		
 		sortedData.comparatorProperty().bind(pdtTable.comparatorProperty());
 		
         pdtTable.setItems(sortedData);
-        
 	}
 	
 	public ProductController() {}
-	
+
 	public void setUserAccSetting(Account accUser) {
 		classAddBtn.setVisible(false);
 		admitCb.setValue("false");
@@ -217,7 +260,12 @@ public class ProductController {
 				 String lowerCaseFilter = newValue.toLowerCase();			
 				 String pdtName = pdt.getPdtName().toLowerCase();
 				 
-				 if(pdt.getAccName().contains(accUser.getAccName()) && pdtName.contains(lowerCaseFilter)) {
+				 if(pdt.getAccName().contains(accUser.getAccName()) && pdtName.contains(lowerCaseFilter) ) {
+					 return true;
+				 }
+				 
+				 String pdtCode = pdt.getPdtCode() + "";
+				 if(pdt.getAccName().contains(accUser.getAccName()) && pdtCode.contains(lowerCaseFilter)) {
 					 return true;
 				 }
 				 
@@ -228,7 +276,7 @@ public class ProductController {
 		SortedList<Product> sortedData = new SortedList<>(filterData);
 		
 		sortedData.comparatorProperty().bind(pdtTable.comparatorProperty());
-		
+	
         pdtTable.setItems(sortedData);
 	}
 	
@@ -236,14 +284,14 @@ public class ProductController {
 	private void deleteSelectedCell(ActionEvent event) {		
 		for(int i=0; myList.size()>i; i++) {
 			Product pdt = myList.get(i);
-			System.out.println(pdt);
 			if(pdt.getCheckedBox()) {
-				 myList.remove(pdt);
 				 pdt.setPdtAdmit("false");
 				 pdtService.updatePdt(pdt);
-				 i = 0;
 			};
+			pdt.setCheckedBox(false);
 		}
+		checkTable(dbCheck.isSelected());
+		pdtTable.refresh();
 	}
 	
 	private ProductTestMain mainApp;
@@ -256,13 +304,8 @@ public class ProductController {
 	
 	@FXML
 	public void checkboxChange() {
-		if(dbCheck.isSelected()) {
-			refreshTableAll();
-			checkAdmit = true;
-		}else {
-			refreshTableAdmitTrue();	
-			checkAdmit = false;
-		}
+		checkTable(dbCheck.isSelected());
+		pdtTable.refresh();
 	}
 	
 	@FXML
@@ -302,49 +345,8 @@ public class ProductController {
 			
 			myList.add(pdt);
 			pdtTable.refresh();
-		}
-		
+		}		
 	}
-
-	/*@FXML
-	public void SearchClickAction() {
-
-		myList = FXCollections.observableArrayList();
-		
-		String searchtf = searchTf.getText();
-		searchtf  = "%" + searchtf +  "%";
-		Product pdt1 = new Product();
-		pdt1.setPdtName(searchtf);
-		
-		pdtService = ProductService.getInstance();
-		accService = AccountService.getInstance();
-		
-		Account findAcc = new Account();
-		Account resAcc = new Account(); 
-		
-		if(checkAdmit) {
-			List<Product> lists = pdtService.findByAllItem(pdt1);
-			
-			for(Product pdt : lists) {
-				findAcc.setAccCode(pdt.getAccCode());
-				resAcc = accService.findAccountByCode(findAcc);
-				pdt.setAccName(resAcc.getAccNameProperty());
-				myList.add(pdt);
-			}
-		}else if(!checkAdmit){
-			pdt1.setPdtAdmit("true");
-			List<Product> lists = pdtService.findByAllItem(pdt1);
-			
-			for(Product pdt : lists) {
-				findAcc.setAccCode(pdt.getAccCode());
-				resAcc = accService.findAccountByCode(findAcc);
-				pdt.setAccName(resAcc.getAccNameProperty());
-				myList.add(pdt);
-			}
-		}
-		
-		pdtTable.setItems(myList);
-	}*/
 	
 	private void checkAlert(boolean isOk,String pwck) throws Exception {
 		if(!isOk) {
@@ -377,7 +379,6 @@ public class ProductController {
 			
 			e.printStackTrace();
 		}
-
 	}
 	
 	@FXML
@@ -459,28 +460,6 @@ public class ProductController {
 		
 		
 	}
-	
-	
-	private void refreshTableAdmitTrue() {
-		myList = FXCollections.observableArrayList();
-		pdtService = ProductService.getInstance();
-		accService = AccountService.getInstance();
-		
-		Account findAcc = new Account();
-		Account resAcc = new Account();
-		List<Product> lists = pdtService.findAllAdmit();
-		
-		for(Product pdt : lists) {
-			
-			findAcc.setAccCode(pdt.getAccCode());
-			resAcc = accService.findAccountByCode(findAcc);
-			pdt.setAccName(resAcc.getAccName());
-			
-			myList.add(pdt);
-		}
-		pdtTable.setItems(myList);
-	}
-	
 	
 	private void refreshTableAll() {
 		myList = FXCollections.observableArrayList();

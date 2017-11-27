@@ -70,8 +70,6 @@ public class MainApp extends Application {
 		});
 	}*/
 
-	
-
 	private void fontLoad() {
 //		Font.loadFont(getClass().getResourceAsStream("view/font/NotoSansCJKkr-Black.otf"),14);		
 	}
