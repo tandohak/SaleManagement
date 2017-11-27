@@ -1,5 +1,6 @@
 package kr.or.dgit.SaleManagement.dto;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -33,6 +34,17 @@ public class Record {
 	private IntegerProperty profit = new SimpleIntegerProperty();
 	private IntegerProperty margin = new SimpleIntegerProperty();
 	private IntegerProperty marginPer = new SimpleIntegerProperty();
+	
+	DecimalFormat df = new DecimalFormat("#,###");
+	private StringProperty formatCount = new SimpleStringProperty();
+
+	public StringProperty getFormatCount() {
+		return formatCount;
+	}
+
+	public void setFormatCount(StringProperty formatCount) {
+		this.formatCount = formatCount;
+	}
 
 	public IntegerProperty getRecCostProperty() {
 		return recCost;
