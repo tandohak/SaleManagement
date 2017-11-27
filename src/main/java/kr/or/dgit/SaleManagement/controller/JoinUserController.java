@@ -122,7 +122,7 @@ public class JoinUserController{
 		fileChooser.getExtensionFilters().add(extFilter);
 
 		File file = fileChooser.showOpenDialog(pane.getScene().getWindow());
-
+		
 		if (file != null) {
 			try {
 				InputStream is = new FileInputStream(file);

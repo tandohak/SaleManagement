@@ -1,7 +1,10 @@
 package kr.or.dgit.SaleManagement.controller.dialogController;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,11 +15,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import kr.or.dgit.SaleManagement.MainApp;
@@ -48,10 +53,34 @@ public class SalesEditDialogController {
 	private TextFieldUtil tfUtil = new TextFieldUtil();
 	
 	private boolean pwCheckOk;
+	@FXML private ImageView userImg;
+	@FXML private TextField imgNameTf;
 	
 	@FXML
 	private void initialize() {
 		
+	}
+	
+	@FXML
+	private void openDialogFileChooser() {
+		FileChooser fileChooser = new FileChooser();
+
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("jpg,png,gif files ", "*.jpg", "*.png",
+				"*.gif");
+
+		fileChooser.getExtensionFilters().add(extFilter);
+
+		File file = fileChooser.showOpenDialog(pane.getScene().getWindow());
+	
+		if (file != null) {
+			try {
+				InputStream is = new FileInputStream(file);
+				userImg.setImage(new Image(is));
+				imgNameTf.setText(file.getName());
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();	
+			}
+		}
 	}
 	
 	public void changeHeader() {
