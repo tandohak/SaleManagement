@@ -17,63 +17,51 @@ import javafx.stage.Stage;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.dialogController.SalesSearchDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
-import kr.or.dgit.SaleManagement.dto.AccountLevel;
 import kr.or.dgit.SaleManagement.dto.Product;
 import kr.or.dgit.SaleManagement.dto.Record;
 import kr.or.dgit.SaleManagement.dto.Sales;
-import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.service.AccountService;
-import kr.or.dgit.SaleManagement.service.BigClassService;
 import kr.or.dgit.SaleManagement.service.ProductService;
 import kr.or.dgit.SaleManagement.service.RecordSerivce;
 import kr.or.dgit.SaleManagement.service.SalesService;
-import kr.or.dgit.SaleManagement.service.SmallClassService;
 
 public class StateController {
-	@FXML
-	private BorderPane pane;
+	@FXML private BorderPane pane;
+	@FXML private TextField testTf;
 
-	@FXML
-	private TextField testTf;
-
-	@FXML
-	private TableView<Record> accTable;
-	@FXML
-	private TableColumn<Record, Integer> accNo;
-	@FXML
-	private TableColumn<Record, Integer> accCode;
-	@FXML
-	private TableColumn<Record, String> accName;
-	@FXML
-	private TableColumn<Record, Integer> accCount;
-	@FXML
-	private TableColumn<Record, Integer> accPrice;
-	@FXML
-	private TableColumn<Record, Integer> accCost;
-	@FXML
-	private TableColumn<Record, Integer> accDisprice;
-	@FXML
-	private TableColumn<Record, Integer> accMargin;
-	@FXML
-	private TableColumn<Record, Integer> accProfit;
+	@FXML private TableView<Record> accTable;
+	@FXML private TableColumn<Record, Integer> accNo;
+	@FXML private TableColumn<Record, Integer> accCode;
+	@FXML private TableColumn<Record, String> accName;
+	@FXML private TableColumn<Record, Integer> accCount;
+	@FXML private TableColumn<Record, Integer> accPrice;
+	@FXML private TableColumn<Record, Integer> accCost;
+	@FXML private TableColumn<Record, Integer> accDisprice;
+	@FXML private TableColumn<Record, Integer> accMargin;
+	@FXML private TableColumn<Record, Integer> accProfit;
 
 	private ObservableList<Record> acclist = FXCollections.observableArrayList();
-	// private static ProductService pdtService;
-	// private static BigClassService bigService;
-	// private static SmallClassService smallService;
-	// private static AccountService accService;
-	// private static RecordSerivce recordService;
-	private SalesService saleService;
-	private AccountService accService;
-	private ProductService pdtService;
-	private RecordSerivce recService;
+	private SalesService salesService;
+	private AccountService accountService;
+	private ProductService productService;
+	private RecordSerivce recordService;
 	private ObservableList<Record> myList = FXCollections.observableArrayList();
-
 	private ObservableList<Record> accList = FXCollections.observableArrayList();
 
 	@FXML
 	private void initialize() {
-
+		//서비스연결
+		salesService = SalesService.getInstance();
+		accountService = AccountService.getInstance();
+		productService = ProductService.getInstance();
+		recordService = RecordSerivce.getInstance();
+		
+		//거래처별 통계
+		//거래처목록 전체로드
+		List<Account> accAllList = accountService.findAllAccount();
+		
+		
+		
 		/*
 		 * saleService = SalesService.getInstance(); pdtService =
 		 * ProductService.getInstance(); accService = AccountService.getInstance();
