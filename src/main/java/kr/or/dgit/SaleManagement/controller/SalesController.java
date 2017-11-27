@@ -149,7 +149,7 @@ public class SalesController {
 		levelTc.setCellValueFactory(cellData -> cellData.getValue().getSaleLevelProperty());
 		leaveTc.setCellValueFactory(cellData -> cellData.getValue().getSaleLeaveProperty());
 		addrTc.setCellValueFactory(cellData -> cellData.getValue().getSaleAddrProperty());;
-		
+	    
 		FilteredList<Sales> filterData = new FilteredList<>(myList, s -> true);
 		searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
 			filterData.setPredicate(sales ->{

@@ -145,6 +145,7 @@ public class RecordController {
 					 String recordAccName = record.getAccName().toLowerCase();
 					 String recordSaleName = record.getSaleNamey().toLowerCase();
 					 String recordPdtName = record.getPdtName().toLowerCase();
+					 
 					 if(recordAccName.contains(lowerCaseFilter)) {
 						 return true;
 					 }
@@ -191,8 +192,8 @@ public class RecordController {
 					 //대문자 -> 소문자로 변경
 					 String lowerCaseFilter = newValue.toLowerCase();				
 					 String recordAccName = record.getAccName().toLowerCase();
-					 
 					 String recordPdtName = record.getPdtName().toLowerCase();
+					 
 					 if(recordAccName.contains(lowerCaseFilter) && saleOk) {
 						 return true;
 					 }
@@ -228,7 +229,8 @@ public class RecordController {
 			
 			searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
 				filterData.setPredicate(record ->{
-					 if ((newValue == null || newValue.isEmpty()) && (record.getAccName().equals(accUser.getAccName()))) {
+					 boolean userOk = record.getAccName().contains(accUser.getAccName());
+					 if ((newValue == null || newValue.isEmpty()) && userOk) {
 		                    return true;
 		                }
 					 
@@ -237,11 +239,11 @@ public class RecordController {
 					 String lowerCaseFilter = newValue.toLowerCase();				
 					 String recordSaleName = record.getSaleNamey().toLowerCase();
 					 String recordPdtName = record.getPdtName().toLowerCase();
-					 if(recordSaleName.contains(lowerCaseFilter) && record.getAccName().contains(accUser.getAccName())) {
+					 if(recordSaleName.contains(lowerCaseFilter) && userOk) {
 						 return true;
 					 } 
 					 
-					 if(recordPdtName.contains(lowerCaseFilter) && record.getAccName().contains(accUser.getAccName())) {
+					 if(recordPdtName.contains(lowerCaseFilter) && userOk) {
 						 return true;
 					 }
 					 

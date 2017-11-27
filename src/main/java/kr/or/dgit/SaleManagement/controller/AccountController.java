@@ -8,6 +8,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,6 +40,7 @@ import kr.or.dgit.SaleManagement.controller.dialogController.AddrDialogControlle
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.AccountLevel;
 import kr.or.dgit.SaleManagement.dto.AddrItem;
+import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.service.AccountLevelService;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
@@ -134,8 +137,41 @@ public class AccountController {
 		levelTc.setCellValueFactory(cellData -> cellData.getValue().getAccLevelProperty());
 		admitTc.setCellValueFactory(cellData -> cellData.getValue().getAccAdmitProperty());
 		addrTc.setCellValueFactory(cellData -> cellData.getValue().getAccAddrProperty());
-
-		accTable.setItems(myList);
+		
+		FilteredList<Account> filterData = new FilteredList<>(myList, acc -> true);
+		searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
+			filterData.setPredicate(acc ->{
+				 if (newValue == null || newValue.isEmpty()) {
+	                    return true;
+	                }
+				 
+				 //대문자 -> 소문자로 변경
+				 String lowerCaseFilter = newValue.toLowerCase();				
+				 String saleName = acc.getAccName().toLowerCase();
+				 String SaleLevel = acc.getAccLevel().toLowerCase();
+				 String saleCode = acc.getAccCode()+"";
+				 if(saleName.contains(lowerCaseFilter)) {
+					 return true;
+				 }
+				 
+				 if(SaleLevel.contains(lowerCaseFilter)) {
+					 return true;
+				 }
+				 
+				 if(saleCode.contains(lowerCaseFilter)) {
+					 return true;
+				 }
+				 
+				return false;
+			});
+		});
+		
+		// 필터리스트를 sorted리스트에 넣는다
+		SortedList<Account> sortedData = new SortedList<>(filterData);
+		
+		sortedData.comparatorProperty().bind(accTable.comparatorProperty());
+		
+		accTable.setItems(sortedData);
 	}
 	
 	public void setSaleUserSetting() {

@@ -171,10 +171,16 @@ public class ProductController {
 				 if(pdtAccName.contains(lowerCaseFilter)) {
 					 return true;
 				 }
+				 
 				 String pdtName = pdt.getPdtName().toLowerCase();
 				 if(pdtName.contains(lowerCaseFilter)) {
 					 return true;
 				 }
+				 String pdtCode = pdt.getPdtCode() + "";
+				 if(pdtCode.contains(lowerCaseFilter)) {
+					 return true;
+				 }
+				 
 				 
 				return false;
 			});
@@ -218,6 +224,11 @@ public class ProductController {
 				 String pdtName = pdt.getPdtName().toLowerCase();
 				 
 				 if(pdt.getAccName().contains(accUser.getAccName()) && pdtName.contains(lowerCaseFilter)) {
+					 return true;
+				 }
+				 
+				 String pdtCode = pdt.getPdtCode() + "";
+				 if(pdt.getAccName().contains(accUser.getAccName()) && pdtCode.contains(lowerCaseFilter)) {
 					 return true;
 				 }
 				 
