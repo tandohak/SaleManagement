@@ -99,13 +99,13 @@
                         <Label text="상세주소" />
                         <TextField fx:id="addrTf" prefHeight="23.0" prefWidth="223.0" />
                      </children></HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" visible="false" GridPane.rowIndex="4">
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                      <children>
                         <Label text="사진" />
                         <Pane prefHeight="31.0" prefWidth="178.0">
                            <children>
-                              <TextField fx:id="picTf" layoutY="4.0" prefHeight="24.0" prefWidth="112.0" promptText="사진 삽입" styleClass="searchTF" />
-                              <Button layoutX="112.0" layoutY="4.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="27.0" styleClass="uploadBtn" text="Button" />
+                              <TextField fx:id="imgNameTf" layoutY="4.0" prefHeight="24.0" prefWidth="112.0" promptText="사진 삽입" styleClass="searchTF" />
+                              <Button layoutX="112.0" layoutY="4.0" mnemonicParsing="false" onAction="#openDialogFileChooser" prefHeight="22.0" prefWidth="27.0" styleClass="uploadBtn" text="Button" />
                            </children>
                         </Pane>
                      </children>

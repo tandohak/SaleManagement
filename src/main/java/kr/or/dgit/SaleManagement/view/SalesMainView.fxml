@@ -28,7 +28,7 @@
                   <Font name="NanumGothicBold" size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="48.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 50%;" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="25.0" />
+            <ImageView fx:id="userImg" fitHeight="65.0" fitWidth="65.0" layoutX="48.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="25.0" />
             <ImageView fitHeight="2.0" fitWidth="160.0" layoutX="-21.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="160.0">
                <image>
                   <Image url="file:/D:/workspace/workspace_mybatis/SaleManagement/DataFile/menu_line.jpg" />

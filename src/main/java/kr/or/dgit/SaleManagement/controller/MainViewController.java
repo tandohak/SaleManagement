@@ -1,14 +1,23 @@
 package kr.or.dgit.SaleManagement.controller;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import kr.or.dgit.SaleManagement.MainApp;
@@ -45,7 +54,10 @@ public class MainViewController  {
 	private SalesService saleSerivce;
 
 	private AccountService accountService;
+
+	@FXML private ImageView userImg;
 	
+	private String path = System.getProperty("user.dir");
 	
 	@FXML
 	private void initialize() {	
@@ -179,8 +191,24 @@ public class MainViewController  {
 		this.saleUser = user;		
 		if(saleUser.getSaleId().equals("admin")) {
 			myPage.setVisible(false);
+			nameLb.setText(saleUser.getSaleName());
+			return;
 		}
 		nameLb.setText(saleUser.getSaleName());
+		
+		File file = new File(path+"/DataFile/userImg/"+saleUser.getSaleCode()+".jpg");
+		/*Arc clip = new Arc(userImg.getFitWidth()/2, userImg.getFitHeight()/2, 32.5, 32.5, 0, 360);
+		
+		userImg.setClip(clip);
+		userImg.setFitWidth(100);*/
+		if (file != null) {
+			try {
+				InputStream is = new FileInputStream(file);
+				userImg.setImage(new Image(is));						
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();	
+			}
+		}
 	}
 	
 	public void setAccUser(Account user) {

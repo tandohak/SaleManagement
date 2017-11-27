@@ -1,10 +1,14 @@
 package kr.or.dgit.SaleManagement.controller.dialogController;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,12 +19,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -51,10 +55,12 @@ public class SalesEditDialogController {
 	private Sales sales;
 	private boolean okClicked = false;
 	private TextFieldUtil tfUtil = new TextFieldUtil();
+	private String path = System.getProperty("user.dir");
 	
 	private boolean pwCheckOk;
 	@FXML private ImageView userImg;
 	@FXML private TextField imgNameTf;
+	private File loadFile;
 	
 	@FXML
 	private void initialize() {
@@ -65,24 +71,28 @@ public class SalesEditDialogController {
 	private void openDialogFileChooser() {
 		FileChooser fileChooser = new FileChooser();
 
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("jpg,png,gif files ", "*.jpg", "*.png",
-				"*.gif");
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("jpg files ", "*.jpg");
 
 		fileChooser.getExtensionFilters().add(extFilter);
 
-		File file = fileChooser.showOpenDialog(pane.getScene().getWindow());
-	
-		if (file != null) {
+		loadFile = fileChooser.showOpenDialog(pane.getScene().getWindow());
+		Rectangle clip = new Rectangle(userImg.getFitWidth(), userImg.getFitHeight());
+		 
+		clip.setArcHeight(20);
+		clip.setArcWidth(20);
+		userImg.setClip(clip);
+		
+		if (loadFile != null) {
 			try {
-				InputStream is = new FileInputStream(file);
+				InputStream is = new FileInputStream(loadFile);
 				userImg.setImage(new Image(is));
-				imgNameTf.setText(file.getName());
+				imgNameTf.setText(loadFile.getPath());	
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();	
 			}
 		}
 	}
-	
+
 	public void changeHeader() {
 		headLabel.setText("회원 정보 수정");
 	}
@@ -103,7 +113,24 @@ public class SalesEditDialogController {
 		telTf.setText(sales.getSaleTel());
 		String addrs =  sales.getSaleAddr();
 		addrZipTf.setText(addrs.substring(addrs.indexOf("[")+1, addrs.indexOf("]")));
-		addrTf.setText(addrs.substring(addrs.indexOf("]")+1, addrs.length()));		
+		addrTf.setText(addrs.substring(addrs.indexOf("]")+1, addrs.length()));	
+		
+		File file = new File(path+"/DataFile/userImg/"+sales.getSaleCode()+".jpg");
+		Rectangle clip = new Rectangle(userImg.getFitWidth(), userImg.getFitHeight());
+		 
+		clip.setArcHeight(20);
+		clip.setArcWidth(20);
+		userImg.setClip(clip);
+
+		if (file != null) {
+			try {
+				InputStream is = new FileInputStream(file);
+				userImg.setImage(new Image(is));
+				imgNameTf.setText(file.getPath());			
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();	
+			}
+		}
 	}
 
 	public Sales getSales() {
@@ -132,15 +159,38 @@ public class SalesEditDialogController {
 			sales.setSaleAddr("["+ addrZipTf.getText() + "]" + addrTf.getText());
 			sales.setSaleCode(Integer.parseInt(codeLabel.getText()));
 			sales.setSaleLevel(levelCb.getValue().getSalLevel());
-			sales.setSalePw(changeKorean(pwTf.getText()));
+			
+			if(!pwTf.getText().equals("")) {
+				sales.setSalePw(changeKorean(pwTf.getText()));
+			}
+			
 			okClicked = true;		
 			dialogStage.close();
+			
+			if(loadFile != null) {	
+				try {
+					InputStream fis = new FileInputStream(loadFile);
+					OutputStream fos = new FileOutputStream(new File(path+"/DataFile/userImg/"+sales.getSaleCode()+".jpg"));
+					
+					while(true) {
+						int data = fis.read();
+						if(data==-1) {
+							break;
+						}
+						fos.write(data);
+					}
+					
+					fos.close();
+					fis.close();			
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
         }
     }
 	
 	@FXML
-	private void pwTypeHandler(KeyEvent event) {
-		String path = System.getProperty("user.dir");
+	private void pwTypeHandler(KeyEvent event) {		
 		String pwVal =pwTf.getText();
 		String pwComVal = pwComfTf.getText();
 	
@@ -160,7 +210,7 @@ public class SalesEditDialogController {
 			pwCheckOk = false;
 		}
 	}
-	
+
 	@FXML
 	private void handleCancel() {
 	      dialogStage.close();

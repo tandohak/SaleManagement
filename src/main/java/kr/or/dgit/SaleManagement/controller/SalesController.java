@@ -1,7 +1,12 @@
 package kr.or.dgit.SaleManagement.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
@@ -31,6 +36,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -76,8 +83,10 @@ public class SalesController {
 	
 	@FXML private ImageView checkIdIcon;
 	@FXML private ImageView checkPwIcon;
-	
+	@FXML private TextField imgNameTf;
 	@FXML private Button submitBtn;
+	private String path = System.getProperty("user.dir");
+	private File loadFile;
 	
 	private TextFieldUtil tfUtil = new TextFieldUtil();
 	private ObservableList<Sales> myList = FXCollections.observableArrayList();
@@ -150,6 +159,27 @@ public class SalesController {
 		addrTc.setCellValueFactory(cellData -> cellData.getValue().getSaleAddrProperty());;
 	    
 		checkTable(false);
+	}
+	
+	@FXML
+	private void openDialogFileChooser() {
+		FileChooser fileChooser = new FileChooser();
+
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("jpg files ", "*.jpg");
+
+		fileChooser.getExtensionFilters().add(extFilter);
+
+		loadFile = fileChooser.showOpenDialog(pane.getScene().getWindow());
+		
+		
+		if (loadFile != null) {
+			try {
+				InputStream is = new FileInputStream(loadFile);
+				imgNameTf.setText(loadFile.getPath());	
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();	
+			}
+		}
 	}
 	
 	@FXML
@@ -317,7 +347,7 @@ public class SalesController {
 			alert.setContentText("정말 등록하시겠습니까?");
 			
 			ButtonType clickType= alert.showAndWait().get();
-			
+			 
 			if(clickType.getText().equals("취소")) {
 				return;
 			}
@@ -345,6 +375,26 @@ public class SalesController {
 			}
 			sales.setSaleCode(codeNum);
 			saleSerivce.insertSales(sales);
+			
+			if(loadFile != null) {	
+				try {
+					InputStream fis = new FileInputStream(loadFile);
+					OutputStream fos = new FileOutputStream(new File(path+"/DataFile/userImg/"+sales.getSaleCode()+".jpg"));
+					
+					while(true) {
+						int data = fis.read();
+						if(data==-1) {
+							break;
+						}
+						fos.write(data);
+					}
+					
+					fos.close();
+					fis.close();			
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 			
 			myList.add(sales);
 			saleTable.refresh();
@@ -404,17 +454,7 @@ public class SalesController {
 		saleTable.setItems(myList);
 	}
 	
-	private void refreshTableAdmitTrue() {
-		myList = FXCollections.observableArrayList();
-		saleSerivce = SalesService.getInstance();
-		Sales s = new Sales();
-		s.setSaleLeave("true");
-		List<Sales> lists = saleSerivce.findSalesSearch(s);
-		for(Sales sale : lists) {
-			myList.add(sale);
-		}
-		saleTable.setItems(myList);
-	}
+
 	
 	@FXML
 	private void pwTypeHandler(KeyEvent event) {
