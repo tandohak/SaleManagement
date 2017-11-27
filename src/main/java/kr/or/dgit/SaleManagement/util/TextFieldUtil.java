@@ -112,7 +112,7 @@ public class TextFieldUtil {
 	}
 	
 	public void regexTfComfirmAccProductName(TextField nameTf) throws Exception {
-		String pattern = "^[a-zA-Z가-힣0-9]{1,15}$";
+		String pattern = "^[a-zA-Z가-힣0-9_-]{1,20}$";
 		String errmsg = "제품명은 한글/영문/숫자만 가능합니다.";
 
 		Pattern p = Pattern.compile(pattern);

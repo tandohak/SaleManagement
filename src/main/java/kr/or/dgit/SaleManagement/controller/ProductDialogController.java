@@ -173,4 +173,8 @@ public class ProductDialogController {
 			return false;
 		}		
 	}
+
+	public void setAccUserSetting() {
+		admitCb.setDisable(true);
+	}
 }

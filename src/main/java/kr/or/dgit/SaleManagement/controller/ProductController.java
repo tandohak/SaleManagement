@@ -234,9 +234,10 @@ public class ProductController {
 	public ProductController() {}
 
 	public void setUserAccSetting(Account accUser) {
+		isUserLogin = true;
 		classAddBtn.setVisible(false);
 		admitCb.setValue("false");
-		admitCb.setDisable(true);
+		admitCb.setDisable(true);		
 		dbCheck.setVisible(false);
 		accCodeTf.setText(accUser.getAccCode()+"");
 		accSerachBtn.setVisible(false);
@@ -301,6 +302,7 @@ public class ProductController {
 	  }
 	
 	private boolean checkAdmit;
+	private boolean isUserLogin = false;
 	
 	@FXML
 	public void checkboxChange() {
@@ -446,7 +448,11 @@ public class ProductController {
 	        controller.setDialogStage(dialogStage);
 	        controller.setLevellist(levellist);
 	        controller.setProduct(pdt);
-	
+	        
+	        if(isUserLogin ) {
+	        	controller.setAccUserSetting();
+	        }
+	        
 	        dialogStage.showAndWait();
 
 	        if(controller.isOkClicked()) {

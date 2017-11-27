@@ -328,8 +328,7 @@ public class InsertRecordController {
 	}
 	
 	@FXML
-	private void insertRecordAction(){
-		
+	private void insertRecordAction(){		
 		 for(Record rec : myList) {	    
 	    	 rec.setRecNo(recordSerivce.findMaxCode()+1);
 	    	 recordSerivce.insertRecord(rec);
@@ -388,8 +387,7 @@ public class InsertRecordController {
 	        }
 	   } catch (IOException e) {
 	        e.printStackTrace();
-	   }
-		  
+	   }		  
 	}
 	
 	private void checkAlert(boolean isOk,String pwck) throws Exception {
@@ -401,24 +399,24 @@ public class InsertRecordController {
 	@FXML
 	private void addTableAction() {	
 		if(tfComfrimField()) {
-		Record rec = new Record();	
-		no += 1;
-		rec.setRecNo(no);
-		rec.setRecDate(dateDP.getValue());
-		rec.setAccName(acc.getAccName());
-		rec.setPdtName(pdt.getPdtName());
-		rec.setrProductCode(pdt.getPdtCode());
-		rec.setSumPrice(Integer.parseInt(sumPriceTf.getText()));
-		rec.setrSalecode(sales.getSaleCode());
-		rec.setSaleName(sales.getSaleName());
-		rec.setRecDisprice(Integer.parseInt(disPriceTf.getText()));
-		rec.setRecDisrate(Integer.parseInt(disrateTf.getText().replaceAll("%", "")));
-		rec.setRecCount(Integer.parseInt(countTf.getText()));
-		
-		myList.add(rec);
-		recTable.refresh();
-		
-		tfAllClear();
+			Record rec = new Record();	
+			no += 1;
+			rec.setRecNo(no);
+			rec.setRecDate(dateDP.getValue());
+			rec.setAccName(acc.getAccName());
+			rec.setPdtName(pdt.getPdtName());
+			rec.setrProductCode(pdt.getPdtCode());
+			rec.setSumPrice(Integer.parseInt(sumPriceTf.getText()));
+			rec.setrSalecode(sales.getSaleCode());
+			rec.setSaleName(sales.getSaleName());
+			rec.setRecDisprice(Integer.parseInt(disPriceTf.getText()));
+			rec.setRecDisrate(Integer.parseInt(disrateTf.getText().replaceAll("%", "")));
+			rec.setRecCount(Integer.parseInt(countTf.getText()));
+			
+			myList.add(rec);
+			recTable.refresh();
+			
+			tfAllClear();
 		}
 	}
 
@@ -427,7 +425,7 @@ public class InsertRecordController {
 		dateDP.setValue(nowDate);
 		tfUtil.tfClear(pdtTf);
 		tfUtil.tfClear(pdtClassTf);
-		tfUtil.tfClear(countTf);	
+		countTf.setText("1");
 		tfUtil.tfClear(priceTf);
 		tfUtil.tfClear(disPriceTf);
 		tfUtil.tfClear(sumPriceTf);			
