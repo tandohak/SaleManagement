@@ -96,15 +96,13 @@ public class SalesController {
 			levellist.add(saleLevel);
 		}	
 		levelCb.setItems(levellist);
+		SalesLevel s = new SalesLevel();
+		s.setSalLevel("none");
+		s.setSalDisrate(0);
+		levelCb.setValue(s);
 		
-		Sales leaveSales = new Sales();
-		leaveSales.setSaleLeave("true");
-		saleSerivce = SalesService.getInstance();
-		List<Sales> lists = saleSerivce.findSalesByLeave(leaveSales);
-		for(Sales sale : lists) {
-			myList.add(sale);
-		}		
-				
+		refreshTableAdmitTrue();
+		
 		chckTc.setCellFactory(new Callback<TableColumn<Sales,Boolean>, TableCell<Sales,Boolean>>() {
 				@Override
 				public TableCell<Sales, Boolean> call(TableColumn<Sales, Boolean> param) {
@@ -165,8 +163,15 @@ public class SalesController {
 	private void deleteCellMenuAction() {
 		int index = saleTable.getSelectionModel().getSelectedIndex();
 		Sales sales = saleTable.getSelectionModel().getSelectedItem();
-		saleSerivce.deleteSales(sales);
-		saleTable.getItems().remove(index);
+		sales.setSaleLeave("false");
+		saleSerivce.updateSales(sales);
+//		saleSerivce.deleteSales(sales);
+//		saleTable.getItems().remove(index);
+		if(allSales.isSelected()) {
+			refreshTable();
+		}else {
+			refreshTableAdmitTrue();
+		}
 	}
 	
 	@FXML
@@ -176,9 +181,16 @@ public class SalesController {
 			
 			if(sales.getCheckedBox()) {
 				 myList.remove(sales);
-				 saleSerivce.deleteSales(sales);
+				 //saleSerivce.deleteSales(sales);
+				sales.setSaleLeave("false");
+				saleSerivce.updateSales(sales);
 				 i = 0;
 			};
+		}
+		if(allSales.isSelected()) {
+			refreshTable();
+		}else {
+			refreshTableAdmitTrue();
 		}
 	}
 	
@@ -214,6 +226,7 @@ public class SalesController {
 		        SalesEditDialogController controller = loader.getController();
 		        controller.setDialogStage(dialogStage);
 		        controller.setLevellist(levellist);
+		       
 		        controller.setSales(sales);
 		        
 		        dialogStage.showAndWait();
@@ -247,8 +260,10 @@ public class SalesController {
 			Sales sales = new Sales();
 			sales.setSaleName(nameTf.getText());
 			sales.setSaleId(idTf.getText());
-			sales.setSalePw(pwTf.getText());
+			String pw = changeKorean(pwTf.getText());
+			sales.setSalePw(pw);
 			sales.setSaleTel(telTf.getText());
+			sales.setSaleLeave("true");
 			sales.setSaleAddr("["+ addrZipTf.getText() + "]" + addrTf.getText());
 			sales.setSaleLevel(levelCb.getValue().getSalLevel());
 			String code = "";
@@ -265,7 +280,11 @@ public class SalesController {
 			}
 			sales.setSaleCode(codeNum);
 			saleSerivce.insertSales(sales);
-			refreshTable();
+			if(allSales.isSelected()) {
+				refreshTable();
+			}else {
+				refreshTableAdmitTrue();
+			}
 		}
 	}
 
@@ -314,6 +333,18 @@ public class SalesController {
 		myList = FXCollections.observableArrayList();
 		saleSerivce = SalesService.getInstance();
 		List<Sales> lists = saleSerivce.findSaleAll();
+		for(Sales sale : lists) {
+			myList.add(sale);
+		}
+		saleTable.setItems(myList);
+	}
+	
+	private void refreshTableAdmitTrue() {
+		myList = FXCollections.observableArrayList();
+		saleSerivce = SalesService.getInstance();
+		Sales s = new Sales();
+		s.setSaleLeave("true");
+		List<Sales> lists = saleSerivce.findSalesSearch(s);
 		for(Sales sale : lists) {
 			myList.add(sale);
 		}
@@ -373,6 +404,17 @@ public class SalesController {
 	@FXML
 	private boolean allSalesCheck() {
 		return allSales.isSelected();
+	}
+	
+	@FXML
+	public void checkboxChange() {
+		if(allSales.isSelected()) {
+			System.out.println("체크됨");
+			refreshTable();
+		}else {
+			System.out.println("체크안됨");
+			refreshTableAdmitTrue();
+		}
 	}
 	
 	@FXML
@@ -439,5 +481,67 @@ public class SalesController {
 	   } catch (IOException e) {
 	        e.printStackTrace();
 	   }
+	}
+	
+	public static String changeKorean(String word) {
+		// 분리할 단어
+		String result = "";
+		// 결과 저장할 변수
+		String resultEng = "";
+		// 알파벳으로
+		char[] arrChoSung = { 0x3131, 0x3132, 0x3134, 0x3137, 0x3138, 0x3139, 0x3141, 0x3142, 0x3143, 0x3145, 0x3146,
+				0x3147, 0x3148, 0x3149, 0x314a, 0x314b, 0x314c, 0x314d, 0x314e };
+
+		char[] arrJungSung = { 0x314f, 0x3150, 0x3151, 0x3152, 0x3153, 0x3154, 0x3155, 0x3156, 0x3157, 0x3158, 0x3159,
+				0x315a, 0x315b, 0x315c, 0x315d, 0x315e, 0x315f, 0x3160, 0x3161, 0x3162, 0x3163 };
+
+		char[] arrJongSung = { 0x0000, 0x3131, 0x3132, 0x3133, 0x3134, 0x3135, 0x3136, 0x3137, 0x3139, 0x313a, 0x313b,
+				0x313c, 0x313d, 0x313e, 0x313f, 0x3140, 0x3141, 0x3142, 0x3144, 0x3145, 0x3146, 0x3147, 0x3148, 0x314a,
+				0x314b, 0x314c, 0x314d, 0x314e };
+
+		String[] arrChoSungEng = { "r", "R", "s", "e", "E", "f", "a", "q", "Q", "t", "T", "d", "w", "W", "c", "z", "x",
+				"v", "g" };
+
+		String[] arrJungSungEng = { "k", "o", "i", "O", "j", "p", "u", "P", "h", "hk", "ho", "hl", "y", "n", "nj", "np",
+				"nl", "b", "m", "ml", "l" };
+
+		String[] arrJongSungEng = { "", "r", "R", "rt", "s", "sw", "sg", "e", "f", "fr", "fa", "fq", "ft", "fx", "fv",
+				"fg", "a", "q", "qt", "t", "T", "d", "w", "c", "z", "x", "v", "g" };
+
+		String[] arrSingleJaumEng = { "r", "R", "rt", "s", "sw", "sg", "e", "E", "f", "fr", "fa", "fq", "ft", "fx",
+				"fv", "fg", "a", "q", "Q", "qt", "t", "T", "d", "w", "W", "c", "z", "x", "v", "g" };
+
+		for (int i = 0; i < word.length(); i++) { /* 한글자씩 읽어들인다. */
+			char chars = (char) (word.charAt(i) - 0xAC00);
+			if (chars >= 0 && chars <= 11172) {
+				/* A. 자음과 모음이 합쳐진 글자인경우 */ /* A-1. 초/중/종성 분리 */
+				int chosung = chars / (21 * 28);
+				int jungsung = chars % (21 * 28) / 28;
+				int jongsung = chars % (21 * 28) % 28;
+				/* A-2. result에 담기 */
+				result = result + arrChoSung[chosung] + arrJungSung[jungsung];
+				/* 자음분리 */
+				if (jongsung != 0x0000) { /* A-3. 종성이 존재할경우 result에 담는다 */
+					result = result + arrJongSung[jongsung];
+				} /* 알파벳으로 */
+				resultEng = resultEng + arrChoSungEng[chosung] + arrJungSungEng[jungsung];
+				if (jongsung != 0x0000) { /* A-3. 종성이 존재할경우 result에 담는다 */
+					resultEng = resultEng + arrJongSungEng[jongsung];
+				}
+			} else { /* B. 한글이 아니거나 자음만 있을경우 */
+				/* 자음분리 */
+				result = result + ((char) (chars + 0xAC00)); /* 알파벳으로 */
+				if (chars >= 34097 && chars <= 34126) { /* 단일자음인 경우 */
+					int jaum = (chars - 34097);
+					resultEng = resultEng + arrSingleJaumEng[jaum];
+				} else if (chars >= 34127 && chars <= 34147) { /* 단일모음인 경우 */
+					int moum = (chars - 34127);
+					resultEng = resultEng + arrJungSungEng[moum];
+				} else { /* 알파벳인 경우 */
+					resultEng = resultEng + ((char) (chars + 0xAC00));
+				}
+			}
+		}
+		return resultEng;
 	}
 }
