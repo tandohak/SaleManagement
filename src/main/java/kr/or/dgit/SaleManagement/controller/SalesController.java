@@ -8,6 +8,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +38,7 @@ import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.dialogController.AddrDialogController;
 import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
 import kr.or.dgit.SaleManagement.dto.AddrItem;
+import kr.or.dgit.SaleManagement.dto.Record;
 import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.dto.SalesLevel;
 import kr.or.dgit.SaleManagement.service.SalesLevelService;
@@ -147,7 +150,40 @@ public class SalesController {
 		leaveTc.setCellValueFactory(cellData -> cellData.getValue().getSaleLeaveProperty());
 		addrTc.setCellValueFactory(cellData -> cellData.getValue().getSaleAddrProperty());;
 		
-		saleTable.setItems(myList);
+		FilteredList<Sales> filterData = new FilteredList<>(myList, s -> true);
+		searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
+			filterData.setPredicate(sales ->{
+				 if (newValue == null || newValue.isEmpty()) {
+	                    return true;
+	                }
+				 
+				 //대문자 -> 소문자로 변경
+				 String lowerCaseFilter = newValue.toLowerCase();				
+				 String saleName = sales.getSaleName().toLowerCase();
+				 String SaleLevel = sales.getSaleLevel().toLowerCase();
+				 String saleCode = sales.getSaleCode()+"";
+				 if(saleName.contains(lowerCaseFilter)) {
+					 return true;
+				 }
+				 
+				 if(SaleLevel.contains(lowerCaseFilter)) {
+					 return true;
+				 }
+				 
+				 if(saleCode.contains(lowerCaseFilter)) {
+					 return true;
+				 }
+				 
+				return false;
+			});
+		});
+		
+		// 필터리스트를 sorted리스트에 넣는다
+		SortedList<Sales> sortedData = new SortedList<>(filterData);
+		
+		sortedData.comparatorProperty().bind(saleTable.comparatorProperty());
+		
+		saleTable.setItems(sortedData);		
 	}
 	
 	
@@ -375,7 +411,7 @@ public class SalesController {
 		return allSales.isSelected();
 	}
 	
-	@FXML
+	/*@FXML
 	private void searchSales() {
 		Sales findSales = new Sales();
 		List<Sales> lists;
@@ -400,7 +436,7 @@ public class SalesController {
 			lists = saleSerivce.findSalesLikeName(findSales);
 		}
 		setSalesModel(lists);
-	}
+	}*/
 	
 	@FXML
 	private void setSalesModel(List<Sales> lists) {
