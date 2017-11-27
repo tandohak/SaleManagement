@@ -1,5 +1,8 @@
 package kr.or.dgit.SaleManagement.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -39,15 +42,16 @@ public class TestSalesService {
 		int res = salesService.insertSales(sales);
 		Assert.assertSame(1, res);
 	}
-	
+	*/
 	@Test
 	public void test2FindByAll() {
 		List<Sales> lists = new ArrayList<>();
 		
 		lists = salesService.findSaleAll();
+		System.out.println(lists);
 		Assert.assertNotNull(lists);
 	}
-	
+	/*
 	@Test
 	public void test3findSalesSearch() {
 		List<Sales> lists = new ArrayList<>();

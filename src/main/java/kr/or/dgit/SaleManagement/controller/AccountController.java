@@ -40,7 +40,6 @@ import kr.or.dgit.SaleManagement.controller.dialogController.AddrDialogControlle
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.AccountLevel;
 import kr.or.dgit.SaleManagement.dto.AddrItem;
-import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.service.AccountLevelService;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
@@ -116,7 +115,6 @@ public class AccountController {
 		});
 
 		accCheck.selectedProperty().addListener(new ChangeListener<Boolean>() {
-
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (newValue) {
@@ -236,7 +234,6 @@ public class AccountController {
 			alert.setHeaderText(null);
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
-			e.printStackTrace();
 			e.printStackTrace();
 			return ;
 		}
@@ -425,9 +422,8 @@ public class AccountController {
 			Account account = myList.get(i);
 			
 			if(account.getCheckedBox()) {
-				 myList.remove(account);
+				 account.setAccAdmit("false");
 				 accountService.updateAccount(account);
-				 i = 0;
 			};
 		}
 	}
