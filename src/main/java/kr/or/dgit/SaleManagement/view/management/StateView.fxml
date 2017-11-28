@@ -31,11 +31,11 @@
                               <RowConstraints maxHeight="287.0" minHeight="10.0" prefHeight="136.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TableView fx:id="accTable" prefHeight="210.0" prefWidth="1000.0" stylesheets="@../css/style.css" GridPane.rowIndex="1">
+                              <TableView fx:id="accTable" onMouseClicked="#tableSort" prefHeight="210.0" prefWidth="1000.0" stylesheets="@../css/style.css" GridPane.rowIndex="1">
                                  <columns>
                                     <TableColumn fx:id="accNo" prefWidth="34.0" text="No" />
-                                    <TableColumn fx:id="accCode" prefWidth="107.0" text="거래처코드" />
-                                    <TableColumn fx:id="accName" prefWidth="110.0" text="거래처명" />
+                                    <TableColumn fx:id="accCode" prefWidth="107.0" sortable="false" text="거래처코드" />
+                                    <TableColumn fx:id="accName" prefWidth="110.0" sortable="false" text="거래처명" />
                                     <TableColumn fx:id="accCount" prefWidth="98.0" text="판매량" />
                                     <TableColumn fx:id="accPrice" prefWidth="121.0" text="매출액" />
                                     <TableColumn fx:id="accCost" prefWidth="137.0" text="매출원가" />
@@ -124,11 +124,11 @@
                                     <RowConstraints maxHeight="287.0" minHeight="10.0" prefHeight="136.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <TableView fx:id="saleTable" prefHeight="210.0" prefWidth="1000.0" stylesheets="@../css/style.css" GridPane.rowIndex="1">
+                                    <TableView fx:id="saleTable" onMouseClicked="#tableSort" prefHeight="210.0" prefWidth="1000.0" stylesheets="@../css/style.css" GridPane.rowIndex="1">
                                        <columns>
                                           <TableColumn fx:id="saleNo" prefWidth="30.0" text="No" />
-                                          <TableColumn fx:id="saleCode" prefWidth="97.0" text="사원코드" />
-                                          <TableColumn fx:id="saleName" prefWidth="98.0" text="사원명" />
+                                          <TableColumn fx:id="saleCode" prefWidth="97.0" sortable="false" text="사원코드" />
+                                          <TableColumn fx:id="saleName" prefWidth="98.0" sortable="false" text="사원명" />
                                           <TableColumn fx:id="saleCount" prefWidth="95.0" text="판매량" />
                                           <TableColumn fx:id="salePrice" prefWidth="155.0" text="매출액" />
                                           <TableColumn fx:id="saleCost" prefWidth="157.0" text="매출원가" />

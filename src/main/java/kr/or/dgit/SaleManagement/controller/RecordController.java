@@ -133,6 +133,7 @@ public class RecordController {
 			//recTable 역순 정렬
 			recTable.getSortOrder().add(noTc);
 			
+			
 			FilteredList<Record> filterData = new FilteredList<>(myList, r -> true);
 			searchAllTf.textProperty().addListener((observable, oldValue, newValue)->{
 				filterData.setPredicate(record ->{
