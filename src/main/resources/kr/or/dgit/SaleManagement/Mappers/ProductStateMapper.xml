@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="kr.or.dgit.SaleManagement.dao.ProductStateDao">
+	<resultMap type="ProductState" id="pdtStateResult">
+		<id property="code" column="pdtCode"/>
+		<result property="name" column="name"/>
+		<result property="amount" column="amount"/>
+		<result property="priceAll" column="priceAll"/>
+		<result property="costAll" column="costAll"/>
+		<result property="dispriceAll" column="dispriceAll"/>
+		<result property="profit" column="Profit"/>
+		<result property="margin" column="margin"/>
+	</resultMap>
+	
+	<resultMap type="ProductState" id="classStateResult">
+		<result property="name" column="name"/>
+		<result property="amount" column="amount"/>
+		<result property="priceAll" column="priceAll"/>
+		<result property="costAll" column="costAll"/>
+		<result property="dispriceAll" column="dispriceAll"/>
+		<result property="profit" column="Profit"/>
+		<result property="margin" column="margin"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="pdtStateResult">
+		select pdtCode, name, amount, priceAll, costAll, dispriceAll, Profit, margin
+		from product_amount
+	</select>
+	
+	<select id="selectBigClassAll" resultMap="classStateResult">
+		select  name, amount, priceAll, costAll, dispriceAll, Profit, margin
+		from bigclass_amount;
+	</select>
+	
+	<select id="selectSmallClassAll" resultMap="classStateResult">
+		select  name, amount, priceAll, costAll, dispriceAll, Profit, margin
+		from small_amount;
+	</select>
+</mapper>

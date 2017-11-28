@@ -10,6 +10,7 @@
 	<typeAliases>
 		<package name="kr.or.dgit.SaleManagement.dto"/> 
 		<package name="kr.or.dgit.SaleManagement.dto.AccountLevel"/> 
+		<package name="kr.or.dgit.SaleManagement.dto.ProductState"/> 
 	</typeAliases>	
 	
 	<environments default="development">
@@ -34,5 +35,6 @@
  		<mapper resource="kr/or/dgit/SaleManagement/Mappers/SalesLevelMapper.xml" />
  		<mapper resource="kr/or/dgit/SaleManagement/Mappers/AddrMapper.xml" />
  		<mapper resource="kr/or/dgit/SaleManagement/Mappers/RecordMapper.xml" />
+ 		<mapper resource="kr/or/dgit/SaleManagement/Mappers/ProductStateMapper.xml" />
 	</mappers>
 </configuration>
