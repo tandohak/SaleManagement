@@ -7,9 +7,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="580.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.state.ProductStateController">
+<BorderPane prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.state.ProductStateController">
    <top>
-      <StackedBarChart fx:id="stackChart" prefHeight="386.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+      <StackedBarChart fx:id="stackChart" prefHeight="386.0" BorderPane.alignment="CENTER">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -21,15 +21,15 @@
    <bottom>
       <TableView fx:id="viewTable" onMouseClicked="#tableSortEvent" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="no" prefWidth="75.0" text="No" />
-          <TableColumn fx:id="pdtCode" prefWidth="115.0" text="제품코드" />
-            <TableColumn fx:id="pdtName" prefWidth="85.0" text="제품명" />
-            <TableColumn fx:id="pdtAmount" prefWidth="114.0" text="판매량" />
-            <TableColumn fx:id="pdtPrice" prefWidth="118.0" text="매출액" />
-            <TableColumn fx:id="pdtCost" prefWidth="130.0" text="매출원가" />
-            <TableColumn fx:id="pdtDisprice" prefWidth="135.0" text="할인금액" />
-            <TableColumn fx:id="pdtMargin" prefWidth="90.0" text="마진율" />
-            <TableColumn fx:id="pdtProfit" prefWidth="136.0" text="총매출이익" />
+          <TableColumn fx:id="no" prefWidth="30.0" text="No" />
+          <TableColumn fx:id="pdtCode" prefWidth="100.0" text="제품코드" />
+            <TableColumn fx:id="pdtName" prefWidth="120.0" text="제품명" />
+            <TableColumn fx:id="pdtAmount" prefWidth="120.0" text="판매량" />
+            <TableColumn fx:id="pdtPrice" prefWidth="120.0" text="매출액" />
+            <TableColumn fx:id="pdtCost" prefWidth="120.0" text="매출원가" />
+            <TableColumn fx:id="pdtDisprice" prefWidth="120.0" text="할인금액" />
+            <TableColumn fx:id="pdtMargin" prefWidth="55.0" text="마진율" />
+            <TableColumn fx:id="pdtProfit" prefWidth="114.0" text="총매출이익" />
         </columns>
       </TableView>
    </bottom>
