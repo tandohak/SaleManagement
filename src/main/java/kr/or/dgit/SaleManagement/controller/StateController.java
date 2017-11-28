@@ -1,5 +1,6 @@
 package kr.or.dgit.SaleManagement.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -10,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
@@ -18,6 +21,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import kr.or.dgit.SaleManagement.MainApp;
+import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Product;
 import kr.or.dgit.SaleManagement.dto.Record;
@@ -55,7 +62,9 @@ public class StateController {
 	@FXML private StackedBarChart<String, Integer> stackChartAccount;
 	@FXML private StackedBarChart<String, Integer> stackChartSales;
 	@FXML private CategoryAxis xAxis = new CategoryAxis();
-
+	
+	@FXML private BorderPane pdtPane;
+	
 	//차트용 옵저버
 	private ObservableList<String> xAxisName = FXCollections.observableArrayList();
 	
@@ -188,6 +197,10 @@ public class StateController {
 		
 		//SALES DATA&CHART 로드
 		salesChart();
+		
+		//제품 통계 로드
+		showPdtChart();
+		
 	}
 	
 	//ACCOUNT CHART DATA 세팅
@@ -551,5 +564,41 @@ public class StateController {
 			rec.setRank(rank);
 			rank++;
 		}
+	}
+		
+	@FXML
+	private void showPdtChart() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/graph/ProductState.fxml"));
+			BorderPane pane = (BorderPane)loader.load();
+		
+			pdtPane.setCenter(pane);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	           
+	}
+	
+	@FXML
+	private void showBigClassChart() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/graph/BigClassState.fxml"));
+			BorderPane pane = (BorderPane)loader.load();
+		
+			pdtPane.setCenter(pane);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	           
+	}
+	
+	@FXML
+	private void showSmallClassChart() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/graph/SmallClassState.fxml"));
+			BorderPane pane = (BorderPane)loader.load();
+		
+			pdtPane.setCenter(pane);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	           
 	}
 }

@@ -26,7 +26,6 @@ public class RecordTestMain extends Application {
 
 //	private static ProductService pdtService;
 
-
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -3,7 +3,7 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.StackedBarChart?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -62,49 +62,17 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane prefHeight="484.0" prefWidth="1000.0">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="236.0" minHeight="0.0" prefHeight="203.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="287.0" minHeight="10.0" prefHeight="227.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <AnchorPane prefHeight="24.0" prefWidth="992.0">
+                        <BorderPane fx:id="pdtPane" layoutX="244.0" layoutY="181.0" prefHeight="646.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <top>
+                              <AnchorPane prefHeight="52.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <AnchorPane prefHeight="61.0" prefWidth="1000.0">
-                                       <children>
-                                          <ComboBox layoutX="25.0" layoutY="19.0" prefWidth="150.0" promptText="대분류" />
-                                          <ComboBox layoutX="193.0" layoutY="19.0" prefWidth="150.0" promptText="소분류" />
-                                       </children>
-                                    </AnchorPane>
+                                    <Button layoutX="21.0" layoutY="13.0" mnemonicParsing="false" onAction="#showPdtChart" prefWidth="153.0" style="-fx-pref-width: 100;" text="제품별통계" />
+                                    <Button layoutX="134.0" layoutY="13.0" mnemonicParsing="false" onAction="#showBigClassChart" style="-fx-pref-width: 100;" text="대분류별통계" />
+                                    <Button layoutX="248.0" layoutY="13.0" mnemonicParsing="false" onAction="#showSmallClassChart" style="-fx-pref-width: 100;" text="소분류별통계" />
                                  </children>
                               </AnchorPane>
-                              <TableView prefHeight="273.0" prefWidth="1000.0" stylesheets="@../css/style.css" GridPane.rowIndex="2">
-                                 <columns>
-                                    <TableColumn prefWidth="33.0" text="No" />
-                                    <TableColumn prefWidth="71.0" text="제품코드" />
-                                    <TableColumn prefWidth="138.0" text="제품명" />
-                                    <TableColumn prefWidth="73.0" text="판매량" />
-                                    <TableColumn prefWidth="129.0" text="총판매액" />
-                                    <TableColumn prefWidth="150.0" text="판매원가" />
-                                    <TableColumn prefWidth="164.0" text="할인금액" />
-                                    <TableColumn prefWidth="89.0" text="마진율" />
-                                    <TableColumn prefWidth="152.0" text="총매출이익" />
-                                 </columns>
-                              </TableView>
-                              <StackedBarChart prefWidth="1000.0" GridPane.rowIndex="1">
-                                 <xAxis>
-                                    <CategoryAxis side="BOTTOM" fx:id="xAxis1" />
-                                 </xAxis>
-                                 <yAxis>
-                                    <NumberAxis fx:id="yAxis1" side="LEFT" />
-                                 </yAxis>
-                              </StackedBarChart>
-                           </children>
-                        </GridPane>
+                           </top>
+                        </BorderPane>
                      </children>
                   </AnchorPane>
                </content>
