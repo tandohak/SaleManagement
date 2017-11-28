@@ -39,7 +39,7 @@
    <center>
       <AnchorPane prefHeight="452.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="recTable" editable="true" prefHeight="522.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="recTable" editable="true" onMouseClicked="#onClickSaleEdit" prefHeight="522.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
                   <TableColumn fx:id="chckTc" prefWidth="32.0">
                      <graphic>

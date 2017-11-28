@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -426,6 +427,14 @@ public class ProductController {
 		}
 
 	}
+	
+	@FXML
+	private void onClickSaleEdit(MouseEvent event) {
+		if(2 == event.getClickCount()) {
+			getCellMenuAction();
+		}
+	}
+	
 	
 	@FXML
 	public void getCellMenuAction() {

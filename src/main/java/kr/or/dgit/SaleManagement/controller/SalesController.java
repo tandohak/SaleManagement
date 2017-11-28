@@ -34,6 +34,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
@@ -291,6 +292,13 @@ public class SalesController {
 
 		checkTable(dbCheck.isSelected());
 		saleTable.refresh();
+	}
+	
+	@FXML
+	private void onClickSaleEdit(MouseEvent event) {
+		if(2 == event.getClickCount()) {
+			getCellMenuAction();
+		}
 	}
 	
 	@FXML

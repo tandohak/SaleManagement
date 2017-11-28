@@ -116,7 +116,7 @@
       </AnchorPane>
    </bottom>
    <center>
-      <TableView fx:id="accTable" editable="true" prefHeight="349.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="accTable" editable="true" onMouseClicked="#onClickSaleEdit" prefHeight="349.0" prefWidth="900.0" BorderPane.alignment="CENTER">
         <columns>
             <TableColumn fx:id="chckTc" prefWidth="51.0" resizable="false">
                <graphic>

@@ -30,6 +30,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -248,6 +249,13 @@ public class AccountController {
 			myList.add(account);
 		}
 		accTable.setItems(myList);
+	}
+	
+	@FXML
+	private void onClickSaleEdit(MouseEvent event) {
+		if(2 == event.getClickCount()) {
+			getCellMenuAction();
+		}
 	}
 	
 	@FXML
