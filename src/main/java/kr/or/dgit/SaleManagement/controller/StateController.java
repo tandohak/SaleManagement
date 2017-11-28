@@ -1,10 +1,14 @@
 package kr.or.dgit.SaleManagement.controller;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+
+import com.sun.javafx.scene.control.skin.TableColumnHeader;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.StackedBarChart;
@@ -12,6 +16,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Product;
@@ -30,22 +35,22 @@ public class StateController {
 	@FXML private TableColumn<Record, Integer> accNo;
 	@FXML private TableColumn<Record, Integer> accCode;
 	@FXML private TableColumn<Record, String> accName;
-	@FXML private TableColumn<Record, Integer> accCount;
-	@FXML private TableColumn<Record, Integer> accPrice;
-	@FXML private TableColumn<Record, Integer> accCost;
-	@FXML private TableColumn<Record, Integer> accDisprice;
-	@FXML private TableColumn<Record, Integer> accMargin;
-	@FXML private TableColumn<Record, Integer> accProfit;
+	@FXML private TableColumn<Record, String> accCount;
+	@FXML private TableColumn<Record, String> accPrice;
+	@FXML private TableColumn<Record, String> accCost;
+	@FXML private TableColumn<Record, String> accDisprice;
+	@FXML private TableColumn<Record, String> accMargin;
+	@FXML private TableColumn<Record, String> accProfit;
 	@FXML private TableView<Record> saleTable;
 	@FXML private TableColumn<Record, Integer> saleNo;
 	@FXML private TableColumn<Record, Integer> saleCode;
 	@FXML private TableColumn<Record, String> saleName;
-	@FXML private TableColumn<Record, Integer> saleCount;
-	@FXML private TableColumn<Record, Integer> salePrice;
-	@FXML private TableColumn<Record, Integer> saleCost;
-	@FXML private TableColumn<Record, Integer> saleDisprice;
-	@FXML private TableColumn<Record, Integer> saleMargin;
-	@FXML private TableColumn<Record, Integer> saleProfit;	
+	@FXML private TableColumn<Record, String> saleCount;
+	@FXML private TableColumn<Record, String> salePrice;
+	@FXML private TableColumn<Record, String> saleCost;
+	@FXML private TableColumn<Record, String> saleDisprice;
+	@FXML private TableColumn<Record, String> saleMargin;
+	@FXML private TableColumn<Record, String> saleProfit;
 	
 	@FXML private StackedBarChart<String, Integer> stackChartAccount;
 	@FXML private StackedBarChart<String, Integer> stackChartSales;
@@ -61,10 +66,14 @@ public class StateController {
 	private RecordSerivce recordService;
 	
 	private Record recStandard;
-	private ObservableList<Record> standardList = FXCollections.observableArrayList();
+	private ObservableList<Record> standardAccList = FXCollections.observableArrayList();
+	private SortedList<Record> sortedAccList;
+	private ObservableList<Record> standardSaleList = FXCollections.observableArrayList();
+	private SortedList<Record> sortedSaleList;
 	
 		
 	//통계용 변수선언
+	int	rank = 1;			//정렬용 번호
 	int totalProfit = 0;	//매출이익(마진액)
 	int totalMarginPer = 0;	//마진율
 	int totalDiscount = 0;	//할인금액
@@ -93,6 +102,7 @@ public class StateController {
 			//통계저장용 업체명 SET
 			recStandard.setAccCode(findAccCode.getAccCode());
 			recStandard.setAccName(findAccCode.getAccName());
+			recStandard.setRank(rank);
 			
 			//거래처별 제품목록 검색
 			Product findPdtByAccCode = new Product();
@@ -131,39 +141,56 @@ public class StateController {
 					recStandard.setRecCount(totalCount);		//통계저장용 판매수량 SET
 					recStandard.setRecNo(totalRecCount);		//통계저장용 거래내역수 SET
 					
-					standardList.add(recStandard);
+					standardAccList.add(recStandard);
+					rank++;	//DATA번호 컨트롤
 				}
-			}
+			}	
 		}
 
 		//차트 DATA
 		int index = 0;
-		String[] accountNames = new String[standardList.size()];
-		for(Record name : standardList) {
+		String[] accountNames = new String[standardAccList.size()];
+		for(Record name : standardAccList) {
 			accountNames[index] = name.getAccName();
 			index++;
 		}
 		xAxisName.addAll(Arrays.asList(accountNames));
 		xAxis.setCategories(xAxisName);
 		
-		setData(standardList, xAxisName);
+		//차트용 DATA 세팅
+		setData(standardAccList, xAxisName);
 		
 		//테이블 DATA
+		accNo.setCellValueFactory(cellData -> cellData.getValue().getRank().asObject());
 		accCode.setCellValueFactory(cellData -> cellData.getValue().getaccCodeProperty().asObject());
 		accName.setCellValueFactory(cellData -> cellData.getValue().getAccNameProperty());
-		accCount.setCellValueFactory(cellData -> cellData.getValue().getRecCountProperty().asObject());
-		accCost.setCellValueFactory(cellData -> cellData.getValue().getRecCostProperty().asObject());
-		accPrice.setCellValueFactory(cellData -> cellData.getValue().getRecPriceProperty().asObject());
-		accDisprice.setCellValueFactory(cellData -> cellData.getValue().getRecDispriceProperty().asObject());
-		accMargin.setCellValueFactory(cellData -> cellData.getValue().getMarginPerProperty().asObject());
-		accProfit.setCellValueFactory(cellData -> cellData.getValue().getProfitProperty().asObject());
-
-		accTable.setItems(standardList);
+		accCount.setCellValueFactory(cellData -> cellData.getValue().getFormatCount());
+		accCost.setCellValueFactory(cellData -> cellData.getValue().getFormatCost());
+		accPrice.setCellValueFactory(cellData -> cellData.getValue().getFormatPrice());
+		accDisprice.setCellValueFactory(cellData -> cellData.getValue().getFormatDisprice());
+		accMargin.setCellValueFactory(cellData -> cellData.getValue().getFormatMargin());
+		accProfit.setCellValueFactory(cellData -> cellData.getValue().getFormatProfit());
 		
-		//먼저 로드를 해놓는 부분
+		sortedAccList = standardAccList.sorted(new Comparator<Record>() {
+            @Override
+            public int compare(Record o1, Record o2) {
+               if(o1.getRank().get() > o2.getRank().get()){
+                  return 1;
+               }else if(o1.getRank().get() < o2.getRank().get()){
+                  return -1;
+               }else{
+                  return 0;
+               }
+            }
+        });
+		
+		accTable.setItems(sortedAccList);
+		
+		//SALES DATA&CHART 로드
 		salesChart();
 	}
 	
+	//ACCOUNT CHART DATA 세팅
 	public void setData(List<Record> standardList, ObservableList<String> xAxisName) {
 		int index = 0;
 		int[][] chartBar = new int[standardList.size()][3];
@@ -203,16 +230,17 @@ public class StateController {
 	
 	//영업사원별 통계
 	public void salesChart() {
-		
-		standardList = FXCollections.observableArrayList();
+		rank = 1;	//DATA번호 리셋
 		List<Sales> salesAllList = salesService.findSaleAll();
 		//사원을 기준으로 거래내역 검색
-		for(Sales findSalesCode : salesAllList){			
+		for(Sales findSalesCode : salesAllList){
 			recStandard = new Record();
+			setClearTotal();
 			
 			//통계저장용 사원명 SET
 			recStandard.setrSalecode(findSalesCode.getSaleCode());
 			recStandard.setSaleName(findSalesCode.getSaleName());
+			recStandard.setRank(rank);
 			
 			//사원별 거래내역 검색
 			Record findRecBySaleCode = new Record();
@@ -244,15 +272,8 @@ public class StateController {
 				recStandard.setRecCount(totalCount);		//통계저장용 판매수량 SET
 				recStandard.setRecNo(totalRecCount);		//통계저장용 거래내역수 SET
 				
-				System.out.println(recStandard.getProfit());
-				System.out.println(recStandard.getMarginPer());
-				System.out.println(recStandard.getRecDisprice());
-				System.out.println(recStandard.getRecCost());
-				System.out.println(recStandard.getRecPrice());
-				System.out.println(recStandard.getRecCount());
-				System.out.println(recStandard.getRecNo());
-				
-				standardList.add(recStandard);
+				standardSaleList.add(recStandard);
+				rank++;	//DATA번호 컨트롤
 			}
 		}
 
@@ -260,8 +281,8 @@ public class StateController {
 		xAxis = new CategoryAxis();
 		xAxisName = FXCollections.observableArrayList();
 		int index = 0;
-		String[] salesNames = new String[standardList.size()];
-		for(Record name : standardList) {
+		String[] salesNames = new String[standardSaleList.size()];
+		for(Record name : standardSaleList) {
 			Sales finder = new Sales();
 			finder.setSaleCode(name.getrSalecode());
 			finder = salesService.findSalesByCode(finder);
@@ -271,21 +292,37 @@ public class StateController {
 		xAxisName.addAll(Arrays.asList(salesNames));
 		xAxis.setCategories(xAxisName);
 		
-		setDataSales(standardList, xAxisName);
+		//차트용 DATA 세팅
+		setDataSales(standardSaleList, xAxisName);
 		
 		//테이블 DATA
+		saleNo.setCellValueFactory(cellData -> cellData.getValue().getRank().asObject());
 		saleCode.setCellValueFactory(cellData -> cellData.getValue().getrSalecodeProperty().asObject());
 		saleName.setCellValueFactory(cellData -> cellData.getValue().getSaleNameProperty());
-		saleCount.setCellValueFactory(cellData -> cellData.getValue().getRecCountProperty().asObject());
-		salePrice.setCellValueFactory(cellData -> cellData.getValue().getRecCostProperty().asObject());
-		saleCost.setCellValueFactory(cellData -> cellData.getValue().getRecPriceProperty().asObject());
-		saleDisprice.setCellValueFactory(cellData -> cellData.getValue().getRecDispriceProperty().asObject());
-		saleMargin.setCellValueFactory(cellData -> cellData.getValue().getMarginPerProperty().asObject());
-		saleProfit.setCellValueFactory(cellData -> cellData.getValue().getProfitProperty().asObject());
+		saleCount.setCellValueFactory(cellData -> cellData.getValue().getFormatCount());
+		salePrice.setCellValueFactory(cellData -> cellData.getValue().getFormatPrice());
+		saleCost.setCellValueFactory(cellData -> cellData.getValue().getFormatCost());
+		saleDisprice.setCellValueFactory(cellData -> cellData.getValue().getFormatDisprice());
+		saleMargin.setCellValueFactory(cellData -> cellData.getValue().getFormatMargin());
+		saleProfit.setCellValueFactory(cellData -> cellData.getValue().getFormatProfit());	
 
-		saleTable.setItems(standardList);
+		sortedSaleList = standardSaleList.sorted(new Comparator<Record>() {
+            @Override
+            public int compare(Record o1, Record o2) {
+               if(o1.getRank().get() > o2.getRank().get()){
+                  return 1;
+               }else if(o1.getRank().get() < o2.getRank().get()){
+                  return -1;
+               }else{
+                  return 0;
+               }
+            }
+        });
+		
+		saleTable.setItems(sortedSaleList);
 	}
 	
+	//SALES CHART DATA 세팅
 	public void setDataSales(List<Record> standardList, ObservableList<String> xAxisName) {
 		int index = 0;
 		int[][] chartBar = new int[standardList.size()][3];
@@ -311,5 +348,208 @@ public class StateController {
 			seriesProfit.getData().add(new XYChart.Data<>(xAxisName.get(i), chartBar[i][2]));
 		}
 		stackChartSales.getData().addAll(seriesCost, seriesPrice, seriesProfit);
+	}
+	
+	@FXML
+	private void tableSort(MouseEvent mouse) {
+		TableColumnHeader columnHeader = null;
+		try{
+			columnHeader = (TableColumnHeader)mouse.getTarget();
+			String findTable = columnHeader.getParent().getParent().getParent().getId(); //이걸로 테이블 찾아야함
+			if(columnHeader != null) {
+				switch (columnHeader.getId()) {
+					case "accProfit":
+						sortedAccList = standardAccList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getProfit().get() < o2.getProfit().get()){
+				                  return 1;
+				               }else if(o1.getProfit().get() > o2.getProfit().get()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					case "accMargin":
+						sortedAccList = standardAccList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getMarginPer() < o2.getMarginPer()){
+				                  return 1;
+				               }else if(o1.getMarginPer() > o2.getMarginPer()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					case "accDisprice":
+						sortedAccList = standardAccList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getRecDisprice() < o2.getRecDisprice()){
+				                  return 1;
+				               }else if(o1.getRecDisprice() > o2.getRecDisprice()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					case "accCost":
+						sortedAccList = standardAccList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getRecCost() < o2.getRecCost()){
+				                  return 1;
+				               }else if(o1.getRecCost() > o2.getRecCost()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					case "accPrice":
+						sortedAccList = standardAccList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getRecPrice() < o2.getRecPrice()){
+				                  return 1;
+				               }else if(o1.getRecPrice() > o2.getRecPrice()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					case "accCount":
+						sortedAccList = standardAccList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getRecCount() < o2.getRecCount()){
+				                  return 1;
+				               }else if(o1.getRecCount() > o2.getRecCount()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					case "saleCount":
+						sortedSaleList = standardSaleList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getRecCount() < o2.getRecCount()){
+				                  return 1;
+				               }else if(o1.getRecCount() > o2.getRecCount()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					case "salePrice":
+						sortedSaleList = standardSaleList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getRecPrice() < o2.getRecPrice()){
+				                  return 1;
+				               }else if(o1.getRecPrice() > o2.getRecPrice()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					case "saleCost":
+						sortedSaleList = standardSaleList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getRecCost() < o2.getRecCost()){
+				                  return 1;
+				               }else if(o1.getRecCost() > o2.getRecCost()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					case "saleDisprice":
+						sortedSaleList = standardSaleList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getRecDisprice() < o2.getRecDisprice()){
+				                  return 1;
+				               }else if(o1.getRecDisprice() > o2.getRecDisprice()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					case "saleMargin":
+						sortedSaleList = standardSaleList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getMarginPer() < o2.getMarginPer()){
+				                  return 1;
+				               }else if(o1.getMarginPer() > o2.getMarginPer()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					case "saleProfit":
+						sortedSaleList = standardSaleList.sorted(new Comparator<Record>() {
+				            @Override
+				            public int compare(Record o1, Record o2) {
+				               if(o1.getProfit().get() < o2.getProfit().get()){
+				                  return 1;
+				               }else if(o1.getProfit().get() > o2.getProfit().get()){
+				                  return -1;
+				               }else{
+				                  return 0;
+				               }
+				            }
+				        });
+						break;
+					default:
+						System.out.println("ID검색 실패");
+						break;		
+				}
+				if(findTable.equals("accTable")) {
+					setRank(sortedAccList);
+					accTable.setItems(sortedAccList);
+				}
+				if(findTable.equals("saleTable")) {
+					setRank(sortedSaleList);
+					saleTable.setItems(sortedSaleList);
+				}
+			}
+		}
+		catch (Exception e) {
+			
+		}
+	}
+	
+	public void setRank(SortedList<Record> sortedList) {
+		int rank = 1;
+		for(Record rec : sortedList) {
+			rec.setRank(rank);
+			rank++;
+		}
 	}
 }

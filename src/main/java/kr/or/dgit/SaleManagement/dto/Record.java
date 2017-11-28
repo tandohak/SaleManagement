@@ -1,5 +1,6 @@
 package kr.or.dgit.SaleManagement.dto;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -33,7 +34,63 @@ public class Record {
 	private IntegerProperty profit = new SimpleIntegerProperty();
 	private IntegerProperty margin = new SimpleIntegerProperty();
 	private IntegerProperty marginPer = new SimpleIntegerProperty();
+	private IntegerProperty rank = new SimpleIntegerProperty();
 
+	private StringProperty formatCount = new SimpleStringProperty();
+	private StringProperty formatCost = new SimpleStringProperty();
+
+	public StringProperty ChangeFormat(int number, String type) {
+		StringProperty strReturn;
+		String str;
+		DecimalFormat commaFormat = new DecimalFormat("#,###");
+		if(type.equals("per")) {
+			str = number + " %";
+			strReturn = new SimpleStringProperty(str);
+			return strReturn;
+		}
+		if(type.equals("comma")) {
+			str = commaFormat.format(number);
+			strReturn = new SimpleStringProperty(str);
+			return strReturn;
+		}
+		return null;
+	}
+	
+	//포맷타입 변환 메소드
+	public StringProperty getFormatCount() {
+		return ChangeFormat(recCount.get(), "comma");
+	}
+	
+	public StringProperty getFormatCost() {
+		return ChangeFormat(recCost.get(), "comma");
+	}
+	
+	public StringProperty getFormatPrice() {
+		return ChangeFormat(recPrice.get(), "comma");
+	}
+	
+	public StringProperty getFormatDisprice() {
+		return ChangeFormat(recDisprice.get(), "comma");
+	}
+	
+	public StringProperty getFormatMargin() {
+		return ChangeFormat(marginPer.get(), "per");
+	}
+	
+	public StringProperty getFormatProfit() {
+		return ChangeFormat(profit.get(), "comma");
+	}
+	
+	
+	//GET&SET 메소드
+	public IntegerProperty getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank.set(rank);
+	}
+	
 	public IntegerProperty getRecCostProperty() {
 		return recCost;
 	}
@@ -44,7 +101,6 @@ public class Record {
 
 	public void setRecCost(int recCost) {
 		this.recCost.set(recCost);
-		;
 	}
 
 	public IntegerProperty getSumPriceProperty() {

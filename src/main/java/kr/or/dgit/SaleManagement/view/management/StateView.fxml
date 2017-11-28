@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.StackedBarChart?>
@@ -10,7 +8,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -18,13 +15,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane fx:id="pane" prefHeight="675.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.dgit.SaleManagement.controller.StateController">
-   <bottom>
-      <AnchorPane prefHeight="63.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-         <children>
-            <JFXButton layoutX="816.0" layoutY="23.0" styleClass="greenBtn" stylesheets="@../css/style.css" text="취소" textFill="#7c8991" AnchorPane.rightAnchor="34.0" />
-         </children>
-      </AnchorPane>
-   </bottom>
    <right>
       <TabPane prefHeight="388.0" prefWidth="1000.0" stylesheets="@../css/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -32,7 +22,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane prefHeight="590.0" prefWidth="1000.0">
+                        <GridPane prefHeight="646.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
@@ -41,11 +31,11 @@
                               <RowConstraints maxHeight="287.0" minHeight="10.0" prefHeight="136.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TableView fx:id="accTable" prefHeight="235.0" prefWidth="1000.0" stylesheets="@../css/style.css" GridPane.rowIndex="1">
+                              <TableView fx:id="accTable" onMouseClicked="#tableSort" prefHeight="210.0" prefWidth="1000.0" stylesheets="@../css/style.css" GridPane.rowIndex="1">
                                  <columns>
                                     <TableColumn fx:id="accNo" prefWidth="34.0" text="No" />
-                                    <TableColumn fx:id="accCode" prefWidth="107.0" text="거래처코드" />
-                                    <TableColumn fx:id="accName" prefWidth="110.0" text="거래처명" />
+                                    <TableColumn fx:id="accCode" prefWidth="107.0" sortable="false" text="거래처코드" />
+                                    <TableColumn fx:id="accName" prefWidth="110.0" sortable="false" text="거래처명" />
                                     <TableColumn fx:id="accCount" prefWidth="98.0" text="판매량" />
                                     <TableColumn fx:id="accPrice" prefWidth="121.0" text="매출액" />
                                     <TableColumn fx:id="accCost" prefWidth="137.0" text="매출원가" />
@@ -123,37 +113,22 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="994.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="1000.0">
                            <children>
-                              <GridPane prefHeight="484.0" prefWidth="1000.0">
+                              <GridPane prefHeight="55.0" prefWidth="994.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                  </columnConstraints>
                                  <rowConstraints>
-                                    <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="236.0" minHeight="0.0" prefHeight="203.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="287.0" minHeight="10.0" prefHeight="227.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="460.0" minHeight="0.0" prefHeight="454.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="287.0" minHeight="10.0" prefHeight="136.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <AnchorPane prefHeight="24.0" prefWidth="992.0">
-                                       <children>
-                                          <AnchorPane prefHeight="61.0" prefWidth="1000.0">
-                                             <children>
-                                                <TextField layoutX="48.0" layoutY="19.0" promptText="내역조회" styleClass="searchTF" stylesheets="@../css/style.css">
-                                                   <padding>
-                                                      <Insets bottom="4.0" left="7.0" right="7.0" top="4.0" />
-                                                   </padding>
-                                                </TextField>
-                                                <JFXButton layoutX="175.0" layoutY="19.0" prefWidth="73.0" styleClass="searchBtn" stylesheets="@../css/style.css" text="검색" textOverrun="CLIP" />
-                                             </children>
-                                          </AnchorPane>
-                                       </children>
-                                    </AnchorPane>
-                                    <TableView fx:id="saleTable" prefHeight="273.0" prefWidth="1000.0" stylesheets="@../css/style.css" GridPane.rowIndex="2">
+                                    <TableView fx:id="saleTable" onMouseClicked="#tableSort" prefHeight="210.0" prefWidth="1000.0" stylesheets="@../css/style.css" GridPane.rowIndex="1">
                                        <columns>
                                           <TableColumn fx:id="saleNo" prefWidth="30.0" text="No" />
-                                          <TableColumn fx:id="saleCode" prefWidth="97.0" text="사원코드" />
-                                          <TableColumn fx:id="saleName" prefWidth="98.0" text="사원명" />
+                                          <TableColumn fx:id="saleCode" prefWidth="97.0" sortable="false" text="사원코드" />
+                                          <TableColumn fx:id="saleName" prefWidth="98.0" sortable="false" text="사원명" />
                                           <TableColumn fx:id="saleCount" prefWidth="95.0" text="판매량" />
                                           <TableColumn fx:id="salePrice" prefWidth="155.0" text="매출액" />
                                           <TableColumn fx:id="saleCost" prefWidth="157.0" text="매출원가" />
@@ -162,7 +137,7 @@
                                           <TableColumn fx:id="saleProfit" prefWidth="162.0" text="총매출이익" />
                                        </columns>
                                     </TableView>
-                                    <StackedBarChart fx:id="stackChartSales" prefWidth="1000.0" GridPane.rowIndex="1">
+                                    <StackedBarChart fx:id="stackChartSales" prefHeight="350.0" prefWidth="1000.0">
                                        <xAxis>
                                           <CategoryAxis side="BOTTOM" fx:id="xAxis2" />
                                        </xAxis>
