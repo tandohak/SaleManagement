@@ -65,7 +65,7 @@ public class LoginController {
 	private void changeView() {
 		Sales sales = new Sales();
 		sales.setSaleId(idTf.getText().trim());
-	
+		
 		Account acc = new Account();
 		acc.setAccId(idTf.getText().trim());
 		
