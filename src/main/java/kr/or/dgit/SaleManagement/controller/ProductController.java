@@ -466,9 +466,11 @@ public class ProductController {
 	        dialogStage.showAndWait();
 
 	        if(controller.isOkClicked()) {
-	        	System.out.println(controller.getProduct());
+//	        	System.out.println(controller.getProduct());
 	        	pdtService.updatePdt(controller.getProduct());
-	        	pdtTable.refresh();
+	        	checkTable(dbCheck.isSelected());
+	    		pdtTable.refresh();
+	    		
 	        }
 	   } catch (IOException e) {
 	        e.printStackTrace();

@@ -288,11 +288,8 @@ public class AccountController {
 		        if(controller.isOkClicked()) {
 		        	accountService.updateAccount(controller.getAccount());
 		        	
-		        	if(dbCheck.isSelected()) {
-		        		refreshTable();
-		        	}else {
-		        		refreshTableAdmitTrue();
-		        	}		        	
+		        	checkTable(dbCheck.isSelected());
+		    		accTable.refresh();     	
 		        }
 		   } catch (IOException e) {
 		        e.printStackTrace();

@@ -331,10 +331,11 @@ public class SalesController {
 		        dialogStage.showAndWait();
 
 		        if(controller.isOkClicked()) {
-		        	System.out.println(controller.getSales());
+//		        	ㄴSystem.out.println(controller.getSales());
 		        	saleSerivce.updateSales(controller.getSales());
 		        	checkTable(dbCheck.isSelected());
 		    		saleTable.refresh();
+		    		return;
 		        }
 		   } catch (IOException e) {
 		        e.printStackTrace();
