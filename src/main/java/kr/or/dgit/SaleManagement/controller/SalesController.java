@@ -108,7 +108,11 @@ public class SalesController {
 			levellist.add(saleLevel);
 		}	
 		levelCb.setItems(levellist);
-
+		
+		SalesLevel a = new SalesLevel();
+		a.setSalDisrate(0);
+		a.setSalLevel("no");
+		levelCb.setValue(a);
 			
 		saleSerivce = SalesService.getInstance();
 		List<Sales> lists = saleSerivce.findSaleAll();
@@ -329,7 +333,8 @@ public class SalesController {
 		        if(controller.isOkClicked()) {
 		        	System.out.println(controller.getSales());
 		        	saleSerivce.updateSales(controller.getSales());
-		        	refreshTable();
+		        	checkTable(dbCheck.isSelected());
+		    		saleTable.refresh();
 		        }
 		   } catch (IOException e) {
 		        e.printStackTrace();
@@ -398,7 +403,19 @@ public class SalesController {
 			
 			myList.add(sales);
 			saleTable.refresh();
+			tfAllClear();
 		}
+	}
+	
+	private void tfAllClear() {
+		tfUtil.tfClear(nameTf);
+		tfUtil.tfClear(idTf);
+		tfUtil.tfClear(pwTf);
+		tfUtil.tfClear(telTf);
+		tfUtil.tfClear(addrZipTf);			
+		tfUtil.tfClear(addrTf);
+		tfUtil.tfClear(pwComfTf);
+		tfUtil.tfClear(imgNameTf);
 	}
 
 	private void checkAlert(boolean isOk,String pwck) throws Exception {

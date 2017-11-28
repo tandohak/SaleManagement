@@ -39,6 +39,7 @@ public class AccountEditDialogController {
 	@FXML private TextField telTf;
 	@FXML private ImageView checkPwIcon;
 	@FXML private ComboBox<AccountLevel> levelCb;
+	@FXML private ComboBox<String> admitCb;
 	
 	private ObservableList<AccountLevel> levellist = FXCollections.observableArrayList();
 	
@@ -60,7 +61,8 @@ public class AccountEditDialogController {
 		levelCb.setItems(levellist);
 		
 	}
-
+	private ObservableList<String> abminlist = FXCollections.observableArrayList();
+	
 	public void setAccount(Account account) {
 		this.account = account;
 		System.out.println(account);
@@ -71,7 +73,12 @@ public class AccountEditDialogController {
 		telTf.setText(account.getAccTel());		
 		String addrs =  account.getAccAddr();
 		addrZipTf.setText(addrs.substring(addrs.indexOf("[")+1, addrs.indexOf("]")));
-		addrTf.setText(addrs.substring(addrs.indexOf("]")+1, addrs.length()));		
+		addrTf.setText(addrs.substring(addrs.indexOf("]")+1, addrs.length()));	
+		
+		abminlist.add("true");
+		abminlist.add("false");
+		admitCb.setItems(abminlist);
+		admitCb.setValue(account.getAccAdmit());
 	}
 
 	public Account getAccount() {
@@ -100,6 +107,7 @@ public class AccountEditDialogController {
 			account.setAccAddr("["+ addrZipTf.getText() + "]" + addrTf.getText());
 			account.setAccCode(Integer.parseInt(codeLabel.getText()));
 			account.setAccLevel(levelCb.getValue().getAccLevel());
+			account.setAccAdmit(admitCb.getValue());
 			okClicked = true;		
 			dialogStage.close();
         }

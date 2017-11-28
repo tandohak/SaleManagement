@@ -2,6 +2,7 @@ package kr.or.dgit.SaleManagement.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
@@ -286,7 +287,12 @@ public class AccountController {
 
 		        if(controller.isOkClicked()) {
 		        	accountService.updateAccount(controller.getAccount());
-		        	refreshTable();
+		        	
+		        	if(dbCheck.isSelected()) {
+		        		refreshTable();
+		        	}else {
+		        		refreshTableAdmitTrue();
+		        	}		        	
 		        }
 		   } catch (IOException e) {
 		        e.printStackTrace();
@@ -333,8 +339,21 @@ public class AccountController {
 			
 			myList.add(account);
 			accTable.refresh();
+			
+			tfAllClear();
 		}
 	}
+	
+	private void tfAllClear() {
+		tfUtil.tfClear(nameTf);
+		tfUtil.tfClear(idTf);
+		tfUtil.tfClear(pwTf);
+		tfUtil.tfClear(pwComfTf);
+		tfUtil.tfClear(telTf);
+		tfUtil.tfClear(addrZipTf);			
+		tfUtil.tfClear(addrTf);
+	}
+	
 
 	private void checkAlert(boolean isOk,String pwck) throws Exception {
 		if(!isOk) {

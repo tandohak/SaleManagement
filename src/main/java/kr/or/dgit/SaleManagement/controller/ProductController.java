@@ -1,6 +1,7 @@
 package kr.or.dgit.SaleManagement.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
@@ -347,8 +348,17 @@ public class ProductController {
 			
 			myList.add(pdt);
 			pdtTable.refresh();
+			
+			tfAllClear();
 		}		
 	}
+	private void tfAllClear() {
+		tfUtil.tfClear(nameTf);
+		tfUtil.tfClear(priceTf);
+		tfUtil.tfClear(accCodeTf);			
+		tfUtil.tfClear(costTf);
+	}
+	
 	
 	private void checkAlert(boolean isOk,String pwck) throws Exception {
 		if(!isOk) {

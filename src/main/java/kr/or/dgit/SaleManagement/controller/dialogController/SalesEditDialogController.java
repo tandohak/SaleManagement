@@ -48,7 +48,7 @@ public class SalesEditDialogController {
 	@FXML private TextField telTf;
 	@FXML private ImageView checkPwIcon;
 	@FXML private ComboBox<SalesLevel> levelCb;
-	
+	@FXML private ComboBox<String> admitCb;
 	private ObservableList<SalesLevel> levellist = FXCollections.observableArrayList();
 	
 	private Stage dialogStage;
@@ -102,7 +102,8 @@ public class SalesEditDialogController {
 		System.out.println(levellist);
 		levelCb.setItems(levellist);
 	}
-
+	private ObservableList<String> abminlist = FXCollections.observableArrayList();
+	
 	public void setSales(Sales sales) {
 		this.sales = sales;
 		System.out.println(sales);
@@ -114,6 +115,11 @@ public class SalesEditDialogController {
 		String addrs =  sales.getSaleAddr();
 		addrZipTf.setText(addrs.substring(addrs.indexOf("[")+1, addrs.indexOf("]")));
 		addrTf.setText(addrs.substring(addrs.indexOf("]")+1, addrs.length()));	
+		
+		abminlist.add("true");
+		abminlist.add("false");
+		admitCb.setItems(abminlist);
+		admitCb.setValue(sales.getSaleLeave());
 		
 		File file = new File(path+"/DataFile/userImg/"+sales.getSaleCode()+".jpg");
 		Rectangle clip = new Rectangle(userImg.getFitWidth(), userImg.getFitHeight());
@@ -159,7 +165,7 @@ public class SalesEditDialogController {
 			sales.setSaleAddr("["+ addrZipTf.getText() + "]" + addrTf.getText());
 			sales.setSaleCode(Integer.parseInt(codeLabel.getText()));
 			sales.setSaleLevel(levelCb.getValue().getSalLevel());
-			
+			sales.setSaleLeave(admitCb.getValue());
 			if(!pwTf.getText().equals("")) {
 				sales.setSalePw(changeKorean(pwTf.getText()));
 			}
