@@ -36,7 +36,7 @@
             </ImageView>
             <JFXButton layoutX="53.0" layoutY="272.0" onAction="#hadleShowSellManager" styleClass="mainButton" text="주문내역관리" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="221.0" />
             <JFXButton layoutX="53.0" layoutY="240.0" onAction="#hadleShowProductManager" styleClass="mainButton" text="제품관리" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="181.0" />
-            <JFXButton layoutY="261.0" styleClass="mainButton" text="통계" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="261.0" />
+            <JFXButton layoutY="261.0" onAction="#handleStateView" styleClass="mainButton" text="통계" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="261.0" />
          </children>
       </AnchorPane>
    </left>

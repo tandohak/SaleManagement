@@ -255,6 +255,18 @@ public class MainViewController  {
 	}
 	
 
+	@FXML
+	private void handleStateView() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/StateView.fxml"));
+			BorderPane pane = (BorderPane)loader.load();
+			
+			admNode.setCenter(pane);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void init(RootLayoutController rootLayoutController) {
 		this.rootLayoutController = rootLayoutController;
 	}

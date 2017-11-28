@@ -38,7 +38,7 @@
             <JFXButton layoutX="53.0" layoutY="207.0" onAction="#hadleShowAccountManager" styleClass="mainButton" text="거래처조회" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="221.0" />
             <JFXButton layoutX="1.0" layoutY="261.0" onAction="#hadleShowSellManager" styleClass="mainButton" text="거래내역관리" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="261.0" />
             <JFXButton layoutX="1.0" layoutY="301.0" onAction="#hadleShowInsertSell" styleClass="mainButton" text="거래등록" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="301.0" />
-            <JFXButton layoutX="1.0" layoutY="341.0" styleClass="mainButton" text="통계" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="341.0" />
+            <JFXButton layoutX="1.0" layoutY="341.0" onAction="#handleStateView" styleClass="mainButton" text="통계" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="341.0" />
          </children>
       </AnchorPane>
    </left>
