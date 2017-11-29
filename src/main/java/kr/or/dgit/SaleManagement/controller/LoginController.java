@@ -71,19 +71,34 @@ public class LoginController {
 		
 		Sales saleFind = salesService.findSalesByCode(sales);
 		Account accFind = accService.findAccountByCode(acc);
-			
+				
 		boolean checkId = false;
-
-		if (saleFind != null) {
+		
+		
+		
+		
+		if ((saleFind != null)) {
 			String findSalePw = saleFind.getSalePw().trim();
-			if(findSalePw.equals(pwTf.getText().trim())) {
+			boolean saleLeaveCk = saleFind.getSaleLeave().equals("true");
+			if(findSalePw.equals(pwTf.getText().trim()) && saleLeaveCk) {
 				checkId = true;
 				loginId = saleFind.getSaleId();
 			}			
 		}
 
-		if (accFind != null) {
+		if ((accFind != null)) {
 			String findAccPw = accFind.getAccPw().trim();
+			boolean accAdmitCk = accFind.getAccAdmit().equals("true");
+			if(!accAdmitCk) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle(null);
+				alert.setHeaderText(null);
+				alert.setContentText("허가받은 아이디가 아닙니다. 관리자에게 문의하세요.");
+
+				alert.showAndWait();
+				return;
+			}
+			
 			if(findAccPw.equals(pwTf.getText().trim())) {
 				checkId = true;
 				loginId = accFind.getAccId();
