@@ -563,7 +563,7 @@ public class ProductController {
 			alert.setHeaderText(null);
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
-			e.printStackTrace();
+			e.printStackTrace();   
 			return false;
 		}		
 	}
