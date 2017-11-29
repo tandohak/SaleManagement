@@ -21,9 +21,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -35,6 +37,7 @@ import kr.or.dgit.SaleManagement.controller.dialogController.AddClassDialogContr
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.BigClass;
 import kr.or.dgit.SaleManagement.dto.Product;
+import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.dto.SmallClass;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.BigClassService;
@@ -166,6 +169,19 @@ public class ProductController {
 		bigCb.setItems(biglist);
 		admitCb.setItems(abminlist);
 		admitCb.setValue("true");
+		
+		pdtTable.setRowFactory(tv -> {
+			 TableRow<Product> row = new TableRow<>();
+			    row.setOnMouseClicked(event -> {
+			        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
+			             && event.getClickCount() == 2) {
+			        	Product clickedRow = row.getItem();
+			            showEditDialog(clickedRow);
+			        }
+			    });
+			    return row ;
+		});	
+		
 		checkTable(true);
         
 	}
@@ -288,6 +304,12 @@ public class ProductController {
 		sortedData.comparatorProperty().bind(pdtTable.comparatorProperty());
 	
         pdtTable.setItems(sortedData);
+        
+        pdtTable.setRowFactory(tv -> {
+			 TableRow<Product> row = new TableRow<>();
+			    row.setOnMouseClicked(null);
+			    return row ;
+		});	
 	}
 	
 	@FXML
@@ -435,13 +457,6 @@ public class ProductController {
 
 	}
 	
-	@FXML
-	private void onClickSaleEdit(MouseEvent event) {
-		if(2 == event.getClickCount()) {
-			getCellMenuAction();
-		}
-	}
-	
 	
 	@FXML
 	public void getCellMenuAction() {
@@ -458,7 +473,13 @@ public class ProductController {
 			e.printStackTrace();
 			e.printStackTrace();
 			return ;
-		}try {
+		}
+		
+		showEditDialog(pdt);	
+	}
+
+	private void showEditDialog(Product pdt) {
+		try {
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(MainApp.class.getResource("view/dialog/AdminInsertProduct.fxml"));
 	        BorderPane page = (BorderPane) loader.load();
@@ -482,17 +503,13 @@ public class ProductController {
 	        dialogStage.showAndWait();
 
 	        if(controller.isOkClicked()) {
-//	        	System.out.println(controller.getProduct());
 	        	pdtService.updatePdt(controller.getProduct());
 	        	checkTable(dbCheck.isSelected());
 	    		pdtTable.refresh();
-	    		
 	        }
 	   } catch (IOException e) {
 	        e.printStackTrace();
-	   }	
-		
-		
+	   }
 	}
 	
 	private void refreshTableAll() {

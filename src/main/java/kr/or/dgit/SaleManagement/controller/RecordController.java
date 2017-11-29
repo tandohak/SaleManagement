@@ -22,9 +22,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -171,6 +173,18 @@ public class RecordController {
 			sortedData.comparatorProperty().bind(recTable.comparatorProperty());
 			
 	        recTable.setItems(sortedData);
+	        
+	        recTable.setRowFactory(tv -> {
+				 TableRow<Record> row = new TableRow<>();
+				    row.setOnMouseClicked(event -> {
+				        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
+				             && event.getClickCount() == 2) {
+				        	Record clickedRow = row.getItem();
+				            showEditDialog(clickedRow);
+				        }
+				    });
+				    return row ;
+			});
 		}
 		
 		public void setSaleUserSetting(Sales saleUser) {
@@ -285,16 +299,6 @@ public class RecordController {
 		}
 		
 		@FXML
-		private void onClickSaleEdit(MouseEvent event) {
-			if(isAccUserLogin) {
-				return;
-			}
-			if(2 == event.getClickCount()) {
-				getCellMenuAction();
-			}
-		}
-		
-		@FXML
 		private void getCellMenuAction() {		
 			Record rec = recTable.getSelectionModel().getSelectedItem();
 			
@@ -306,11 +310,16 @@ public class RecordController {
 				alert.setHeaderText(null);
 				alert.setContentText(e.getMessage());
 				alert.showAndWait();
-				e.printStackTrace();
+				e.printStackTrace(); 
 				e.printStackTrace();
 				return ;
 			}
 			
+			showEditDialog(rec);
+			  
+		}
+
+		private void showEditDialog(Record rec) {
 			try {
 		        FXMLLoader loader = new FXMLLoader();
 		        loader.setLocation(MainApp.class.getResource("view/dialog/RecordEditDialog.fxml"));
@@ -340,7 +349,6 @@ public class RecordController {
 		   } catch (IOException e) {
 		        e.printStackTrace();
 		   }
-			  
 		}
 		
 		private void checkAlert(boolean isOk,String pwck) throws Exception {

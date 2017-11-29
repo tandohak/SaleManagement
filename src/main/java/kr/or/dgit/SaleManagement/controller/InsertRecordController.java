@@ -18,9 +18,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -135,6 +137,19 @@ public class InsertRecordController {
 		});		
 		
 		recTable.setItems(myList);
+		
+		recTable.setRowFactory(tv -> {
+			 TableRow<Record> row = new TableRow<>();
+			    row.setOnMouseClicked(event -> {
+			        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
+			             && event.getClickCount() == 2) {
+
+			        	Record clickedRow = row.getItem();
+			            showEditDialog(clickedRow);
+			        }
+			    });
+			    return row ;
+		});
 	}
 	
 	@FXML
@@ -369,6 +384,10 @@ public class InsertRecordController {
 			return ;
 		}
 
+		showEditDialog(rec);		  
+	}
+
+	private void showEditDialog(Record rec) {
 		try {
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(MainApp.class.getResource("view/dialog/RecordEditDialog.fxml"));
@@ -395,7 +414,7 @@ public class InsertRecordController {
 	        }
 	   } catch (IOException e) {
 	        e.printStackTrace();
-	   }		  
+	   }
 	}
 	
 	private void checkAlert(boolean isOk,String pwck) throws Exception {
