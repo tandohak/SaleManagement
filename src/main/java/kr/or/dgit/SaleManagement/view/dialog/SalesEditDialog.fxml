@@ -105,8 +105,8 @@
             </ImageView>
             <TextField fx:id="imgNameTf" editable="false" layoutX="107.0" layoutY="48.0" prefHeight="23.0" prefWidth="127.0" />
             <Label layoutX="107.0" layoutY="25.0" text="이미지추가" />
-            <JFXButton layoutX="244.0" layoutY="48.0" onAction="#openDialogFileChooser" text="삽입하기" />
-            <JFXButton layoutX="288.0" layoutY="324.0" onAction="#searchAddrAction" styleClass="searchBtn" />
+            <JFXButton fx:id="openDialogBtn" layoutX="244.0" layoutY="48.0" onAction="#openDialogFileChooser" text="삽입하기" />
+            <JFXButton fx:id="addrSearchBtn" layoutX="288.0" layoutY="324.0" onAction="#searchAddrAction" styleClass="searchBtn" />
             <ImageView fx:id="checkPwIcon" fitHeight="22.0" fitWidth="18.0" layoutX="324.0" layoutY="226.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>

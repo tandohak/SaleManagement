@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -62,6 +63,11 @@ public class AccountEditDialogController {
 		
 	}
 	private ObservableList<String> abminlist = FXCollections.observableArrayList();
+	private boolean accUserLogin = false;
+	
+	public void setAccUserSetting() {
+		accUserLogin = true;
+	}
 	
 	public void setAccount(Account account) {
 		this.account = account;
@@ -74,10 +80,11 @@ public class AccountEditDialogController {
 		String addrs =  account.getAccAddr();
 		addrZipTf.setText(addrs.substring(addrs.indexOf("[")+1, addrs.indexOf("]")));
 		addrTf.setText(addrs.substring(addrs.indexOf("]")+1, addrs.length()));	
-		
-		abminlist.add("true");
-		abminlist.add("false");
-		admitCb.setItems(abminlist);
+		if(!accUserLogin) {
+			abminlist.add("true");
+			abminlist.add("false");
+			admitCb.setItems(abminlist);
+		}
 		admitCb.setValue(account.getAccAdmit());
 	}
 

@@ -29,6 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.ResizeFeatures;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
@@ -37,6 +38,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -100,6 +102,7 @@ public class SalesController {
 	private boolean idCheckOk;
 
 	private boolean pwCheckOk;
+	private boolean saleUserLogin = false;
 	
 	@FXML
 	private void initialize() {
@@ -269,12 +272,15 @@ public class SalesController {
 	
 	@FXML
 	public void setSaleUserSetting() {
+		saleUserLogin = true;
 		AnchorPane anchorBotton = new AnchorPane();
 		anchorBotton.setPrefHeight(73);
 		AnchorPane anchorTop = (AnchorPane)pane.getTop();
 		anchorTop.setPrefHeight(80);
 		pane.setBottom(anchorBotton);
 		dbCheck.setVisible(false);
+		chckTc.setVisible(false);
+		saleTable.columnResizePolicyProperty();
 	}
 	
 	@FXML
@@ -296,13 +302,17 @@ public class SalesController {
 	
 	@FXML
 	private void onClickSaleEdit(MouseEvent event) {
+		if(saleUserLogin) {
+        	return;
+        }
+		
 		if(2 == event.getClickCount()) {
 			getCellMenuAction();
 		}
 	}
 	
 	@FXML
-	private void getCellMenuAction() {		
+	private void getCellMenuAction() {				
 		Sales sales = saleTable.getSelectionModel().getSelectedItem();
 		
 		try {
@@ -337,9 +347,8 @@ public class SalesController {
 		        controller.setSales(sales);
 		        
 		        dialogStage.showAndWait();
-
+		        
 		        if(controller.isOkClicked()) {
-//		        	ㄴSystem.out.println(controller.getSales());
 		        	saleSerivce.updateSales(controller.getSales());
 		        	checkTable(dbCheck.isSelected());
 		    		saleTable.refresh();

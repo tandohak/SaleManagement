@@ -113,8 +113,9 @@ public class MainViewController  {
 	        
 	        AccountEditDialogController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
+	        controller.setAccUserSetting();
 	        controller.setAccount(accUser);
-	        controller.changeHeader();
+	        controller.changeHeader();	        
 	        dialogStage.showAndWait();
 	        
 	        if(controller.isOkClicked()) {

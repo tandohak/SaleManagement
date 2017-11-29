@@ -247,18 +247,26 @@ public class InsertRecordController {
 		sales = saleUser;
 		saleTf.setText(saleUser.getSaleName());
 		saleSearchBtn.setOnAction(null);
+		saleTf.setOnMouseClicked(event -> {
+			saleMosueClickAlert();
+		});
+		
 		saleSearchBtn.setOnMouseClicked(event -> {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle(null);
-			alert.setHeaderText(null);
-			alert.setContentText("사원 검색은 관리자만 가능합니다.");
-		    alert.showAndWait();
+			saleMosueClickAlert();
 		});
 		saleLevelTf.setText(saleUser.getSaleLevel());
 		SalesLevel saleDis = sLevelService.findOneSalesLevel(new SalesLevel(saleUser.getSaleLevel()));	
 		disrateTf.setText(saleDis.getSalDisrate()+"%");
 		isUserLogin = true;
 		
+	}
+
+	private void saleMosueClickAlert() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(null);
+		alert.setHeaderText(null);
+		alert.setContentText("사원 검색은 관리자만 가능합니다.");
+		alert.showAndWait();
 	}
 	
 	@FXML
@@ -328,7 +336,7 @@ public class InsertRecordController {
 	}
 	
 	@FXML
-	private void insertRecordAction(){		
+	private void insertRecordAction(){				
 		 for(Record rec : myList) {	    
 	    	 rec.setRecNo(recordSerivce.findMaxCode()+1);
 	    	 recordSerivce.insertRecord(rec);
@@ -433,7 +441,7 @@ public class InsertRecordController {
 	}
 	
 	private boolean tfComfrimField() {
-		try {	
+		try {				
 			tfUtil.tfComfrim(accTf);
 			tfUtil.tfComfrim(saleTf);			
 			tfUtil.tfComfrim(pdtTf);
@@ -443,6 +451,10 @@ public class InsertRecordController {
 			tfUtil.tfComfrim(disPriceTf);
 			tfUtil.tfComfrim(sumPriceTf);			
 			tfUtil.tfComfrim(unitPriceTf);
+			if(Integer.parseInt(countTf.getText()) <= 0) {
+				countTf.requestFocus();
+				throw new Exception("수량은 최소 1이상의 숫자를 입력해야합니다.");				
+			}
 			tfUtil.regexTfComfirmNumber(countTf);
 			return true;
 		} catch (Exception e) {

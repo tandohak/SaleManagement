@@ -83,6 +83,7 @@ public class AccountController {
 	private AccountLevelService aLevelService;
 	private boolean idCheckOk;
 	private boolean pwCheckOk;
+	private boolean isSaleUserLogin = false;
 
 	@FXML
 	private void initialize() {
@@ -229,12 +230,14 @@ public class AccountController {
 	}
 	
 	public void setSaleUserSetting() {
+		isSaleUserLogin = true;
 		AnchorPane anchorBotton = new AnchorPane();
 		anchorBotton.setPrefHeight(73);
 		AnchorPane anchorTop = (AnchorPane)pane.getTop();
 		anchorTop.setPrefHeight(80);
 		pane.setBottom(anchorBotton);
 		dbCheck.setVisible(false);
+		chckTc.setVisible(false);
 	}
 	
 	@FXML
@@ -253,6 +256,9 @@ public class AccountController {
 	
 	@FXML
 	private void onClickSaleEdit(MouseEvent event) {
+		if(isSaleUserLogin) {
+			return;
+		}
 		if(2 == event.getClickCount()) {
 			getCellMenuAction();
 		}
@@ -292,7 +298,7 @@ public class AccountController {
 		        controller.setAccount(account);
 		        
 		        dialogStage.showAndWait();
-
+		        
 		        if(controller.isOkClicked()) {
 		        	accountService.updateAccount(controller.getAccount());
 		        	

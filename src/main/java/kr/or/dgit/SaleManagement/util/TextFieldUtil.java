@@ -217,8 +217,8 @@ public class TextFieldUtil {
 	}
 	
 	public void regexTfComfirmTel(TextField telTf) throws Exception {
-		String pattern = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$";
-		String errmsg = "핸드폰 형식에 맞춰 입력해 주세요 ex) 010-1234-1234";
+		String pattern = "^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$";
+		String errmsg = "형식에 맞춰 입력해 주세요 \n ex) 010-1234-1234 , 053-1234-1234";
 
 		Pattern p = Pattern.compile(pattern);
 		

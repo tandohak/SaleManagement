@@ -71,6 +71,7 @@ public class RecordController {
 		private ProductService pdtService;
 	    private RecordSerivce recService;
 		private boolean isUserLogin = false;
+		private boolean isAccUserLogin;
 	    
 		@FXML
 		private void initialize() {
@@ -214,12 +215,13 @@ public class RecordController {
 			sortedData.comparatorProperty().bind(recTable.comparatorProperty());
 			
 	        recTable.setItems(sortedData);
-	        
+	    
 		}
 		
 		public void setUserAccSetting(Account accUser) {
+			isAccUserLogin = true;
 			btnBar.setVisible(false);
-			
+			chckTc.setVisible(false);
 			FilteredList<Record> filterData = new FilteredList<>(myList, r -> true);
 			
 			filterData.setPredicate(record ->{	
@@ -284,6 +286,9 @@ public class RecordController {
 		
 		@FXML
 		private void onClickSaleEdit(MouseEvent event) {
+			if(isAccUserLogin) {
+				return;
+			}
 			if(2 == event.getClickCount()) {
 				getCellMenuAction();
 			}

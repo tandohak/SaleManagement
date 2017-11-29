@@ -46,7 +46,7 @@
                         <Label text="거래처" />
                         <HBox prefHeight="31.0" prefWidth="138.0" style="-fx-spacing: 0;">
                            <children>
-                              <TextField fx:id="accTf" editable="false" prefHeight="23.0" prefWidth="115.0" styleClass="searchTF" />
+                              <TextField fx:id="accTf" editable="false" onMouseClicked="#searchAccountAction" prefHeight="23.0" prefWidth="115.0" styleClass="searchTF" />
                               <Button mnemonicParsing="false" onAction="#searchAccountAction" styleClass="searchBtn" textOverrun="CLIP" />
                            </children>
                         </HBox>
@@ -59,7 +59,7 @@
                         <Label text="제품명" />
                         <HBox prefHeight="31.0" prefWidth="138.0" style="-fx-spacing: 0;">
                            <children>
-                              <TextField fx:id="pdtTf" editable="false" prefWidth="115.0" styleClass="searchTF" />
+                              <TextField fx:id="pdtTf" editable="false" onMouseClicked="#searchProductAction" prefWidth="115.0" styleClass="searchTF" />
                               <Button mnemonicParsing="false" onAction="#searchProductAction" styleClass="searchBtn" textOverrun="CLIP" />
                            </children>
                         </HBox>
@@ -80,7 +80,7 @@
                         <Label text="관리담당자" />
                         <HBox prefHeight="31.0" prefWidth="138.0" style="-fx-spacing: 0;">
                            <children>
-                              <TextField fx:id="saleTf" editable="false" prefWidth="115.0" styleClass="searchTF" />
+                              <TextField fx:id="saleTf" editable="false" onMouseClicked="#searchSalesAction" prefWidth="115.0" styleClass="searchTF" />
                               <Button fx:id="saleSearchBtn" mnemonicParsing="false" onAction="#searchSalesAction" prefHeight="0.0" styleClass="searchBtn" textOverrun="CLIP" />
                            </children>
                         </HBox>
