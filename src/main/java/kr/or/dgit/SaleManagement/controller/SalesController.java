@@ -28,6 +28,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.ResizeFeatures;
 import javafx.scene.control.TextField;
@@ -35,6 +36,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -47,6 +49,7 @@ import javafx.util.Callback;
 import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.dialogController.AddrDialogController;
 import kr.or.dgit.SaleManagement.controller.dialogController.SalesEditDialogController;
+import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.AddrItem;
 import kr.or.dgit.SaleManagement.dto.Record;
 import kr.or.dgit.SaleManagement.dto.Sales;
@@ -167,6 +170,19 @@ public class SalesController {
 		addrTc.setCellValueFactory(cellData -> cellData.getValue().getSaleAddrProperty());;
 	    
 		checkTable(false);
+		
+		saleTable.setRowFactory(tv -> {
+			 TableRow<Sales> row = new TableRow<>();
+			    row.setOnMouseClicked(event -> {
+			        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
+			             && event.getClickCount() == 2) {
+
+			            Sales clickedRow = row.getItem();
+			            showEditDialog(clickedRow);
+			        }
+			    });
+			    return row ;
+		});
 	}
 	
 	@FXML
@@ -281,6 +297,11 @@ public class SalesController {
 		dbCheck.setVisible(false);
 		chckTc.setVisible(false);
 		saleTable.columnResizePolicyProperty();
+		saleTable.setRowFactory(tv -> {
+			 TableRow<Sales> row = new TableRow<>();
+			    row.setOnMouseClicked(null);
+			    return row ;
+		});
 	}
 	
 	@FXML
@@ -301,17 +322,6 @@ public class SalesController {
 	}
 	
 	@FXML
-	private void onClickSaleEdit(MouseEvent event) {
-		if(saleUserLogin) {
-        	return;
-        }
-		
-		if(2 == event.getClickCount()) {
-			getCellMenuAction();
-		}
-	}
-	
-	@FXML
 	private void getCellMenuAction() {				
 		Sales sales = saleTable.getSelectionModel().getSelectedItem();
 		
@@ -328,6 +338,10 @@ public class SalesController {
 			return ;
 		}
 
+		showEditDialog(sales);	
+	}
+
+	private void showEditDialog(Sales sales) {
 		try {
 		        FXMLLoader loader = new FXMLLoader();
 		        loader.setLocation(MainApp.class.getResource("view/dialog/SalesEditDialog.fxml"));
@@ -356,7 +370,7 @@ public class SalesController {
 		        }
 		   } catch (IOException e) {
 		        e.printStackTrace();
-		   }	
+		   }
 	}
 	
 	

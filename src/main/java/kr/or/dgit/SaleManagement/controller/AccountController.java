@@ -2,8 +2,9 @@ package kr.or.dgit.SaleManagement.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
+
+import javax.swing.JTextField;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,12 +25,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -42,7 +45,6 @@ import kr.or.dgit.SaleManagement.controller.dialogController.AddrDialogControlle
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.AccountLevel;
 import kr.or.dgit.SaleManagement.dto.AddrItem;
-import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.service.AccountLevelService;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.util.TextFieldUtil;
@@ -227,6 +229,18 @@ public class AccountController {
 		
 		accTable.setItems(sortedData);	
 		
+		accTable.setRowFactory(tv -> {
+			 TableRow<Account> row = new TableRow<>();
+			    row.setOnMouseClicked(event -> {
+			        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
+			             && event.getClickCount() == 2) {
+
+			            Account clickedRow = row.getItem();
+			            showEditDialog(clickedRow);
+			        }
+			    });
+			    return row ;
+		});
 	}
 	
 	public void setSaleUserSetting() {
@@ -238,6 +252,11 @@ public class AccountController {
 		pane.setBottom(anchorBotton);
 		dbCheck.setVisible(false);
 		chckTc.setVisible(false);
+		accTable.setRowFactory(tv -> {
+			 TableRow<Account> row = new TableRow<>();
+			    row.setOnMouseClicked(null);
+			    return row ;
+		});
 	}
 	
 	@FXML
@@ -254,15 +273,6 @@ public class AccountController {
 		accTable.setItems(myList);
 	}
 	
-	@FXML
-	private void onClickSaleEdit(MouseEvent event) {
-		if(isSaleUserLogin) {
-			return;
-		}
-		if(2 == event.getClickCount()) {
-			getCellMenuAction();
-		}
-	}
 	
 	@FXML
 	private void getCellMenuAction() {		
@@ -280,6 +290,10 @@ public class AccountController {
 			return ;
 		}
 
+		showEditDialog(account);	
+	}
+
+	private void showEditDialog(Account account) {
 		try {
 		        FXMLLoader loader = new FXMLLoader();
 		        loader.setLocation(MainApp.class.getResource("view/dialog/AccountEditDialog.fxml"));
@@ -307,7 +321,7 @@ public class AccountController {
 		        }
 		   } catch (IOException e) {
 		        e.printStackTrace();
-		   }	
+		   }
 	}
 	
 	@FXML
