@@ -156,6 +156,13 @@ public class ProductController {
 
 		refreshTableAll();
 		
+		BigClass b = new BigClass();
+		SmallClass s = new SmallClass();
+		b.setBigName("대분류");
+		s.setSmallName("소분류");
+		bigCb.setValue(b);
+		smallCb.setValue(s);
+		
 		bigCb.setItems(biglist);
 		admitCb.setItems(abminlist);
 		admitCb.setValue("true");
@@ -507,6 +514,7 @@ public class ProductController {
 	
 	private void resetBigCb() {
 		smallService = SmallClassService.getInstance();
+		biglist = FXCollections.observableArrayList();
 		
 		List<BigClass> blist = bigService.findAll();
 		for(BigClass big : blist) {	
@@ -522,7 +530,9 @@ public class ProductController {
 			tfUtil.regexTfComfirmAccProductName(nameTf);
 			tfUtil.tfComfrimAcc(accCodeTf);
 			tfUtil.cbComfrim(bigCb);
+			tfUtil.cbComfrimBig(bigCb);
 			tfUtil.cbComfrim(smallCb);
+			tfUtil.cbComfrimSmall(smallCb);
 			tfUtil.cbComfrim(admitCb);
 			tfUtil.regexTfComfirmNumber(priceTf);
 			tfUtil.regexTfComfirmNumber(costTf);
