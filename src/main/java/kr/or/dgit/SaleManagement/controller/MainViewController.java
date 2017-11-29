@@ -86,7 +86,7 @@ public class MainViewController  {
 		        SalesEditDialogController controller = loader.getController();
 		        controller.setDialogStage(dialogStage);
 		        controller.setSales(saleUser);
-		        controller.changeHeader();
+		        controller.setSaleUserSetting();
 		        dialogStage.showAndWait();
 
 		        if(controller.isOkClicked()) {

@@ -288,7 +288,7 @@ public class RecordController {
 				    return row ;
 			});
 		}
-
+		
 		@FXML
 		private void deleteCellMenuAction() {
 			int index = recTable.getSelectionModel().getSelectedIndex();

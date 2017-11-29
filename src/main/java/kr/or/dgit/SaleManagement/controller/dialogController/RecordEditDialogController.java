@@ -179,7 +179,7 @@ public class RecordEditDialogController {
 			page = (BorderPane) loader.load();
 			
 			Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Product");
+	        dialogStage.setTitle("거래처 검색");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
 	        dialogStage.initOwner(pane.getScene().getWindow());
 	        Scene scene = new Scene(page);
@@ -239,7 +239,7 @@ public class RecordEditDialogController {
 			page = (BorderPane) loader.load();
 			
 			Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Sales");
+	        dialogStage.setTitle("사원 검색");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
 	        dialogStage.initOwner(pane.getScene().getWindow());
 	        Scene scene = new Scene(page);
@@ -297,7 +297,7 @@ public class RecordEditDialogController {
 			page = (BorderPane) loader.load();
 			
 			Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Product");
+	        dialogStage.setTitle("제품 검색");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
 	        dialogStage.initOwner(pane.getScene().getWindow());
 	        Scene scene = new Scene(page);

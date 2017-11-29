@@ -23,6 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -92,8 +93,9 @@ public class SalesEditDialogController {
 		}
 	}
 
-	public void changeHeader() {
+	public void setSaleUserSetting() {
 		headLabel.setText("회원 정보 수정");
+		admitCb.setDisable(true);
 	}
 
 	public void setLevellist(ObservableList<SalesLevel> levellist) {
