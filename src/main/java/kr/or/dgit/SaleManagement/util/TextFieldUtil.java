@@ -8,7 +8,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import kr.or.dgit.SaleManagement.dto.Account;
+import kr.or.dgit.SaleManagement.dto.BigClass;
 import kr.or.dgit.SaleManagement.dto.Sales;
+import kr.or.dgit.SaleManagement.dto.SmallClass;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.SalesService;
 import javafx.scene.control.ComboBox;
@@ -29,6 +31,18 @@ public class TextFieldUtil {
 	public void cbComfrim(ComboBox<?> cb) throws Exception {
 		if(cb.getValue() == null) {
 			throw new Exception("콤보박스를 선택하세요.");
+		}
+	}
+	
+	public void cbComfrimBig(ComboBox<BigClass> cb) throws Exception {	
+		if(cb.getValue().getBigName().equals("대분류")) {			
+			throw new Exception("대분류를 선택하세요.");
+		}
+	}
+	
+	public void cbComfrimSmall(ComboBox<SmallClass> cb) throws Exception {	
+		if(cb.getValue().getSmallName().equals("소분류")) {			
+			throw new Exception("소분류를 선택하세요.");
 		}
 	}
 	
