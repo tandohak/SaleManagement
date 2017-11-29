@@ -48,13 +48,14 @@
                   </TableColumn>
                   <TableColumn fx:id="noTc" editable="false" prefWidth="38.0" text="No." />
                 <TableColumn fx:id="dateTc" editable="false" prefWidth="111.0" text="거래일자" />
-                <TableColumn fx:id="accNameTc" editable="false" prefWidth="110.0" text="거래처" />
-                  <TableColumn fx:id="pdtNameTc" editable="false" prefWidth="108.0" text="제품명" />
-                  <TableColumn fx:id="sumPriceTc" editable="false" prefWidth="82.0" text="판매금액" />
-                  <TableColumn fx:id="dispriceTc" editable="false" prefWidth="90.0" text="할인금액" />
-                  <TableColumn fx:id="disrateTc" editable="false" prefWidth="84.0" text="할인율" />
-                  <TableColumn fx:id="countTc" editable="false" prefWidth="93.0" text="판매수량" />
-                  <TableColumn fx:id="saleNameTc" editable="false" prefWidth="151.0" text="관리담당자" />
+                <TableColumn fx:id="accNameTc" editable="false" prefWidth="113.0" text="거래처" />
+                  <TableColumn fx:id="pdtNameTc" editable="false" prefWidth="132.0" text="제품명" />
+                  <TableColumn fx:id="sumPriceTc" editable="false" prefWidth="95.0" text="판매금액" />
+                  <TableColumn fx:id="dispriceTc" editable="false" prefWidth="97.0" text="할인금액" />
+                  <TableColumn fx:id="disrateTc" editable="false" prefWidth="88.0" text="할인율" />
+                  <TableColumn fx:id="countTc" editable="false" prefWidth="88.0" text="판매수량" />
+                  <TableColumn fx:id="saleNameTc" editable="false" prefWidth="105.0" text="관리담당자" />
+                  <TableColumn fx:id="telTc" prefWidth="120.0" text="연락처" visible="false" />
               </columns>
             </TableView>
          </children>

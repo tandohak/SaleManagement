@@ -61,6 +61,7 @@ public class RecordController {
 	    @FXML private TableColumn<Record, Integer> disrateTc;
 	    @FXML private TableColumn<Record, Integer> countTc;
 	    @FXML private TableColumn<Record, String> saleNameTc;
+	    @FXML private TableColumn<Record, String> telTc;
 	    @FXML private ButtonBar btnBar;
 	    
 	    private TextFieldUtil tfUtil = new TextFieldUtil();
@@ -130,7 +131,8 @@ public class RecordController {
 			dispriceTc.setCellValueFactory(cellData -> cellData.getValue().getRecDispriceProperty().asObject());;
 			disrateTc.setCellValueFactory(cellData -> cellData.getValue().getRecDisrateProperty().asObject());;
 			countTc.setCellValueFactory(cellData -> cellData.getValue().getRecCountProperty().asObject());;
-			saleNameTc.setCellValueFactory(cellData -> cellData.getValue().getSaleNameProperty());		
+			saleNameTc.setCellValueFactory(cellData -> cellData.getValue().getSaleNameProperty());	
+			telTc.setCellValueFactory(cellData -> cellData.getValue().getSaleTelProperty());
 			
 			noTc.setSortType(TableColumn.SortType.DESCENDING);
 			
@@ -228,14 +230,18 @@ public class RecordController {
 			
 			sortedData.comparatorProperty().bind(recTable.comparatorProperty());
 			
-	        recTable.setItems(sortedData);
-	    
+	        recTable.setItems(sortedData);	    
 		}
 		
 		public void setUserAccSetting(Account accUser) {
 			isAccUserLogin = true;
 			btnBar.setVisible(false);
 			chckTc.setVisible(false);
+			telTc.setVisible(true);
+			saleNameTc.setPrefWidth(75);
+			dispriceTc.setPrefWidth(50);
+			disrateTc.setPrefWidth(50);
+			telTc.setPrefWidth(120);
 			FilteredList<Record> filterData = new FilteredList<>(myList, r -> true);
 			
 			filterData.setPredicate(record ->{	
@@ -275,8 +281,14 @@ public class RecordController {
 			sortedData.comparatorProperty().bind(recTable.comparatorProperty());
 			
 	        recTable.setItems(sortedData);
+	        
+	        recTable.setRowFactory(tv -> {
+				 TableRow<Record> row = new TableRow<>();
+				    row.setOnMouseClicked(null);
+				    return row ;
+			});
 		}
-		
+
 		@FXML
 		private void deleteCellMenuAction() {
 			int index = recTable.getSelectionModel().getSelectedIndex();
@@ -377,7 +389,7 @@ public class RecordController {
 				rec.setPdtName(pdt.getPdtName());
 				rec.setSaleName(sale.getSaleName());
 				rec.setSumPrice(pdt.getPdtCost()*rec.getRecCount());
-				
+				rec.setSaleTel(sale.getSaleTel());
 				myList.add(rec);				
 			}		
 		}

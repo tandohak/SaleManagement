@@ -210,7 +210,7 @@ drop view if exists salemanagement.product_amount;
 create view salemanagement.product_amount as
  select pdtCode, name,sum(count) as amount,sum(price) as priceAll ,sum(cost) as costAll, sum(disprice) as dispriceAll,
  (sum(price)-sum(cost)-sum(disprice)) as Profit,
- round(sum(price)/(sum(price)-sum(cost)-sum(disprice)))as margin 
+ round(((sum(price)-sum(cost)-sum(disprice))*100/sum(price)))as margin
  from salemanagement.record r right join salemanagement.product p
  on r.pCode = p.pdtCode
  where count is not null
@@ -222,7 +222,7 @@ create view salemanagement.small_amount as
  select small,s.name, sum(count) as amount,
  sum(price) as priceAll, sum(cost) as costAll,sum(disprice) as dispriceAll,
  (sum(price)-sum(cost)-sum(disprice)) as Profit,
- round(sum(price)/(sum(price)-sum(cost)-sum(disprice)))as margin
+ round(((sum(price)-sum(cost)-sum(disprice))*100/sum(price)))as margin
  from salemanagement.smallclass s left join salemanagement.product p 
  on s.small = p.class
  left join salemanagement.record r
@@ -237,7 +237,7 @@ create view salemanagement.bigclass_amount as
  sum(price) as priceAll, sum(cost) as costAll,
  sum(disprice) as dispriceAll,
  (sum(price)-sum(cost)-sum(disprice)) as Profit ,
- round(sum(price)/(sum(price)-sum(cost)-sum(disprice)))as margin
+ round(((sum(price)-sum(cost)-sum(disprice))*100/sum(price)))as margin
  from salemanagement.smallclass s left join salemanagement.product p 
  on s.small = p.class
  left join salemanagement.record r

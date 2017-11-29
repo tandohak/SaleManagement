@@ -31,6 +31,7 @@ public class Record {
 	private StringProperty accName = new SimpleStringProperty();
 	private StringProperty pdtName = new SimpleStringProperty();
 	private StringProperty saleName = new SimpleStringProperty();
+	private StringProperty saleTel = new SimpleStringProperty();
 	private IntegerProperty profit = new SimpleIntegerProperty();
 	private IntegerProperty margin = new SimpleIntegerProperty();
 	private IntegerProperty marginPer = new SimpleIntegerProperty();
@@ -38,6 +39,19 @@ public class Record {
 
 	private StringProperty formatCount = new SimpleStringProperty();
 	private StringProperty formatCost = new SimpleStringProperty();
+	
+	
+	
+	public String getSaleTel() {
+		return saleTel.get();
+	}
+	public StringProperty getSaleTelProperty() {
+		return saleTel;
+	}
+
+	public void setSaleTel(String saleTel) {
+		this.saleTel.set(saleTel);
+	}
 
 	public StringProperty ChangeFormat(int number, String type) {
 		StringProperty strReturn;

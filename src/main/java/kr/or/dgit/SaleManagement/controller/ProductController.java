@@ -305,11 +305,6 @@ public class ProductController {
 	
         pdtTable.setItems(sortedData);
         
-        pdtTable.setRowFactory(tv -> {
-			 TableRow<Product> row = new TableRow<>();
-			    row.setOnMouseClicked(null);
-			    return row ;
-		});	
 	}
 	
 	@FXML
