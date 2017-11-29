@@ -569,7 +569,7 @@ public class StateController {
 	@FXML
 	private void showPdtChart() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/graph/ProductState.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/graph/ProductState.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 		
 			pdtPane.setCenter(pane);
@@ -581,7 +581,7 @@ public class StateController {
 	@FXML
 	private void showBigClassChart() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/graph/BigClassState.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/graph/BigClassState.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 		
 			pdtPane.setCenter(pane);
@@ -593,7 +593,7 @@ public class StateController {
 	@FXML
 	private void showSmallClassChart() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/graph/SmallClassState.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/graph/SmallClassState.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 		
 			pdtPane.setCenter(pane);

@@ -42,7 +42,6 @@ public class RootLayoutController {
 	private void initialize() throws IOException {
 		setWindowMove();
 		
-		
 		changeLoginView(false);
 	}	
 

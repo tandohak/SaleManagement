@@ -130,7 +130,7 @@ public class MainViewController  {
 	@FXML
 	private void hadleShowSalesManager() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/SalesManagement.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/management/SalesManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			SalesController controller = loader.getController();
 			if(!saleUser.getSaleId().equals("admin")) {
@@ -145,7 +145,7 @@ public class MainViewController  {
 	@FXML
 	private void hadleShowProductManager() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/ProductManager.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/management/ProductManager.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			ProductController controller = loader.getController();
 			if(accUser != null) {
@@ -160,7 +160,7 @@ public class MainViewController  {
 	@FXML
 	private void hadleShowInsertSell() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/InsertRecordManagement.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/management/InsertRecordManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			InsertRecordController controller = loader.getController();
 			if(!saleUser.getSaleId().equals("admin")) {
@@ -175,7 +175,7 @@ public class MainViewController  {
 	@FXML
 	private void hadleShowAccountManager() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/AccountManagement.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/management/AccountManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			AccountController controller = loader.getController();
 			if(!saleUser.getSaleId().equals("admin")) {
@@ -220,7 +220,7 @@ public class MainViewController  {
 	@FXML
 	private void hadleShowSellManager() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/RecordManagement.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/management/RecordManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			RecordController controller = loader.getController();
 			if(accUser != null) {
@@ -259,7 +259,7 @@ public class MainViewController  {
 	@FXML
 	private void handleStateView() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/management/StateView.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/management/StateView.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
 			
 			admNode.setCenter(pane);

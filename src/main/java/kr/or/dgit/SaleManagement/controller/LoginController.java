@@ -136,7 +136,7 @@ public class LoginController {
 	@FXML
 	private void showJoinDialogAcc() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dialog/AccountjoinUserDialog.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/dialog/AccountjoinUserDialog.fxml"));
 			BorderPane pane = (BorderPane) loader.load();
 
 			Stage dialogStage = new Stage();
@@ -165,7 +165,7 @@ public class LoginController {
 	@FXML
 	private void showPasswordChangeDialog() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dialog/PasswordChangeDialog.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/dialog/PasswordChangeDialog.fxml"));
 			BorderPane pane = (BorderPane) loader.load();
 
 			Stage dialogStage = new Stage();
