@@ -29,6 +29,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import kr.or.dgit.SaleManagement.MainApp;
+import kr.or.dgit.SaleManagement.controller.MainViewController;
+import kr.or.dgit.SaleManagement.controller.RootLayoutController;
 import kr.or.dgit.SaleManagement.dto.AddrItem;
 import kr.or.dgit.SaleManagement.dto.Sales;
 import kr.or.dgit.SaleManagement.dto.SalesLevel;
@@ -67,6 +69,7 @@ public class SalesEditDialogController {
 		
 	}
 	
+
 	@FXML
 	private void openDialogFileChooser() {
 		FileChooser fileChooser = new FileChooser();
@@ -196,6 +199,7 @@ public class SalesEditDialogController {
         }
     }
 	
+
 	@FXML
 	private void pwTypeHandler(KeyEvent event) {		
 		String pwVal =pwTf.getText();

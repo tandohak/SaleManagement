@@ -9,15 +9,12 @@ import java.io.InputStream;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.shape.Arc;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import kr.or.dgit.SaleManagement.MainApp;
@@ -87,10 +84,14 @@ public class MainViewController  {
 		        controller.setDialogStage(dialogStage);
 		        controller.setSales(saleUser);
 		        controller.setSaleUserSetting();
+		        
+		       
+
 		        dialogStage.showAndWait();
 
 		        if(controller.isOkClicked()) {
 		        	saleSerivce.updateSales(controller.getSales());
+		        	setSaleUserImg();
 		        }
 		   } catch (IOException e) {
 		        e.printStackTrace();
@@ -197,11 +198,12 @@ public class MainViewController  {
 		}
 		nameLb.setText(saleUser.getSaleName());
 		
+		setSaleUserImg();
+	}
+
+	private void setSaleUserImg() {
 		File file = new File(path+"/DataFile/userImg/"+saleUser.getSaleCode()+".jpg");
-		/*Arc clip = new Arc(userImg.getFitWidth()/2, userImg.getFitHeight()/2, 32.5, 32.5, 0, 360);
-		
-		userImg.setClip(clip);
-		userImg.setFitWidth(100);*/
+
 		if (file != null) {
 			try {
 				InputStream is = new FileInputStream(file);
@@ -267,7 +269,7 @@ public class MainViewController  {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void init(RootLayoutController rootLayoutController) {
 		this.rootLayoutController = rootLayoutController;
 	}
