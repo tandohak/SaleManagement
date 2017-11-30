@@ -1,6 +1,11 @@
 package kr.or.dgit.SaleManagement.controller;
 
+import java.awt.EventQueue;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
 
@@ -10,6 +15,8 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -21,6 +28,7 @@ import kr.or.dgit.SaleManagement.MainApp;
 import kr.or.dgit.SaleManagement.controller.dialogController.PasswordChangeDialogController;
 import kr.or.dgit.SaleManagement.dto.Account;
 import kr.or.dgit.SaleManagement.dto.Sales;
+import kr.or.dgit.SaleManagement.jdbc_setting.jdbcSetting;
 import kr.or.dgit.SaleManagement.service.AccountService;
 import kr.or.dgit.SaleManagement.service.SalesService;
 
@@ -39,17 +47,26 @@ public class LoginController {
 
 	@FXML
 	private PasswordField pwTf;
-
+	@FXML private ImageView bgImgview;
 	private MainApp mainApp;
 
 	private static AccountService accService;
 	private static SalesService salesService;
 	private String loginId;
-
+	private String path = System.getProperty("user.dir");
+	
 	@FXML
 	private void initialize() {
 		salesService = SalesService.getInstance();
 		accService = AccountService.getInstance();
+		
+		InputStream is;
+		try {
+			is = new FileInputStream(new File(path+"/DataFile/loginBg_2.jpg"));
+			bgImgview.setImage(new Image(is));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -179,6 +196,21 @@ public class LoginController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	private void showJDBCSetting() {
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {					
+					jdbcSetting frame = new jdbcSetting();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	public void init(RootLayoutController rootLayoutController) {

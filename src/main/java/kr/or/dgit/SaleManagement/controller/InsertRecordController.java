@@ -161,7 +161,7 @@ public class InsertRecordController {
 			page = (BorderPane) loader.load();
 			
 			Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Product");
+	        dialogStage.setTitle("거래처 검색");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
 	        dialogStage.initOwner(pane.getScene().getWindow());
 	        Scene scene = new Scene(page);
@@ -210,7 +210,7 @@ public class InsertRecordController {
 			page = (BorderPane) loader.load();
 			
 			Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Sales");
+	        dialogStage.setTitle("사원 검색");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
 	        dialogStage.initOwner(pane.getScene().getWindow());
 	        Scene scene = new Scene(page);
@@ -287,13 +287,13 @@ public class InsertRecordController {
 	@FXML
 	private void searchProductAction() {
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("view/dialog/ProductSearchDialog.fxml"));
+        loader.setLocation(MainApp.class.getResource("view/dialog/productSearchDialog.fxml"));
         BorderPane page;
 		try {
 			page = (BorderPane) loader.load();
 			
 			Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Product");
+	        dialogStage.setTitle("제품 검색");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);		        
 	        dialogStage.initOwner(pane.getScene().getWindow());
 	        Scene scene = new Scene(page);

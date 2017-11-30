@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -98,11 +97,7 @@
             <Label layoutX="35.0" layoutY="328.0" text="주소" />
             <TextField fx:id="addrTf" layoutX="99.0" layoutY="358.0" prefHeight="23.0" prefWidth="214.0" />
             <Label layoutX="34.0" layoutY="362.0" text="상세주소" />
-            <ImageView fx:id="userImg" fitHeight="75.0" fitWidth="75.0" layoutX="25.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:/D:/workspace/workspace_mybatis/SaleManagement/DataFile/ic_account_box_black_48dp_.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="userImg" fitHeight="75.0" fitWidth="75.0" layoutX="25.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
             <TextField fx:id="imgNameTf" editable="false" layoutX="107.0" layoutY="48.0" prefHeight="23.0" prefWidth="127.0" />
             <Label layoutX="107.0" layoutY="25.0" text="이미지추가" />
             <JFXButton fx:id="openDialogBtn" layoutX="244.0" layoutY="48.0" onAction="#openDialogFileChooser" text="삽입하기" />

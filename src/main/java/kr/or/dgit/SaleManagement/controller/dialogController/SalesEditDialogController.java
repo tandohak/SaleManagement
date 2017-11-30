@@ -67,8 +67,7 @@ public class SalesEditDialogController {
 	@FXML
 	private void initialize() {
 		
-	}
-	
+	}	
 
 	@FXML
 	private void openDialogFileChooser() {
@@ -108,6 +107,7 @@ public class SalesEditDialogController {
 	}
 	private ObservableList<String> abminlist = FXCollections.observableArrayList();
 	
+	@SuppressWarnings("unused")
 	public void setSales(Sales sales) {
 		this.sales = sales;
 		System.out.println(sales);
@@ -125,20 +125,23 @@ public class SalesEditDialogController {
 		admitCb.setItems(abminlist);
 		admitCb.setValue(sales.getSaleLeave());
 		
-		File file = new File(path+"/DataFile/userImg/"+sales.getSaleCode()+".jpg");
 		Rectangle clip = new Rectangle(userImg.getFitWidth(), userImg.getFitHeight());
-		 
 		clip.setArcHeight(20);
 		clip.setArcWidth(20);
 		userImg.setClip(clip);
-
-		if (file != null) {
+		
+		try {
+			File file = new File(path+"/DataFile/userImg/"+sales.getSaleCode()+".jpg");
+			InputStream is = new FileInputStream(file);
+			userImg.setImage(new Image(is));
+			imgNameTf.setText(file.getPath());	
+		}catch (Exception e) {
 			try {
-				InputStream is = new FileInputStream(file);
+				InputStream is = new FileInputStream(new File(path+"/DataFile/ic_account_box_black_48dp_.png"));
 				userImg.setImage(new Image(is));
-				imgNameTf.setText(file.getPath());			
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();	
+				imgNameTf.setText(path+"/DataFile/ic_account_box_black_48dp_.png");
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();	
 			}
 		}
 	}
