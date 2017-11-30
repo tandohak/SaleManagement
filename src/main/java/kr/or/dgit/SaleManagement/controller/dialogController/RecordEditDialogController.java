@@ -291,7 +291,7 @@ public class RecordEditDialogController {
 	@FXML
 	private void searchProductAction() {
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("view/dialog/ProductSearchDialog.fxml"));
+        loader.setLocation(MainApp.class.getResource("view/dialog/productSearchDialog.fxml"));
         BorderPane page;
 		try {
 			page = (BorderPane) loader.load();
