@@ -60,6 +60,7 @@ public class MainViewController  {
 	private void initialize() {	
 		saleSerivce =SalesService.getInstance();
 		accountService = AccountService.getInstance();
+	
 	}
 
 	public void setMainApp(MainApp mainApp) {
@@ -129,7 +130,7 @@ public class MainViewController  {
 	}
 	
 	@FXML
-	private void hadleShowSalesManager() {
+	protected void hadleShowSalesManager() {
 		try {
 			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/management/SalesManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
@@ -144,7 +145,7 @@ public class MainViewController  {
 	}
 	
 	@FXML
-	private void hadleShowProductManager() {
+	protected void hadleShowProductManager() {
 		try {
 			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/management/ProductManager.fxml"));
 			BorderPane pane = (BorderPane)loader.load();
@@ -174,7 +175,7 @@ public class MainViewController  {
 	}
 	
 	@FXML
-	private void hadleShowAccountManager() {
+	protected void hadleShowAccountManager() {
 		try {
 			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/management/AccountManagement.fxml"));
 			BorderPane pane = (BorderPane)loader.load();

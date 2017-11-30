@@ -102,8 +102,12 @@ public class RootLayoutController {
 			rootPane.getScene().getWindow().setHeight(675);
 			rootPane.setCenter(pane);
 			mainViewController.setSaleUser(saleUser);
+			if(saleUser.getSaleId().equals("admin")) {
+				mainViewController.hadleShowAccountManager();
+			}else {
+				mainViewController.hadleShowSalesManager();
+			}			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -122,6 +126,7 @@ public class RootLayoutController {
 				rootPane.getScene().getWindow().setHeight(675);
 				rootPane.setCenter(pane);
 				mainViewController.setAccUser(accUser);
+				mainViewController.hadleShowProductManager();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
